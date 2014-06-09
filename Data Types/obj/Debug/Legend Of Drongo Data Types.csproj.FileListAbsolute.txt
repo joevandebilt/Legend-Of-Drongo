@@ -1,0 +1,22 @@
+F:\Legend Of Drongo\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+F:\Legend Of Drongo\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+F:\Legend Of Drongo\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+F:\Legend Of Drongo\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
+F:\Legend Of Drongo\Legend Of Drongo Compile\Debug\ClassLibrary1.dll
+F:\Legend Of Drongo\Legend Of Drongo Compile\Debug\ClassLibrary1.pdb
+F:\Legend Of Drongo v2\Compiler\Debug\ClassLibrary1.dll
+F:\Legend Of Drongo v2\Compiler\Debug\ClassLibrary1.pdb
+F:\Legend Of Drongo v2\Data Types\obj\Debug\ClassLibrary1.dll
+F:\Legend Of Drongo v2\Data Types\obj\Debug\ClassLibrary1.pdb
+F:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo Data Types.dll
+F:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo Data Types.pdb
+F:\Legend Of Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+F:\Legend Of Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
+G:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo Data Types.dll
+G:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo Data Types.pdb
+G:\Legend Of Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+G:\Legend Of Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
+D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo Data Types.dll
+D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo Data Types.pdb
+D:\Dropbox\Programming\Legend Of Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+D:\Dropbox\Programming\Legend Of Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
