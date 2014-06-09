@@ -20,3 +20,7 @@ D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo Data Typ
 D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo Data Types.pdb
 D:\Dropbox\Programming\Legend Of Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
 D:\Dropbox\Programming\Legend Of Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo Data Types.dll
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo Data Types.pdb
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb

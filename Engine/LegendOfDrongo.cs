@@ -1724,7 +1724,15 @@ namespace Legend_Of_Drongo
                 {
                     for (int i = 0; i < CurrentRoom.Events.Count; i++)
                     {
-                        if (canstillpickup == false && CurrentRoom.Events[i].Trigger == "itempickup") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
+                        if (CurrentRoom.Events[i].Trigger == "itempickup") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
+                    }
+
+                    if (canstillpickup == false)
+                    {
+                        for (int i = 0; i < CurrentRoom.Events.Count; i++)
+                        {
+                            if (canstillpickup == false && CurrentRoom.Events[i].Trigger == "allitempickup") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
+                        }
                     }
                 }
             }

@@ -26,7 +26,7 @@ namespace Legend_Of_Drongo
             public string ActionDesc;
         }
 
-        EventTriggers[] Triggers = new EventTriggers[6];
+        EventTriggers[] Triggers = new EventTriggers[7];
         EventActions[] Actions = new EventActions[5];
 
         public frmEventEditor(DataTypes.Event thisEvent, int FloorCount)
@@ -41,12 +41,14 @@ namespace Legend_Of_Drongo
             Triggers[1].TriggerDesc = "Player moves into the current room";
             Triggers[2].Trigger = "itempickup";
             Triggers[2].TriggerDesc = "Player picks up an item";
-            Triggers[3].Trigger = "payoff";
-            Triggers[3].TriggerDesc = "Player pays off an enemy";
-            Triggers[4].Trigger = "iteminteraction";
-            Triggers[4].TriggerDesc = "Player uses an interaction item correctly";
-            Triggers[5].Trigger = "killenemy";
-            Triggers[5].TriggerDesc = "Players kills 1 enemy in a room";
+            Triggers[3].Trigger = "allitempickup";
+            Triggers[3].TriggerDesc = "Player picked up all items in the room";
+            Triggers[4].Trigger = "payoff";
+            Triggers[4].TriggerDesc = "Player pays off an enemy";
+            Triggers[5].Trigger = "iteminteraction";
+            Triggers[5].TriggerDesc = "Player uses an interaction item correctly";
+            Triggers[6].Trigger = "killenemy";
+            Triggers[6].TriggerDesc = "Players kills 1 enemy in a room";
 
             //Actions
             Actions[0].Action = "unlock";
