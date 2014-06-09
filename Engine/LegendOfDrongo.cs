@@ -545,13 +545,14 @@ namespace Legend_Of_Drongo
                     Console.WriteLine(WordWrap("Attack - Attacks an enemy with equipped weapon"));
                     Console.WriteLine(WordWrap("Bribe - Pay off people to look the other way"));
                     Console.WriteLine(WordWrap("Talk To - Talk to non hostible people"));
+                    Console.WriteLine(WordWrap("Ask - Ask a person about a thing"));
                     Console.WriteLine(WordWrap("View Wares - See the wares of a merchant"));
                     Console.WriteLine(WordWrap("Buy - Buy items from merchants"));
                     Console.WriteLine(WordWrap("Sell - Sell an item to a willing merchant"));
                     Console.WriteLine(WordWrap("Take - picks up an item"));
                     Console.WriteLine(WordWrap("Drop - Drops an item"));
-                    Console.WriteLine(WordWrap("Sleep in - go to sleep in a bed"));
-                    Console.WriteLine(WordWrap("Use - Uses an item"));
+                    Console.WriteLine(WordWrap("Sleep in - go to sleep in a bed or bed like item"));
+                    Console.WriteLine(WordWrap("Use - Uses an item on something"));
                     Console.WriteLine(WordWrap("Equip - Equip weapons and armor"));
                     Console.WriteLine(WordWrap("Eat - Eats food in your inventory"));
                     Console.WriteLine(WordWrap("\nDescriptions"));
@@ -583,10 +584,10 @@ namespace Legend_Of_Drongo
                     ProposedMove[2] = Player.CurrentPos[2];
 
                     PotentialRoom = GetRoomInfo(ProposedMove);
-                    Console.WriteLine(WordWrap(PotentialRoom.Description));
-
                     if (PotentialRoom.CanMove == true)
                     {
+                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                         CurrentRoom = PotentialRoom;
                         Player.CurrentPos = ProposedMove;
@@ -601,6 +602,8 @@ namespace Legend_Of_Drongo
                             }
                         }
                     }
+                    else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
+                    else Console.WriteLine(WordWrap(PotentialRoom.Description));
                     
 
                 }
@@ -613,11 +616,10 @@ namespace Legend_Of_Drongo
                     ProposedMove[2] = Player.CurrentPos[2];
 
                     PotentialRoom = GetRoomInfo(ProposedMove);
-                    Console.WriteLine(WordWrap(PotentialRoom.Description));
-
                     if (PotentialRoom.CanMove == true)
                     {
-
+                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                         CurrentRoom = PotentialRoom;
                         Player.CurrentPos = ProposedMove;
@@ -632,7 +634,8 @@ namespace Legend_Of_Drongo
                             }
                         }
                     }
-                    
+                    else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
+                    else Console.WriteLine(WordWrap(PotentialRoom.Description));
 
                 }
                 else if (PlayerCommand.ToLower() == "south" || PlayerCommand.ToLower() == "go south" || PlayerCommand.ToLower() == "move south")
@@ -644,10 +647,10 @@ namespace Legend_Of_Drongo
                     ProposedMove[2] = Player.CurrentPos[2];
 
                     PotentialRoom = GetRoomInfo(ProposedMove);
-                    Console.WriteLine(WordWrap(PotentialRoom.Description));
-
                     if (PotentialRoom.CanMove == true)
                     {
+                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                         CurrentRoom = PotentialRoom;
                         Player.CurrentPos = ProposedMove;
@@ -662,6 +665,8 @@ namespace Legend_Of_Drongo
                             }
                         }
                     }
+                    else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
+                    else Console.WriteLine(WordWrap(PotentialRoom.Description));
                 }
                 else if (PlayerCommand.ToLower() == "west" || PlayerCommand.ToLower() == "go west" || PlayerCommand.ToLower() == "move west")
                 {
@@ -672,10 +677,10 @@ namespace Legend_Of_Drongo
                     ProposedMove[2] = Player.CurrentPos[2];
 
                     PotentialRoom = GetRoomInfo(ProposedMove);
-                    Console.WriteLine(WordWrap(PotentialRoom.Description));
-
                     if (PotentialRoom.CanMove == true)
                     {
+                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                         CurrentRoom = PotentialRoom;
                         Player.CurrentPos = ProposedMove;
@@ -690,6 +695,8 @@ namespace Legend_Of_Drongo
                             }
                         }
                     }
+                    else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
+                    else Console.WriteLine(WordWrap(PotentialRoom.Description));
                 }
                 else if (PlayerCommand.ToLower().Contains("who am i") || PlayerCommand == "whoami")
                 {

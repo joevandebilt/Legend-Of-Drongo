@@ -102,8 +102,10 @@ D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of D
 D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
 D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
 D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe.manifest
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.application
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.pdb
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
@@ -115,9 +117,7 @@ C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\L
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe.manifest
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.application
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.pdb
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
