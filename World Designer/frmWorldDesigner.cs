@@ -215,7 +215,7 @@ namespace Legend_Of_Drongo
             bool OverWrite = true;
             lblEditor.Text = "Saving " + txtWorldName.Text + ".LoD...";  
 
-            //Detect if exists
+            //Detect if doesnt exist
             if (!Directory.Exists(SavePath))
                 Directory.CreateDirectory(SavePath);
 
