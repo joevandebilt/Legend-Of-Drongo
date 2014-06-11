@@ -17,6 +17,8 @@ namespace Legend_Of_Drongo
 
         public static roomInfo[,] ThisFloor = new roomInfo[10,10];
 
+        public static WorldFile WorldState = new WorldFile();
+
         public static List<roomInfo[,]> world = new List<roomInfo[,]>();
 
         public static SoundPlayer MusicPlayer = new SoundPlayer();
@@ -91,8 +93,6 @@ namespace Legend_Of_Drongo
             //Console.WriteLine("              [N] New Game                        [Q] Quit");
             ConsoleKeyInfo Menu = Console.ReadKey();
 
-            world = new List<roomInfo[,]>();
-            
                 if (Menu.Key == ConsoleKey.N)
                 {
                     Player = new PlayerProfile();
@@ -104,51 +104,6 @@ namespace Legend_Of_Drongo
                     if (playername == "")
                     {
                         playername = "Drongo";
-                    }
-
-                    System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\saves");
-                    int NumOfSaves = (dir.GetFiles().Length / 2);
-                    int index = 0;
-                    string[] SavesList = new string[NumOfSaves];
-                    bool namefound = false;
-
-                    foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
-                    {
-                        string FileName = file.Name;
-                        if (FileName.Split('.')[1] == "PlayerInfo")
-                        {
-                            Console.WriteLine(WordWrap(FileName.Split('.')[0]));
-                            SavesList[index] = FileName.Split('.')[0];
-                            Console.WriteLine("If {0} == {1}", SavesList[index], playername);
-                            if (playername == SavesList[index]) namefound = true;
-                            index++;
-                        }
-                    }
-                    while (namefound == true)   //warn players who have save files
-                    {
-                        Console.WriteLine(WordWrap("There is already a save game for {0}"), playername);
-                        Console.WriteLine(WordWrap("You can start a new game with this name, but if you save you will overwrite progress for that character"));
-                        Console.WriteLine(WordWrap("Do you want to continue with this name? (Y/n)"));
-                        string YesNo = Console.ReadLine();
-
-                        if (YesNo.ToLower() == "yes" || YesNo.ToLower() == "y") namefound = false;
-                        else
-                        {
-                            Console.Clear();
-                            Console.Write("What is your name?: ");
-
-                            playername = Console.ReadLine();
-                            if (playername == "")
-                            {
-                                playername = "Drongo";
-                            }
-                            namefound = false;
-                            for (index = 0; index < NumOfSaves; index++)
-                            {
-                                if (playername == SavesList[index]) namefound = true;
-                            }
-
-                        }
                     }
 
                     //Player.name = "... You do not remember your name...";
@@ -206,7 +161,6 @@ namespace Legend_Of_Drongo
                     Intro.Join();
 
                     //Load Campaign World
-                    WorldFile WorldState = new WorldFile();
                     using (Stream stream = File.Open(".\\Worlds\\LoDCampaign.LoD", FileMode.Open))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
@@ -263,7 +217,6 @@ namespace Legend_Of_Drongo
 
 
                     //Load Tutorial World
-                    WorldFile WorldState = new WorldFile();
                     using (Stream stream = File.Open(".\\Worlds\\LoDTutorial.LoD", FileMode.Open))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
@@ -271,35 +224,39 @@ namespace Legend_Of_Drongo
 
                     }
                     world = WorldState.WorldState;
-
                     Console.Clear();
-
-                    
                 }
                 else if (Menu.Key == ConsoleKey.L)
                 {
                     validChoice = true;
-                    System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\saves");
-                    int NumOfSaves = (dir.GetFiles().Length);
-                    int index = 0;
-                    string[] SavesList = new string[NumOfSaves];
+                    System.IO.DirectoryInfo parDir = new System.IO.DirectoryInfo(".\\Saves");
+                    int SaveIndex = 0;
+                    List<string> SavesList = new List<string>();
 
-                    if (NumOfSaves != 0)
+                    if (parDir.GetDirectories().Length != 0)
                     {
                         Console.Clear();
-                        Console.WriteLine(WordWrap("Select a save from the list below:\n"));
+                        Console.WriteLine(WordWrap("Select a save from the list below:"));
 
-                        foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
+                        foreach (DirectoryInfo folder in parDir.GetDirectories())
                         {
-                            string FileName = file.Name;
-                            Console.WriteLine(WordWrap(string.Concat((index + 1), ": ", FileName.Split('.')[0])));
-                            SavesList[index] = FileName;
-                            index++;
+                            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\Saves\\"+ folder.Name);
+                            if (dir.GetFiles().Length != 0)
+                            {
+                                Console.WriteLine(WordWrap("\n\n"+folder.Name));
+                                foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
+                                {
+                                    string FileName = file.Name;
+                                    Console.WriteLine(WordWrap(string.Concat((SaveIndex + 1), ": ", FileName.Split('.')[0])));
+                                    SavesList.Add(folder.Name + "\\" + FileName);
+                                    SaveIndex++;
+                                }
+                            }
                         }
 
                         Console.Write("\nWhich save would you like to continue: ");
                         int UserChoice = Convert.ToInt32(Console.ReadLine());
-                        string SavePath = string.Concat(".\\saves\\", SavesList[UserChoice - 1]);
+                        string SavePath = string.Concat(".\\Saves\\", SavesList[UserChoice - 1]);
 
                         GameState gamestate = new GameState();
                         using (Stream stream = File.Open(SavePath, FileMode.Open))
@@ -379,13 +336,12 @@ namespace Legend_Of_Drongo
                         }
                         string SavePath = string.Concat(".\\Worlds\\", WorldsList[UserChoice - 1]);
 
-                        WorldFile WorldFile = new WorldFile();
                         using (Stream stream = File.Open(SavePath, FileMode.Open))
                         {
                             BinaryFormatter bin = new BinaryFormatter();
-                            WorldFile = (WorldFile)bin.Deserialize(stream);
+                            WorldState = (WorldFile)bin.Deserialize(stream);
                         }
-                        world = WorldFile.WorldState;
+                        world = WorldState.WorldState;
 
                         Console.Clear();
                         Console.Write("What is your name?: ");
@@ -586,21 +542,12 @@ namespace Legend_Of_Drongo
                     PotentialRoom = GetRoomInfo(ProposedMove);
                     if (PotentialRoom.CanMove == true)
                     {
-                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
                         else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                         CurrentRoom = PotentialRoom;
                         Player.CurrentPos = ProposedMove;
-                        if (CurrentRoom.Events != null)
-                        {
-                            for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                            {
-                                if (CurrentRoom.Events[i].Trigger == "moveinto")
-                                {
-                                    CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                }
-                            }
-                        }
+                        EventTrigger("moveinto");
                     }
                     else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                     else Console.WriteLine(WordWrap(PotentialRoom.Description));
@@ -618,21 +565,12 @@ namespace Legend_Of_Drongo
                     PotentialRoom = GetRoomInfo(ProposedMove);
                     if (PotentialRoom.CanMove == true)
                     {
-                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
                         else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                         CurrentRoom = PotentialRoom;
                         Player.CurrentPos = ProposedMove;
-                        if (CurrentRoom.Events != null)
-                        {
-                            for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                            {
-                                if (CurrentRoom.Events[i].Trigger == "moveinto")
-                                {
-                                    CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                }
-                            }
-                        }
+                        EventTrigger("moveinto");
                     }
                     else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                     else Console.WriteLine(WordWrap(PotentialRoom.Description));
@@ -649,21 +587,12 @@ namespace Legend_Of_Drongo
                     PotentialRoom = GetRoomInfo(ProposedMove);
                     if (PotentialRoom.CanMove == true)
                     {
-                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
                         else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                         CurrentRoom = PotentialRoom;
                         Player.CurrentPos = ProposedMove;
-                        if (CurrentRoom.Events != null)
-                        {
-                            for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                            {
-                                if (CurrentRoom.Events[i].Trigger == "moveinto")
-                                {
-                                    CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                }
-                            }
-                        }
+                        EventTrigger("moveinto");
                     }
                     else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                     else Console.WriteLine(WordWrap(PotentialRoom.Description));
@@ -679,21 +608,12 @@ namespace Legend_Of_Drongo
                     PotentialRoom = GetRoomInfo(ProposedMove);
                     if (PotentialRoom.CanMove == true)
                     {
-                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
                         else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                         CurrentRoom = PotentialRoom;
                         Player.CurrentPos = ProposedMove;
-                        if (CurrentRoom.Events != null)
-                        {
-                            for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                            {
-                                if (CurrentRoom.Events[i].Trigger == "moveinto")
-                                {
-                                    CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                }
-                            }
-                        }
+                        EventTrigger("moveinto");
                     }
                     else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                     else Console.WriteLine(WordWrap(PotentialRoom.Description));
@@ -1547,27 +1467,31 @@ namespace Legend_Of_Drongo
                     {
                         Console.WriteLine("\n\n     Your adventure has come to an end :(");
                         Console.ReadLine();
-                        MainMenu();
+                        Player = MainMenu();
+                        ThisFloor = world[Player.CurrentPos[2]];
+                        CurrentRoom = ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
+                        Console.WriteLine(WordWrap(CurrentRoom.Description));
                     }
                     else
                     {
                         Console.WriteLine("\n\n     You have died, but this is not the end...");
                         Console.ReadLine();
                         Console.Clear();
-                        Console.WriteLine(WordWrap("\n\n     You fall through darkness and smoke until you feel your feet softly make contact with ground"));
-                        Console.ReadLine();
+                        Console.WriteLine(WordWrap("\n\n\tYou fall through darkness and smoke\n\tuntil you feel your feet softly make contact with ground"));
+                        //Console.ReadLine();
                         Player.HPBonus = 60;
                         world[(Player.CurrentPos[2])] = ThisFloor;
                         Player.CurrentPos[0] = 1;
-                        Player.CurrentPos[1] = 4;      //set coodinates of afterlife
+                        Player.CurrentPos[1] = 1;      //set coodinates of afterlife
                         Player.CurrentPos[2] = 0;
                         ThisFloor = world[0];
                         CurrentRoom = GetRoomInfo(Player.CurrentPos);
-                        Console.Clear();
-                        Console.WriteLine(WordWrap(CurrentRoom.Description));
+                        EventTrigger("moveinto");
+                        //Console.Clear();
+                        //Console.WriteLine(WordWrap(CurrentRoom.Description));
                         
-                        MusicPlayer.SoundLocation = ".\\music\\Scary 8-Bit.wav";
-                        Music("start");
+                        //MusicPlayer.SoundLocation = ".\\music\\Scary 8-Bit.wav";
+                        //Music("start");
                     }
                 }
 
@@ -1727,21 +1651,8 @@ namespace Legend_Of_Drongo
                         if (CurrentRoom.items[index].CanPickUp == true) canstillpickup = true;
                     }   
                 }
-                if (CurrentRoom.Events != null)
-                {
-                    for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                    {
-                        if (CurrentRoom.Events[i].Trigger == "itempickup") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                    }
-
-                    if (canstillpickup == false)
-                    {
-                        for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                        {
-                            if (canstillpickup == false && CurrentRoom.Events[i].Trigger == "allitempickup") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                        }
-                    }
-                }
+                EventTrigger("itempickup");
+                if (canstillpickup == false) EventTrigger("allitempickup");
             }
             return (ReturnString);
         }
@@ -1795,26 +1706,11 @@ namespace Legend_Of_Drongo
                         }
                         else
                         {
-                            if (CurrentRoom.Events != null)
-                            {
-                                for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                                {
-                                    if (CurrentRoom.Enemy.Count == 1 && CurrentRoom.Events[i].Trigger == "killallenemies") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                }
-                            }
-                            CurrentRoom.Enemy = null;
+                            EventTrigger("killallenemies");
+                            CurrentRoom.Enemy.Clear();
                             //break;
                         }
-
-                        if (CurrentRoom.Events != null)
-                        {
-                            for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                            {
-                                if (CurrentRoom.Enemy == null && CurrentRoom.Events[i].Trigger == "payoff") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);  //will only trigger if all enemies in the room are dead
-
-                            }
-                        }
-
+                        EventTrigger("payoff");
                     }
                     else
                     {
@@ -2122,21 +2018,7 @@ namespace Legend_Of_Drongo
                                     Array.Clear(Player.inventory, (20 - Player.invspace), (20 - Player.invspace));
                                     Player.invspace = Player.invspace + 1;
 
-                                    if (CurrentRoom.Events != null) 
-                                    {
-                                        bool found = false;
-                                        for (int i=0; i < CurrentRoom.Events.Count; i++)
-                                        {
-                                            if (CurrentRoom.Events[i].Trigger == "iteminteraction")
-                                            {
-                                                found = true;
-                                                Console.WriteLine(WordWrap(CurrentRoom.items[index].interactionResponse));
-                                                CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                            }
-                                        }
-                                        if (!found) Console.WriteLine("The items interacted, but nothing happened");
-                                    }
-                                    else Console.WriteLine("The items interacted, but nothing happened");
+                                    if (!EventTrigger("iteminteraction")) Console.WriteLine("The items interacted, but nothing happened");
                                 }
                             }
                             Counter++;
@@ -2366,17 +2248,7 @@ namespace Legend_Of_Drongo
                             if (ThisEnemy.Money != 0) Console.WriteLine("\nYou take {0} gold coins from {1}'s corpse", ThisEnemy.Money, enemy);
 
                             Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
-
-                            if (CurrentRoom.Events != null)
-                            {
-                                
-                                for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                                {
-                                    if (CurrentRoom.Enemy.Count == 1 && CurrentRoom.Events[i].Trigger == "killenemy") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-
-                                }
-                            }
-
+                            EventTrigger("killenemy");
                             if (CurrentRoom.Enemy.Count - 1 != 0)
                             {
                                 //int offset = 0;
@@ -2390,13 +2262,7 @@ namespace Legend_Of_Drongo
                             }
                             else
                             {
-                                if (CurrentRoom.Events != null)
-                                {
-                                    for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                                    {
-                                        if (CurrentRoom.Enemy.Count == 1 && CurrentRoom.Events[i].Trigger == "killallenemies") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                    }
-                                }
+                                EventTrigger("killallenemies");
                                 CurrentRoom.Enemy.Clear();
                                 //break;
                             }
@@ -2529,14 +2395,7 @@ namespace Legend_Of_Drongo
                                 Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
                                 NumOfFighters = NumOfFighters - 1;
 
-                                if (CurrentRoom.Events != null)
-                                {
-                                    for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                                    {
-                                        if (CurrentRoom.Enemy.Count == 1 && CurrentRoom.Events[i].Trigger == "killenemy") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                    }
-                                }
-
+                                EventTrigger("killenemy");
                                 //Console.WriteLine("There are {0} enemies in the room, there will now be {1}", CurrentRoom.Enemy.Count, CurrentRoom.Enemy.Count - 1);
 
                                 if (CurrentRoom.Enemy.Count - 1 != 0)
@@ -2551,13 +2410,7 @@ namespace Legend_Of_Drongo
                                 }
                                 else
                                 {
-                                    if (CurrentRoom.Events != null)
-                                    {
-                                        for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                                        {
-                                            if (CurrentRoom.Enemy.Count == 1 && CurrentRoom.Events[i].Trigger == "killallenemies") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                                        }
-                                    }
+                                    EventTrigger("killallenemies");
                                     CurrentRoom.Enemy.Clear();
                                     //break;
                                 }
@@ -2663,10 +2516,9 @@ namespace Legend_Of_Drongo
             bool Found = false;
             string Knowledge = string.Empty;
 
-            //Console.WriteLine("Asking " + Target + " about " + Topic);
-
             if (CurrentRoom.Civilians != null)
             {
+                if (Target == string.Empty && CurrentRoom.Civilians.Count == 1) Target = CurrentRoom.Civilians[0].name;
                 foreach (CivilianProfile NPC in CurrentRoom.Civilians)
                 {
                     if (Target.ToLower().Trim() == NPC.name.ToLower().Trim())
@@ -2771,11 +2623,43 @@ namespace Legend_Of_Drongo
 
         public static string SaveGame()
         {
-            if (Player.Objective == "Complete the tutorial") return ("unable to save during tutorial");
-            else
+            string playername = Player.name;
+            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\Saves\\" + WorldState.WorldName);
+            bool namefound = false;
+            if (!dir.Exists) Directory.CreateDirectory(".\\Saves\\" + WorldState.WorldName);
+            foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
             {
+                if (file.Name.ToLower() == (playername + ".dsg").ToLower()) namefound = true;
+            }
+            while (namefound == true)   //warn players who have save files
+            {                
+                Console.WriteLine(WordWrap("There is already a save game for {0}"), playername);
+                Console.WriteLine(WordWrap("You can save a new game with this name, but if you save you will overwrite progress for that character"));
+                Console.Write(WordWrap("Do you want to continue saving and overwrite?\n1: Yes\n2: No\n3: Choose a new name\n>"));
+                string YesNo = Console.ReadLine();
 
-                string SavePath = string.Concat(".\\saves\\", Player.name, ".WorldState");
+                if (YesNo.ToLower() == "yes" || YesNo.ToLower() == "y" || YesNo.ToLower() == "1") namefound = false;
+                else if (YesNo.ToLower() == "no" || YesNo.ToLower() == "n" || YesNo.ToLower() == "2") return ("Failure");
+                else
+                {
+                    Console.Clear();
+                    Console.Write("Choose a new name?: ");
+
+                    playername = Console.ReadLine();
+                    if (playername == "")
+                    {
+                        playername = "Drongo";
+                    }
+                    namefound = false;
+                    foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
+                    {
+                        if (file.Name.ToLower() == (playername + ".dsg").ToLower()) namefound = true;
+                    }
+                }
+            }
+            Player.name = playername;
+
+                string SavePath = string.Concat(".\\Saves\\", WorldState.WorldName, "\\" , Player.name, ".dsg");
                 GameState gamestate = new GameState();
 
                 gamestate.PlayerState = Player;
@@ -2787,10 +2671,25 @@ namespace Legend_Of_Drongo
                     bin.Serialize(stream, gamestate);
                 }
                 return ("Success");
-            }
         }
 
-        public static Event ActionTrigger(Event thisEvent)
+        public static bool EventTrigger(string Trigger)
+        {
+            int i = 0;
+            bool Fired = false;
+            while (CurrentRoom.Events != null && i < CurrentRoom.Events.Count)
+            {
+                if (CurrentRoom.Events[i].Trigger.ToLower() == Trigger.ToLower())
+                {
+                    CurrentRoom.Events[i] = EventAction(CurrentRoom.Events[i]);
+                    Fired = true;
+                }
+                i++;
+            }
+            return Fired;
+        }
+        
+        public static Event EventAction(Event thisEvent)
         {
             if (thisEvent.Triggered == false)
             {
@@ -2836,10 +2735,7 @@ namespace Legend_Of_Drongo
                             newItem.InteractionName.Add(ThisEnemy.name);
                             CurrentRoom.items.Add(newItem);
                         }
-                        for (int i = 0; i < CurrentRoom.Events.Count; i++)
-                        {
-                            if (CurrentRoom.Events[i].Trigger == "killallenemies") CurrentRoom.Events[i] = ActionTrigger(CurrentRoom.Events[i]);
-                        }
+                        EventTrigger("killallenemies");
                         CurrentRoom.Enemy.Clear();   //Overwrite all enemies
                     }
                 }
@@ -2875,6 +2771,15 @@ namespace Legend_Of_Drongo
 
                     //MusicPlayer.SoundLocation = SongList[Player.CurrentPos[2]];
                     //Music("start");
+                }
+                else if (thisEvent.Action.ToLower() == "change objective")
+                {
+                    Player.Objective = thisEvent.EventValue;
+                    Console.WriteLine("Your current objective has changed.");
+                }
+                else if (thisEvent.Action.ToLower() == "output text")
+                {
+                    Console.WriteLine(WordWrap(thisEvent.EventValue));
                 }
                 else thisEvent.Triggered = false;
             }

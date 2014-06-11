@@ -64,7 +64,7 @@
             this.cmdAddItems.Location = new System.Drawing.Point(104, 357);
             this.cmdAddItems.Name = "cmdAddItems";
             this.cmdAddItems.Size = new System.Drawing.Size(160, 28);
-            this.cmdAddItems.TabIndex = 0;
+            this.cmdAddItems.TabIndex = 14;
             this.cmdAddItems.Text = "Save Item";
             this.cmdAddItems.UseVisualStyleBackColor = true;
             this.cmdAddItems.Click += new System.EventHandler(this.cmdAddItems_Click);
@@ -75,7 +75,7 @@
             this.label3.Location = new System.Drawing.Point(9, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 10;
+            this.label3.TabIndex = 16;
             this.label3.Text = "Item Name";
             // 
             // label4
@@ -84,7 +84,7 @@
             this.label4.Location = new System.Drawing.Point(9, 61);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 13);
-            this.label4.TabIndex = 11;
+            this.label4.TabIndex = 17;
             this.label4.Text = "Item Description";
             // 
             // txtName
@@ -92,7 +92,7 @@
             this.txtName.Location = new System.Drawing.Point(12, 24);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(160, 20);
-            this.txtName.TabIndex = 12;
+            this.txtName.TabIndex = 0;
             // 
             // txtDescription
             // 
@@ -100,7 +100,7 @@
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(160, 74);
-            this.txtDescription.TabIndex = 13;
+            this.txtDescription.TabIndex = 2;
             // 
             // chkPickup
             // 
@@ -108,7 +108,7 @@
             this.chkPickup.Location = new System.Drawing.Point(201, 24);
             this.chkPickup.Name = "chkPickup";
             this.chkPickup.Size = new System.Drawing.Size(140, 17);
-            this.chkPickup.TabIndex = 14;
+            this.chkPickup.TabIndex = 1;
             this.chkPickup.Text = "Can Item be Picked up?";
             this.chkPickup.UseVisualStyleBackColor = true;
             // 
@@ -132,7 +132,7 @@
             this.cmbItemClass.Location = new System.Drawing.Point(199, 77);
             this.cmbItemClass.Name = "cmbItemClass";
             this.cmbItemClass.Size = new System.Drawing.Size(160, 21);
-            this.cmbItemClass.TabIndex = 15;
+            this.cmbItemClass.TabIndex = 3;
             this.cmbItemClass.TextChanged += new System.EventHandler(this.cmbItemClass_TextChanged);
             // 
             // label5
@@ -141,7 +141,7 @@
             this.label5.Location = new System.Drawing.Point(196, 61);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 16;
+            this.label5.TabIndex = 18;
             this.label5.Text = "Item Class";
             // 
             // txtInteraction
@@ -150,7 +150,7 @@
             this.txtInteraction.Multiline = true;
             this.txtInteraction.Name = "txtInteraction";
             this.txtInteraction.Size = new System.Drawing.Size(160, 130);
-            this.txtInteraction.TabIndex = 18;
+            this.txtInteraction.TabIndex = 5;
             // 
             // label1
             // 
@@ -158,7 +158,7 @@
             this.label1.Location = new System.Drawing.Point(367, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
-            this.label1.TabIndex = 17;
+            this.label1.TabIndex = 20;
             this.label1.Text = "Interaction Names";
             // 
             // label2
@@ -175,7 +175,7 @@
             this.txtValue.Location = new System.Drawing.Point(199, 131);
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(160, 20);
-            this.txtValue.TabIndex = 20;
+            this.txtValue.TabIndex = 4;
             // 
             // label6
             // 
@@ -201,7 +201,7 @@
             this.txtDamage.Location = new System.Drawing.Point(119, 161);
             this.txtDamage.Name = "txtDamage";
             this.txtDamage.Size = new System.Drawing.Size(28, 20);
-            this.txtDamage.TabIndex = 23;
+            this.txtDamage.TabIndex = 6;
             // 
             // txtProtection
             // 
@@ -209,7 +209,7 @@
             this.txtProtection.Location = new System.Drawing.Point(313, 161);
             this.txtProtection.Name = "txtProtection";
             this.txtProtection.Size = new System.Drawing.Size(28, 20);
-            this.txtProtection.TabIndex = 24;
+            this.txtProtection.TabIndex = 7;
             // 
             // txtHP
             // 
@@ -217,7 +217,7 @@
             this.txtHP.Location = new System.Drawing.Point(502, 161);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(28, 20);
-            this.txtHP.TabIndex = 26;
+            this.txtHP.TabIndex = 8;
             // 
             // label8
             // 
@@ -225,7 +225,7 @@
             this.label8.Location = new System.Drawing.Point(425, 164);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 13);
-            this.label8.TabIndex = 25;
+            this.label8.TabIndex = 23;
             this.label8.Text = "HP Recovery";
             // 
             // label9
@@ -234,7 +234,7 @@
             this.label9.Location = new System.Drawing.Point(12, 193);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 13);
-            this.label9.TabIndex = 27;
+            this.label9.TabIndex = 24;
             this.label9.Text = "Good Hit";
             // 
             // txtGoodHit
@@ -243,7 +243,7 @@
             this.txtGoodHit.Location = new System.Drawing.Point(67, 190);
             this.txtGoodHit.Name = "txtGoodHit";
             this.txtGoodHit.Size = new System.Drawing.Size(463, 20);
-            this.txtGoodHit.TabIndex = 28;
+            this.txtGoodHit.TabIndex = 9;
             this.txtGoodHit.Text = "Hitting the enemy the weapon deals a good amount of damage";
             // 
             // txtMedHit
@@ -252,7 +252,7 @@
             this.txtMedHit.Location = new System.Drawing.Point(67, 216);
             this.txtMedHit.Name = "txtMedHit";
             this.txtMedHit.Size = new System.Drawing.Size(463, 20);
-            this.txtMedHit.TabIndex = 30;
+            this.txtMedHit.TabIndex = 10;
             this.txtMedHit.Text = "Hitting the enemy the weapon deals a medium amount of damage";
             // 
             // label10
@@ -261,7 +261,7 @@
             this.label10.Location = new System.Drawing.Point(1, 219);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
-            this.label10.TabIndex = 29;
+            this.label10.TabIndex = 25;
             this.label10.Text = "Medium Hit";
             // 
             // txtBadHit
@@ -270,7 +270,7 @@
             this.txtBadHit.Location = new System.Drawing.Point(67, 242);
             this.txtBadHit.Name = "txtBadHit";
             this.txtBadHit.Size = new System.Drawing.Size(463, 20);
-            this.txtBadHit.TabIndex = 32;
+            this.txtBadHit.TabIndex = 11;
             this.txtBadHit.Text = "Barely hitting the enemy the weapon deals a bad amount of damage";
             // 
             // label11
@@ -279,7 +279,7 @@
             this.label11.Location = new System.Drawing.Point(19, 245);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 13);
-            this.label11.TabIndex = 31;
+            this.label11.TabIndex = 26;
             this.label11.Text = "Bad Hit";
             // 
             // txtItemNeeded
@@ -288,7 +288,7 @@
             this.txtItemNeeded.Location = new System.Drawing.Point(166, 282);
             this.txtItemNeeded.Name = "txtItemNeeded";
             this.txtItemNeeded.Size = new System.Drawing.Size(175, 20);
-            this.txtItemNeeded.TabIndex = 34;
+            this.txtItemNeeded.TabIndex = 12;
             // 
             // label12
             // 
@@ -296,7 +296,7 @@
             this.label12.Location = new System.Drawing.Point(5, 285);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(123, 13);
-            this.label12.TabIndex = 33;
+            this.label12.TabIndex = 27;
             this.label12.Text = "Item Needed To Interact";
             // 
             // label13
@@ -305,7 +305,7 @@
             this.label13.Location = new System.Drawing.Point(5, 311);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(155, 13);
-            this.label13.TabIndex = 35;
+            this.label13.TabIndex = 28;
             this.label13.Text = "Message When Interacted with";
             // 
             // txtInteractionMessage
@@ -314,14 +314,14 @@
             this.txtInteractionMessage.Location = new System.Drawing.Point(166, 308);
             this.txtInteractionMessage.Name = "txtInteractionMessage";
             this.txtInteractionMessage.Size = new System.Drawing.Size(360, 20);
-            this.txtInteractionMessage.TabIndex = 36;
+            this.txtInteractionMessage.TabIndex = 13;
             // 
             // cmdCancelEdit
             // 
             this.cmdCancelEdit.Location = new System.Drawing.Point(270, 357);
             this.cmdCancelEdit.Name = "cmdCancelEdit";
             this.cmdCancelEdit.Size = new System.Drawing.Size(160, 28);
-            this.cmdCancelEdit.TabIndex = 37;
+            this.cmdCancelEdit.TabIndex = 15;
             this.cmdCancelEdit.Text = "Close Without Saving";
             this.cmdCancelEdit.UseVisualStyleBackColor = true;
             this.cmdCancelEdit.Click += new System.EventHandler(this.cmdCancelEdit_Click);

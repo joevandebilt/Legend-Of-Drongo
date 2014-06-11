@@ -1,4 +1,0 @@
-F:\Legend Of Drongo\Compiler\Release\Legend Of Drongo Data Types.dll
-F:\Legend Of Drongo\Compiler\Release\Legend Of Drongo Data Types.pdb
-F:\Legend Of Drongo\Data Types\obj\Release\Legend Of Drongo Data Types.dll
-F:\Legend Of Drongo\Data Types\obj\Release\Legend Of Drongo Data Types.pdb

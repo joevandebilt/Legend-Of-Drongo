@@ -1,123 +1,19 @@
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.frmMain.resources
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.Properties.Resources.resources
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\bin\Debug\Legend Of Drongo World Designer.exe
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\bin\Debug\Legend Of Drongo World Designer.pdb
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.frmWorldDesigner.resources
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
-D:\Users\joe.vandebilt\Desktop\Legend Of Drongo World Designer\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.frmRoomEditor.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.frmWorldDesigner.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.frmMain.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.Properties.Resources.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.frmRoomEditor.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\bin\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo\Legend Of Drongo World Designer\Legend Of Drongo World Designer\bin\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo_World_Designer.Properties.Resources.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
-F:\Legend Of Drongo\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-F:\Legend Of Drongo\Legend Of Drongo World Designer\bin\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo\Legend Of Drongo World Designer\bin\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo\Legend Of Drongo World Designer\bin\Debug\ClassLibrary1.dll
-F:\Legend Of Drongo\Legend Of Drongo World Designer\bin\Debug\ClassLibrary1.pdb
-F:\Legend Of Drongo\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo\Legend Of Drongo Compile\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo\Legend Of Drongo Compile\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo\Legend Of Drongo World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo v2\Compiler\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo v2\Compiler\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldPicker.resources
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
-F:\Legend Of Drongo v2\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmNPCEditor.resources
-F:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmNPCEditor.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldPicker.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
-F:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe.manifest
-F:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.application
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
-F:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
-G:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe.manifest
-G:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.application
-G:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe
-G:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.pdb
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmNPCEditor.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldPicker.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-G:\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
-D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe.manifest
-D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.application
-D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe
-D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo World Designer.pdb
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmNPCEditor.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldPicker.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-D:\Dropbox\Programming\Legend Of Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe.manifest
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.application
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.exe
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo World Designer.pdb
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmNPCEditor.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldPicker.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe.manifest
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.application
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.pdb
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmNPCEditor.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldPicker.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
+G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb

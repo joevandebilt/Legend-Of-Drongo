@@ -122,6 +122,10 @@ namespace Legend_Of_Drongo
             public string Trigger;
             public string Action;
             public int[] Coodinates;
+            public string EventValue;
+            public List<CivilianProfile> NPCs;
+            public List<itemInfo> Items;
+            public List<EnemyProfile> Enemies;
             public bool Triggered;
         }
 

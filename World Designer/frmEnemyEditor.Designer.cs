@@ -57,7 +57,7 @@
             this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 12;
             this.label1.Text = "Name";
             // 
             // label2
@@ -66,7 +66,7 @@
             this.label2.Location = new System.Drawing.Point(13, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 13;
             this.label2.Text = "Weapon";
             // 
             // label3
@@ -75,7 +75,7 @@
             this.label3.Location = new System.Drawing.Point(13, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 13);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 14;
             this.label3.Text = "HP";
             // 
             // label4
@@ -84,7 +84,7 @@
             this.label4.Location = new System.Drawing.Point(97, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
-            this.label4.TabIndex = 3;
+            this.label4.TabIndex = 15;
             this.label4.Text = "Armor %";
             // 
             // label5
@@ -93,7 +93,7 @@
             this.label5.Location = new System.Drawing.Point(13, 313);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
-            this.label5.TabIndex = 4;
+            this.label5.TabIndex = 19;
             this.label5.Text = "Pay Off Value";
             // 
             // label6
@@ -102,7 +102,7 @@
             this.label6.Location = new System.Drawing.Point(12, 120);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 5;
+            this.label6.TabIndex = 17;
             this.label6.Text = "Kill Message";
             // 
             // label7
@@ -111,7 +111,7 @@
             this.label7.Location = new System.Drawing.Point(12, 213);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 13);
-            this.label7.TabIndex = 6;
+            this.label7.TabIndex = 18;
             this.label7.Text = "Death Message";
             // 
             // label8
@@ -120,7 +120,7 @@
             this.label8.Location = new System.Drawing.Point(13, 341);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(93, 13);
-            this.label8.TabIndex = 7;
+            this.label8.TabIndex = 20;
             this.label8.Text = "Pay Off Response";
             // 
             // txtName
@@ -128,28 +128,28 @@
             this.txtName.Location = new System.Drawing.Point(67, 6);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(220, 20);
-            this.txtName.TabIndex = 8;
+            this.txtName.TabIndex = 0;
             // 
             // txtWeapon
             // 
             this.txtWeapon.Location = new System.Drawing.Point(67, 34);
             this.txtWeapon.Name = "txtWeapon";
             this.txtWeapon.Size = new System.Drawing.Size(189, 20);
-            this.txtWeapon.TabIndex = 9;
+            this.txtWeapon.TabIndex = 1;
             // 
             // txtHP
             // 
             this.txtHP.Location = new System.Drawing.Point(41, 64);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(38, 20);
-            this.txtHP.TabIndex = 10;
+            this.txtHP.TabIndex = 3;
             // 
             // txtArmor
             // 
             this.txtArmor.Location = new System.Drawing.Point(148, 64);
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
-            this.txtArmor.TabIndex = 12;
+            this.txtArmor.TabIndex = 4;
             // 
             // txtKill
             // 
@@ -157,7 +157,7 @@
             this.txtKill.Multiline = true;
             this.txtKill.Name = "txtKill";
             this.txtKill.Size = new System.Drawing.Size(271, 50);
-            this.txtKill.TabIndex = 13;
+            this.txtKill.TabIndex = 6;
             // 
             // txtDeath
             // 
@@ -165,28 +165,28 @@
             this.txtDeath.Multiline = true;
             this.txtDeath.Name = "txtDeath";
             this.txtDeath.Size = new System.Drawing.Size(271, 50);
-            this.txtDeath.TabIndex = 14;
+            this.txtDeath.TabIndex = 7;
             // 
             // txtPayOff
             // 
             this.txtPayOff.Location = new System.Drawing.Point(91, 310);
             this.txtPayOff.Name = "txtPayOff";
             this.txtPayOff.Size = new System.Drawing.Size(38, 20);
-            this.txtPayOff.TabIndex = 15;
+            this.txtPayOff.TabIndex = 8;
             // 
             // txtPayOffResponse
             // 
             this.txtPayOffResponse.Location = new System.Drawing.Point(112, 338);
             this.txtPayOffResponse.Name = "txtPayOffResponse";
             this.txtPayOffResponse.Size = new System.Drawing.Size(175, 20);
-            this.txtPayOffResponse.TabIndex = 16;
+            this.txtPayOffResponse.TabIndex = 9;
             // 
             // cmdItemInspect
             // 
             this.cmdItemInspect.Location = new System.Drawing.Point(262, 32);
             this.cmdItemInspect.Name = "cmdItemInspect";
             this.cmdItemInspect.Size = new System.Drawing.Size(25, 22);
-            this.cmdItemInspect.TabIndex = 17;
+            this.cmdItemInspect.TabIndex = 2;
             this.cmdItemInspect.Text = "...";
             this.cmdItemInspect.UseVisualStyleBackColor = true;
             this.cmdItemInspect.Click += new System.EventHandler(this.cmdItemInspect_Click);
@@ -196,7 +196,7 @@
             this.cmdSaveEnemy.Location = new System.Drawing.Point(16, 379);
             this.cmdSaveEnemy.Name = "cmdSaveEnemy";
             this.cmdSaveEnemy.Size = new System.Drawing.Size(121, 27);
-            this.cmdSaveEnemy.TabIndex = 18;
+            this.cmdSaveEnemy.TabIndex = 10;
             this.cmdSaveEnemy.Text = "Save Enemy";
             this.cmdSaveEnemy.UseVisualStyleBackColor = true;
             this.cmdSaveEnemy.Click += new System.EventHandler(this.cmdSaveEnemy_Click);
@@ -206,7 +206,7 @@
             this.cmdCancel.Location = new System.Drawing.Point(166, 379);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(121, 27);
-            this.cmdCancel.TabIndex = 19;
+            this.cmdCancel.TabIndex = 11;
             this.cmdCancel.Text = "Close Without Saving";
             this.cmdCancel.UseVisualStyleBackColor = true;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
@@ -217,7 +217,7 @@
             this.label9.Location = new System.Drawing.Point(203, 67);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
-            this.label9.TabIndex = 2;
+            this.label9.TabIndex = 16;
             this.label9.Text = "Money";
             // 
             // txtMoney
@@ -225,7 +225,7 @@
             this.txtMoney.Location = new System.Drawing.Point(249, 64);
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(38, 20);
-            this.txtMoney.TabIndex = 10;
+            this.txtMoney.TabIndex = 5;
             // 
             // frmEnemyEditor
             // 

@@ -105,6 +105,16 @@ namespace Legend_Of_Drongo
             GetAllItems();
         }
 
+        private void cmdCloneItem_Click(object sender, EventArgs e)
+        {
+            if (lstInventory.SelectedIndex > -1)
+            {
+                NPC.inventory.Add(NPC.inventory[lstInventory.SelectedIndex]);
+                GetAllItems();
+            }
+            else MessageBox.Show("Select an item to clone");
+        }
+
         private void cmdRemoveItem_Click(object sender, EventArgs e)
         {
             NPC.inventory.RemoveAt(lstInventory.SelectedIndex);
@@ -156,6 +166,16 @@ namespace Legend_Of_Drongo
             NPC.Knowledge.Add(thisFact);
 
             GetAllKnowledge();
+        }
+
+        private void cmdCloneKnowledge_Click(object sender, EventArgs e)
+        {
+            if (lstKnowledge.SelectedIndex > -1)
+            {
+                NPC.Knowledge.Add(NPC.Knowledge[lstKnowledge.SelectedIndex]);
+                GetAllKnowledge();
+            }
+            else MessageBox.Show("Select a knowledge item to clone");
         }
 
         private void cmdRemoveKnowledge_Click(object sender, EventArgs e)
@@ -215,5 +235,7 @@ namespace Legend_Of_Drongo
                 txtKnowledge.Text = NPC.Knowledge[lstKnowledge.SelectedIndex].Knowledge;
             }
         }
+
+        
     }
 }

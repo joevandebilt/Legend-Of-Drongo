@@ -56,6 +56,10 @@
             this.cmdAddEnemy = new System.Windows.Forms.Button();
             this.cmdRemoveNPC = new System.Windows.Forms.Button();
             this.cmdAddNPC = new System.Windows.Forms.Button();
+            this.cmdCloneEvent = new System.Windows.Forms.Button();
+            this.cmdCloneItem = new System.Windows.Forms.Button();
+            this.cmdCloneNPC = new System.Windows.Forms.Button();
+            this.cmdCloneEnemy = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdSaveRoom
@@ -63,7 +67,7 @@
             this.cmdSaveRoom.Location = new System.Drawing.Point(12, 306);
             this.cmdSaveRoom.Name = "cmdSaveRoom";
             this.cmdSaveRoom.Size = new System.Drawing.Size(161, 38);
-            this.cmdSaveRoom.TabIndex = 0;
+            this.cmdSaveRoom.TabIndex = 4;
             this.cmdSaveRoom.Text = "Save";
             this.cmdSaveRoom.UseVisualStyleBackColor = true;
             this.cmdSaveRoom.Click += new System.EventHandler(this.cmdSaveRoom_Click);
@@ -73,7 +77,7 @@
             this.cmdCancel.Location = new System.Drawing.Point(346, 306);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(171, 38);
-            this.cmdCancel.TabIndex = 1;
+            this.cmdCancel.TabIndex = 6;
             this.cmdCancel.Text = "Close Without Saving";
             this.cmdCancel.UseVisualStyleBackColor = true;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
@@ -128,7 +132,7 @@
             this.cmdSaveClose.Location = new System.Drawing.Point(179, 306);
             this.cmdSaveClose.Name = "cmdSaveClose";
             this.cmdSaveClose.Size = new System.Drawing.Size(161, 38);
-            this.cmdSaveClose.TabIndex = 7;
+            this.cmdSaveClose.TabIndex = 5;
             this.cmdSaveClose.Text = "Save and Close";
             this.cmdSaveClose.UseVisualStyleBackColor = true;
             this.cmdSaveClose.Click += new System.EventHandler(this.cmdSaveClose_Click);
@@ -140,7 +144,7 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescription.Size = new System.Drawing.Size(191, 121);
-            this.txtDescription.TabIndex = 8;
+            this.txtDescription.TabIndex = 1;
             // 
             // txtAltDescription
             // 
@@ -149,7 +153,7 @@
             this.txtAltDescription.Name = "txtAltDescription";
             this.txtAltDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtAltDescription.Size = new System.Drawing.Size(191, 121);
-            this.txtAltDescription.TabIndex = 10;
+            this.txtAltDescription.TabIndex = 2;
             // 
             // label5
             // 
@@ -166,7 +170,7 @@
             this.chkCanMove.Location = new System.Drawing.Point(15, 44);
             this.chkCanMove.Name = "chkCanMove";
             this.chkCanMove.Size = new System.Drawing.Size(139, 17);
-            this.chkCanMove.TabIndex = 11;
+            this.chkCanMove.TabIndex = 0;
             this.chkCanMove.Text = "Player Can Move Here?";
             this.chkCanMove.UseVisualStyleBackColor = true;
             // 
@@ -175,7 +179,7 @@
             this.cmdFormHelp.Location = new System.Drawing.Point(862, 306);
             this.cmdFormHelp.Name = "cmdFormHelp";
             this.cmdFormHelp.Size = new System.Drawing.Size(171, 38);
-            this.cmdFormHelp.TabIndex = 12;
+            this.cmdFormHelp.TabIndex = 7;
             this.cmdFormHelp.Text = "Help";
             this.cmdFormHelp.UseVisualStyleBackColor = true;
             // 
@@ -184,7 +188,7 @@
             this.txtSuicide.Location = new System.Drawing.Point(12, 262);
             this.txtSuicide.Name = "txtSuicide";
             this.txtSuicide.Size = new System.Drawing.Size(394, 20);
-            this.txtSuicide.TabIndex = 14;
+            this.txtSuicide.TabIndex = 3;
             // 
             // label6
             // 
@@ -252,7 +256,7 @@
             // 
             // cmdRemoveItem
             // 
-            this.cmdRemoveItem.Location = new System.Drawing.Point(453, 186);
+            this.cmdRemoveItem.Location = new System.Drawing.Point(453, 214);
             this.cmdRemoveItem.Name = "cmdRemoveItem";
             this.cmdRemoveItem.Size = new System.Drawing.Size(19, 22);
             this.cmdRemoveItem.TabIndex = 21;
@@ -262,7 +266,7 @@
             // 
             // cmdRemoveEvent
             // 
-            this.cmdRemoveEvent.Location = new System.Drawing.Point(453, 72);
+            this.cmdRemoveEvent.Location = new System.Drawing.Point(453, 99);
             this.cmdRemoveEvent.Name = "cmdRemoveEvent";
             this.cmdRemoveEvent.Size = new System.Drawing.Size(19, 22);
             this.cmdRemoveEvent.TabIndex = 23;
@@ -282,7 +286,7 @@
             // 
             // cmdRemoveEnemy
             // 
-            this.cmdRemoveEnemy.Location = new System.Drawing.Point(770, 74);
+            this.cmdRemoveEnemy.Location = new System.Drawing.Point(770, 102);
             this.cmdRemoveEnemy.Name = "cmdRemoveEnemy";
             this.cmdRemoveEnemy.Size = new System.Drawing.Size(19, 22);
             this.cmdRemoveEnemy.TabIndex = 25;
@@ -302,7 +306,7 @@
             // 
             // cmdRemoveNPC
             // 
-            this.cmdRemoveNPC.Location = new System.Drawing.Point(770, 186);
+            this.cmdRemoveNPC.Location = new System.Drawing.Point(770, 214);
             this.cmdRemoveNPC.Name = "cmdRemoveNPC";
             this.cmdRemoveNPC.Size = new System.Drawing.Size(19, 22);
             this.cmdRemoveNPC.TabIndex = 27;
@@ -320,11 +324,55 @@
             this.cmdAddNPC.UseVisualStyleBackColor = true;
             this.cmdAddNPC.Click += new System.EventHandler(this.cmdAddNPC_Click);
             // 
+            // cmdCloneEvent
+            // 
+            this.cmdCloneEvent.Location = new System.Drawing.Point(453, 71);
+            this.cmdCloneEvent.Name = "cmdCloneEvent";
+            this.cmdCloneEvent.Size = new System.Drawing.Size(19, 22);
+            this.cmdCloneEvent.TabIndex = 28;
+            this.cmdCloneEvent.Text = "||";
+            this.cmdCloneEvent.UseVisualStyleBackColor = true;
+            this.cmdCloneEvent.Click += new System.EventHandler(this.cmdCloneEvent_Click);
+            // 
+            // cmdCloneItem
+            // 
+            this.cmdCloneItem.Location = new System.Drawing.Point(453, 186);
+            this.cmdCloneItem.Name = "cmdCloneItem";
+            this.cmdCloneItem.Size = new System.Drawing.Size(19, 22);
+            this.cmdCloneItem.TabIndex = 29;
+            this.cmdCloneItem.Text = "||";
+            this.cmdCloneItem.UseVisualStyleBackColor = true;
+            this.cmdCloneItem.Click += new System.EventHandler(this.cmdCloneItem_Click);
+            // 
+            // cmdCloneNPC
+            // 
+            this.cmdCloneNPC.Location = new System.Drawing.Point(770, 186);
+            this.cmdCloneNPC.Name = "cmdCloneNPC";
+            this.cmdCloneNPC.Size = new System.Drawing.Size(19, 22);
+            this.cmdCloneNPC.TabIndex = 30;
+            this.cmdCloneNPC.Text = "||";
+            this.cmdCloneNPC.UseVisualStyleBackColor = true;
+            this.cmdCloneNPC.Click += new System.EventHandler(this.cmdCloneNPC_Click);
+            // 
+            // cmdCloneEnemy
+            // 
+            this.cmdCloneEnemy.Location = new System.Drawing.Point(770, 74);
+            this.cmdCloneEnemy.Name = "cmdCloneEnemy";
+            this.cmdCloneEnemy.Size = new System.Drawing.Size(19, 22);
+            this.cmdCloneEnemy.TabIndex = 31;
+            this.cmdCloneEnemy.Text = "||";
+            this.cmdCloneEnemy.UseVisualStyleBackColor = true;
+            this.cmdCloneEnemy.Click += new System.EventHandler(this.cmdCloneEnemy_Click);
+            // 
             // frmRoomEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1065, 368);
+            this.Controls.Add(this.cmdCloneEnemy);
+            this.Controls.Add(this.cmdCloneNPC);
+            this.Controls.Add(this.cmdCloneItem);
+            this.Controls.Add(this.cmdCloneEvent);
             this.Controls.Add(this.cmdRemoveNPC);
             this.Controls.Add(this.cmdAddNPC);
             this.Controls.Add(this.cmdRemoveEnemy);
@@ -390,5 +438,9 @@
         private System.Windows.Forms.Button cmdAddEnemy;
         private System.Windows.Forms.Button cmdRemoveNPC;
         private System.Windows.Forms.Button cmdAddNPC;
+        private System.Windows.Forms.Button cmdCloneEvent;
+        private System.Windows.Forms.Button cmdCloneItem;
+        private System.Windows.Forms.Button cmdCloneNPC;
+        private System.Windows.Forms.Button cmdCloneEnemy;
     }
 }

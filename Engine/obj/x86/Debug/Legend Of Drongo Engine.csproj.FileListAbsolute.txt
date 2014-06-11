@@ -1,38 +1,5 @@
-F:\Legend Of Drongo\Legend Of Drongo\bin\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo\Legend Of Drongo\bin\Debug\Legend Of Drongo.pdb
-F:\Legend Of Drongo\Legend Of Drongo\obj\x86\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo\Legend Of Drongo\obj\x86\Debug\Legend Of Drongo.pdb
-F:\Legend Of Drongo\Legend Of Drongo Engine\bin\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo\Legend Of Drongo Engine\bin\Debug\Legend Of Drongo.pdb
-F:\Legend Of Drongo\Legend Of Drongo Engine\bin\Debug\ClassLibrary1.dll
-F:\Legend Of Drongo\Legend Of Drongo Engine\bin\Debug\ClassLibrary1.pdb
-F:\Legend Of Drongo\Legend Of Drongo Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-F:\Legend Of Drongo\Legend Of Drongo Engine\obj\x86\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo\Legend Of Drongo Engine\obj\x86\Debug\Legend Of Drongo.pdb
-F:\Legend Of Drongo\Legend Of Drongo Compile\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo\Legend Of Drongo Compile\Debug\Legend Of Drongo.pdb
-F:\Legend Of Drongo v2\Compiler\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo v2\Compiler\Debug\Legend Of Drongo.pdb
-F:\Legend Of Drongo v2\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-F:\Legend Of Drongo v2\Engine\obj\x86\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo v2\Engine\obj\x86\Debug\Legend Of Drongo.pdb
-F:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo.pdb
-F:\Legend Of Drongo\engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-F:\Legend Of Drongo\engine\obj\x86\Debug\Legend Of Drongo.exe
-F:\Legend Of Drongo\engine\obj\x86\Debug\Legend Of Drongo.pdb
-G:\Legend Of Drongo\engine\obj\x86\Debug\Legend Of Drongo.exe
-G:\Legend Of Drongo\engine\obj\x86\Debug\Legend Of Drongo.pdb
-G:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo.exe
-G:\Legend Of Drongo\Compiler\Debug\Legend Of Drongo.pdb
-G:\Legend Of Drongo\engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo.exe
-D:\Dropbox\Programming\Legend Of Drongo\Compiler\Debug\Legend Of Drongo.pdb
-D:\Dropbox\Programming\Legend Of Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-D:\Dropbox\Programming\Legend Of Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
-D:\Dropbox\Programming\Legend Of Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo.exe
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo.pdb
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
-C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo.pdb
+G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
+G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
+G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb

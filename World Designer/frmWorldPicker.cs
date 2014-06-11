@@ -51,9 +51,13 @@ namespace Legend_Of_Drongo
 
         private void LoadWorld(int SelectedIndex)
         {
-            frmWorldDesigner NewForm = new frmWorldDesigner(true, SavesList[SelectedIndex]);
-            NewForm.Show();
-            this.Hide();
+            if (lstWorlds.SelectedIndex > -1)
+            {
+                frmWorldDesigner NewForm = new frmWorldDesigner(true, SavesList[SelectedIndex]);
+                NewForm.Show();
+                this.Hide();
+            }
+            else MessageBox.Show("Select a world from the list first");
         }
 
         private void cmdLoadWorld_Click(object sender, EventArgs e)

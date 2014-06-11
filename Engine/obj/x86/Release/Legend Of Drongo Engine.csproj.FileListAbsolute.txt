@@ -1,5 +1,0 @@
-F:\Legend Of Drongo\Compiler\Release\Legend Of Drongo.exe
-F:\Legend Of Drongo\Compiler\Release\Legend Of Drongo.pdb
-F:\Legend Of Drongo\engine\obj\x86\Release\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-F:\Legend Of Drongo\engine\obj\x86\Release\Legend Of Drongo.exe
-F:\Legend Of Drongo\engine\obj\x86\Release\Legend Of Drongo.pdb

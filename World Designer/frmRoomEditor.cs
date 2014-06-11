@@ -102,6 +102,16 @@ namespace Legend_Of_Drongo
             GetAllItems();
         }
 
+        private void cmdCloneItem_Click(object sender, EventArgs e)
+        {
+            if (lstItems.SelectedIndex > -1)
+            {
+                Room.items.Add(Room.items[lstItems.SelectedIndex]);
+                GetAllItems();
+            }
+            else MessageBox.Show("Select an item to clone");
+        }
+
         private void cmdRemoveItem_Click(object sender, EventArgs e)
         {
             Room.items.RemoveAt(lstItems.SelectedIndex);
@@ -152,6 +162,16 @@ namespace Legend_Of_Drongo
                 Room.Enemy.Add(NewEnemy);
             }
             GetAllEnemies();
+        }
+
+        private void cmdCloneEnemy_Click(object sender, EventArgs e)
+        {
+            if (lstEnemies.SelectedIndex > -1)
+            {
+                Room.Enemy.Add(Room.Enemy[lstEnemies.SelectedIndex]);
+                GetAllEnemies();
+            }
+            else MessageBox.Show("Select an enemy to clone");
         }
 
         private void cmdRemoveEnemy_Click(object sender, EventArgs e)
@@ -207,6 +227,16 @@ namespace Legend_Of_Drongo
             GetAllNPCs();
         }
 
+        private void cmdCloneNPC_Click(object sender, EventArgs e)
+        {
+            if (lstNPCs.SelectedIndex > -1)
+            {
+                Room.Civilians.Add(Room.Civilians[lstNPCs.SelectedIndex]);
+                GetAllNPCs();
+            }
+            else MessageBox.Show("Select an NPC to Clone");
+        }
+
         private void cmdRemoveNPC_Click(object sender, EventArgs e)
         {
             Room.Civilians.RemoveAt(lstNPCs.SelectedIndex);
@@ -258,6 +288,16 @@ namespace Legend_Of_Drongo
                 Room.Events.Add(NewEvent);
             }
             GetAllEvents();            
+        }
+
+        private void cmdCloneEvent_Click(object sender, EventArgs e)
+        {
+            if (lstEvents.SelectedIndex > -1)
+            {
+                Room.Events.Add(Room.Events[lstEvents.SelectedIndex]);
+                GetAllEvents();
+            }
+            else MessageBox.Show("Select an Event to Clone");
         }
 
         private void cmdRemoveEvent_Click(object sender, EventArgs e)
