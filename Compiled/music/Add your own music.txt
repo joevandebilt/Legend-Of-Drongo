@@ -1,0 +1,3 @@
+Hi there!
+
+Any wav format file you put in this folder can be played in game. Simply put your music in this directory and use the music browse command in game to start playing. 

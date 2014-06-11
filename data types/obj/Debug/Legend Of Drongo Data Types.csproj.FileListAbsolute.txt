@@ -1,0 +1,4 @@
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.dll
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.pdb
+G:\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+G:\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb

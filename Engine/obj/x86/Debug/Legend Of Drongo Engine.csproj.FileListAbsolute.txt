@@ -1,0 +1,5 @@
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe
+G:\Legend-Of-Drongo\Compiled\Legend Of Drongo.pdb
+G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
+G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
+G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
