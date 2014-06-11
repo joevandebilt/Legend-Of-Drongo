@@ -17,3 +17,5 @@ G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer
 G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
 G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
 G:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
+D:\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
+D:\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
