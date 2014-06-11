@@ -1311,7 +1311,7 @@ namespace Legend_Of_Drongo
 
                         }
                         index = 0;
-                        while (CurrentRoom.Enemy != null && index < CurrentRoom.Enemy.Count)
+                        while (CurrentRoom.Enemy != null && index < CurrentRoom.Enemy.Count && enemyfound == false)
                         {
                             if (CurrentRoom.Enemy[index].name.ToLower() == enemy.ToLower())
                             {
@@ -1814,12 +1814,14 @@ namespace Legend_Of_Drongo
                             itemFound = true;
                             if (Player.inventory[index].Class == "Weapon")
                             {
-
+                                Player.ArmorBonus = Player.ArmorBonus - Player.WeaponHeld.DefenseMod;
                                 tempItem = Player.WeaponHeld;
                                 Player.WeaponHeld = Player.inventory[index];
                                 Player.inventory[index] = tempItem;
+                                Player.ArmorBonus = Player.ArmorBonus + Player.WeaponHeld.DefenseMod;
                                 Console.WriteLine(WordWrap(string.Concat("You have equipped ", item, " as your current weapon")));
                                 Console.WriteLine(WordWrap(string.Concat("Your old weapon ", Player.inventory[index].Name, " has been been placed in your inventory.")));
+                                
                             }
                             else if (Player.inventory[index].Class.Contains("Armor"))
                             {
@@ -2276,6 +2278,7 @@ namespace Legend_Of_Drongo
         public static void Combat(itemInfo WeaponUsed, string enemy)
         {
             int NumOfFighters = 0;
+            int Fortitude;
             Random RNG = new Random();
             int index;
 
@@ -2283,26 +2286,31 @@ namespace Legend_Of_Drongo
 
             //Console.WriteLine(WordWrap("There are ", ," people in the room", NumOfFighters);
 
-            Fighter[] ThisFight = new Fighter[NumOfFighters];
+            List<Fighter> ThisFight = new List<Fighter>();
             Fighter TempFighter = new Fighter();
 
-            ThisFight[0].name = Player.name;
-            ThisFight[0].HP = Player.HPBonus;
-            ThisFight[0].Weapon = WeaponUsed;
-            ThisFight[0].AttackMod = WeaponUsed.AttackMod;
-            ThisFight[0].DefenseMod = Player.ArmorBonus;
-            ThisFight[0].isAlive = true;
-            ThisFight[0].initiative = RNG.Next(5, 20);
+            TempFighter.name = Player.name;
+            TempFighter.HP = Player.HPBonus;
+            TempFighter.Weapon = WeaponUsed;
+            TempFighter.AttackMod = WeaponUsed.AttackMod;
+            TempFighter.DefenseMod = Player.ArmorBonus;
+            TempFighter.isAlive = true;
+            TempFighter.initiative = RNG.Next(5, 100);  //Potentially add a speed bonus here?
+            TempFighter.ID = 99;
+            ThisFight.Add(TempFighter);
 
-            for (index = 1; index <= CurrentRoom.Enemy.Count; index++)
+
+            for (index = 0; index < CurrentRoom.Enemy.Count; index++)
             {
-                ThisFight[index].name = CurrentRoom.Enemy[index - 1].name;
-                ThisFight[index].HP = CurrentRoom.Enemy[index - 1].HPBonus;
-                ThisFight[index].DefenseMod = CurrentRoom.Enemy[index - 1].armor + CurrentRoom.Enemy[index - 1].Weapon.DefenseMod;
-                ThisFight[index].AttackMod = CurrentRoom.Enemy[index - 1].Weapon.AttackMod;
-                ThisFight[index].Weapon = CurrentRoom.Enemy[index - 1].Weapon;
-                ThisFight[index].isAlive = true;
-                ThisFight[index].initiative = RNG.Next(0, 20);
+                TempFighter.name = CurrentRoom.Enemy[index].name;
+                TempFighter.HP = CurrentRoom.Enemy[index].HPBonus;
+                TempFighter.DefenseMod = CurrentRoom.Enemy[index].armor + CurrentRoom.Enemy[index].Weapon.DefenseMod;
+                TempFighter.AttackMod = CurrentRoom.Enemy[index].Weapon.AttackMod;
+                TempFighter.Weapon = CurrentRoom.Enemy[index].Weapon;
+                TempFighter.isAlive = true;
+                TempFighter.initiative = RNG.Next(0, 100); //Roll 1d100 to decide initiative
+                TempFighter.ID = index;
+                ThisFight.Add(TempFighter);
             }
 
             index = 0;
@@ -2321,40 +2329,41 @@ namespace Legend_Of_Drongo
 
             int BaseAttack = 0;
             int Counter = 0;
-            index = 0;
-            while (index < NumOfFighters)
+            for (index = 0; index < ThisFight.Count; index++)
             {
                 if (ThisFight[index].name == Player.name)   //players turn
                 {
-                    BaseAttack = RNG.Next(1, 20);
+                    BaseAttack = RNG.Next(1, 3);
 
-                    if (BaseAttack < 5)
+                    if (BaseAttack == 1)
                     {
                         //bad attack
                         Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.BadHit)));
                     }
-                    else if (BaseAttack < 10)
+                    else if (BaseAttack == 2)
                     {
                         //Medium Weak Attack
                         Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.MedHit)));
                     }
-                    else
+                    else if (BaseAttack == 3)
                     {
                         //Critical Attack                            
                         Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.GoodHit)));
                     }
 
                     BaseAttack = BaseAttack * ThisFight[index].AttackMod;
-                    //Console.WriteLine("You have dealt {0} damage", BaseAttack = BaseAttack * ThisFight[index].AttackMod);
+                    
                     Counter = 0;
-
-                    //for (Counter=0;Counter<CurrentRoom.Enemy.Count;Counter++)
-                    while (CurrentRoom.Enemy != null && Counter < CurrentRoom.Enemy.Count)
+                    bool GaveHit = false;
+                    
+                    while (CurrentRoom.Enemy != null && Counter < ThisFight.Count && GaveHit == false)
                     {
-                        if (CurrentRoom.Enemy[Counter].name.ToLower() == enemy.ToLower())
+                        if (ThisFight[Counter].name.ToLower() == enemy.ToLower())
                         {
-                            EnemyProfile ThisEnemy = CurrentRoom.Enemy[Counter];
-                            ThisEnemy.HPBonus = ThisEnemy.HPBonus - (BaseAttack - ((BaseAttack / 110) * ThisEnemy.armor));
+                            EnemyProfile ThisEnemy = CurrentRoom.Enemy[ThisFight[Counter].ID];
+                            Fortitude = RNG.Next(1, 100);
+                            if (Fortitude > ThisEnemy.armor) ThisEnemy.HPBonus = ThisEnemy.HPBonus - BaseAttack;
+                            else ThisEnemy.HPBonus = Convert.ToInt32(ThisEnemy.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * ThisEnemy.armor));
 
                             //Console.WriteLine("Enemy {0} has {1} HP left", enemy, CurrentRoom.Enemy[Counter].HPBonus);
 
@@ -2362,32 +2371,25 @@ namespace Legend_Of_Drongo
                             {
                                 Console.WriteLine();
                                 if (CurrentRoom.Enemy[Counter].DeathMessage == null)
-                                { Console.WriteLine(WordWrap(string.Concat("With this blow you kill the enemy ", CurrentRoom.Enemy[Counter].name))); }
+                                { Console.WriteLine(WordWrap(string.Concat("With this hit you kill the enemy ", CurrentRoom.Enemy[Counter].name))); }
                                 else { Console.WriteLine(WordWrap(CurrentRoom.Enemy[Counter].DeathMessage)); }
-                                for (int i = 0; i < ThisFight.Length; i++)
-                                {
-                                    if (ThisFight[i].name == ThisEnemy.name)
-                                    {
-                                        ThisFight[i].isAlive = false;
-                                    }
-                                }
-
-                                if (CurrentRoom.items == null)  CurrentRoom.items = new List<itemInfo>();
+                                
+                                if (CurrentRoom.items == null) CurrentRoom.items = new List<itemInfo>();
 
                                 CurrentRoom.items.Add(ThisEnemy.Weapon);
 
                                 itemInfo newItem = new itemInfo();
 
-                                newItem.Name = string.Concat(CurrentRoom.Enemy[Counter].name, "'s body");
+                                newItem.Name = string.Concat(ThisEnemy.name, "'s body");
                                 newItem.Class = "Object";
-                                newItem.Examine = string.Concat("The slashed and torn body of enemy ", CurrentRoom.Enemy[Counter].name);
+                                newItem.Examine = string.Concat("The slashed and torn body of enemy ", ThisEnemy.name);
                                 newItem.CanPickUp = false;
                                 newItem.InteractionName = new List<string>();
                                 newItem.InteractionName.Add("body");
                                 newItem.InteractionName.Add("corpse");
                                 newItem.InteractionName.Add("enemy");
-                                newItem.InteractionName.Add(string.Concat(CurrentRoom.Enemy[Counter].name, "'s body"));
-                                newItem.InteractionName.Add(CurrentRoom.Enemy[Counter].name);
+                                newItem.InteractionName.Add(string.Concat(ThisEnemy.name, "'s body"));
+                                newItem.InteractionName.Add(ThisEnemy.name);
                                 CurrentRoom.items.Add(newItem);
 
                                 if (ThisEnemy.Money != 0) Console.WriteLine("\nYou take {0} gold coins from {1}'s corpse", ThisEnemy.Money, enemy);
@@ -2395,18 +2397,15 @@ namespace Legend_Of_Drongo
                                 Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
                                 NumOfFighters = NumOfFighters - 1;
 
+                                
                                 EventTrigger("killenemy");
                                 //Console.WriteLine("There are {0} enemies in the room, there will now be {1}", CurrentRoom.Enemy.Count, CurrentRoom.Enemy.Count - 1);
 
                                 if (CurrentRoom.Enemy.Count - 1 != 0)
                                 {
-                                    int i = 0;
-                                    while (i < (CurrentRoom.Enemy.Count - 1))
-                                    {
-                                        CurrentRoom.Enemy[i] = CurrentRoom.Enemy[i + 1];
-                                        i++;
-                                    }
-                                    CurrentRoom.Enemy.RemoveAt(CurrentRoom.Enemy.Count - 1);
+                                    //Remove the fighter
+                                    CurrentRoom.Enemy.RemoveAt(ThisFight[Counter].ID);
+                                    ThisFight.RemoveAt(Counter);
                                 }
                                 else
                                 {
@@ -2415,29 +2414,31 @@ namespace Legend_Of_Drongo
                                     //break;
                                 }
                             }
+                            else CurrentRoom.Enemy[ThisFight[Counter].ID] = ThisEnemy;
+                            GaveHit = true;
                         }
                         Counter++;
                     }
 
                 }
-                else if (ThisFight[index].isAlive == true)  //enemies turn
+                else  //enemies turn
                 {
-                    BaseAttack = RNG.Next(1, 15);
+                    BaseAttack = RNG.Next(1, 3);
 
-                    if (BaseAttack < 3)
+                    if (BaseAttack == 1)
                     {
                         //bad attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
                         Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you\n", ThisFight[index].Weapon.BadHit)));
 
                     }
-                    else if (BaseAttack < 11)
+                    else if (BaseAttack == 2)
                     {
                         //Medium Strong Attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
                         Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you\n", ThisFight[index].Weapon.MedHit)));
                     }
-                    else
+                    else if (BaseAttack == 3)
                     {
                         //Strong Attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
@@ -2445,6 +2446,10 @@ namespace Legend_Of_Drongo
                     }
 
                     Player.HPBonus = Player.HPBonus - (BaseAttack - ((BaseAttack / 110) * Player.ArmorBonus));
+
+                    Fortitude = RNG.Next(1, 100);
+                    if (Fortitude > Player.ArmorBonus) Player.HPBonus = Player.HPBonus- BaseAttack;
+                    else Player.HPBonus = Convert.ToInt32(Player.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * Player.ArmorBonus));
 
                     if (Player.HPBonus < 0)
                     {
@@ -2466,7 +2471,6 @@ namespace Legend_Of_Drongo
 
                     }
                 }
-                index++;
                 Thread.Sleep(1500);
                 Console.WriteLine("");
             }
@@ -2780,6 +2784,30 @@ namespace Legend_Of_Drongo
                 else if (thisEvent.Action.ToLower() == "output text")
                 {
                     Console.WriteLine(WordWrap(thisEvent.EventValue));
+                }
+                else if (thisEvent.Action == "spawnItems")
+                {
+                    if (CurrentRoom.items == null) CurrentRoom.items = new List<itemInfo>();
+                    foreach (itemInfo Item in thisEvent.Items)
+                    {
+                        CurrentRoom.items.Add(Item);
+                    }
+                }
+                else if (thisEvent.Action == "spawnNPC")
+                {
+                    if (CurrentRoom.Civilians == null) CurrentRoom.Civilians = new List<CivilianProfile>();
+                    foreach (CivilianProfile NPC in thisEvent.NPCs)
+                    {
+                        CurrentRoom.Civilians.Add(NPC);
+                    }
+                }
+                else if (thisEvent.Action == "spawnEnemy")
+                {
+                    if (CurrentRoom.Enemy == null) CurrentRoom.Enemy = new List<EnemyProfile>();
+                    foreach (EnemyProfile Enemy in thisEvent.Enemies)
+                    {
+                        CurrentRoom.Enemy.Add(Enemy);
+                    }
                 }
                 else thisEvent.Triggered = false;
             }

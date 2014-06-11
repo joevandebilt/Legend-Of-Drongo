@@ -50,6 +50,7 @@ namespace Legend_Of_Drongo
             public itemInfo Weapon;
             public int AttackMod;
             public int DefenseMod;
+            public int ID;
         }
 
         [Serializable()]

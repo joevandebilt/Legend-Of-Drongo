@@ -15,7 +15,7 @@ namespace Legend_Of_Drongo
         public bool ChangeMade;
 
         string[,] Triggers = new string[7,2];
-        string[,] Actions = new string[11,2];
+        string[,] Actions = new string[10,2];
 
         public frmEventEditor(DataTypes.Event thisEvent, int FloorCount)
         {
@@ -61,13 +61,13 @@ namespace Legend_Of_Drongo
             Actions[9,1] = "Spawn the following enemies";
             
 
-            for (int i = 0; i < Triggers.Length; i++)
+            for (int i = 0; i < (Triggers.Length/2); i++)
             {
                 cmbTrigger.Items.Add(Triggers[i,1]);
             }
             cmbTrigger.Items.Add("Unknown");
 
-            for (int i = 0; i < Actions.Length; i++)
+            for (int i = 0; i < (Actions.Length/2); i++)
             {
                 cmbAction.Items.Add(Actions[i,1]);
             }
@@ -83,7 +83,7 @@ namespace Legend_Of_Drongo
             if (Event.Trigger == null) cmbTrigger.SelectedIndex = cmbTrigger.FindString("Unknown");
             else
             {
-                for (int i = 0; i < Triggers.Length; i++)
+                for (int i = 0; i < (Triggers.Length/2); i++)
                 {
                     if (Triggers[i,0] == Event.Trigger) cmbTrigger.SelectedIndex = i;
                 }
@@ -92,19 +92,12 @@ namespace Legend_Of_Drongo
             if (Event.Action == null) cmbAction.SelectedIndex = cmbAction.FindString("Unknown");
             else
             {
-                for (int i = 0; i < Actions.Length; i++)
+                for (int i = 0; i < (Actions.Length/2); i++)
                 {
                     if (Actions[i,0] == Event.Action) cmbAction.SelectedIndex = i;
                 }
             }
-
-
-            if (cmbAction.SelectedIndex == 0 || cmbAction.SelectedIndex == 1 || cmbAction.SelectedIndex == 3 || cmbAction.SelectedIndex == 4)
-            {
-                cmbRow.Enabled = true;
-                cmbCol.Enabled = true;
-                cmbFloor.Enabled = true;
-            }
+            SetEnabledElements();
 
             cmbFloor.Items.Clear();
             for (int i = 0; i < Count; i++)
@@ -151,54 +144,7 @@ namespace Legend_Of_Drongo
 
         private void cmbAction_TextChanged(object sender, EventArgs e)
         {
-            cmbRow.Enabled = false;
-            cmbCol.Enabled = false;
-            cmbFloor.Enabled = false;
-            txtNewValue.Enabled = false;
-
-            lstItems.Enabled = false;
-            cmdAddItem.Enabled = false;
-            cmdRemoveItem.Enabled = false;
-            
-            lstNPCs.Enabled = false;
-            cmdAddNPC.Enabled = false;
-            cmdRemoveNPC.Enabled = false;
-
-            lstEnemies.Enabled = false;
-            cmdAddEnemy.Enabled = false;
-            cmdRemoveEnemy.Enabled = false;
-
-
-           //Check if coodinate box should be enabled
-            if (cmbAction.SelectedIndex == 0 || cmbAction.SelectedIndex == 1 || cmbAction.SelectedIndex == 3 || cmbAction.SelectedIndex == 4)
-            {
-                cmbRow.Enabled = true;
-                cmbCol.Enabled = true;
-                cmbFloor.Enabled = true;
-            }
-            else if (cmbAction.SelectedIndex == 9 || cmbAction.SelectedIndex == 9)
-            {
-                txtNewValue.Enabled = true;
-            }
-            else if (cmbAction.SelectedIndex == 6)
-            {
-                lstItems.Enabled = true;
-                cmdAddItem.Enabled = true;
-                cmdRemoveItem.Enabled = true;
-            }
-            else if (cmbAction.SelectedIndex == 7)
-            {
-                lstNPCs.Enabled = true;
-                cmdAddNPC.Enabled = true;
-                cmdRemoveNPC.Enabled = true;
-
-            }
-            else if (cmbAction.SelectedIndex == 8)
-            {
-                lstEnemies.Enabled = true;
-                cmdAddEnemy.Enabled = true;
-                cmdRemoveEnemy.Enabled = true;
-            }
+            SetEnabledElements();
         }
 
         private void cmdSaveEvent_Click(object sender, EventArgs e)
@@ -215,6 +161,63 @@ namespace Legend_Of_Drongo
         {
             ChangeMade = false;
             this.Hide();
+        }
+
+        private void SetEnabledElements()
+        {
+            cmbRow.Enabled = false;
+            cmbCol.Enabled = false;
+            cmbFloor.Enabled = false;
+            txtNewValue.Enabled = false;
+
+            lstItems.Enabled = false;
+            cmdAddItem.Enabled = false;
+            cmdCloneItem.Enabled = false;
+            cmdRemoveItem.Enabled = false;
+
+            lstNPCs.Enabled = false;
+            cmdAddNPC.Enabled = false;
+            cmdCloneNPC.Enabled = false;
+            cmdRemoveNPC.Enabled = false;
+
+            lstEnemies.Enabled = false;
+            cmdAddEnemy.Enabled = false;
+            cmdCloneEnemy.Enabled = false;
+            cmdRemoveEnemy.Enabled = false;
+
+            //Check if coodinate box should be enabled
+            if (cmbAction.SelectedIndex == 0 || cmbAction.SelectedIndex == 1 || cmbAction.SelectedIndex == 3 || cmbAction.SelectedIndex == 4)
+            {
+                cmbRow.Enabled = true;
+                cmbCol.Enabled = true;
+                cmbFloor.Enabled = true;
+            }
+            else if (cmbAction.SelectedIndex == 5 || cmbAction.SelectedIndex == 6)
+            {
+                txtNewValue.Enabled = true;
+            }
+            else if (cmbAction.SelectedIndex == 7)
+            {
+                lstItems.Enabled = true;
+                cmdAddItem.Enabled = true;
+                cmdCloneItem.Enabled = true;
+                cmdRemoveItem.Enabled = true;
+            }
+            else if (cmbAction.SelectedIndex == 8)
+            {
+                lstNPCs.Enabled = true;
+                cmdAddNPC.Enabled = true;
+                cmdCloneNPC.Enabled = true;
+                cmdRemoveNPC.Enabled = true;
+
+            }
+            else if (cmbAction.SelectedIndex == 9)
+            {
+                lstEnemies.Enabled = true;
+                cmdAddEnemy.Enabled = true;
+                cmdCloneEnemy.Enabled = true;
+                cmdRemoveEnemy.Enabled = true;
+            }
         }
 
 

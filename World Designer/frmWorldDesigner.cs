@@ -28,7 +28,7 @@ namespace Legend_Of_Drongo
             if (LoadWorld == true)
             {
                 string LoadPath = string.Concat(Directory.GetCurrentDirectory() , "\\Worlds\\" , WorldName);
-                MessageBox.Show(LoadPath);
+                //MessageBox.Show(LoadPath);
 
 
                 DataTypes.WorldFile WorldState = new DataTypes.WorldFile();
