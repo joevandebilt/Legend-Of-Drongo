@@ -8,6 +8,7 @@ The Legend of Drongo was a project I started as a means to familiarise myself wi
 
 Known Bugs:
 - Some iterations of data structures do not check if null, causing crash.
+<<<<<<< HEAD
 - Death in custom world moves player to random point at level 1
 - Saves will overwrite based on name, even if playing custom worlds - Fixed v2.1.3
 - Surprise Attack will only allow twice - FIXED v2.1.2
@@ -28,18 +29,43 @@ V1.0.0
 - Hard Coded Tutorial
 
 v2.0.1
+=======
+- Death in custom world moves player to random point at level 1 - FIXED V2.1.4
+- Saves will overwrite based on name, even if playing custom worlds - Fixed v2.1.3
+- Surprise Attack will only allow twice - FIXED v2.1.2
+
+
+To Do:
+- Finish world.
+- File directories are fixed paths, add in choice of directory.
+
+Changes:
+V1.0.0
+- Created Basic Game engine
+- Added command system
+- Added Data types
+- Created Hard coded world
+- Hard Coded Tutorial
+
+V2.0.1
+>>>>>>> 75d3d5ae41b772f252a110ae8cb38f9829b84eed
 - Created World Designer
 - Moved Data structures into new project
 - Changed Engine to Inherit data structures
 - Changed World Designer to Inherit data stuctures
 
+<<<<<<< HEAD
 v2.1.1
+=======
+V2.1.1
+>>>>>>> 75d3d5ae41b772f252a110ae8cb38f9829b84eed
 - Introduced Seperate World Files in ./Worlds Folder
 - Rewrote Events System
 - Added Knowledge System
 - Allowed for creation and use of custom worlds
 - Removed custom tracks per floor until workaround can be found
 
+<<<<<<< HEAD
 v2.1.2
 - Improved Combat system
 - Improved Item interaction system
@@ -60,5 +86,20 @@ V2.2.0
 - Redesigned Trigger & Action within Event Editor
 - Added Clone Buttons to event/NPC/Item and Enemy controls
 - Moved Event Trigger to new method
+=======
+V2.1.2
+- Improved Combat system
+- Improved Item interaction system
+
+V2.1.3
+- Added seperate folders for per-world save files
+- Improved Ask about system
+- Asked Scott for money. 
+
+V2.1.4
+- Added null selection on worldpicker
+- Fixed Afterlife issue.
+
+>>>>>>> 75d3d5ae41b772f252a110ae8cb38f9829b84eed
 
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

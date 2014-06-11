@@ -50,7 +50,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<<<<<<< HEAD:Compiled/Legend Of Drongo World Designer.exe.manifest
         <dsig:DigestValue>3cI7/HswfFp+EUfeU0plVguEY9M=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>kglxVvTVIXAJmgLcKSXRFIIPG0g=</dsig:DigestValue>
+>>>>>>> 75d3d5ae41b772f252a110ae8cb38f9829b84eed:Compiler/Debug/Legend Of Drongo World Designer.exe.manifest
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +66,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<<<<<<< HEAD:Compiled/Legend Of Drongo World Designer.exe.manifest
         <dsig:DigestValue>s7a3WfQ9sTAe5MjJuMYSqGhYlxc=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>4Ng+oaheYKe1kcJCFMOgYdpyi/o=</dsig:DigestValue>
+>>>>>>> 75d3d5ae41b772f252a110ae8cb38f9829b84eed:Compiler/Debug/Legend Of Drongo World Designer.exe.manifest
       </hash>
     </dependentAssembly>
   </dependency>

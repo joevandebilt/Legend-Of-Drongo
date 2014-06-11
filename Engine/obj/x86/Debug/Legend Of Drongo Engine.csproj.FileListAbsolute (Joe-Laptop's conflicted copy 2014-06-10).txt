@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-G:\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe
-G:\Legend-Of-Drongo\Compiled\Legend Of Drongo.pdb
-G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
-G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
-=======
 F:\Legend Of Drongo\Legend Of Drongo\bin\Debug\Legend Of Drongo.exe
 F:\Legend Of Drongo\Legend Of Drongo\bin\Debug\Legend Of Drongo.pdb
 F:\Legend Of Drongo\Legend Of Drongo\obj\x86\Debug\Legend Of Drongo.exe
@@ -48,14 +41,3 @@ F:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
 F:\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo.exe
 F:\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo.pdb
 F:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
-G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
-G:\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo.exe
-G:\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo.pdb
-G:\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
-D:\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
-D:\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
-D:\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo.exe
-D:\Dropbox\Programming\Legend-Of-Drongo\Compiler\Debug\Legend Of Drongo.pdb
-D:\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
->>>>>>> 75d3d5ae41b772f252a110ae8cb38f9829b84eed
