@@ -11,6 +11,7 @@ Known Bugs:
 - Death in custom world moves player to random point at level 1
 - Saves will overwrite based on name, even if playing custom worlds - Fixed v2.1.3
 - Surprise Attack will only allow twice - FIXED v2.1.2
+- When enemy killed, can still make a move
 
 
 To Do:
@@ -60,5 +61,17 @@ V2.2.0
 - Redesigned Trigger & Action within Event Editor
 - Added Clone Buttons to event/NPC/Item and Enemy controls
 - Moved Event Trigger to new method
+
+V2.2.4
+- Updated Issues with Combat system
+- Redesigned combat system
+- Ended loops in combat starting system
+- Added Defense bonus of weapon to contribute to defense modifier.
+
+V2.2.5
+- Improved Suprise Attack and Attacked functions
+- Added lockedIn criteria
+- Added being attacked after LockedIn criteria set. 
+- Fixed issue with saving not saving current state of room.  
 
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

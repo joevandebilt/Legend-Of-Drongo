@@ -533,90 +533,121 @@ namespace Legend_Of_Drongo
                 }
                 else if (PlayerCommand.ToLower() == "north" || PlayerCommand.ToLower() == "go north" || PlayerCommand.ToLower() == "move north") 
                 {
-                    int[] ProposedMove = new int[3];
-
-                    ProposedMove[0] = Player.CurrentPos[0] - 1;
-                    ProposedMove[1] = Player.CurrentPos[1];
-                    ProposedMove[2] = Player.CurrentPos[2];
-
-                    PotentialRoom = GetRoomInfo(ProposedMove);
-                    if (PotentialRoom.CanMove == true)
+                    if (!CurrentRoom.LockedIn)
                     {
-                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        int[] ProposedMove = new int[3];
+
+                        ProposedMove[0] = Player.CurrentPos[0] - 1;
+                        ProposedMove[1] = Player.CurrentPos[1];
+                        ProposedMove[2] = Player.CurrentPos[2];
+
+                        PotentialRoom = GetRoomInfo(ProposedMove);
+                        if (PotentialRoom.CanMove == true)
+                        {
+                            if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                            ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                            CurrentRoom = PotentialRoom;
+                            Player.CurrentPos = ProposedMove;
+                            EventTrigger("moveinto");
+                        }
+                        else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                         else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                        ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                        CurrentRoom = PotentialRoom;
-                        Player.CurrentPos = ProposedMove;
-                        EventTrigger("moveinto");
                     }
-                    else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                    else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                    
+                    else
+                    {
+                        Console.WriteLine("You cannot leave the current area");
+                        attacked();
+                    }
 
                 }
                 else if (PlayerCommand.ToLower() == "east" || PlayerCommand.ToLower() == "go east" || PlayerCommand.ToLower() == "move east")
                 {
-                    int[] ProposedMove = new int[3];
-
-                    ProposedMove[0] = Player.CurrentPos[0];
-                    ProposedMove[1] = Player.CurrentPos[1] + 1;
-                    ProposedMove[2] = Player.CurrentPos[2];
-
-                    PotentialRoom = GetRoomInfo(ProposedMove);
-                    if (PotentialRoom.CanMove == true)
+                    if (!CurrentRoom.LockedIn)
                     {
-                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        int[] ProposedMove = new int[3];
+
+                        ProposedMove[0] = Player.CurrentPos[0];
+                        ProposedMove[1] = Player.CurrentPos[1] + 1;
+                        ProposedMove[2] = Player.CurrentPos[2];
+
+                        PotentialRoom = GetRoomInfo(ProposedMove);
+                        if (PotentialRoom.CanMove == true)
+                        {
+                            if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                            ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                            CurrentRoom = PotentialRoom;
+                            Player.CurrentPos = ProposedMove;
+                            EventTrigger("moveinto");
+                        }
+                        else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                         else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                        ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                        CurrentRoom = PotentialRoom;
-                        Player.CurrentPos = ProposedMove;
-                        EventTrigger("moveinto");
                     }
-                    else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                    else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                    else
+                    {
+                        Console.WriteLine("You cannot leave the current area");
+                        attacked();
+                    }
 
                 }
                 else if (PlayerCommand.ToLower() == "south" || PlayerCommand.ToLower() == "go south" || PlayerCommand.ToLower() == "move south")
                 {
-                    int[] ProposedMove = new int[3];
-
-                    ProposedMove[0] = Player.CurrentPos[0] + 1;
-                    ProposedMove[1] = Player.CurrentPos[1];
-                    ProposedMove[2] = Player.CurrentPos[2];
-
-                    PotentialRoom = GetRoomInfo(ProposedMove);
-                    if (PotentialRoom.CanMove == true)
+                    if (!CurrentRoom.LockedIn)
                     {
-                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        int[] ProposedMove = new int[3];
+
+                        ProposedMove[0] = Player.CurrentPos[0] + 1;
+                        ProposedMove[1] = Player.CurrentPos[1];
+                        ProposedMove[2] = Player.CurrentPos[2];
+
+                        PotentialRoom = GetRoomInfo(ProposedMove);
+                        if (PotentialRoom.CanMove == true)
+                        {
+                            if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                            ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                            CurrentRoom = PotentialRoom;
+                            Player.CurrentPos = ProposedMove;
+                            EventTrigger("moveinto");
+                        }
+                        else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                         else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                        ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                        CurrentRoom = PotentialRoom;
-                        Player.CurrentPos = ProposedMove;
-                        EventTrigger("moveinto");
                     }
-                    else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                    else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                    else
+                    {
+                        Console.WriteLine("You cannot leave the current area");
+                        attacked();
+                    }
                 }
                 else if (PlayerCommand.ToLower() == "west" || PlayerCommand.ToLower() == "go west" || PlayerCommand.ToLower() == "move west")
                 {
-                    int[] ProposedMove = new int[3];
-
-                    ProposedMove[0] = Player.CurrentPos[0];
-                    ProposedMove[1] = Player.CurrentPos[1] - 1;
-                    ProposedMove[2] = Player.CurrentPos[2];
-
-                    PotentialRoom = GetRoomInfo(ProposedMove);
-                    if (PotentialRoom.CanMove == true)
+                    if (!CurrentRoom.LockedIn)
                     {
-                        if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                        int[] ProposedMove = new int[3];
+
+                        ProposedMove[0] = Player.CurrentPos[0];
+                        ProposedMove[1] = Player.CurrentPos[1] - 1;
+                        ProposedMove[2] = Player.CurrentPos[2];
+
+                        PotentialRoom = GetRoomInfo(ProposedMove);
+                        if (PotentialRoom.CanMove == true)
+                        {
+                            if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                            ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                            CurrentRoom = PotentialRoom;
+                            Player.CurrentPos = ProposedMove;
+                            EventTrigger("moveinto");
+                        }
+                        else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                         else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                        ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                        CurrentRoom = PotentialRoom;
-                        Player.CurrentPos = ProposedMove;
-                        EventTrigger("moveinto");
                     }
-                    else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                    else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                    else
+                    {
+                        Console.WriteLine("You cannot leave the current area");
+                        attacked();
+                    }
                 }
                 else if (PlayerCommand.ToLower().Contains("who am i") || PlayerCommand == "whoami")
                 {
@@ -2120,49 +2151,48 @@ namespace Legend_Of_Drongo
 
         public static void attacked()
         {
-            int BaseAttack = 0;            
+            int BaseAttack = 0;
+            int Fortitude;
             Random RNG = new Random();
 
-            for (int index = 0; index < CurrentRoom.Enemy.Count; index++)
+            foreach (EnemyProfile Enemy in CurrentRoom.Enemy)
             {
-                Thread.Sleep(1500);
-                BaseAttack = RNG.Next(1, 15);
+                if (Player.HPBonus > 0)
+                {
+                    Thread.Sleep(1500);
+                    BaseAttack = RNG.Next(1, 3);
 
-                if (BaseAttack < 3)
-                {
-                    //bad attack
-                    BaseAttack = BaseAttack * CurrentRoom.Enemy[index].Weapon.AttackMod;
-                    Console.WriteLine(WordWrap(string.Concat("Enemy ", CurrentRoom.Enemy[index].name, " lunges forward weilding their ", CurrentRoom.Enemy[index].Weapon.Name, " wildly, however you dodge and their attack grazez you. Dealing, at best, a few scrapes")));
+                    if (BaseAttack == 1)
+                    {
+                        //bad attack
+                        BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you\n", Enemy.Weapon.BadHit)));
 
-                }
-                else if (BaseAttack < 7)
-                {
-                    //Medium Weak Attack
-                    BaseAttack = BaseAttack * CurrentRoom.Enemy[index].Weapon.AttackMod;
-                    Console.WriteLine(WordWrap(string.Concat("Enemy ", CurrentRoom.Enemy[index].name, " attacks using their ", CurrentRoom.Enemy[index].Weapon.Name, ", The weapon sinks into your flesh causing a good deal of damage")));
-                }
-                else if (BaseAttack < 11)
-                {
-                    //Medium Strong Attack
-                    BaseAttack = BaseAttack * CurrentRoom.Enemy[index].Weapon.AttackMod;
-                    Console.WriteLine(WordWrap(string.Concat("Enemy ", CurrentRoom.Enemy[index].name, " attacks using their ", CurrentRoom.Enemy[index].Weapon.Name, ", The weapon sinks into your flesh causing a good deal of damage")));
-                }
-                else
-                {
-                    //Strong Attack
-                    BaseAttack = BaseAttack * CurrentRoom.Enemy[index].Weapon.AttackMod;
-                    Console.WriteLine(WordWrap(string.Concat("Enemy ", CurrentRoom.Enemy[index].name, " skillfully lunges at you with their ", CurrentRoom.Enemy[index].Weapon.Name, ", The weapon strikes you with precision, causing a huge amount of damage")));
-                }
+                    }
+                    else if (BaseAttack == 2)
+                    {
+                        //Medium Strong Attack
+                        BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you\n", Enemy.Weapon.MedHit)));
+                    }
+                    else if (BaseAttack == 3)
+                    {
+                        //Strong Attack
+                        BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you\n", Enemy.Weapon.GoodHit)));
+                    }
 
-                Player.HPBonus = Player.HPBonus - (BaseAttack - ((BaseAttack / 110) * Player.ArmorBonus));
+                    Player.HPBonus = Player.HPBonus - (BaseAttack - ((BaseAttack / 110) * Player.ArmorBonus));
 
-                if (Player.HPBonus < 0)
-                {
-                            if (CurrentRoom.Enemy[index].KillMessage != null)
-                            { Console.WriteLine(WordWrap(string.Concat("\n", CurrentRoom.Enemy[index].KillMessage))); }
-                            else
-                            { Console.WriteLine(WordWrap(string.Concat("\n following the attack you were killed by ", CurrentRoom.Enemy[index].name))); }
-                
+                    Fortitude = RNG.Next(1, 100);
+                    if (Fortitude > Player.ArmorBonus) Player.HPBonus = Player.HPBonus - BaseAttack;
+                    else Player.HPBonus = Convert.ToInt32(Player.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * Player.ArmorBonus));
+
+                    if (Player.HPBonus < 0)
+                    {
+                        if (Enemy.KillMessage != null)  Console.WriteLine(WordWrap(string.Concat("\n", Enemy.KillMessage)));
+                        else Console.WriteLine(WordWrap(string.Concat("\n\n", Enemy.name, " has killed you with their ", Enemy.Weapon.Name)));
+                    }
                 }
             }
         }
@@ -2175,47 +2205,49 @@ namespace Legend_Of_Drongo
 
             int defend = RNG.Next(1,3);
 
+            Console.WriteLine(WordWrap(string.Concat("You carefully wait, and when you think you have the upper hand, you attack ", enemy)));
+            Thread.Sleep(1000);
             if (defend == 1)
             {
-                Console.WriteLine(WordWrap(string.Concat("You carefully wait, and when you think you have the upper hand, you attack ", enemy)));
                 Console.WriteLine(WordWrap("Expecting violence they draw their weapon and defend\n"));
                 Thread.Sleep(1000);
                 Combat(Player.WeaponHeld, enemy);
             }
             else
             {
-                Console.WriteLine(WordWrap(string.Concat("You carefully wait, and when you get your chance you attack ", enemy)));
                 Console.WriteLine(WordWrap("Completely surprised they do not have a chance to defend themselves\n"));
                 Thread.Sleep(1000);
-                BaseAttack = RNG.Next(1, 20);
 
-                if (BaseAttack < 5)
+                BaseAttack = RNG.Next(1, 6);
+
+                if (BaseAttack == 1 || BaseAttack == 2)
                 {
                     //bad attack
-                    Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, "with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.BadHit)));
+                    Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.BadHit)));
                 }
-                else if (BaseAttack < 15)
+                else if (BaseAttack == 3 || BaseAttack == 4)
                 {
-                    //Medium Strong Attack
-                    Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, "with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.MedHit)));
+                    //Medium Weak Attack
+                    Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.MedHit)));
                 }
-                else
+                else if (BaseAttack == 5 || BaseAttack == 6)
                 {
                     //Critical Attack                            
-                    Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, "with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.GoodHit)));
+                    Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.GoodHit)));
                 }
 
                 BaseAttack = BaseAttack * Player.WeaponHeld.AttackMod;
-                //Console.WriteLine("You have dealt {0} damage", BaseAttack = BaseAttack * ThisFight[index].AttackMod);
                 Counter = 0;
+                bool GaveHit = false;
 
-                //for (Counter=0;Counter<CurrentRoom.Enemy.Count;Counter++)
-                while (CurrentRoom.Enemy != null && Counter < CurrentRoom.Enemy.Count)
+                while (CurrentRoom.Enemy != null && Counter < CurrentRoom.Enemy.Count && GaveHit == false)
                 {
                     if (CurrentRoom.Enemy[Counter].name.ToLower() == enemy.ToLower())
                     {
                         EnemyProfile ThisEnemy = CurrentRoom.Enemy[Counter];
-                        ThisEnemy.HPBonus = ThisEnemy.HPBonus - (BaseAttack - ((BaseAttack / 110) * ThisEnemy.armor));
+                        int Fortitude = RNG.Next(1, 100);
+                        if (Fortitude > ThisEnemy.armor) ThisEnemy.HPBonus = ThisEnemy.HPBonus - BaseAttack;
+                        else ThisEnemy.HPBonus = Convert.ToInt32(ThisEnemy.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * ThisEnemy.armor));
 
                         //Console.WriteLine("Enemy {0} has {1} HP left", enemy, CurrentRoom.Enemy[Counter].HPBonus);
 
@@ -2223,44 +2255,35 @@ namespace Legend_Of_Drongo
                         {
                             Console.WriteLine();
                             if (CurrentRoom.Enemy[Counter].DeathMessage == null)
-                            { Console.WriteLine(WordWrap(string.Concat("With this blow you kill the enemy ", CurrentRoom.Enemy[Counter].name))); }
+                            { Console.WriteLine(WordWrap(string.Concat("With this hit you kill the enemy ", CurrentRoom.Enemy[Counter].name))); }
                             else { Console.WriteLine(WordWrap(CurrentRoom.Enemy[Counter].DeathMessage)); }
 
-                            if (CurrentRoom.items == null)
-                            {
-                                CurrentRoom.items = new List<itemInfo>();
-                            }
+                            if (CurrentRoom.items == null) CurrentRoom.items = new List<itemInfo>();
 
                             CurrentRoom.items.Add(ThisEnemy.Weapon);
 
                             itemInfo newItem = new itemInfo();
 
-                            newItem.Name = string.Concat(CurrentRoom.Enemy[Counter].name, "'s body");
+                            newItem.Name = string.Concat(ThisEnemy.name, "'s body");
                             newItem.Class = "Object";
-                            newItem.Examine = string.Concat("The slashed and torn body of enemy ", CurrentRoom.Enemy[Counter].name);
+                            newItem.Examine = string.Concat("The slashed and torn body of enemy ", ThisEnemy.name);
                             newItem.CanPickUp = false;
                             newItem.InteractionName = new List<string>();
                             newItem.InteractionName.Add("body");
                             newItem.InteractionName.Add("corpse");
                             newItem.InteractionName.Add("enemy");
-                            newItem.InteractionName.Add(string.Concat(CurrentRoom.Enemy[Counter].name, "'s body"));
-                            newItem.InteractionName.Add(CurrentRoom.Enemy[Counter].name);
+                            newItem.InteractionName.Add(string.Concat(ThisEnemy.name, "'s body"));
+                            newItem.InteractionName.Add(ThisEnemy.name);
                             CurrentRoom.items.Add(newItem);
 
                             if (ThisEnemy.Money != 0) Console.WriteLine("\nYou take {0} gold coins from {1}'s corpse", ThisEnemy.Money, enemy);
-
                             Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
+                            
                             EventTrigger("killenemy");
                             if (CurrentRoom.Enemy.Count - 1 != 0)
                             {
-                                //int offset = 0;
-                                int i = 0;
-                                while (i < (CurrentRoom.Enemy.Count - 1))
-                                {
-                                    CurrentRoom.Enemy[i] = CurrentRoom.Enemy[i + 1];
-                                    i++;
-                                }
-                                CurrentRoom.Enemy.RemoveAt(CurrentRoom.Enemy.Count - 1);
+                                //Remove the fighter
+                                CurrentRoom.Enemy.RemoveAt(Counter);
                             }
                             else
                             {
@@ -2269,6 +2292,8 @@ namespace Legend_Of_Drongo
                                 //break;
                             }
                         }
+                        else CurrentRoom.Enemy[Counter] = ThisEnemy;
+                        GaveHit = true;
                     }
                     Counter++;
                 }
@@ -2328,24 +2353,24 @@ namespace Legend_Of_Drongo
             }
 
             int BaseAttack = 0;
-            int Counter = 0;
-            for (index = 0; index < ThisFight.Count; index++)
+            index = 0;
+            while (index < ThisFight.Count && Player.HPBonus > 0 && CurrentRoom.Enemy.Count != 0)
             {
                 if (ThisFight[index].name == Player.name)   //players turn
                 {
-                    BaseAttack = RNG.Next(1, 3);
+                    BaseAttack = RNG.Next(1, 6);
 
-                    if (BaseAttack == 1)
+                    if (BaseAttack == 1 || BaseAttack == 2)
                     {
                         //bad attack
                         Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.BadHit)));
                     }
-                    else if (BaseAttack == 2)
+                    else if (BaseAttack == 3 || BaseAttack == 4)
                     {
                         //Medium Weak Attack
                         Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.MedHit)));
                     }
-                    else if (BaseAttack == 3)
+                    else if (BaseAttack == 5 || BaseAttack == 6)
                     {
                         //Critical Attack                            
                         Console.WriteLine(WordWrap(string.Concat("You attack enemy ", enemy, " with your ", Player.WeaponHeld.Name, "\n", Player.WeaponHeld.GoodHit)));
@@ -2353,7 +2378,7 @@ namespace Legend_Of_Drongo
 
                     BaseAttack = BaseAttack * ThisFight[index].AttackMod;
                     
-                    Counter = 0;
+                    int Counter = 0;
                     bool GaveHit = false;
                     
                     while (CurrentRoom.Enemy != null && Counter < ThisFight.Count && GaveHit == false)
@@ -2370,9 +2395,9 @@ namespace Legend_Of_Drongo
                             if (ThisEnemy.HPBonus < 0) //if the enemy has been killed
                             {
                                 Console.WriteLine();
-                                if (CurrentRoom.Enemy[Counter].DeathMessage == null)
-                                { Console.WriteLine(WordWrap(string.Concat("With this hit you kill the enemy ", CurrentRoom.Enemy[Counter].name))); }
-                                else { Console.WriteLine(WordWrap(CurrentRoom.Enemy[Counter].DeathMessage)); }
+                                if (CurrentRoom.Enemy[ThisFight[Counter].ID].DeathMessage == null)
+                                { Console.WriteLine(WordWrap(string.Concat("With this hit you kill the enemy ", CurrentRoom.Enemy[ThisFight[Counter].ID].name))); }
+                                else { Console.WriteLine(WordWrap(CurrentRoom.Enemy[ThisFight[Counter].ID].DeathMessage)); }
                                 
                                 if (CurrentRoom.items == null) CurrentRoom.items = new List<itemInfo>();
 
@@ -2453,7 +2478,7 @@ namespace Legend_Of_Drongo
 
                     if (Player.HPBonus < 0)
                     {
-                        for (Counter = 0; Counter < CurrentRoom.Enemy.Count; Counter++)
+                        for (int Counter = 0; Counter < CurrentRoom.Enemy.Count; Counter++)
                         {
                             if (ThisFight[index].name == CurrentRoom.Enemy[Counter].name)
                             {
@@ -2473,6 +2498,7 @@ namespace Legend_Of_Drongo
                 }
                 Thread.Sleep(1500);
                 Console.WriteLine("");
+                index++;
             }
         }
         
@@ -2666,6 +2692,9 @@ namespace Legend_Of_Drongo
                 string SavePath = string.Concat(".\\Saves\\", WorldState.WorldName, "\\" , Player.name, ".dsg");
                 GameState gamestate = new GameState();
 
+                ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                world[Player.CurrentPos[2]] = ThisFloor;
+
                 gamestate.PlayerState = Player;
                 gamestate.WorldState.WorldState = world;
 
@@ -2706,13 +2735,18 @@ namespace Legend_Of_Drongo
                         ThisFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].CanMove = true;
                     }
                 }
-                if (thisEvent.Action.ToLower() == "lock")   //lock
+                else if (thisEvent.Action.ToLower() == "lock")   //lock
                 {
                     if (thisEvent.Coodinates != null)
                     {
                         ThisFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].CanMove = false;
                     }
 
+                }
+                else if (thisEvent.Action.ToLower() == "lockin")
+                {
+                    if (!CurrentRoom.LockedIn) CurrentRoom.LockedIn = true;
+                    else CurrentRoom.LockedIn = false;
                 }
                 else if (thisEvent.Action.ToLower() == "kill all enemies") //kill all
                 {

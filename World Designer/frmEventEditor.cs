@@ -15,7 +15,7 @@ namespace Legend_Of_Drongo
         public bool ChangeMade;
 
         string[,] Triggers = new string[7,2];
-        string[,] Actions = new string[10,2];
+        string[,] Actions = new string[11,2];
 
         public frmEventEditor(DataTypes.Event thisEvent, int FloorCount)
         {
@@ -43,22 +43,24 @@ namespace Legend_Of_Drongo
             Actions[0,1] = "unlock a locked cell at ";
             Actions[1,0] = "lock";
             Actions[1,1] = "lock a cell at ";
-            Actions[2,0] = "kill all enemies";
-            Actions[2,1] = "kill all enemies in the room";
-            Actions[3,0] = "change description";
-            Actions[3,1] = "change the room description to its alternative";
-            Actions[4,0] = "change location";
-            Actions[4,1] = "move player to these coodinates ";
-            Actions[5,0] = "change objective";
-            Actions[5,1] = "Change the players objective to";
-            Actions[6,0] = "output text";
-            Actions[6,1] = "Output this message";
-            Actions[7,0] = "spawnItems";
-            Actions[7,1] = "Spawn the following Items";
-            Actions[8,0] = "spawnNPC";
-            Actions[8,1] = "Spawn the following NPCs";
-            Actions[9,0] = "spawnEnemy";
-            Actions[9,1] = "Spawn the following enemies";
+            Actions[2,0] = "LockIn";
+            Actions[2,1] = "Lock/Unlock current room";
+            Actions[3,0] = "kill all enemies";
+            Actions[3,1] = "kill all enemies in the room";
+            Actions[4,0] = "change description";
+            Actions[4,1] = "change the room description to its alternative";
+            Actions[5,0] = "change location";
+            Actions[5,1] = "move player to these coodinates ";
+            Actions[6,0] = "change objective";
+            Actions[6,1] = "Change the players objective to";
+            Actions[7,0] = "output text";
+            Actions[7,1] = "Output this message";
+            Actions[8,0] = "spawnItems";
+            Actions[8,1] = "Spawn the following Items";
+            Actions[9,0] = "spawnNPC";
+            Actions[9,1] = "Spawn the following NPCs";
+            Actions[10,0] = "spawnEnemy";
+            Actions[10,1] = "Spawn the following enemies";
             
 
             for (int i = 0; i < (Triggers.Length/2); i++)
