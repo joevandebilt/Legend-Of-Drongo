@@ -60,7 +60,8 @@ namespace Legend_Of_Drongo
             else NPC.QuestCharacter = false;
 
             int n;
-            if (int.TryParse(txtHP.Text, out n)) NPC.HPBonus = n;
+            double d;
+            if (double.TryParse(txtHP.Text, out d)) NPC.HPBonus = d;
             else return false;
             if (int.TryParse(txtArmor.Text, out n)) NPC.armor = n;
             else return false;
@@ -79,7 +80,6 @@ namespace Legend_Of_Drongo
 
             //Inventory Saves in another function
         }
-
 
         public void GetAllItems()
         {

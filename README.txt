@@ -89,4 +89,8 @@ v2.3.0
 - Added option of custom song per floor to datatype
 - Made txtWeapon on frmEnemyEditor non-editable
 
+v2.3.1
+- Change Event Editor to manage selected cmb box values better
+- Changed HP and damage modifiers to double data type
+
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

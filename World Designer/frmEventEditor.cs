@@ -188,24 +188,24 @@ namespace Legend_Of_Drongo
             cmdRemoveEnemy.Enabled = false;
 
             //Check if coodinate box should be enabled
-            if (cmbAction.SelectedIndex == 0 || cmbAction.SelectedIndex == 1 || cmbAction.SelectedIndex == 3 || cmbAction.SelectedIndex == 4)
+            if (cmbAction.Text == "unlock" || cmbAction.Text == "lock" || cmbAction.Text == "change description" || cmbAction.Text == "change location")
             {
                 cmbRow.Enabled = true;
                 cmbCol.Enabled = true;
                 cmbFloor.Enabled = true;
             }
-            else if (cmbAction.SelectedIndex == 5 || cmbAction.SelectedIndex == 6)
+            else if (cmbAction.Text == "output text" || cmbAction.Text == "change objective")
             {
                 txtNewValue.Enabled = true;
             }
-            else if (cmbAction.SelectedIndex == 7)
+            else if (cmbAction.Text == "spawnItems")
             {
                 lstItems.Enabled = true;
                 cmdAddItem.Enabled = true;
                 cmdCloneItem.Enabled = true;
                 cmdRemoveItem.Enabled = true;
             }
-            else if (cmbAction.SelectedIndex == 8)
+            else if (cmbAction.Text == "spawnNPC")
             {
                 lstNPCs.Enabled = true;
                 cmdAddNPC.Enabled = true;
@@ -213,7 +213,7 @@ namespace Legend_Of_Drongo
                 cmdRemoveNPC.Enabled = true;
 
             }
-            else if (cmbAction.SelectedIndex == 9)
+            else if (cmbAction.Text == "spawnEnemy")
             {
                 lstEnemies.Enabled = true;
                 cmdAddEnemy.Enabled = true;

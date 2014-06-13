@@ -53,10 +53,10 @@ namespace Legend_Of_Drongo
         {
             public string name;
             public int initiative;
-            public int HP;
+            public double HP;
             public bool isAlive;
             public itemInfo Weapon;
-            public int AttackMod;
+            public double AttackMod;
             public int DefenseMod;
             public int ID;
         }
@@ -67,7 +67,7 @@ namespace Legend_Of_Drongo
             public List<string> InteractionName;
             public string Examine;
             public string Name;
-            public int AttackMod;
+            public double AttackMod;
             public int DefenseMod;
             public int HPmod;
             public bool CanPickUp;
@@ -86,7 +86,7 @@ namespace Legend_Of_Drongo
             public string name;
             public itemInfo[] inventory;
             public int invspace;
-            public int HPBonus;
+            public double HPBonus;
             public int ArmorBonus;
             public itemInfo WeaponHeld;
             public itemInfo[] ArmorWorn;
@@ -100,7 +100,7 @@ namespace Legend_Of_Drongo
         {
             public string name;
             public itemInfo Weapon;
-            public int HPBonus;
+            public double HPBonus;
             public int armor;
             public int Money;
             public string KillMessage;
@@ -116,7 +116,7 @@ namespace Legend_Of_Drongo
             public string TalkToResponse;
             public List<itemInfo> inventory;
             public List<Facts> Knowledge;
-            public int HPBonus;
+            public double HPBonus;
             public int armor;
             public int Money;
             public bool willSell;

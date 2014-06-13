@@ -102,13 +102,14 @@ namespace Legend_Of_Drongo
 
             Item.Class = cmbItemClass.Text;
             int n;
+            double d;
             if (int.TryParse(txtValue.Text, out n)) Item.Value = n;
             else if (txtValue.Enabled == true) return false;
 
             if (int.TryParse(txtHP.Text, out n)) Item.HPmod = n;
             else if (txtHP.Enabled == true) return false;
 
-            if (int.TryParse(txtDamage.Text, out n)) Item.AttackMod = n;
+            if (double.TryParse(txtDamage.Text, out d)) Item.AttackMod = d;
             else if (txtDamage.Enabled == true) return false;
 
             if (int.TryParse(txtProtection.Text, out n)) Item.DefenseMod = n;

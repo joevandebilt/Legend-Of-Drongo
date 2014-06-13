@@ -49,7 +49,8 @@ namespace Legend_Of_Drongo
             if (txtPayOffResponse.Text != string.Empty) Enemy.PayOffResponse = txtPayOffResponse.Text;
             
             int n;
-            if (int.TryParse(txtHP.Text, out n)) Enemy.HPBonus = n;
+            double d;
+            if (double.TryParse(txtHP.Text, out d)) Enemy.HPBonus = d;
             else return false;
             if (int.TryParse(txtArmor.Text, out n)) Enemy.armor= n;
             else return false;

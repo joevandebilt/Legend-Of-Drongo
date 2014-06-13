@@ -2159,7 +2159,7 @@ namespace Legend_Of_Drongo
 
         public static void attacked()
         {
-            int BaseAttack = 0;
+            double BaseAttack = 0;
             int Fortitude;
             Random RNG = new Random();
 
@@ -2189,12 +2189,10 @@ namespace Legend_Of_Drongo
                         BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
                         Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you\n", Enemy.Weapon.GoodHit)));
                     }
-
-                    Player.HPBonus = Player.HPBonus - (BaseAttack - ((BaseAttack / 110) * Player.ArmorBonus));
-
+                    
                     Fortitude = RNG.Next(1, 100);
                     if (Fortitude > Player.ArmorBonus) Player.HPBonus = Player.HPBonus - BaseAttack;
-                    else Player.HPBonus = Convert.ToInt32(Player.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * Player.ArmorBonus));
+                    else Player.HPBonus = Convert.ToInt32(Player.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * Player.ArmorBonus));
 
                     if (Player.HPBonus < 0)
                     {
@@ -2208,7 +2206,7 @@ namespace Legend_Of_Drongo
         public static void SurpriseAttack(string enemy)
         {
             Random RNG = new Random();
-            int BaseAttack;
+            double BaseAttack;
             int Counter;
 
             int defend = RNG.Next(1,3);
@@ -2255,7 +2253,7 @@ namespace Legend_Of_Drongo
                         EnemyProfile ThisEnemy = CurrentRoom.Enemy[Counter];
                         int Fortitude = RNG.Next(1, 100);
                         if (Fortitude > ThisEnemy.armor) ThisEnemy.HPBonus = ThisEnemy.HPBonus - BaseAttack;
-                        else ThisEnemy.HPBonus = Convert.ToInt32(ThisEnemy.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * ThisEnemy.armor));
+                        else ThisEnemy.HPBonus = ThisEnemy.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * ThisEnemy.armor);
 
                         //Console.WriteLine("Enemy {0} has {1} HP left", enemy, CurrentRoom.Enemy[Counter].HPBonus);
 
@@ -2360,7 +2358,7 @@ namespace Legend_Of_Drongo
                 { index++; }
             }
 
-            int BaseAttack = 0;
+            double BaseAttack = 0;
             index = 0;
             while (index < ThisFight.Count && Player.HPBonus > 0 && CurrentRoom.Enemy.Count != 0)
             {
@@ -2396,7 +2394,7 @@ namespace Legend_Of_Drongo
                             EnemyProfile ThisEnemy = CurrentRoom.Enemy[ThisFight[Counter].ID];
                             Fortitude = RNG.Next(1, 100);
                             if (Fortitude > ThisEnemy.armor) ThisEnemy.HPBonus = ThisEnemy.HPBonus - BaseAttack;
-                            else ThisEnemy.HPBonus = Convert.ToInt32(ThisEnemy.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * ThisEnemy.armor));
+                            else ThisEnemy.HPBonus = ThisEnemy.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * ThisEnemy.armor);
 
                             if (ThisEnemy.HPBonus < 0) //if the enemy has been killed
                             {
@@ -2430,8 +2428,7 @@ namespace Legend_Of_Drongo
 
                                 
                                 EventTrigger("killenemy");
-                                //Console.WriteLine("There are {0} enemies in the room, there will now be {1}", CurrentRoom.Enemy.Count, CurrentRoom.Enemy.Count - 1);
-
+                               
                                 if (CurrentRoom.Enemy.Count - 1 != 0)
                                 {
                                     //Remove the fighter
@@ -2480,7 +2477,7 @@ namespace Legend_Of_Drongo
 
                     Fortitude = RNG.Next(1, 100);
                     if (Fortitude > Player.ArmorBonus) Player.HPBonus = Player.HPBonus- BaseAttack;
-                    else Player.HPBonus = Convert.ToInt32(Player.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * Player.ArmorBonus));
+                    else Player.HPBonus = Player.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * Player.ArmorBonus);
 
                     if (Player.HPBonus < 0)
                     {
