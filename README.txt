@@ -8,10 +8,10 @@ The Legend of Drongo was a project I started as a means to familiarise myself wi
 
 Known Bugs:
 - Some iterations of data structures do not check if null, causing crash.
-- Death in custom world moves player to random point at level 1
+- Death in custom world moves player to random point at level 1 - FIXED v2.1.4
 - Saves will overwrite based on name, even if playing custom worlds - Fixed v2.1.3
 - Surprise Attack will only allow twice - FIXED v2.1.2
-- When enemy killed, can still make a move
+- When enemy killed, they can still make a move - FIXED v2.2.6
 
 
 To Do:
@@ -19,6 +19,7 @@ To Do:
 - File directories are fixed paths, add in choice of directory.
 - Add new features into Tutorial
 - Add XP system?
+- Re-Add Music System (add music per world + root directoy?)
 
 Changes:
 V1.0.0
@@ -50,7 +51,7 @@ v2.1.3
 - Improved Ask about system
 - Asked Scott for money. 
 
-V2.2.0
+v2.2.0
 - Fixed tab indexes on World editor forms
 - Fixed Event Editor Floor Picked Selected Index bug
 - Made ifnull output for attempting to move into new rooms 
@@ -62,16 +63,30 @@ V2.2.0
 - Added Clone Buttons to event/NPC/Item and Enemy controls
 - Moved Event Trigger to new method
 
-V2.2.4
+v2.2.4
 - Updated Issues with Combat system
 - Redesigned combat system
 - Ended loops in combat starting system
 - Added Defense bonus of weapon to contribute to defense modifier.
 
-V2.2.5
+v2.2.5
 - Improved Suprise Attack and Attacked functions
 - Added lockedIn criteria
 - Added being attacked after LockedIn criteria set. 
-- Fixed issue with saving not saving current state of room.  
+- Fixed issue with saving not saving current state of room. 
+
+v2.3.0
+- Fixed issue with non-complete eat command
+- Added command 'drink' to have same affect as 'eat'. 
+- Added Itemclass of type Drink
+- Updated Eat(string) method to Consume(string) 
+- Added different output for loss/gain of HP in Consume(string)
+- Updated output of 'help' command
+- Changed Structure of Floor from Array to custom datatype featuring array
+- Change Engine, World Designer to cope
+- Added floor name to frmWorldDesigner
+- Imported World from old class system to new.
+- Added option of custom song per floor to datatype
+- Made txtWeapon on frmEnemyEditor non-editable
 
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

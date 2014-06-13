@@ -122,6 +122,7 @@
             "Armor-Legs",
             "Armor-Boots",
             "Bed",
+            "Drink",
             "Food",
             "Interaction Object",
             "Interactive Item",

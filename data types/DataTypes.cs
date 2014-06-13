@@ -13,31 +13,39 @@ namespace Legend_Of_Drongo
     public class DataTypes
     {
         [Serializable()]
-        public struct GameState
+        public struct GameState //Stores the details of the current world and player
         {
             public PlayerProfile PlayerState;
             public WorldFile WorldState;
         }
 
         [Serializable()]
-        public struct WorldFile
+        public struct WorldFile //Stores the details of the world
         {
             public string WorldName;
-            public List<roomInfo[,]> WorldState;
+            public List<Floor> WorldState;
         }
 
         [Serializable()]
-        public struct roomInfo
+        public struct roomInfo  //Stores the details of the current room
         {
             public string Description;
             public string AltDescription;   //should the description of a room change
-            public List<itemInfo> items;    //a list of items (list due to players being able to drop items on the floor)
-            public List<EnemyProfile> Enemy;    //an array of enemies in the room
             public bool CanMove;            //denotes whether player can move into this room
             public bool LockedIn;           //If a player is allowed to leave the room
             public string SuicideAction;    //Special string for if the user wishes to commit suicide.
             public List<Event> Events;
-            public List<CivilianProfile> Civilians;
+            public List<CivilianProfile> Civilians; 
+            public List<itemInfo> items;        //a list of items (list due to players being able to drop items on the floor)
+            public List<EnemyProfile> Enemy;    //an array of enemies in the room
+        }
+
+        [Serializable()]
+        public struct Floor     //Stores the details of the current floor
+        {
+            public roomInfo[,] CurrentFloor;
+            public string FloorName;
+            public string FloorSong;
         }
 
         [Serializable()]

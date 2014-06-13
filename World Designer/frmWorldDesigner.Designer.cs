@@ -58,6 +58,7 @@ namespace Legend_Of_Drongo
             this.cmdDeleteLevel = new System.Windows.Forms.Button();
             this.txtWorldName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtFloorName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // cmdMainMenu
@@ -143,7 +144,7 @@ namespace Legend_Of_Drongo
             // 
             this.lblEditor.AutoSize = true;
             this.lblEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditor.Location = new System.Drawing.Point(435, 15);
+            this.lblEditor.Location = new System.Drawing.Point(276, 45);
             this.lblEditor.Name = "lblEditor";
             this.lblEditor.Size = new System.Drawing.Size(97, 16);
             this.lblEditor.TabIndex = 11;
@@ -356,11 +357,19 @@ namespace Legend_Of_Drongo
             this.label1.TabIndex = 34;
             this.label1.Text = "World Name";
             // 
+            // txtFloorName
+            // 
+            this.txtFloorName.Location = new System.Drawing.Point(435, 12);
+            this.txtFloorName.Name = "txtFloorName";
+            this.txtFloorName.Size = new System.Drawing.Size(149, 20);
+            this.txtFloorName.TabIndex = 35;
+            // 
             // frmWorldDesigner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 548);
+            this.Controls.Add(this.txtFloorName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtWorldName);
             this.Controls.Add(this.cmdDeleteLevel);
@@ -428,5 +437,6 @@ namespace Legend_Of_Drongo
         private System.Windows.Forms.Button cmdDeleteLevel;
         private System.Windows.Forms.TextBox txtWorldName;
         private System.Windows.Forms.Label label1;
+        private TextBox txtFloorName;
     }
 }

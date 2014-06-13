@@ -74,3 +74,22 @@ F:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer
 F:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
 F:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
 F:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
+H:\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe.manifest
+H:\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.application
+H:\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe
+H:\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.pdb
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmNPCEditor.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldPicker.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
+H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb

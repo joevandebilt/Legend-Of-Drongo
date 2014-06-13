@@ -15,8 +15,8 @@ namespace Legend_Of_Drongo
     public partial class frmWorldDesigner : Form
     {
         //Set up the Grid
-        public List<DataTypes.roomInfo[,]> world = new List<DataTypes.roomInfo[,]>();
-        DataTypes.roomInfo[,] ThisFloor;
+        public List<DataTypes.Floor> world = new List<DataTypes.Floor>();
+        DataTypes.Floor ThisFloor;
         int FloorNum = 0;
 
         public frmWorldDesigner(bool LoadWorld, string WorldName)
@@ -40,7 +40,9 @@ namespace Legend_Of_Drongo
                 }
                 txtWorldName.Text = WorldState.WorldName;
                 world = WorldState.WorldState;
+
                 ThisFloor = world[0];
+                txtFloorName.Text = ThisFloor.FloorName;
                 cmbLevelSelect.Items.Clear();
                 for (int i=1;i<=world.Count;i++)
                 {
@@ -52,31 +54,34 @@ namespace Legend_Of_Drongo
             }
             else
             {
-                world = new List<DataTypes.roomInfo[,]>();
-                ThisFloor = new DataTypes.roomInfo[10, 10];
+                world = new List<DataTypes.Floor>();
+                ThisFloor = new DataTypes.Floor();
+                ThisFloor.CurrentFloor = new DataTypes.roomInfo[10, 10];
 
                 for (int x = 0; x < 10; x++)
                 {
                     for (int y = 0; y < 10; y++)
                     {
-                        ThisFloor[x, y].CanMove = true;
+                        ThisFloor.CurrentFloor[x, y].CanMove = true;
                     }
                 }
 
                 for (int x = 0; x < 10; x++)
                 {
-                    ThisFloor[x, 0].CanMove = false;
-                    ThisFloor[x, 9].CanMove = false;
+                    ThisFloor.CurrentFloor[x, 0].CanMove = false;
+                    ThisFloor.CurrentFloor[x, 9].CanMove = false;
                 }
 
                 for (int y = 0; y < 10; y++)
                 {
-                    ThisFloor[0, y].CanMove = false;
-                    ThisFloor[9, y].CanMove = false;
+                    ThisFloor.CurrentFloor[0, y].CanMove = false;
+                    ThisFloor.CurrentFloor[9, y].CanMove = false;
                 }
+                ThisFloor.CurrentFloor[1, 1].Description = "This is the starting position. When the player spawns this is the first thing they will read";
 
                 world.Add(ThisFloor);
                 this.tblWorldLevel.CellPaint += new TableLayoutCellPaintEventHandler(tblWorldLevel_CellPaint);
+                txtFloorName.Text = "Level 1";
                 lblEditor.Text = "Default Starting Position is B:2";
             }
         }
@@ -113,13 +118,13 @@ namespace Legend_Of_Drongo
             lblEditor.Text = "Now Editing Cell: " + Char.ConvertFromUtf32(pos.Row + 65) + ":" + (pos.Column + 1);
 
             DataTypes.roomInfo RoomEdit = new DataTypes.roomInfo();
-            RoomEdit = ThisFloor[pos.Row, pos.Column];
+            RoomEdit = ThisFloor.CurrentFloor[pos.Row, pos.Column];
             frmRoomEditor NewForm = new frmRoomEditor(RoomEdit, world.Count);
             NewForm.ShowDialog();   //Wait while room is edited
 
             if (NewForm.ChangeMade == true)
             {
-                ThisFloor[pos.Row, pos.Column] = NewForm.Room;
+                ThisFloor.CurrentFloor[pos.Row, pos.Column] = NewForm.Room;
                 world[FloorNum] = ThisFloor;
             }
             tblWorldLevel.Refresh();
@@ -205,7 +210,7 @@ namespace Legend_Of_Drongo
 
         private Brush GetBrushFor(int row, int column)
         {
-            if (ThisFloor[row,column].CanMove == false) return Brushes.Red;
+            if (ThisFloor.CurrentFloor[row,column].CanMove == false) return Brushes.Red;
             else return Brushes.Green;
         }
 
@@ -240,6 +245,8 @@ namespace Legend_Of_Drongo
                 Thread.Sleep(500);
                 DataTypes.WorldFile ThisWorld = new DataTypes.WorldFile();
 
+                ThisFloor.FloorName = txtFloorName.Text;
+                world[FloorNum] = ThisFloor;
                 ThisWorld.WorldName = txtWorldName.Text;
                 ThisWorld.WorldState = world;
 
@@ -267,32 +274,35 @@ namespace Legend_Of_Drongo
                 cmbLevelSelect.Items[index] = "Level " + (index + 1);
                 cmbLevelSelect.Items.Add("Add New Level...");
 
-                ThisFloor = new DataTypes.roomInfo[10, 10];
+                ThisFloor = new DataTypes.Floor();
+                ThisFloor.CurrentFloor = new DataTypes.roomInfo[10, 10];
                 for (int x = 0; x < 10; x++)
                 {
                     for (int y = 0; y < 10; y++)
                     {
-                        ThisFloor[x, y].CanMove = true;
+                        ThisFloor.CurrentFloor[x, y].CanMove = true;
                     }
                 }
 
                 for (int x = 0; x < 10; x++)
                 {
-                    ThisFloor[x, 0].CanMove = false;
-                    ThisFloor[x, 9].CanMove = false;
+                    ThisFloor.CurrentFloor[x, 0].CanMove = false;
+                    ThisFloor.CurrentFloor[x, 9].CanMove = false;
                 }
 
                 for (int y = 0; y < 10; y++)
                 {
-                    ThisFloor[0, y].CanMove = false;
-                    ThisFloor[9, y].CanMove = false;
+                    ThisFloor.CurrentFloor[0, y].CanMove = false;
+                    ThisFloor.CurrentFloor[9, y].CanMove = false;
                 }
                 world.Add(ThisFloor);
+                txtFloorName.Text = "Level " + (index +1);
             }
             else
             {
                 FloorNum = index;   //Set floor number to selected index
                 ThisFloor = world[index];   //Load in the floor
+                txtFloorName.Text = ThisFloor.FloorName;
             }
             tblWorldLevel.Refresh(); //Draw the grid
         }
@@ -300,14 +310,14 @@ namespace Legend_Of_Drongo
         private void cmdTestWorld_Click(object sender, EventArgs e)
         {
             WorldCreate WC = new WorldCreate();
-            world = new List<DataTypes.roomInfo[,]>();
+            world = new List<DataTypes.Floor>();
             world = WC.CreateWorld();
             FloorNum = 0;
             ThisFloor = world[0];
 
             cmbLevelSelect.Items.Clear();
             int index=1;
-            foreach (DataTypes.roomInfo[,] floor in world)
+            foreach (DataTypes.Floor floor in world)
             {
                 cmbLevelSelect.Items.Add("Level" + index);
                 index++;

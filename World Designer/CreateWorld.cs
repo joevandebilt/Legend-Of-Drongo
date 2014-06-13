@@ -7,9 +7,9 @@ namespace Legend_Of_Drongo
 {
     class WorldCreate : DataTypes
     {
-        public List<roomInfo[,]> Tutorial()
+        public List<Floor> Tutorial()
         {
-            List<roomInfo[,]> Tworld = new List<roomInfo[,]>();
+            List<Floor> Tworld = new List<Floor>();
             roomInfo[,] ThisFloor = new roomInfo[10, 10];
             itemInfo newItem = new itemInfo();
             CivilianProfile Civy = new CivilianProfile();
@@ -361,15 +361,18 @@ namespace Legend_Of_Drongo
             ThisFloor[2, 1].Description = "You cannot go this way";
             ThisFloor[2, 1].CanMove = false;
 
-            Tworld.Add(ThisFloor);
+            Floor Floor = new Floor();
+            Floor.CurrentFloor = ThisFloor;
+            Floor.FloorName = "Tutorial";
+            Tworld.Add(Floor);           
 
             return (Tworld);
         }
 
-        public List<roomInfo[,]> CreateWorld()
+        public List<Floor> CreateWorld()
         {
 
-            List<roomInfo[,]> world = new List<roomInfo[,]>();
+            List<Floor> world = new List<Floor>();
             world.Add(Floor0());
             world.Add(Floor1());
             //world.Add(Floor2());
@@ -378,7 +381,7 @@ namespace Legend_Of_Drongo
 
         }
 
-        public roomInfo[,] Floor0()
+        public Floor Floor0()
         {
             roomInfo[,] ThisFloor = new roomInfo[10, 10];
             EnemyProfile Enemy = new EnemyProfile();
@@ -548,11 +551,15 @@ namespace Legend_Of_Drongo
 
             ThisFloor[7, 6].Description = "Big drop. You don't know where you are but a fall that big can't be good.";
             ThisFloor[7, 6].CanMove = false;
-            
-            return (ThisFloor);
+
+            Floor Floor = new Floor();
+            Floor.CurrentFloor = ThisFloor;
+            Floor.FloorName = "Afterlife";
+
+            return (Floor);
         }
 
-        public roomInfo[,] Floor1()
+        public Floor Floor1()
         {
             roomInfo[,] ThisFloor = new roomInfo[10, 10];
             EnemyProfile Enemy = new EnemyProfile();
@@ -865,8 +872,12 @@ namespace Legend_Of_Drongo
 
             ThisFloor[8, 3].Description = "You can't go that way";
             ThisFloor[8, 3].CanMove = false;
-            
-            return (ThisFloor);
+
+            Floor Floor = new Floor();
+            Floor.CurrentFloor = ThisFloor;
+            Floor.FloorName = "Forest";
+
+            return (Floor);
         }
 
    

@@ -1,4 +1,17 @@
-﻿using System;
+﻿/*  
+ * This game is protected under the Artistic License 2.0
+ *      Copyright (c) 2014 Joseph Benjamin van de Bilt
+ *
+ *      Everyone is permitted to copy and distribute verbatim copies
+ *      of this license document, but changing it is not allowed.
+ * 
+ *  Should you wish to contact the copyright holder at any point please do so at joevandebilt@live.co.uk
+ *  
+ */
+
+
+
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +24,19 @@ namespace Legend_Of_Drongo
 {
     class LegendOfDrongoEngine : DataTypes
     {
-        public static roomInfo CurrentRoom = new roomInfo();
-                
-        public static roomInfo PotentialRoom = new roomInfo();
-
-        public static roomInfo[,] ThisFloor = new roomInfo[10,10];
-
         public static WorldFile WorldState = new WorldFile();
 
-        public static List<roomInfo[,]> world = new List<roomInfo[,]>();
+        public static List<Floor> world = new List<Floor>();
 
-        public static SoundPlayer MusicPlayer = new SoundPlayer();
+        public static Floor ThisFloor = new Floor();
 
-        public static List<string> SongList = new List<string>();
+        public static roomInfo CurrentRoom = new roomInfo();
+
+        public static roomInfo PotentialRoom = new roomInfo();
 
         public static PlayerProfile Player = new PlayerProfile();
+
+        public static SoundPlayer MusicPlayer = new SoundPlayer();
 
         public static object myLock = new object();
         public static bool stopProcessing = false;
@@ -37,7 +48,7 @@ namespace Legend_Of_Drongo
             bool validChoice = false;
             Console.Clear();
 
-            MusicPlayer.SoundLocation = ".\\music\\Warning.wav";
+            MusicPlayer.SoundLocation = ".\\Music\\Warning.wav";
             Music("Start");
 
             Console.WriteLine(WordWrap("This game uses music files throughout and can appear be very loud. Before continuing it may be wise to mute or lower the volume on this application"));
@@ -45,12 +56,7 @@ namespace Legend_Of_Drongo
             Console.ReadLine();
             Console.Clear();
 
-            SongList.Add(".\\music\\Scary 8-Bit.wav"); //music for floor 0
-            SongList.Add(".\\music\\Quartis.wav");      //music for floor 1
-            //SongList.Add("");
-
-
-            MusicPlayer.SoundLocation = SongList[1];
+            MusicPlayer.SoundLocation = ".\\Music\\Quartis.wav";
             Music("Start");
             Console.SetWindowSize(70, 50);
             Console.Title = "Legend of Drongo";
@@ -474,7 +480,7 @@ namespace Legend_Of_Drongo
             //path = Directory.GetCurrentDirectory();
 
             Player = MainMenu();
-            ThisFloor = world[Player.CurrentPos[2]];
+            ThisFloor = world[Player.CurrentPos[2]] ;
             CurrentRoom = GetRoomInfo(Player.CurrentPos);
 
             Console.WriteLine(WordWrap(CurrentRoom.Description));
@@ -490,7 +496,7 @@ namespace Legend_Of_Drongo
                 PlayerCommand = PlayerCommand.Trim();
                 Console.WriteLine("");
 
-                if (PlayerCommand.ToLower() == "help")
+                if (PlayerCommand.ToLower() == "help" || PlayerCommand.ToLower() == "commands" || PlayerCommand.ToLower().Contains("how do i"))
                 {
                     Console.WriteLine(WordWrap("Movement"));
                     Console.WriteLine(WordWrap("North - Move North"));
@@ -500,7 +506,7 @@ namespace Legend_Of_Drongo
                     Console.WriteLine(WordWrap("\nInteraction and Items"));
                     Console.WriteLine(WordWrap("Attack - Attacks an enemy with equipped weapon"));
                     Console.WriteLine(WordWrap("Bribe - Pay off people to look the other way"));
-                    Console.WriteLine(WordWrap("Talk To - Talk to non hostible people"));
+                    Console.WriteLine(WordWrap("Talk To - Talk to non hostile people"));
                     Console.WriteLine(WordWrap("Ask - Ask a person about a thing"));
                     Console.WriteLine(WordWrap("View Wares - See the wares of a merchant"));
                     Console.WriteLine(WordWrap("Buy - Buy items from merchants"));
@@ -510,7 +516,8 @@ namespace Legend_Of_Drongo
                     Console.WriteLine(WordWrap("Sleep in - go to sleep in a bed or bed like item"));
                     Console.WriteLine(WordWrap("Use - Uses an item on something"));
                     Console.WriteLine(WordWrap("Equip - Equip weapons and armor"));
-                    Console.WriteLine(WordWrap("Eat - Eats food in your inventory"));
+                    Console.WriteLine(WordWrap("Eat - Eats an item in your inventory"));
+                    Console.WriteLine(WordWrap("Drink - Drink an item in your inventory"));
                     Console.WriteLine(WordWrap("\nDescriptions"));
                     Console.WriteLine(WordWrap("Describe - Gets the description of the current area you are in"));
                     Console.WriteLine(WordWrap("Read - Read an item, a sign or a other readable items"));
@@ -526,7 +533,7 @@ namespace Legend_Of_Drongo
                     Console.WriteLine(WordWrap("Music Browse - Browse music to play"));
                     Console.WriteLine(WordWrap("Music Stop - Stop music playing"));
                     Console.WriteLine(WordWrap("\nControl"));
-                    Console.WriteLine(WordWrap("Clear - Clears the current window of text"));
+                    Console.WriteLine(WordWrap("Clear - Clears the current window of all text"));
                     Console.WriteLine(WordWrap("Save - Saves your characters current progress"));
                     Console.WriteLine(WordWrap("Main Menu - Goes back to the Main menu"));
                     Console.WriteLine(WordWrap("Quit - Quits game without saving"));
@@ -546,7 +553,7 @@ namespace Legend_Of_Drongo
                         {
                             if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
                             else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                            ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                             CurrentRoom = PotentialRoom;
                             Player.CurrentPos = ProposedMove;
                             EventTrigger("moveinto");
@@ -576,7 +583,7 @@ namespace Legend_Of_Drongo
                         {
                             if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
                             else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                            ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                             CurrentRoom = PotentialRoom;
                             Player.CurrentPos = ProposedMove;
                             EventTrigger("moveinto");
@@ -606,7 +613,7 @@ namespace Legend_Of_Drongo
                         {
                             if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
                             else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                            ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                             CurrentRoom = PotentialRoom;
                             Player.CurrentPos = ProposedMove;
                             EventTrigger("moveinto");
@@ -635,7 +642,7 @@ namespace Legend_Of_Drongo
                         {
                             if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
                             else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                            ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                             CurrentRoom = PotentialRoom;
                             Player.CurrentPos = ProposedMove;
                             EventTrigger("moveinto");
@@ -1378,25 +1385,25 @@ namespace Legend_Of_Drongo
                 {
                     EquipItem(PlayerCommand);
                 }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "eat")
+                else if (PlayerCommand.ToLower().Split(' ')[0] == "eat" || PlayerCommand.ToLower().Split(' ')[0] == "drink")
                 {
                     if (Player.invspace != 20)
                     {
                         int index;
                         string ObjectName = string.Empty;
 
-                        if (PlayerCommand == "eat")
+                        if (PlayerCommand.ToLower() == "eat" || PlayerCommand.ToLower() == "drink")
                         {
                             Console.WriteLine("Food in your inventory:\n");
                             for (index = 0; index < (20 - Player.invspace); index++)
                             {
-                                if (Player.inventory[index].Class == "Food")
+                                if (Player.inventory[index].Class == "Food" || Player.inventory[index].Class == "Drink")
                                 {
                                     Console.WriteLine(WordWrap(Player.inventory[index].Name));
                                 }
-                                Console.Write("\nWhich item would you like to eat?");
-                                ObjectName = Console.ReadLine();
                             }
+                            Console.Write("\nWhich item would you like to consume?");
+                            ObjectName = Console.ReadLine();
                         }
                         else
                         {
@@ -1412,7 +1419,7 @@ namespace Legend_Of_Drongo
                             }
                             ObjectName = ObjectName.Trim();
                         }
-                        Console.WriteLine(WordWrap(Eat(ObjectName)));
+                        Console.WriteLine(WordWrap(Consume(ObjectName)));
                     }
                     else Console.WriteLine("Your inventory is empty");
                 }
@@ -1465,7 +1472,7 @@ namespace Legend_Of_Drongo
                     //Run the main menu screen
                     Player = MainMenu();
                     ThisFloor = world[Player.CurrentPos[2]];
-                    CurrentRoom = ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
+                    CurrentRoom = ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
                     Console.WriteLine(WordWrap(CurrentRoom.Description));
                 }
                 else if (PlayerCommand.ToLower() == "save" || PlayerCommand.ToLower() == "save game")
@@ -1500,7 +1507,7 @@ namespace Legend_Of_Drongo
                         Console.ReadLine();
                         Player = MainMenu();
                         ThisFloor = world[Player.CurrentPos[2]];
-                        CurrentRoom = ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
+                        CurrentRoom = ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
                         Console.WriteLine(WordWrap(CurrentRoom.Description));
                     }
                     else
@@ -1535,7 +1542,7 @@ namespace Legend_Of_Drongo
             roomInfo ThisRoom = new roomInfo();
 
             //ThisFloor = world[UserPos[2]];
-            ThisRoom = ThisFloor[UserPos[0],UserPos[1]];
+            ThisRoom = ThisFloor.CurrentFloor[UserPos[0],UserPos[1]];
 
             return(ThisRoom);
         }
@@ -2121,18 +2128,19 @@ namespace Legend_Of_Drongo
             return(Response);
         }
 
-        public static string Eat(string ObjectName)
+        public static string Consume(string ObjectName)
         {
             int index = 0;
-            string Response = "You cannot eat that item";
+            string Response = "You cannot consume that item";
             bool itemEaten = false;
 
             while (itemEaten == false && index < (20 - Player.invspace))
             {
-                if (Player.inventory[index].Name.ToLower() == ObjectName.ToLower() && Player.inventory[index].Class == "Food")
+                if (Player.inventory[index].Name.ToLower() == ObjectName.ToLower() && (Player.inventory[index].Class == "Food" || Player.inventory[index].Class == "Drink"))
                 {
                     Player.HPBonus = Player.HPBonus + Player.inventory[index].HPmod;
-                    Response = string.Concat("You gained ", Player.inventory[index].HPmod, "HP from ", ObjectName);
+                    if (Player.inventory[index].HPmod > 0) Response = string.Concat("You gained ", Player.inventory[index].HPmod, "HP from ", ObjectName);
+                    else Response = string.Concat("You lost ", Player.inventory[index].HPmod, "HP from ", ObjectName);
                     itemEaten = true;
                     if (Player.HPBonus > 150) Player.HPBonus = 150;
 
@@ -2381,7 +2389,7 @@ namespace Legend_Of_Drongo
                     int Counter = 0;
                     bool GaveHit = false;
                     
-                    while (CurrentRoom.Enemy != null && Counter < ThisFight.Count && GaveHit == false)
+                    while (CurrentRoom.Enemy != null && Counter < ThisFight.Count && GaveHit == false && CurrentRoom.Enemy.Count != 0)
                     {
                         if (ThisFight[Counter].name.ToLower() == enemy.ToLower())
                         {
@@ -2389,8 +2397,6 @@ namespace Legend_Of_Drongo
                             Fortitude = RNG.Next(1, 100);
                             if (Fortitude > ThisEnemy.armor) ThisEnemy.HPBonus = ThisEnemy.HPBonus - BaseAttack;
                             else ThisEnemy.HPBonus = Convert.ToInt32(ThisEnemy.HPBonus - Math.Ceiling((decimal)(BaseAttack / 110) * ThisEnemy.armor));
-
-                            //Console.WriteLine("Enemy {0} has {1} HP left", enemy, CurrentRoom.Enemy[Counter].HPBonus);
 
                             if (ThisEnemy.HPBonus < 0) //if the enemy has been killed
                             {
@@ -2692,7 +2698,7 @@ namespace Legend_Of_Drongo
                 string SavePath = string.Concat(".\\Saves\\", WorldState.WorldName, "\\" , Player.name, ".dsg");
                 GameState gamestate = new GameState();
 
-                ThisFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                 world[Player.CurrentPos[2]] = ThisFloor;
 
                 gamestate.PlayerState = Player;
@@ -2732,14 +2738,14 @@ namespace Legend_Of_Drongo
                 {
                     if (thisEvent.Coodinates != null)
                     {
-                        ThisFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].CanMove = true;
+                        ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].CanMove = true;
                     }
                 }
                 else if (thisEvent.Action.ToLower() == "lock")   //lock
                 {
                     if (thisEvent.Coodinates != null)
                     {
-                        ThisFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].CanMove = false;
+                        ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].CanMove = false;
                     }
 
                 }
@@ -2781,15 +2787,15 @@ namespace Legend_Of_Drongo
                 {
                     if (thisEvent.Coodinates[2] != Player.CurrentPos[2]) //If change is not on this floor
                     {
-                        roomInfo[,] TempFloor;
+                        Floor TempFloor;
                         TempFloor = world[thisEvent.Coodinates[2]];
-                        TempFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = TempFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
+                        TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
                         CurrentRoom.Description = CurrentRoom.AltDescription;
                         world[thisEvent.Coodinates[2]] = TempFloor;
                     }
                     else
                     {
-                        ThisFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = ThisFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
+                        ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
                     }
                     CurrentRoom = GetRoomInfo(Player.CurrentPos);   //retreive new room info
 
@@ -2857,26 +2863,22 @@ namespace Legend_Of_Drongo
             }
            else if (Command.ToLower() == "browse")
            {
-               System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\music");
+               System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\Music");
                int NumOfSongs = dir.GetFiles().Length;
                int index = 0;
                string[] SongList = new string[NumOfSongs];
 
                if (NumOfSongs != 0)
                {
-
+                   Console.WriteLine(WordWrap("Select a song from the list below:\n\n"));
                    foreach (FileInfo file in dir.GetFiles())    //Find Songs in music directory
                    {
-                       Console.WriteLine(WordWrap(file.Name));
-                       SongList[index] = file.Name.Split('.')[0];
-                       index++;
-                   }
-
-                   Console.Clear();
-                   Console.WriteLine(WordWrap("Select a song from the list below:\n\n"));
-                   for (index = 0; index <= NumOfSongs - 1; index++)    //Print Songs for player
-                   {
-                       Console.WriteLine(WordWrap(string.Concat((index + 1), ": ", SongList[index])));
+                       if (file.Name.Split('.')[0].ToLower() == "wav")  //Wav only files
+                       {
+                           Console.WriteLine(WordWrap(string.Concat((index + 1), ": ",file.Name.Split('.')[0])));
+                           SongList[index] = file.Name;
+                           index++;
+                       }
                    }
                    Console.Write("\nWhich Song would you like to play: ");
                    string UserChoice = Console.ReadLine();
@@ -2885,7 +2887,7 @@ namespace Legend_Of_Drongo
                    if (Int32.TryParse(UserChoice, out songChosen))
                    {
 
-                       MusicPlayer.SoundLocation = string.Concat(".\\music\\", SongList[songChosen - 1], ".wav");
+                       MusicPlayer.SoundLocation = string.Concat(".\\Music\\", SongList[songChosen - 1]);
                        MusicPlayer.PlayLooping();
                    }
                    else Console.WriteLine("Not a valid song choice");
