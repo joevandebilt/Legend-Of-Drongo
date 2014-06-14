@@ -749,11 +749,11 @@ namespace Legend_Of_Drongo
                     }
                     else Console.WriteLine(WordWrap("Ask who about what?"));
                 }
-                else if (PlayerCommand.ToLower() != "pick" && (PlayerCommand.ToLower().Split(' ')[0] == "take" || (PlayerCommand.ToLower().Split(' ')[0] == "pick" && PlayerCommand.ToLower().Split(' ')[1] == "up")))
+                else if (PlayerCommand.ToLower().Split(' ')[0] == "take" || PlayerCommand.ToLower().Split(' ')[0] == "pick" || PlayerCommand.ToLower().Split(' ')[0] == "get")
                 {
                     string ObjectName = string.Empty;
 
-                    if (PlayerCommand == "take" || PlayerCommand == "pick up")
+                    if (PlayerCommand.ToLower() == "take" || PlayerCommand.ToLower() == "pick" || PlayerCommand.ToLower() == "pick up" || PlayerCommand.ToLower() == "get")
                     {
                         Console.Write("What do you want to pick up?: ");
                         ObjectName = Console.ReadLine();
@@ -762,7 +762,7 @@ namespace Legend_Of_Drongo
                     {
                         string[] strArray = PlayerCommand.Split(' ');
                         int index = 2;
-                        if (strArray[0] == "take")
+                        if (strArray[0].ToLower() == "take" || strArray[0].ToLower() == "get")
                         {
                             index = 2;
                             ObjectName = strArray[1];
@@ -1274,14 +1274,14 @@ namespace Legend_Of_Drongo
                     }
                     else Console.WriteLine("There is nobody willing to buy anything from you here");
                 }
-                else if (PlayerCommand.Split(' ')[0].ToLower() == "talk" && PlayerCommand.Split(' ')[1].ToLower() == "to")
+                else if (PlayerCommand.Split(' ')[0].ToLower() == "talk")
                 {
                     int index;
                     string NPCname = string.Empty;
 
                     if (CurrentRoom.Civilians != null)
                     {
-                        if (PlayerCommand.ToLower() == "talk to")
+                        if (PlayerCommand.ToLower() == "talk to" || PlayerCommand.ToLower() == "talk")
                         {
                             Console.WriteLine("Non-Hostile people in the room:\n");
 
@@ -1310,7 +1310,6 @@ namespace Legend_Of_Drongo
                     {
                         Console.WriteLine("There are no non-hostile people to talk to");
                     }
-
                 }
                 else if (PlayerCommand.Contains("suicide") || PlayerCommand.ToLower() == "attack self" || PlayerCommand.ToLower() == "hit self" || PlayerCommand.ToLower() == string.Concat("hit ", Player.name.ToLower()) || PlayerCommand.ToLower() == string.Concat("attack ", Player.name.ToLower()) || PlayerCommand.ToLower() == "kill self")
                 {
@@ -1660,18 +1659,7 @@ namespace Legend_Of_Drongo
                             itemToTake = true;
 
                             ReturnString = string.Concat("You have picked up ", CurrentRoom.items[index].Name);
-                            if (CurrentRoom.items.Count == 1)
-                            {
-                                CurrentRoom.items = null;
-                            }
-                            else
-                            {
-                                for (int i = index; i < (CurrentRoom.items.Count - 1); i++)
-                                {
-                                    CurrentRoom.items[i] = CurrentRoom.items[i + 1];
-                                }
-                                CurrentRoom.items.RemoveAt(CurrentRoom.items.Count - 1);
-                            }
+                            CurrentRoom.items.RemoveAt(index);
                         }
                         else if (CurrentRoom.items[index].InteractionName[counter].ToLower() == ObjectName.ToLower() && CurrentRoom.items[index].CanPickUp == false)
                         {

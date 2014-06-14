@@ -78,7 +78,7 @@ v2.2.5
 
 v2.3.0
 - Fixed issue with non-complete eat command
-- Added command 'drink' to have same affect as 'eat'. 
+- Added command 'drink' to have same affect as 'eat'.
 - Added Itemclass of type Drink
 - Updated Eat(string) method to Consume(string) 
 - Added different output for loss/gain of HP in Consume(string)
@@ -102,5 +102,9 @@ v2.3.2
 - Fixed issue with clearing inventory spaces after item use, item equips and sleeping
 - Fixed issue with dying while trying to sleep in a room... yes that was an actual bug >.<
 - Improved world
+
+v2.3.3
+- Fixed issue with command 'talk' causing crash
+- Improved world. 
 
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub
