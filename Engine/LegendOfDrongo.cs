@@ -10,7 +10,6 @@
  */
 
 
-
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -2559,6 +2558,17 @@ namespace Legend_Of_Drongo
                 }
                 if (Found == true) Console.WriteLine(WordWrap(Target + " says to you \"" + Knowledge + "\""));
                 else Console.WriteLine("That person does not seem to be here");
+            }
+            else if (CurrentRoom.Enemy != null)
+            {
+                foreach (EnemyProfile Enemy in CurrentRoom.Enemy)
+                {
+                    if (Enemy.name.ToLower() == Target.ToLower())
+                    {
+                        Knowledge = "It is not advisable to ask somebody questions if they are trying to kill you.";
+                    }
+                }
+                if (Knowledge != string.Empty) Console.WriteLine(WordWrap(Knowledge));
             }
             else Console.WriteLine("That person does not seem to be here");
         }

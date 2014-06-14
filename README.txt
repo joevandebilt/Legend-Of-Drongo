@@ -107,4 +107,7 @@ v2.3.3
 - Fixed issue with command 'talk' causing crash
 - Improved world. 
 
+v2.3.4
+- Added criteria if questions asked to an enemy
+
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub
