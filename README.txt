@@ -11,7 +11,8 @@ Known Bugs:
 - Death in custom world moves player to random point at level 1 - FIXED v2.1.4
 - Saves will overwrite based on name, even if playing custom worlds - Fixed v2.1.3
 - Surprise Attack will only allow twice - FIXED v2.1.2
-- When enemy killed, they can still make a move - FIXED v2.2.6
+- When enemy killed, they can still make a move - FIXED v2.3.0
+- Double items being produced? Cell 8,6,1
 
 
 To Do:
@@ -92,5 +93,14 @@ v2.3.0
 v2.3.1
 - Change Event Editor to manage selected cmb box values better
 - Changed HP and damage modifiers to double data type
+
+v2.3.2
+- Fixed rouding of HP to 2 significant figures
+- Altered Item editor to allow double data type inputs and double casts when editing.
+- Fixed Event editor to enable/disable boxes in a more renewable fashion
+- Fixed issue with item interactions not outputting custom text
+- Fixed issue with clearing inventory spaces after item use, item equips and sleeping
+- Fixed issue with dying while trying to sleep in a room... yes that was an actual bug >.<
+- Improved world
 
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

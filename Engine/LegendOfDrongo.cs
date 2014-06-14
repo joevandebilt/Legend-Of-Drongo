@@ -1803,7 +1803,7 @@ namespace Legend_Of_Drongo
                 {
                     Player.inventory[i] = Player.inventory[i + 1];
                 }
-                Array.Clear(Player.inventory,(20 - Player.invspace),(20 - Player.invspace));
+                Array.Clear(Player.inventory,(20 - Player.invspace),1);
                 Player.invspace = Player.invspace + 1;
 
             }             
@@ -1893,7 +1893,7 @@ namespace Legend_Of_Drongo
                                     {
                                         Player.inventory[i] = Player.inventory[i + 1];
                                     }
-                                    Array.Clear(Player.inventory, (20 - Player.invspace), (20 - Player.invspace));
+                                    Array.Clear(Player.inventory, (20 - Player.invspace), 1);
                                     Player.invspace = Player.invspace + 1;
                                     Console.WriteLine(WordWrap(string.Concat("You have equipped ", item, " as your ", armorType.Split('-')[1], " armor")));
 
@@ -2050,15 +2050,16 @@ namespace Legend_Of_Drongo
                             {
                                 if (CurrentRoom.items[index].Class != null && CurrentRoom.items[index].Class == "Interaction Object" && item.ToLower() == CurrentRoom.items[index].ItemNeeded.ToLower())
                                 {
+                                    if (EventTrigger("iteminteraction") == true) Console.WriteLine(WordWrap(CurrentRoom.items[index].interactionResponse));
+                                    else Console.WriteLine("The items interacted, but nothing happened");
+
                                     itemFound = true;
                                     for (int i = ItemFoundAt; i < (20 - Player.invspace); i++)
                                     {
                                         Player.inventory[i] = Player.inventory[i + 1];
                                     }
-                                    Array.Clear(Player.inventory, (20 - Player.invspace), (20 - Player.invspace));
-                                    Player.invspace = Player.invspace + 1;
-
-                                    if (!EventTrigger("iteminteraction")) Console.WriteLine("The items interacted, but nothing happened");
+                                    Array.Clear(Player.inventory, (20 - Player.invspace), 1);
+                                    Player.invspace = Player.invspace + 1;                                    
                                 }
                             }
                             Counter++;
@@ -2201,6 +2202,7 @@ namespace Legend_Of_Drongo
                     }
                 }
             }
+            Player.HPBonus = Math.Round((double)Player.HPBonus,2);
         }
         
         public static void SurpriseAttack(string enemy)
@@ -2473,12 +2475,10 @@ namespace Legend_Of_Drongo
                         Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you\n", ThisFight[index].Weapon.GoodHit)));
                     }
 
-                    Player.HPBonus = Player.HPBonus - (BaseAttack - ((BaseAttack / 110) * Player.ArmorBonus));
-
                     Fortitude = RNG.Next(1, 100);
                     if (Fortitude > Player.ArmorBonus) Player.HPBonus = Player.HPBonus- BaseAttack;
                     else Player.HPBonus = Player.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * Player.ArmorBonus);
-
+                    Player.HPBonus = Math.Round((double)Player.HPBonus, 2);
                     if (Player.HPBonus < 0)
                     {
                         for (int Counter = 0; Counter < CurrentRoom.Enemy.Count; Counter++)
@@ -2519,7 +2519,7 @@ namespace Legend_Of_Drongo
                     {
                         if (CurrentRoom.items[index].Class == "Bed" && CurrentRoom.items[index].InteractionName[counter].ToLower() == BedItem.ToLower())
                         {
-                            if (CurrentRoom.Enemy == null)
+                            if (CurrentRoom.Enemy == null || CurrentRoom.Enemy.Count == 0)
                             {
                                 bedFound = true;
                                 Console.WriteLine(WordWrap(string.Concat("You lie down on your ", BedItem, " and go to sleep")));
@@ -2536,6 +2536,7 @@ namespace Legend_Of_Drongo
                         }
                         counter++;
                     }
+                    counter = 0;
                     index++;
                 }
                 if (bedFound == false) Console.WriteLine("Cannot find that place to sleep in this area");
