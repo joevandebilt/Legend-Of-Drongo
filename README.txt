@@ -114,4 +114,11 @@ v2.3.5
 - Added try catch to main command entry to allow for errors
 - Improved world
 
+v2.3.6
+- Added extra criteria to examine command to output different information based on each item class.
+- Added line breaks to event text output
+- Fixed issue with rooms not unlocking
+- Improved world
+- Wrote my first #GameDevHaiku
+
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

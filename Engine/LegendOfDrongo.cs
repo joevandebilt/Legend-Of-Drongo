@@ -889,22 +889,7 @@ namespace Legend_Of_Drongo
                                 ObjectName = ObjectName.Trim();
 
                             }
-                            itemInfo invItem = new itemInfo();
-
-                            invItem = ExamineItem(ObjectName);
-
-                            if (invItem.Name != null)
-                            {
-                                Console.WriteLine(WordWrap(string.Concat("Name: ", invItem.Name)));
-                                Console.WriteLine(WordWrap(string.Concat("Health Boost: ", invItem.HPmod)));
-                                Console.WriteLine(WordWrap(string.Concat("Attack Bonus: ", invItem.AttackMod)));
-                                Console.WriteLine(WordWrap(string.Concat("Defense Bonus: ", invItem.DefenseMod)));
-                            }
-                            else
-                            {
-                                Console.WriteLine(WordWrap("Item not found in your intentory"));
-                            }
-
+                            ExamineItem(ObjectName);
                         }
                         else
                             Console.WriteLine(WordWrap("There are no items in your inventory"));
@@ -1614,20 +1599,29 @@ namespace Legend_Of_Drongo
 
         }
 
-        public static itemInfo ExamineItem(string Objectname)
+        public static void ExamineItem(string Objectname)
         {
             int index;
             itemInfo invItem = new itemInfo();
-            
-            for (index = 0; index < (20 - Player.invspace); index++)
+
+            if (CurrentRoom.items != null)  //Check current room for items to inspect
             {
-                
+                foreach (itemInfo Item in CurrentRoom.items)
+                {
+                    if (Item.Name.ToLower() == Objectname.ToLower())
+                    {
+                        invItem = Item;
+                    }
+                }
+            }
+            for (index = 0; index < (20 - Player.invspace); index++)    //Then check players inventory
+            {
                 if (Player.inventory[index].Name.ToLower() == Objectname.ToLower())
                 {
                     invItem = Player.inventory[index];
                 }
             }
-            for (index = 0; index < 5; index++)
+            for (index = 0; index < 5; index++)     //Then check the players armor
             {
                 if (Player.ArmorWorn[index].Name != null)
                 {
@@ -1637,10 +1631,47 @@ namespace Legend_Of_Drongo
                     }
                 }
             }
-            if (Player.WeaponHeld.Name.ToLower() == Objectname.ToLower()) invItem = Player.WeaponHeld;
+            if (Player.WeaponHeld.Name.ToLower() == Objectname.ToLower()) invItem = Player.WeaponHeld;  //Then check their weapon held
 
-            return (invItem);
-
+            if (invItem.Name != null)
+            {
+                if (invItem.Class == "Food" || invItem.Class == "Drink")
+                {
+                    Console.WriteLine(WordWrap(string.Concat("Name: ", invItem.Name)));
+                    Console.WriteLine(WordWrap(string.Concat("Item Type: ", invItem.Class)));
+                    Console.WriteLine(WordWrap(string.Concat("Health Boost: ", invItem.HPmod)));
+                    Console.WriteLine(WordWrap(string.Concat("Value: ", invItem.Value)));
+                    Console.WriteLine(WordWrap(string.Concat(invItem.Examine)));
+                }
+                else if (invItem.Class == "Weapon")
+                {
+                    Console.WriteLine(WordWrap(string.Concat("Name: ", invItem.Name)));
+                    Console.WriteLine(WordWrap(string.Concat("Item Type: ", invItem.Class)));
+                    Console.WriteLine(WordWrap(string.Concat("Base Damage: ", invItem.AttackMod)));
+                    Console.WriteLine(WordWrap(string.Concat("Defense Modifier: ", invItem.DefenseMod)));
+                    Console.WriteLine(WordWrap(string.Concat("Value: ", invItem.Value)));
+                    Console.WriteLine(WordWrap(string.Concat(invItem.Examine)));
+                }
+                else if (invItem.Class.Contains("Armor"))
+                {
+                    Console.WriteLine(WordWrap(string.Concat("Name: ", invItem.Name)));
+                    Console.WriteLine(WordWrap(string.Concat("Item Type: ", invItem.Class)));
+                    Console.WriteLine(WordWrap(string.Concat("Defense Modifier: ", invItem.DefenseMod)));
+                    Console.WriteLine(WordWrap(string.Concat("Value: ", invItem.Value)));
+                    Console.WriteLine(WordWrap(string.Concat(invItem.Examine)));
+                }
+                else if (invItem.Class == "Bed")
+                {
+                    Console.WriteLine(WordWrap(string.Concat("Name: ", invItem.Name)));
+                    Console.WriteLine(WordWrap(string.Concat("Item Type: ", invItem.Class)));
+                    Console.WriteLine(WordWrap(string.Concat("Value: ", invItem.Value)));
+                    Console.WriteLine(WordWrap(string.Concat(invItem.Examine)));
+                }
+                else if (invItem.Class == "Readable") Console.WriteLine(WordWrap(string.Concat("I think I may be supposed to read this")));
+                else if (invItem.Class == "Interactive Item") Console.WriteLine(WordWrap(string.Concat("I think I'm supposed to use ", invItem.Name, " on something")));
+                else Console.WriteLine(WordWrap(string.Concat(invItem.Name, " remains a mystery, but you could probably sell it for ", invItem.Value, " gold.")));
+            }
+            else Console.WriteLine(WordWrap("Item not found in your intentory"));
         }
 
         public static string TakeItem(string ObjectName)
@@ -2059,6 +2090,7 @@ namespace Legend_Of_Drongo
                             }
                             Counter++;
                         }
+                        Counter = 0;
                         index++;
                     }
                     if (itemFound == false) Console.WriteLine(WordWrap(string.Concat("Tried to use ", item, " on ", target, " but it failed")));
@@ -2423,20 +2455,18 @@ namespace Legend_Of_Drongo
                                 Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
                                 NumOfFighters = NumOfFighters - 1;
 
-                                
                                 EventTrigger("killenemy");
-                               
-                                if (CurrentRoom.Enemy.Count - 1 != 0)
+                                CurrentRoom.Enemy.RemoveAt(ThisFight[Counter].ID);
+
+                                if (CurrentRoom.Enemy.Count != 0)
                                 {
                                     //Remove the fighter
-                                    CurrentRoom.Enemy.RemoveAt(ThisFight[Counter].ID);
                                     ThisFight.RemoveAt(Counter);
                                 }
                                 else
                                 {
                                     EventTrigger("killallenemies");
                                     CurrentRoom.Enemy.Clear();
-                                    //break;
                                 }
                             }
                             else CurrentRoom.Enemy[ThisFight[Counter].ID] = ThisEnemy;
@@ -2797,12 +2827,16 @@ namespace Legend_Of_Drongo
                         CurrentRoom.Description = CurrentRoom.AltDescription;
                         world[thisEvent.Coodinates[2]] = TempFloor;
                     }
+                    else if (thisEvent.Coodinates == Player.CurrentPos)
+                    {
+                        CurrentRoom.Description = CurrentRoom.AltDescription;
+                        ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;   //Save the status of the current room
+                    }
                     else
                     {
                         ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
                     }
                     CurrentRoom = GetRoomInfo(Player.CurrentPos);   //retreive new room info
-
                 }
                 else if (thisEvent.Action.ToLower() == "change location") //change floor
                 {
@@ -2827,6 +2861,7 @@ namespace Legend_Of_Drongo
                 }
                 else if (thisEvent.Action.ToLower() == "output text")
                 {
+                    Console.WriteLine("");
                     Console.WriteLine(WordWrap(thisEvent.EventValue));
                 }
                 else if (thisEvent.Action == "spawnItems")
