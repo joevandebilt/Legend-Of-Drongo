@@ -495,388 +495,353 @@ namespace Legend_Of_Drongo
                 PlayerCommand = PlayerCommand.Trim();
                 Console.WriteLine("");
 
-                if (PlayerCommand.ToLower() == "help" || PlayerCommand.ToLower() == "commands" || PlayerCommand.ToLower().Contains("how do i"))
+                try
                 {
-                    Console.WriteLine(WordWrap("Movement"));
-                    Console.WriteLine(WordWrap("North - Move North"));
-                    Console.WriteLine(WordWrap("East - Move East"));
-                    Console.WriteLine(WordWrap("South - Move South"));
-                    Console.WriteLine(WordWrap("West - Move West"));
-                    Console.WriteLine(WordWrap("\nInteraction and Items"));
-                    Console.WriteLine(WordWrap("Attack - Attacks an enemy with equipped weapon"));
-                    Console.WriteLine(WordWrap("Bribe - Pay off people to look the other way"));
-                    Console.WriteLine(WordWrap("Talk To - Talk to non hostile people"));
-                    Console.WriteLine(WordWrap("Ask - Ask a person about a thing"));
-                    Console.WriteLine(WordWrap("View Wares - See the wares of a merchant"));
-                    Console.WriteLine(WordWrap("Buy - Buy items from merchants"));
-                    Console.WriteLine(WordWrap("Sell - Sell an item to a willing merchant"));
-                    Console.WriteLine(WordWrap("Take - picks up an item"));
-                    Console.WriteLine(WordWrap("Drop - Drops an item"));
-                    Console.WriteLine(WordWrap("Sleep in - go to sleep in a bed or bed like item"));
-                    Console.WriteLine(WordWrap("Use - Uses an item on something"));
-                    Console.WriteLine(WordWrap("Equip - Equip weapons and armor"));
-                    Console.WriteLine(WordWrap("Eat - Eats an item in your inventory"));
-                    Console.WriteLine(WordWrap("Drink - Drink an item in your inventory"));
-                    Console.WriteLine(WordWrap("\nDescriptions"));
-                    Console.WriteLine(WordWrap("Describe - Gets the description of the current area you are in"));
-                    Console.WriteLine(WordWrap("Read - Read an item, a sign or a other readable items"));
-                    Console.WriteLine(WordWrap("Status - Gets status of player, including health, armor and Weapon Status"));
-                    Console.WriteLine(WordWrap("Inventory - lists items in inventory"));
-                    Console.WriteLine(WordWrap("Objective - Tells you your current objective"));
-                    Console.WriteLine(WordWrap("Money - Tells you how much money you have"));
-                    Console.WriteLine(WordWrap("Look At - Inspect objects in your current area"));
-                    Console.WriteLine(WordWrap("Examine - Examine items in your inventory to a greater detail"));
-                    Console.WriteLine(WordWrap("Who am I - Tells you your name"));
-                    Console.WriteLine(WordWrap("\nMusic"));
-                    Console.WriteLine(WordWrap("Music Play - Start playing music"));
-                    Console.WriteLine(WordWrap("Music Browse - Browse music to play"));
-                    Console.WriteLine(WordWrap("Music Stop - Stop music playing"));
-                    Console.WriteLine(WordWrap("\nControl"));
-                    Console.WriteLine(WordWrap("Clear - Clears the current window of all text"));
-                    Console.WriteLine(WordWrap("Save - Saves your characters current progress"));
-                    Console.WriteLine(WordWrap("Main Menu - Goes back to the Main menu"));
-                    Console.WriteLine(WordWrap("Quit - Quits game without saving"));
-                }
-                else if (PlayerCommand.ToLower() == "north" || PlayerCommand.ToLower() == "go north" || PlayerCommand.ToLower() == "move north") 
-                {
-                    if (!CurrentRoom.LockedIn)
+                    if (PlayerCommand.ToLower() == "help" || PlayerCommand.ToLower() == "commands" || PlayerCommand.ToLower().Contains("how do i"))
                     {
-                        int[] ProposedMove = new int[3];
-
-                        ProposedMove[0] = Player.CurrentPos[0] - 1;
-                        ProposedMove[1] = Player.CurrentPos[1];
-                        ProposedMove[2] = Player.CurrentPos[2];
-
-                        PotentialRoom = GetRoomInfo(ProposedMove);
-                        if (PotentialRoom.CanMove == true)
+                        Console.WriteLine(WordWrap("Movement"));
+                        Console.WriteLine(WordWrap("North - Move North"));
+                        Console.WriteLine(WordWrap("East - Move East"));
+                        Console.WriteLine(WordWrap("South - Move South"));
+                        Console.WriteLine(WordWrap("West - Move West"));
+                        Console.WriteLine(WordWrap("\nInteraction and Items"));
+                        Console.WriteLine(WordWrap("Attack - Attacks an enemy with equipped weapon"));
+                        Console.WriteLine(WordWrap("Bribe - Pay off people to look the other way"));
+                        Console.WriteLine(WordWrap("Talk To - Talk to non hostile people"));
+                        Console.WriteLine(WordWrap("Ask - Ask a person about a thing"));
+                        Console.WriteLine(WordWrap("View Wares - See the wares of a merchant"));
+                        Console.WriteLine(WordWrap("Buy - Buy items from merchants"));
+                        Console.WriteLine(WordWrap("Sell - Sell an item to a willing merchant"));
+                        Console.WriteLine(WordWrap("Take - picks up an item"));
+                        Console.WriteLine(WordWrap("Drop - Drops an item"));
+                        Console.WriteLine(WordWrap("Sleep in - go to sleep in a bed or bed like item"));
+                        Console.WriteLine(WordWrap("Use - Uses an item on something"));
+                        Console.WriteLine(WordWrap("Equip - Equip weapons and armor"));
+                        Console.WriteLine(WordWrap("Eat - Eats an item in your inventory"));
+                        Console.WriteLine(WordWrap("Drink - Drink an item in your inventory"));
+                        Console.WriteLine(WordWrap("\nDescriptions"));
+                        Console.WriteLine(WordWrap("Describe - Gets the description of the current area you are in"));
+                        Console.WriteLine(WordWrap("Read - Read an item, a sign or a other readable items"));
+                        Console.WriteLine(WordWrap("Status - Gets status of player, including health, armor and Weapon Status"));
+                        Console.WriteLine(WordWrap("Inventory - lists items in inventory"));
+                        Console.WriteLine(WordWrap("Objective - Tells you your current objective"));
+                        Console.WriteLine(WordWrap("Money - Tells you how much money you have"));
+                        Console.WriteLine(WordWrap("Look At - Inspect objects in your current area"));
+                        Console.WriteLine(WordWrap("Examine - Examine items in your inventory to a greater detail"));
+                        Console.WriteLine(WordWrap("Who am I - Tells you your name"));
+                        Console.WriteLine(WordWrap("\nMusic"));
+                        Console.WriteLine(WordWrap("Music Play - Start playing music"));
+                        Console.WriteLine(WordWrap("Music Browse - Browse music to play"));
+                        Console.WriteLine(WordWrap("Music Stop - Stop music playing"));
+                        Console.WriteLine(WordWrap("\nControl"));
+                        Console.WriteLine(WordWrap("Clear - Clears the current window of all text"));
+                        Console.WriteLine(WordWrap("Save - Saves your characters current progress"));
+                        Console.WriteLine(WordWrap("Main Menu - Goes back to the Main menu"));
+                        Console.WriteLine(WordWrap("Quit - Quits game without saving"));
+                    }
+                    else if (PlayerCommand.ToLower() == "north" || PlayerCommand.ToLower() == "go north" || PlayerCommand.ToLower() == "move north")
+                    {
+                        if (!CurrentRoom.LockedIn)
                         {
-                            if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                            int[] ProposedMove = new int[3];
+
+                            ProposedMove[0] = Player.CurrentPos[0] - 1;
+                            ProposedMove[1] = Player.CurrentPos[1];
+                            ProposedMove[2] = Player.CurrentPos[2];
+
+                            PotentialRoom = GetRoomInfo(ProposedMove);
+                            if (PotentialRoom.CanMove == true)
+                            {
+                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                                else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                                CurrentRoom = PotentialRoom;
+                                Player.CurrentPos = ProposedMove;
+                                EventTrigger("moveinto");
+                            }
+                            else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
                             else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                            CurrentRoom = PotentialRoom;
-                            Player.CurrentPos = ProposedMove;
-                            EventTrigger("moveinto");
-                        }
-                        else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                        else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot leave the current area");
-                        attacked();
-                    }
-
-                }
-                else if (PlayerCommand.ToLower() == "east" || PlayerCommand.ToLower() == "go east" || PlayerCommand.ToLower() == "move east")
-                {
-                    if (!CurrentRoom.LockedIn)
-                    {
-                        int[] ProposedMove = new int[3];
-
-                        ProposedMove[0] = Player.CurrentPos[0];
-                        ProposedMove[1] = Player.CurrentPos[1] + 1;
-                        ProposedMove[2] = Player.CurrentPos[2];
-
-                        PotentialRoom = GetRoomInfo(ProposedMove);
-                        if (PotentialRoom.CanMove == true)
-                        {
-                            if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
-                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                            CurrentRoom = PotentialRoom;
-                            Player.CurrentPos = ProposedMove;
-                            EventTrigger("moveinto");
-                        }
-                        else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                        else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot leave the current area");
-                        attacked();
-                    }
-
-                }
-                else if (PlayerCommand.ToLower() == "south" || PlayerCommand.ToLower() == "go south" || PlayerCommand.ToLower() == "move south")
-                {
-                    if (!CurrentRoom.LockedIn)
-                    {
-                        int[] ProposedMove = new int[3];
-
-                        ProposedMove[0] = Player.CurrentPos[0] + 1;
-                        ProposedMove[1] = Player.CurrentPos[1];
-                        ProposedMove[2] = Player.CurrentPos[2];
-
-                        PotentialRoom = GetRoomInfo(ProposedMove);
-                        if (PotentialRoom.CanMove == true)
-                        {
-                            if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
-                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                            CurrentRoom = PotentialRoom;
-                            Player.CurrentPos = ProposedMove;
-                            EventTrigger("moveinto");
-                        }
-                        else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                        else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot leave the current area");
-                        attacked();
-                    }
-                }
-                else if (PlayerCommand.ToLower() == "west" || PlayerCommand.ToLower() == "go west" || PlayerCommand.ToLower() == "move west")
-                {
-                    if (!CurrentRoom.LockedIn)
-                    {
-                        int[] ProposedMove = new int[3];
-
-                        ProposedMove[0] = Player.CurrentPos[0];
-                        ProposedMove[1] = Player.CurrentPos[1] - 1;
-                        ProposedMove[2] = Player.CurrentPos[2];
-
-                        PotentialRoom = GetRoomInfo(ProposedMove);
-                        if (PotentialRoom.CanMove == true)
-                        {
-                            if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
-                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                            CurrentRoom = PotentialRoom;
-                            Player.CurrentPos = ProposedMove;
-                            EventTrigger("moveinto");
-                        }
-                        else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                        else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot leave the current area");
-                        attacked();
-                    }
-                }
-                else if (PlayerCommand.ToLower().Contains("who am i") || PlayerCommand == "whoami")
-                {
-                    Console.WriteLine(WordWrap(string.Concat("Your name is ", Player.name)));
-                }
-                else if (PlayerCommand.ToLower() == "status")
-                {
-                    PlayerStatus();
-                }
-                else if (PlayerCommand.ToLower() == "describe")
-                {
-                    Console.WriteLine(WordWrap(CurrentRoom.Description));
-                }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "read")
-                {
-                    int index;
-                    string readitem;
-
-                    if (CurrentRoom.items != null || Player.invspace != 20)
-                    {
-
-                        if (PlayerCommand.ToLower().Split(' ').Length == 1)
-                        {
-                            Console.Write("What do you want to read?");
-                            readitem = Console.ReadLine();
                         }
                         else
                         {
-                            string[] strArray = PlayerCommand.Split(' ');
-                            index = 2;
-                            readitem = strArray[1];
+                            Console.WriteLine("You cannot leave the current area");
+                            attacked();
+                        }
 
-                            while (index < strArray.Length)
+                    }
+                    else if (PlayerCommand.ToLower() == "east" || PlayerCommand.ToLower() == "go east" || PlayerCommand.ToLower() == "move east")
+                    {
+                        if (!CurrentRoom.LockedIn)
+                        {
+                            int[] ProposedMove = new int[3];
+
+                            ProposedMove[0] = Player.CurrentPos[0];
+                            ProposedMove[1] = Player.CurrentPos[1] + 1;
+                            ProposedMove[2] = Player.CurrentPos[2];
+
+                            PotentialRoom = GetRoomInfo(ProposedMove);
+                            if (PotentialRoom.CanMove == true)
                             {
-                                readitem = string.Concat(readitem, " ", strArray[index]);
-                                index++;
-                                //Console.WriteLine(WordWrap("item is {0}", item);
+                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                                else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                                CurrentRoom = PotentialRoom;
+                                Player.CurrentPos = ProposedMove;
+                                EventTrigger("moveinto");
                             }
-                            readitem = readitem.Trim();
+                            else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
+                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
                         }
-                        Console.WriteLine(WordWrap(ReadItem(readitem)));
-                    }
-                    else Console.WriteLine("There is nothing to read");
-
-
-                }
-                else if (PlayerCommand.ToLower() == "inventory")
-                {
-                    if (Player.invspace != 20)
-                    {
-                        Console.WriteLine(WordWrap(string.Concat("You are currently using ", (20 - Player.invspace), "/20 of your inventory\n")));
-                        for (int index = 0; index < (20 - Player.invspace); index++)
+                        else
                         {
-                            Console.WriteLine(WordWrap(string.Concat((index + 1), ": ", Player.inventory[index].Name)));
+                            Console.WriteLine("You cannot leave the current area");
+                            attacked();
                         }
-                        Console.WriteLine("");
-                    }
-                    else Console.WriteLine("Your inventory is empty");
-                }
-                else if (PlayerCommand.ToLower() == "objective")
-                {
-                    Console.WriteLine(WordWrap(string.Concat("Your Current Objective is: ", Player.Objective)));
-                }
-                else if (PlayerCommand.ToLower() == "money")
-                {
-                    Console.WriteLine("You currently have {0} gold coins", Player.Money);
-                }
-                else if (PlayerCommand.Split(' ')[0].ToLower() == "ask")
-                {
-                    string Target = string.Empty;
-                    string Topic = string.Empty;
-                    bool topicstart = false;
 
-                    if (PlayerCommand.ToLower().Contains("about"))
+                    }
+                    else if (PlayerCommand.ToLower() == "south" || PlayerCommand.ToLower() == "go south" || PlayerCommand.ToLower() == "move south")
                     {
-                        for (int i = 1; i < PlayerCommand.Split(' ').Length; i++)
+                        if (!CurrentRoom.LockedIn)
                         {
-                            if (PlayerCommand.Split(' ')[i].ToLower() == "about")
+                            int[] ProposedMove = new int[3];
+
+                            ProposedMove[0] = Player.CurrentPos[0] + 1;
+                            ProposedMove[1] = Player.CurrentPos[1];
+                            ProposedMove[2] = Player.CurrentPos[2];
+
+                            PotentialRoom = GetRoomInfo(ProposedMove);
+                            if (PotentialRoom.CanMove == true)
                             {
-                                topicstart = true;
+                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                                else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                                CurrentRoom = PotentialRoom;
+                                Player.CurrentPos = ProposedMove;
+                                EventTrigger("moveinto");
                             }
-                            else if (topicstart == false)
+                            else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
+                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                        }
+                        else
+                        {
+                            Console.WriteLine("You cannot leave the current area");
+                            attacked();
+                        }
+                    }
+                    else if (PlayerCommand.ToLower() == "west" || PlayerCommand.ToLower() == "go west" || PlayerCommand.ToLower() == "move west")
+                    {
+                        if (!CurrentRoom.LockedIn)
+                        {
+                            int[] ProposedMove = new int[3];
+
+                            ProposedMove[0] = Player.CurrentPos[0];
+                            ProposedMove[1] = Player.CurrentPos[1] - 1;
+                            ProposedMove[2] = Player.CurrentPos[2];
+
+                            PotentialRoom = GetRoomInfo(ProposedMove);
+                            if (PotentialRoom.CanMove == true)
                             {
-                                Target = Target + " " + PlayerCommand.Split(' ')[i];
+                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                                else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+                                CurrentRoom = PotentialRoom;
+                                Player.CurrentPos = ProposedMove;
+                                EventTrigger("moveinto");
                             }
-                            else if (topicstart == true)
+                            else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
+                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
+                        }
+                        else
+                        {
+                            Console.WriteLine("You cannot leave the current area");
+                            attacked();
+                        }
+                    }
+                    else if (PlayerCommand.ToLower().Contains("who am i") || PlayerCommand == "whoami")
+                    {
+                        Console.WriteLine(WordWrap(string.Concat("Your name is ", Player.name)));
+                    }
+                    else if (PlayerCommand.ToLower() == "status")
+                    {
+                        PlayerStatus();
+                    }
+                    else if (PlayerCommand.ToLower() == "describe")
+                    {
+                        Console.WriteLine(WordWrap(CurrentRoom.Description));
+                    }
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "read")
+                    {
+                        int index;
+                        string readitem;
+
+                        if (CurrentRoom.items != null || Player.invspace != 20)
+                        {
+
+                            if (PlayerCommand.ToLower().Split(' ').Length == 1)
                             {
-                                Topic = Topic + " " + PlayerCommand.Split(' ')[i];
+                                Console.Write("What do you want to read?");
+                                readitem = Console.ReadLine();
                             }
+                            else
+                            {
+                                string[] strArray = PlayerCommand.Split(' ');
+                                index = 2;
+                                readitem = strArray[1];
+
+                                while (index < strArray.Length)
+                                {
+                                    readitem = string.Concat(readitem, " ", strArray[index]);
+                                    index++;
+                                    //Console.WriteLine(WordWrap("item is {0}", item);
+                                }
+                                readitem = readitem.Trim();
+                            }
+                            Console.WriteLine(WordWrap(ReadItem(readitem)));
                         }
-                        AskQuestion(Target.Trim(), Topic.Trim());
+                        else Console.WriteLine("There is nothing to read");
+
+
                     }
-                    else Console.WriteLine(WordWrap("Ask who about what?"));
-                }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "take" || PlayerCommand.ToLower().Split(' ')[0] == "pick" || PlayerCommand.ToLower().Split(' ')[0] == "get")
-                {
-                    string ObjectName = string.Empty;
-
-                    if (PlayerCommand.ToLower() == "take" || PlayerCommand.ToLower() == "pick" || PlayerCommand.ToLower() == "pick up" || PlayerCommand.ToLower() == "get")
+                    else if (PlayerCommand.ToLower() == "inventory")
                     {
-                        Console.Write("What do you want to pick up?: ");
-                        ObjectName = Console.ReadLine();
-                    }
-                    else
-                    {
-                        string[] strArray = PlayerCommand.Split(' ');
-                        int index = 2;
-                        if (strArray[0].ToLower() == "take" || strArray[0].ToLower() == "get")
+                        if (Player.invspace != 20)
                         {
-                            index = 2;
-                            ObjectName = strArray[1];
-                        }
-                        else if (strArray[0] == "pick" && strArray[1] == "up")
-                        {
-                            index = 3;
-                            ObjectName = strArray[2];
-                        }
-
-                        while (index < strArray.Length)
-                        {
-                            ObjectName = string.Concat(ObjectName, " ", strArray[index]);
-                            index++;
-                            //Console.WriteLine(WordWrap("item is {0}", item);
-                        }
-                        ObjectName = ObjectName.Trim();
-                    }
-
-                    Console.WriteLine(WordWrap(TakeItem(ObjectName)));
-
-                }
-                else if (PlayerCommand.ToLower() == "drop" || PlayerCommand.ToLower().Split(' ')[0] == "drop")
-                {
-                    if (Player.invspace != 20)
-                    {
-                        string ObjectName = string.Empty;
-
-                        if (PlayerCommand.ToLower() == "drop")
-                        {
-                            Console.WriteLine(WordWrap("What do you want to drop?: "));
+                            Console.WriteLine(WordWrap(string.Concat("You are currently using ", (20 - Player.invspace), "/20 of your inventory\n")));
                             for (int index = 0; index < (20 - Player.invspace); index++)
                             {
                                 Console.WriteLine(WordWrap(string.Concat((index + 1), ": ", Player.inventory[index].Name)));
                             }
-                            Console.Write("\nSlot Number: ");
-                            int Menu = Convert.ToInt32(Console.ReadLine());
-
-
-                            ObjectName = Player.inventory[Menu - 1].Name;
+                            Console.WriteLine("");
                         }
-                        else
-                        {
-                            string[] strArray = PlayerCommand.Split(' ');
-                            ObjectName = strArray[1];
+                        else Console.WriteLine("Your inventory is empty");
+                    }
+                    else if (PlayerCommand.ToLower() == "objective")
+                    {
+                        Console.WriteLine(WordWrap(string.Concat("Your Current Objective is: ", Player.Objective)));
+                    }
+                    else if (PlayerCommand.ToLower() == "money")
+                    {
+                        Console.WriteLine("You currently have {0} gold coins", Player.Money);
+                    }
+                    else if (PlayerCommand.Split(' ')[0].ToLower() == "ask")
+                    {
+                        string Target = string.Empty;
+                        string Topic = string.Empty;
+                        bool topicstart = false;
 
-                            int index = 2;
-                            while (index < strArray.Length)
+                        if (PlayerCommand.ToLower().Contains("about"))
+                        {
+                            for (int i = 1; i < PlayerCommand.Split(' ').Length; i++)
                             {
-                                ObjectName = string.Concat(ObjectName, " ", strArray[index]);
-                                index++;
-                                //Console.WriteLine(WordWrap("item is {0}", item);
+                                if (PlayerCommand.Split(' ')[i].ToLower() == "about")
+                                {
+                                    topicstart = true;
+                                }
+                                else if (topicstart == false)
+                                {
+                                    Target = Target + " " + PlayerCommand.Split(' ')[i];
+                                }
+                                else if (topicstart == true)
+                                {
+                                    Topic = Topic + " " + PlayerCommand.Split(' ')[i];
+                                }
                             }
-
-                            ObjectName = ObjectName.Trim();
-
+                            AskQuestion(Target.Trim(), Topic.Trim());
                         }
-                        Console.WriteLine(WordWrap(DropItem(ObjectName)));
-
+                        else Console.WriteLine(WordWrap("Ask who about what?"));
                     }
-                    else
-                        Console.WriteLine(WordWrap("There are no items in your inventory"));
-                }
-                else if (PlayerCommand.ToLower() != "look" && (PlayerCommand.ToLower() == "look at" || (PlayerCommand.ToLower().Split(' ')[0] == "look" && PlayerCommand.ToLower().Split(' ')[1] == "at")))
-                {
-                    string ObjectName = string.Empty;
-
-                    if (PlayerCommand == "look at")
-                    {
-                        Console.Write("What do you want to look at?: ");
-                        ObjectName = Console.ReadLine();
-                    }
-                    else
-                    {
-                        string[] strArray = PlayerCommand.Split(' ');
-                        ObjectName = strArray[2];
-
-                        int index = 3;
-                        while (index < strArray.Length)
-                        {
-                            ObjectName = string.Concat(ObjectName, " ", strArray[index]);
-                            index++;
-                            //Console.WriteLine(WordWrap("item is {0}", item);
-                        }
-
-                        ObjectName = ObjectName.Trim();
-                    }
-
-                    Console.WriteLine(WordWrap(LookAtObject(ObjectName)));
-                }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "examine" || PlayerCommand.ToLower() == "examine")
-                {
-                    if (Player.invspace != 20)
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "take" || PlayerCommand.ToLower().Split(' ')[0] == "pick" || PlayerCommand.ToLower().Split(' ')[0] == "get")
                     {
                         string ObjectName = string.Empty;
 
-                        if (PlayerCommand.ToLower() == "examine")
+                        if (PlayerCommand.ToLower() == "take" || PlayerCommand.ToLower() == "pick" || PlayerCommand.ToLower() == "pick up" || PlayerCommand.ToLower() == "get")
                         {
-                            Console.WriteLine(WordWrap("What item do you want to examine?: "));
-                            for (int index = 0; index < (20 - Player.invspace); index++)
-                            {
-                                Console.WriteLine(WordWrap("{0}: {1}"), (index + 1), Player.inventory[index].Name);
-                            }
-                            Console.Write("\nSlot Number: ");
-                            int Menu = Convert.ToInt32(Console.ReadLine());
-
-
-                            ObjectName = Player.inventory[Menu - 1].Name;
+                            Console.Write("What do you want to pick up?: ");
+                            ObjectName = Console.ReadLine();
                         }
                         else
                         {
                             string[] strArray = PlayerCommand.Split(' ');
-                            ObjectName = strArray[1];
-
                             int index = 2;
+                            if (strArray[0].ToLower() == "take" || strArray[0].ToLower() == "get")
+                            {
+                                index = 2;
+                                ObjectName = strArray[1];
+                            }
+                            else if (strArray[0] == "pick" && strArray[1] == "up")
+                            {
+                                index = 3;
+                                ObjectName = strArray[2];
+                            }
+
+                            while (index < strArray.Length)
+                            {
+                                ObjectName = string.Concat(ObjectName, " ", strArray[index]);
+                                index++;
+                                //Console.WriteLine(WordWrap("item is {0}", item);
+                            }
+                            ObjectName = ObjectName.Trim();
+                        }
+
+                        Console.WriteLine(WordWrap(TakeItem(ObjectName)));
+
+                    }
+                    else if (PlayerCommand.ToLower() == "drop" || PlayerCommand.ToLower().Split(' ')[0] == "drop")
+                    {
+                        if (Player.invspace != 20)
+                        {
+                            string ObjectName = string.Empty;
+
+                            if (PlayerCommand.ToLower() == "drop")
+                            {
+                                Console.WriteLine(WordWrap("What do you want to drop?: "));
+                                for (int index = 0; index < (20 - Player.invspace); index++)
+                                {
+                                    Console.WriteLine(WordWrap(string.Concat((index + 1), ": ", Player.inventory[index].Name)));
+                                }
+                                Console.Write("\nSlot Number: ");
+                                int Menu = Convert.ToInt32(Console.ReadLine());
+
+
+                                ObjectName = Player.inventory[Menu - 1].Name;
+                            }
+                            else
+                            {
+                                string[] strArray = PlayerCommand.Split(' ');
+                                ObjectName = strArray[1];
+
+                                int index = 2;
+                                while (index < strArray.Length)
+                                {
+                                    ObjectName = string.Concat(ObjectName, " ", strArray[index]);
+                                    index++;
+                                    //Console.WriteLine(WordWrap("item is {0}", item);
+                                }
+
+                                ObjectName = ObjectName.Trim();
+
+                            }
+                            Console.WriteLine(WordWrap(DropItem(ObjectName)));
+
+                        }
+                        else
+                            Console.WriteLine(WordWrap("There are no items in your inventory"));
+                    }
+                    else if (PlayerCommand.ToLower() != "look" && (PlayerCommand.ToLower() == "look at" || (PlayerCommand.ToLower().Split(' ')[0] == "look" && PlayerCommand.ToLower().Split(' ')[1] == "at")))
+                    {
+                        string ObjectName = string.Empty;
+
+                        if (PlayerCommand == "look at")
+                        {
+                            Console.Write("What do you want to look at?: ");
+                            ObjectName = Console.ReadLine();
+                        }
+                        else
+                        {
+                            string[] strArray = PlayerCommand.Split(' ');
+                            ObjectName = strArray[2];
+
+                            int index = 3;
                             while (index < strArray.Length)
                             {
                                 ObjectName = string.Concat(ObjectName, " ", strArray[index]);
@@ -885,279 +850,154 @@ namespace Legend_Of_Drongo
                             }
 
                             ObjectName = ObjectName.Trim();
-
-                        }
-                        itemInfo invItem = new itemInfo();
-
-                        invItem = ExamineItem(ObjectName);
-
-                        if (invItem.Name != null)
-                        {
-                            Console.WriteLine(WordWrap(string.Concat("Name: ", invItem.Name)));
-                            Console.WriteLine(WordWrap(string.Concat("Health Boost: ", invItem.HPmod)));
-                            Console.WriteLine(WordWrap(string.Concat("Attack Bonus: ", invItem.AttackMod)));
-                            Console.WriteLine(WordWrap(string.Concat("Defense Bonus: ", invItem.DefenseMod)));
-                        }
-                        else
-                        {
-                            Console.WriteLine(WordWrap("Item not found in your intentory"));
                         }
 
+                        Console.WriteLine(WordWrap(LookAtObject(ObjectName)));
                     }
-                    else
-                        Console.WriteLine(WordWrap("There are no items in your inventory"));
-                }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "use" || PlayerCommand.ToLower().Split(' ')[0] == "put")
-                {
-                    int index = 0;
-                    string item = string.Empty;
-                    string target = string.Empty;
-
-                    if (CurrentRoom.items != null)
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "examine" || PlayerCommand.ToLower() == "examine")
                     {
-
-                        if (PlayerCommand.ToLower() == "use" || PlayerCommand.ToLower() == "put")
+                        if (Player.invspace != 20)
                         {
-                            Console.Write("What do you want to {0}: ", PlayerCommand.ToLower().Split(' ')[0]);
-                            item = Console.ReadLine();
+                            string ObjectName = string.Empty;
 
-                            Console.Write("\n\nWhat do you want to {1} {0} {2}?", item, PlayerCommand.ToLower().Split(' ')[0], PlayerCommand.ToLower().Split(' ')[2]);
-                            target = Console.ReadLine();
-                        }
-                        else if (CurrentRoom.items != null)
-                        {
-                            item = PlayerCommand.Split(' ')[1];
-                            bool itemFound = false;
-                            bool targetFound = false;
-                            index = 2;
-
-                            while (index < (PlayerCommand.Split(' ').Length))
+                            if (PlayerCommand.ToLower() == "examine")
                             {
-                                if (PlayerCommand.Split(' ')[index].ToLower() == "on" || PlayerCommand.Split(' ')[index].ToLower() == "in")
+                                Console.WriteLine(WordWrap("What item do you want to examine?: "));
+                                for (int index = 0; index < (20 - Player.invspace); index++)
                                 {
-                                    itemFound = true;
+                                    Console.WriteLine(WordWrap("{0}: {1}"), (index + 1), Player.inventory[index].Name);
+                                }
+                                Console.Write("\nSlot Number: ");
+                                int Menu = Convert.ToInt32(Console.ReadLine());
+
+
+                                ObjectName = Player.inventory[Menu - 1].Name;
+                            }
+                            else
+                            {
+                                string[] strArray = PlayerCommand.Split(' ');
+                                ObjectName = strArray[1];
+
+                                int index = 2;
+                                while (index < strArray.Length)
+                                {
+                                    ObjectName = string.Concat(ObjectName, " ", strArray[index]);
                                     index++;
-                                    target = PlayerCommand.Split(' ')[index].ToLower();
-                                    targetFound = true;
+                                    //Console.WriteLine(WordWrap("item is {0}", item);
                                 }
-                                else if (itemFound == false)
-                                {
-                                    item = string.Concat(item, " ", PlayerCommand.Split(' ')[index].ToLower());
-                                }
-                                else
-                                {
-                                    target = string.Concat(target, " ", PlayerCommand.Split(' ')[index].ToLower());
-                                }
-                                index++;
+
+                                ObjectName = ObjectName.Trim();
+
+                            }
+                            itemInfo invItem = new itemInfo();
+
+                            invItem = ExamineItem(ObjectName);
+
+                            if (invItem.Name != null)
+                            {
+                                Console.WriteLine(WordWrap(string.Concat("Name: ", invItem.Name)));
+                                Console.WriteLine(WordWrap(string.Concat("Health Boost: ", invItem.HPmod)));
+                                Console.WriteLine(WordWrap(string.Concat("Attack Bonus: ", invItem.AttackMod)));
+                                Console.WriteLine(WordWrap(string.Concat("Defense Bonus: ", invItem.DefenseMod)));
+                            }
+                            else
+                            {
+                                Console.WriteLine(WordWrap("Item not found in your intentory"));
                             }
 
-                            if (targetFound == false)
+                        }
+                        else
+                            Console.WriteLine(WordWrap("There are no items in your inventory"));
+                    }
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "use" || PlayerCommand.ToLower().Split(' ')[0] == "put")
+                    {
+                        int index = 0;
+                        string item = string.Empty;
+                        string target = string.Empty;
+
+                        if (CurrentRoom.items != null)
+                        {
+
+                            if (PlayerCommand.ToLower() == "use" || PlayerCommand.ToLower() == "put")
                             {
-                                Console.WriteLine("Objects in the room:\n");
+                                Console.Write("What do you want to {0}: ", PlayerCommand.ToLower().Split(' ')[0]);
+                                item = Console.ReadLine();
 
-                                for (index = 0; index < CurrentRoom.items.Count; index++)
-                                {
-                                    //if (CurrentRoom.items[index].Class == "Interaction Object") Console.WriteLine(string.Concat(CurrentRoom.items[index].Name)); 
-                                    Console.WriteLine(string.Concat(CurrentRoom.items[index].Name));
-
-                                }
-                                Console.Write("\nWhat do you want to use {0} on? ", item);
+                                Console.Write("\n\nWhat do you want to {1} {0} {2}?", item, PlayerCommand.ToLower().Split(' ')[0], PlayerCommand.ToLower().Split(' ')[2]);
                                 target = Console.ReadLine();
                             }
-                        }
-                        UseItem(item, target);
-                    }
-                    else
-                    {
-                        Console.WriteLine("There is nothing in the room to interact with");
-                    }
-
-                }
-                else if (PlayerCommand.ToLower() != "view" && PlayerCommand.ToLower().Split(' ')[0] == "view" && PlayerCommand.ToLower().Split(' ')[1] == "wares")
-                {
-                    int index;
-                    string VendorName;
-
-                    if (CurrentRoom.Civilians != null)
-                    {
-                        if (PlayerCommand.ToLower().Split(' ').Length > 2)
-                        {
-                            string[] strArray = PlayerCommand.Split(' ');
-                            VendorName = strArray[2];
-
-                            index = 3;
-                            while (index < strArray.Length)
+                            else if (CurrentRoom.items != null)
                             {
-                                VendorName = string.Concat(VendorName, " ", strArray[index]);
-                                index++;
-                                //Console.WriteLine(WordWrap("item is {0}", item);
-                            }
+                                item = PlayerCommand.Split(' ')[1];
+                                bool itemFound = false;
+                                bool targetFound = false;
+                                index = 2;
 
-                            VendorName = VendorName.Trim();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Civilians in the room:\n");
-
-                            for (index = 0; index < CurrentRoom.Civilians.Count; index++)
-                            {
-                                if (CurrentRoom.Civilians[index].willSell == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
-
-                            }
-                            Console.Write("\nWho do you want to view the inventory of? ");
-                            VendorName = Console.ReadLine();
-                        }
-
-                        bool vendorFound = false;
-                        index = 0;
-
-                        while (vendorFound == false && CurrentRoom.Civilians != null && index < CurrentRoom.Civilians.Count)
-                        {
-                            if (VendorName.ToLower() == CurrentRoom.Civilians[index].name.ToLower() && CurrentRoom.Civilians[index].willSell == true)
-                            {
-                                vendorFound = true;
-                                Console.WriteLine();
-                                Console.WriteLine("Item\t\t\tClass\t\t\tPrice");
-                                for (int Count = 0; Count < CurrentRoom.Civilians[index].inventory.Count; Count++)
+                                while (index < (PlayerCommand.Split(' ').Length))
                                 {
-                                    if (CurrentRoom.Civilians[index].inventory[Count].Name == null) Console.Write("null\t\t");
-                                    if (CurrentRoom.Civilians[index].inventory[Count].Name.Length < 8) Console.Write("{0}\t\t", CurrentRoom.Civilians[index].inventory[Count].Name);
-                                    else if (CurrentRoom.Civilians[index].inventory[Count].Name.Length <= 15) Console.Write("{0}\t", CurrentRoom.Civilians[index].inventory[Count].Name);
-                                    else Console.Write(CurrentRoom.Civilians[index].inventory[Count].Name);
-
-                                    if (CurrentRoom.Civilians[index].inventory[Count].Class == null) Console.Write("null\t\t\t");
-                                    else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length < 8) Console.Write("{0}\t\t\t", CurrentRoom.Civilians[index].inventory[Count].Class);
-                                    else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length <= 15) Console.Write("{0}\t\t", CurrentRoom.Civilians[index].inventory[Count].Class);
-                                    else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length <= 21) Console.Write("{0}\t", CurrentRoom.Civilians[index].inventory[Count].Class);
-                                    else Console.Write(CurrentRoom.Civilians[index].inventory[Count].Class);
-
-                                    if (CurrentRoom.Civilians[index].inventory[Count].Value != 0) Console.Write("\t{0}\n", CurrentRoom.Civilians[index].inventory[Count].Value);
-                                    else Console.Write("\tnull\n");
-                                    //Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].inventory[Count].Name, "\t", CurrentRoom.Civilians[index].inventory[Count].Class, "\t",CurrentRoom.Civilians[index].inventory[Count].Value)));
-                                }
-                            }
-                            else Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].name, " is not willing to sell you anything")));
-                            index++;
-                        }
-                    }
-                    else Console.WriteLine("There is nobody currently selling anything in this area");
-
-                }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "bribe")
-                {
-                    int index;
-                    string WhoToBribe = string.Empty;
-                    int BribeAmount = 0;
-                    bool dontrun = false;
-
-                    if (CurrentRoom.Enemy != null)
-                    {
-                        if (PlayerCommand.ToLower() == "bribe")
-                        {
-                            Console.WriteLine("People in the room who may accept a bribe:\n");
-                            for (index = 0; index < CurrentRoom.Enemy.Count; index++)
-                            {
-                                Console.WriteLine(CurrentRoom.Enemy[index].name);
-                            }
-                            Console.Write("\nWho do you want to bribe? ");
-                            WhoToBribe = Console.ReadLine();
-                            Console.Write("How much do you want to give them? ");
-                            Int32.TryParse(Console.ReadLine(), out BribeAmount);
-                            if (BribeAmount == 0)
-                            {
-                                dontrun = true;
-                                Console.WriteLine("You cannot bribe somebody with that amount");
-                            }
-                        }
-                        else if (PlayerCommand.Split(' ')[0].ToLower() == "bribe" && PlayerCommand.Split(' ').Length == 2)
-                        {
-                            WhoToBribe = PlayerCommand.Split(' ')[1];
-                            Console.Write("How much do you want to give {0}? ", PlayerCommand.Split(' ')[1]);
-                            Int32.TryParse(Console.ReadLine(), out BribeAmount);
-                            if (BribeAmount == 0)
-                            {
-                                dontrun = true;
-                                Console.WriteLine("You cannot bribe somebody with that amount");
-                            }
-                        }
-                        else if (PlayerCommand.Split(' ')[0].ToLower() == "bribe" && PlayerCommand.Split(' ').Length == 3)
-                        {
-                            WhoToBribe = PlayerCommand.Split(' ')[1];
-                            Int32.TryParse(PlayerCommand.Split(' ')[2], out BribeAmount);
-                            if (BribeAmount == 0)
-                            {
-                                dontrun = true;
-                                Console.WriteLine("You cannot bribe somebody with that amount");
-                            }
-                        }
-                        else
-                        {
-                            dontrun = true;
-                            Console.WriteLine(WordWrap("I can't quite work out how many things you just said, try again"));
-                        }
-
-                        if (dontrun == false) PayOff(WhoToBribe, BribeAmount);
-
-                    }
-                    else Console.WriteLine(WordWrap("There are no people in the room to bribe"));
-
-
-                }
-                else if (PlayerCommand.Split(' ')[0].ToLower() == "buy")
-                {
-                    int index;
-                    string vendor = string.Empty;
-                    string ItemName = string.Empty;
-
-                    if (CurrentRoom.Civilians != null)
-                    {
-                        if (PlayerCommand.ToLower() == "buy")
-                        {
-                            Console.Write("What item do you want to buy? ");
-                            ItemName = Console.ReadLine();
-
-
-                            //player didn't specify item or person
-                            Console.WriteLine("Civilians in the room:\n");
-
-                            for (index = 0; index < CurrentRoom.Civilians.Count; index++)
-                            {
-                                if (CurrentRoom.Civilians[index].willSell == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
-
-                            }
-                            Console.Write("\nWho do you want to buy from? ");
-                            vendor = Console.ReadLine();
-
-                        }
-                        else if (PlayerCommand.Split(' ').Length >= 2)
-                        {
-                            //ItemName = PlayerCommand.Split(' ')[1].ToLower();
-                            ItemName = PlayerCommand.Split(' ')[1].ToLower();
-                            bool itemFound = false;
-                            bool vendorFound = false;
-                            index = 2;
-
-                            while (index < (PlayerCommand.Split(' ').Length))
-                            {
-                                if (PlayerCommand.Split(' ')[index].ToLower() == "from")
-                                {
-                                    itemFound = true;
+                                    if (PlayerCommand.Split(' ')[index].ToLower() == "on" || PlayerCommand.Split(' ')[index].ToLower() == "in")
+                                    {
+                                        itemFound = true;
+                                        index++;
+                                        target = PlayerCommand.Split(' ')[index].ToLower();
+                                        targetFound = true;
+                                    }
+                                    else if (itemFound == false)
+                                    {
+                                        item = string.Concat(item, " ", PlayerCommand.Split(' ')[index].ToLower());
+                                    }
+                                    else
+                                    {
+                                        target = string.Concat(target, " ", PlayerCommand.Split(' ')[index].ToLower());
+                                    }
                                     index++;
-                                    vendor = PlayerCommand.Split(' ')[index].ToLower();
-                                    vendorFound = true;
                                 }
-                                else if (itemFound == false)
-                                {
-                                    ItemName = string.Concat(ItemName, " ", PlayerCommand.Split(' ')[index].ToLower());
-                                }
-                                else
-                                {
-                                    vendor = string.Concat(vendor, " ", PlayerCommand.Split(' ')[index].ToLower());
-                                }
-                                index++;
-                            }
 
-                            if (vendorFound == false)
+                                if (targetFound == false)
+                                {
+                                    Console.WriteLine("Objects in the room:\n");
+
+                                    for (index = 0; index < CurrentRoom.items.Count; index++)
+                                    {
+                                        //if (CurrentRoom.items[index].Class == "Interaction Object") Console.WriteLine(string.Concat(CurrentRoom.items[index].Name)); 
+                                        Console.WriteLine(string.Concat(CurrentRoom.items[index].Name));
+
+                                    }
+                                    Console.Write("\nWhat do you want to use {0} on? ", item);
+                                    target = Console.ReadLine();
+                                }
+                            }
+                            UseItem(item, target);
+                        }
+                        else
+                        {
+                            Console.WriteLine("There is nothing in the room to interact with");
+                        }
+
+                    }
+                    else if (PlayerCommand.ToLower() != "view" && PlayerCommand.ToLower().Split(' ')[0] == "view" && PlayerCommand.ToLower().Split(' ')[1] == "wares")
+                    {
+                        int index;
+                        string VendorName;
+
+                        if (CurrentRoom.Civilians != null)
+                        {
+                            if (PlayerCommand.ToLower().Split(' ').Length > 2)
+                            {
+                                string[] strArray = PlayerCommand.Split(' ');
+                                VendorName = strArray[2];
+
+                                index = 3;
+                                while (index < strArray.Length)
+                                {
+                                    VendorName = string.Concat(VendorName, " ", strArray[index]);
+                                    index++;
+                                    //Console.WriteLine(WordWrap("item is {0}", item);
+                                }
+
+                                VendorName = VendorName.Trim();
+                            }
+                            else
                             {
                                 Console.WriteLine("Civilians in the room:\n");
 
@@ -1166,97 +1006,205 @@ namespace Legend_Of_Drongo
                                     if (CurrentRoom.Civilians[index].willSell == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
 
                                 }
-                                Console.Write("\nWho do you want to buy {0} from? ", ItemName);
-                                vendor = Console.ReadLine();
+                                Console.Write("\nWho do you want to view the inventory of? ");
+                                VendorName = Console.ReadLine();
                             }
 
-                        }
-                        BuyItem(ItemName, vendor);
-                    }
-                    else Console.WriteLine("There is nobody willing to buy anything from you here");
-                }
-                else if (PlayerCommand.Split(' ')[0].ToLower() == "sell")
-                {
-                    int index;
-                    string vendor = string.Empty;
-                    string ItemName = string.Empty;
-                    itemInfo ItemToSell = new itemInfo();
-
-                    if (CurrentRoom.Civilians != null)
-                    {
-                        if (PlayerCommand.ToLower() == "sell")
-                        {
-                            Console.Write("What item do you want to sell? ");
-                            ItemName = Console.ReadLine();
-
-                            index = 0;
-                            bool itemfound = false;
-
-                            while (itemfound == false && index < (20 - Player.invspace))
-                            {
-                                if (ItemName.ToLower() == Player.inventory[index].Name.ToLower())
-                                {
-                                    itemfound = true;
-                                    ItemToSell = Player.inventory[index];
-                                }
-                                index++;
-                            }
-
-                            //player didn't specify item or person
-                            Console.WriteLine("Civilians in the room:\n");
-
-                            for (index = 0; index < CurrentRoom.Civilians.Count; index++)
-                            {
-                                if (CurrentRoom.Civilians[index].willBuy == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
-
-                            }
-                            Console.Write("\nWho do you want to sell to? ");
-                            vendor = Console.ReadLine();
-
-                        }
-                        else if (PlayerCommand.Split(' ').Length >= 2)
-                        {
-                            //ItemName = PlayerCommand.Split(' ')[1].ToLower();
-                            ItemName = PlayerCommand.Split(' ')[1].ToLower();
-                            bool itemFound = false;
                             bool vendorFound = false;
-                            index = 2;
-
-                            while (index < (PlayerCommand.Split(' ').Length))
-                            {
-                                if (PlayerCommand.Split(' ')[index].ToLower() == "to")
-                                {
-                                    itemFound = true;
-                                    index++;
-                                    vendor = PlayerCommand.Split(' ')[index].ToLower();
-                                    vendorFound = true;
-                                }
-                                else if (itemFound == false)
-                                {
-                                    ItemName = string.Concat(ItemName, " ", PlayerCommand.Split(' ')[index].ToLower());
-                                }
-                                else
-                                {
-                                    vendor = string.Concat(vendor, " ", PlayerCommand.Split(' ')[index].ToLower());
-                                }
-                                index++;
-                            }
-
                             index = 0;
-                            itemFound = false;
 
-                            while (itemFound == false && index < (20 - Player.invspace))
+                            while (vendorFound == false && CurrentRoom.Civilians != null && index < CurrentRoom.Civilians.Count)
                             {
-                                if (ItemName.ToLower() == Player.inventory[index].Name.ToLower())
+                                if (VendorName.ToLower() == CurrentRoom.Civilians[index].name.ToLower() && CurrentRoom.Civilians[index].willSell == true)
                                 {
-                                    itemFound = true;
-                                    ItemToSell = Player.inventory[index];
+                                    vendorFound = true;
+                                    Console.WriteLine();
+                                    Console.WriteLine("Item\t\t\tClass\t\t\tPrice");
+                                    for (int Count = 0; Count < CurrentRoom.Civilians[index].inventory.Count; Count++)
+                                    {
+                                        if (CurrentRoom.Civilians[index].inventory[Count].Name == null) Console.Write("null\t\t");
+                                        if (CurrentRoom.Civilians[index].inventory[Count].Name.Length < 8) Console.Write("{0}\t\t", CurrentRoom.Civilians[index].inventory[Count].Name);
+                                        else if (CurrentRoom.Civilians[index].inventory[Count].Name.Length <= 15) Console.Write("{0}\t", CurrentRoom.Civilians[index].inventory[Count].Name);
+                                        else Console.Write(CurrentRoom.Civilians[index].inventory[Count].Name);
+
+                                        if (CurrentRoom.Civilians[index].inventory[Count].Class == null) Console.Write("null\t\t\t");
+                                        else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length < 8) Console.Write("{0}\t\t\t", CurrentRoom.Civilians[index].inventory[Count].Class);
+                                        else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length <= 15) Console.Write("{0}\t\t", CurrentRoom.Civilians[index].inventory[Count].Class);
+                                        else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length <= 21) Console.Write("{0}\t", CurrentRoom.Civilians[index].inventory[Count].Class);
+                                        else Console.Write(CurrentRoom.Civilians[index].inventory[Count].Class);
+
+                                        if (CurrentRoom.Civilians[index].inventory[Count].Value != 0) Console.Write("\t{0}\n", CurrentRoom.Civilians[index].inventory[Count].Value);
+                                        else Console.Write("\tnull\n");
+                                        //Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].inventory[Count].Name, "\t", CurrentRoom.Civilians[index].inventory[Count].Class, "\t",CurrentRoom.Civilians[index].inventory[Count].Value)));
+                                    }
                                 }
+                                else Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].name, " is not willing to sell you anything")));
                                 index++;
                             }
+                        }
+                        else Console.WriteLine("There is nobody currently selling anything in this area");
 
-                            if (itemFound == true && vendorFound == false)
+                    }
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "bribe")
+                    {
+                        int index;
+                        string WhoToBribe = string.Empty;
+                        int BribeAmount = 0;
+                        bool dontrun = false;
+
+                        if (CurrentRoom.Enemy != null)
+                        {
+                            if (PlayerCommand.ToLower() == "bribe")
                             {
+                                Console.WriteLine("People in the room who may accept a bribe:\n");
+                                for (index = 0; index < CurrentRoom.Enemy.Count; index++)
+                                {
+                                    Console.WriteLine(CurrentRoom.Enemy[index].name);
+                                }
+                                Console.Write("\nWho do you want to bribe? ");
+                                WhoToBribe = Console.ReadLine();
+                                Console.Write("How much do you want to give them? ");
+                                Int32.TryParse(Console.ReadLine(), out BribeAmount);
+                                if (BribeAmount == 0)
+                                {
+                                    dontrun = true;
+                                    Console.WriteLine("You cannot bribe somebody with that amount");
+                                }
+                            }
+                            else if (PlayerCommand.Split(' ')[0].ToLower() == "bribe" && PlayerCommand.Split(' ').Length == 2)
+                            {
+                                WhoToBribe = PlayerCommand.Split(' ')[1];
+                                Console.Write("How much do you want to give {0}? ", PlayerCommand.Split(' ')[1]);
+                                Int32.TryParse(Console.ReadLine(), out BribeAmount);
+                                if (BribeAmount == 0)
+                                {
+                                    dontrun = true;
+                                    Console.WriteLine("You cannot bribe somebody with that amount");
+                                }
+                            }
+                            else if (PlayerCommand.Split(' ')[0].ToLower() == "bribe" && PlayerCommand.Split(' ').Length == 3)
+                            {
+                                WhoToBribe = PlayerCommand.Split(' ')[1];
+                                Int32.TryParse(PlayerCommand.Split(' ')[2], out BribeAmount);
+                                if (BribeAmount == 0)
+                                {
+                                    dontrun = true;
+                                    Console.WriteLine("You cannot bribe somebody with that amount");
+                                }
+                            }
+                            else
+                            {
+                                dontrun = true;
+                                Console.WriteLine(WordWrap("I can't quite work out how many things you just said, try again"));
+                            }
+
+                            if (dontrun == false) PayOff(WhoToBribe, BribeAmount);
+
+                        }
+                        else Console.WriteLine(WordWrap("There are no people in the room to bribe"));
+
+
+                    }
+                    else if (PlayerCommand.Split(' ')[0].ToLower() == "buy")
+                    {
+                        int index;
+                        string vendor = string.Empty;
+                        string ItemName = string.Empty;
+
+                        if (CurrentRoom.Civilians != null)
+                        {
+                            if (PlayerCommand.ToLower() == "buy")
+                            {
+                                Console.Write("What item do you want to buy? ");
+                                ItemName = Console.ReadLine();
+
+
+                                //player didn't specify item or person
+                                Console.WriteLine("Civilians in the room:\n");
+
+                                for (index = 0; index < CurrentRoom.Civilians.Count; index++)
+                                {
+                                    if (CurrentRoom.Civilians[index].willSell == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
+
+                                }
+                                Console.Write("\nWho do you want to buy from? ");
+                                vendor = Console.ReadLine();
+
+                            }
+                            else if (PlayerCommand.Split(' ').Length >= 2)
+                            {
+                                //ItemName = PlayerCommand.Split(' ')[1].ToLower();
+                                ItemName = PlayerCommand.Split(' ')[1].ToLower();
+                                bool itemFound = false;
+                                bool vendorFound = false;
+                                index = 2;
+
+                                while (index < (PlayerCommand.Split(' ').Length))
+                                {
+                                    if (PlayerCommand.Split(' ')[index].ToLower() == "from")
+                                    {
+                                        itemFound = true;
+                                        index++;
+                                        vendor = PlayerCommand.Split(' ')[index].ToLower();
+                                        vendorFound = true;
+                                    }
+                                    else if (itemFound == false)
+                                    {
+                                        ItemName = string.Concat(ItemName, " ", PlayerCommand.Split(' ')[index].ToLower());
+                                    }
+                                    else
+                                    {
+                                        vendor = string.Concat(vendor, " ", PlayerCommand.Split(' ')[index].ToLower());
+                                    }
+                                    index++;
+                                }
+
+                                if (vendorFound == false)
+                                {
+                                    Console.WriteLine("Civilians in the room:\n");
+
+                                    for (index = 0; index < CurrentRoom.Civilians.Count; index++)
+                                    {
+                                        if (CurrentRoom.Civilians[index].willSell == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
+
+                                    }
+                                    Console.Write("\nWho do you want to buy {0} from? ", ItemName);
+                                    vendor = Console.ReadLine();
+                                }
+
+                            }
+                            BuyItem(ItemName, vendor);
+                        }
+                        else Console.WriteLine("There is nobody willing to buy anything from you here");
+                    }
+                    else if (PlayerCommand.Split(' ')[0].ToLower() == "sell")
+                    {
+                        int index;
+                        string vendor = string.Empty;
+                        string ItemName = string.Empty;
+                        itemInfo ItemToSell = new itemInfo();
+
+                        if (CurrentRoom.Civilians != null)
+                        {
+                            if (PlayerCommand.ToLower() == "sell")
+                            {
+                                Console.Write("What item do you want to sell? ");
+                                ItemName = Console.ReadLine();
+
+                                index = 0;
+                                bool itemfound = false;
+
+                                while (itemfound == false && index < (20 - Player.invspace))
+                                {
+                                    if (ItemName.ToLower() == Player.inventory[index].Name.ToLower())
+                                    {
+                                        itemfound = true;
+                                        ItemToSell = Player.inventory[index];
+                                    }
+                                    index++;
+                                }
+
+                                //player didn't specify item or person
                                 Console.WriteLine("Civilians in the room:\n");
 
                                 for (index = 0; index < CurrentRoom.Civilians.Count; index++)
@@ -1264,237 +1212,297 @@ namespace Legend_Of_Drongo
                                     if (CurrentRoom.Civilians[index].willBuy == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
 
                                 }
-                                Console.Write("\nWho do you want to {0} sell to? ", ItemName);
+                                Console.Write("\nWho do you want to sell to? ");
                                 vendor = Console.ReadLine();
-                            }
 
+                            }
+                            else if (PlayerCommand.Split(' ').Length >= 2)
+                            {
+                                //ItemName = PlayerCommand.Split(' ')[1].ToLower();
+                                ItemName = PlayerCommand.Split(' ')[1].ToLower();
+                                bool itemFound = false;
+                                bool vendorFound = false;
+                                index = 2;
+
+                                while (index < (PlayerCommand.Split(' ').Length))
+                                {
+                                    if (PlayerCommand.Split(' ')[index].ToLower() == "to")
+                                    {
+                                        itemFound = true;
+                                        index++;
+                                        vendor = PlayerCommand.Split(' ')[index].ToLower();
+                                        vendorFound = true;
+                                    }
+                                    else if (itemFound == false)
+                                    {
+                                        ItemName = string.Concat(ItemName, " ", PlayerCommand.Split(' ')[index].ToLower());
+                                    }
+                                    else
+                                    {
+                                        vendor = string.Concat(vendor, " ", PlayerCommand.Split(' ')[index].ToLower());
+                                    }
+                                    index++;
+                                }
+
+                                index = 0;
+                                itemFound = false;
+
+                                while (itemFound == false && index < (20 - Player.invspace))
+                                {
+                                    if (ItemName.ToLower() == Player.inventory[index].Name.ToLower())
+                                    {
+                                        itemFound = true;
+                                        ItemToSell = Player.inventory[index];
+                                    }
+                                    index++;
+                                }
+
+                                if (itemFound == true && vendorFound == false)
+                                {
+                                    Console.WriteLine("Civilians in the room:\n");
+
+                                    for (index = 0; index < CurrentRoom.Civilians.Count; index++)
+                                    {
+                                        if (CurrentRoom.Civilians[index].willBuy == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
+
+                                    }
+                                    Console.Write("\nWho do you want to {0} sell to? ", ItemName);
+                                    vendor = Console.ReadLine();
+                                }
+
+                            }
+                            SellItem(ItemToSell, vendor);
                         }
-                        SellItem(ItemToSell, vendor);
+                        else Console.WriteLine("There is nobody willing to buy anything from you here");
                     }
-                    else Console.WriteLine("There is nobody willing to buy anything from you here");
-                }
-                else if (PlayerCommand.Split(' ')[0].ToLower() == "talk")
-                {
-                    int index;
-                    string NPCname = string.Empty;
-
-                    if (CurrentRoom.Civilians != null)
-                    {
-                        if (PlayerCommand.ToLower() == "talk to" || PlayerCommand.ToLower() == "talk")
-                        {
-                            Console.WriteLine("Non-Hostile people in the room:\n");
-
-                            for (index = 0; index < CurrentRoom.Civilians.Count; index++)
-                            {
-                                Console.WriteLine(WordWrap(CurrentRoom.Civilians[index].name));
-                            }
-                            Console.Write("\nWho do you want to talk to? ");
-                            NPCname = Console.ReadLine();
-                        }
-                        else
-                        {
-                            string[] strArray = PlayerCommand.Split(' ');
-
-                            NPCname = strArray[2];
-
-                            for (index = 3; index < strArray.Length; index++)
-                            {
-                                NPCname = string.Concat(NPCname, " ", strArray[index]);
-                            }
-
-                        }
-                        Console.WriteLine(WordWrap(TalkToNPC(NPCname)));
-                    }
-                    else
-                    {
-                        Console.WriteLine("There are no non-hostile people to talk to");
-                    }
-                }
-                else if (PlayerCommand.Contains("suicide") || PlayerCommand.ToLower() == "attack self" || PlayerCommand.ToLower() == "hit self" || PlayerCommand.ToLower() == string.Concat("hit ", Player.name.ToLower()) || PlayerCommand.ToLower() == string.Concat("attack ", Player.name.ToLower()) || PlayerCommand.ToLower() == "kill self")
-                {
-                    if (PlayerCommand.Contains("suicide") && CurrentRoom.SuicideAction != null) Console.WriteLine(WordWrap(CurrentRoom.SuicideAction));
-                    else Console.WriteLine(WordWrap("You raise your weapon above your head. Screaming in blind rage for some unknown reason. You strike yourself until you die"));
-                    Player.HPBonus = 0;
-                    //Console.WriteLine("I GET HERE, and my health is {0}", Player.HPBonus);
-                }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "attack" || PlayerCommand.ToLower().Split(' ')[0] == "hit" || PlayerCommand.ToLower().Split(' ')[0] == "fight")
-                {
-                    string enemy;
-                    int index;
-                    bool enemyfound = false;
-
-                    if (CurrentRoom.Enemy != null && CurrentRoom.Enemy.Count > 0)
-                    {
-                        if (PlayerCommand.ToLower() == "attack" || PlayerCommand.ToLower() == "hit" || PlayerCommand.ToLower() == "fight")
-                        {
-                            Console.WriteLine(WordWrap("Enemies in room:\n"));
-                            for (index = 0; index < CurrentRoom.Enemy.Count; index++)
-                            {
-                                Console.WriteLine(WordWrap(CurrentRoom.Enemy[index].name));
-                            }
-                            Console.Write("\nWho do you want to attack: ");
-                            enemy = Console.ReadLine();
-
-                        }
-                        else
-                        {
-                            string[] strArray = PlayerCommand.Split(' ');
-                            enemy = strArray[1];
-                            for (int i = 2; i < strArray.Length; i++)
-                            {
-                                enemy = enemy + " " + strArray[i];
-                            }
-
-                        }
-                        index = 0;
-                        while (CurrentRoom.Enemy != null && index < CurrentRoom.Enemy.Count && enemyfound == false)
-                        {
-                            if (CurrentRoom.Enemy[index].name.ToLower() == enemy.ToLower())
-                            {
-                                Combat(Player.WeaponHeld, enemy);
-                                enemyfound = true;
-                            }
-                            index++;
-                        }
-                        if (enemyfound == false) Console.WriteLine(WordWrap(string.Concat("Could not find ", enemy, " in the area")));
-                    }
-                    else if (CurrentRoom.Civilians != null && CurrentRoom.Civilians.Count > 0)
-                    {
-                        if (PlayerCommand.ToLower() == "attack" || PlayerCommand.ToLower() == "hit" || PlayerCommand.ToLower() == "fight")
-                        {
-                            Console.WriteLine("Who do you want to attack");
-                            enemy = Console.ReadLine();
-                        }
-                        else
-                        {
-                            string[] strArray = PlayerCommand.Split(' ');
-                            enemy = strArray[1];
-                            for (int i = 2; i < strArray.Length; i++)
-                            {
-                                enemy = enemy + " " + strArray[i];
-                            }
-                        }
-                        StartFight(enemy);
-                    }
-                    else
-                        Console.WriteLine(WordWrap("There is nobody in the room to fight"));
-                }
-                else if (PlayerCommand.Split(' ')[0].ToLower() == "equip" || PlayerCommand.Split(' ')[0].ToLower() == "wear")
-                {
-                    EquipItem(PlayerCommand);
-                }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "eat" || PlayerCommand.ToLower().Split(' ')[0] == "drink")
-                {
-                    if (Player.invspace != 20)
+                    else if (PlayerCommand.Split(' ')[0].ToLower() == "talk")
                     {
                         int index;
-                        string ObjectName = string.Empty;
+                        string NPCname = string.Empty;
 
-                        if (PlayerCommand.ToLower() == "eat" || PlayerCommand.ToLower() == "drink")
+                        if (CurrentRoom.Civilians != null)
                         {
-                            Console.WriteLine("Food in your inventory:\n");
-                            for (index = 0; index < (20 - Player.invspace); index++)
+                            if (PlayerCommand.ToLower() == "talk to" || PlayerCommand.ToLower() == "talk")
                             {
-                                if (Player.inventory[index].Class == "Food" || Player.inventory[index].Class == "Drink")
+                                Console.WriteLine("Non-Hostile people in the room:\n");
+
+                                for (index = 0; index < CurrentRoom.Civilians.Count; index++)
                                 {
-                                    Console.WriteLine(WordWrap(Player.inventory[index].Name));
+                                    Console.WriteLine(WordWrap(CurrentRoom.Civilians[index].name));
                                 }
+                                Console.Write("\nWho do you want to talk to? ");
+                                NPCname = Console.ReadLine();
                             }
-                            Console.Write("\nWhich item would you like to consume?");
-                            ObjectName = Console.ReadLine();
+                            else
+                            {
+                                string[] strArray = PlayerCommand.Split(' ');
+
+                                NPCname = strArray[2];
+
+                                for (index = 3; index < strArray.Length; index++)
+                                {
+                                    NPCname = string.Concat(NPCname, " ", strArray[index]);
+                                }
+
+                            }
+                            Console.WriteLine(WordWrap(TalkToNPC(NPCname)));
                         }
                         else
                         {
-                            string[] strArray = PlayerCommand.Split(' ');
-                            ObjectName = strArray[1];
+                            Console.WriteLine("There are no non-hostile people to talk to");
+                        }
+                    }
+                    else if (PlayerCommand.Contains("suicide") || PlayerCommand.ToLower() == "attack self" || PlayerCommand.ToLower() == "hit self" || PlayerCommand.ToLower() == string.Concat("hit ", Player.name.ToLower()) || PlayerCommand.ToLower() == string.Concat("attack ", Player.name.ToLower()) || PlayerCommand.ToLower() == "kill self")
+                    {
+                        if (PlayerCommand.Contains("suicide") && CurrentRoom.SuicideAction != null) Console.WriteLine(WordWrap(CurrentRoom.SuicideAction));
+                        else Console.WriteLine(WordWrap("You raise your weapon above your head. Screaming in blind rage for some unknown reason. You strike yourself until you die"));
+                        Player.HPBonus = 0;
+                        //Console.WriteLine("I GET HERE, and my health is {0}", Player.HPBonus);
+                    }
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "attack" || PlayerCommand.ToLower().Split(' ')[0] == "hit" || PlayerCommand.ToLower().Split(' ')[0] == "fight")
+                    {
+                        string enemy;
+                        int index;
+                        bool enemyfound = false;
 
-                            index = 2;
+                        if (CurrentRoom.Enemy != null && CurrentRoom.Enemy.Count > 0)
+                        {
+                            if (PlayerCommand.ToLower() == "attack" || PlayerCommand.ToLower() == "hit" || PlayerCommand.ToLower() == "fight")
+                            {
+                                Console.WriteLine(WordWrap("Enemies in room:\n"));
+                                for (index = 0; index < CurrentRoom.Enemy.Count; index++)
+                                {
+                                    Console.WriteLine(WordWrap(CurrentRoom.Enemy[index].name));
+                                }
+                                Console.Write("\nWho do you want to attack: ");
+                                enemy = Console.ReadLine();
+
+                            }
+                            else
+                            {
+                                string[] strArray = PlayerCommand.Split(' ');
+                                enemy = strArray[1];
+                                for (int i = 2; i < strArray.Length; i++)
+                                {
+                                    enemy = enemy + " " + strArray[i];
+                                }
+
+                            }
+                            index = 0;
+                            while (CurrentRoom.Enemy != null && index < CurrentRoom.Enemy.Count && enemyfound == false)
+                            {
+                                if (CurrentRoom.Enemy[index].name.ToLower() == enemy.ToLower())
+                                {
+                                    Combat(Player.WeaponHeld, enemy);
+                                    enemyfound = true;
+                                }
+                                index++;
+                            }
+                            if (enemyfound == false) Console.WriteLine(WordWrap(string.Concat("Could not find ", enemy, " in the area")));
+                        }
+                        else if (CurrentRoom.Civilians != null && CurrentRoom.Civilians.Count > 0)
+                        {
+                            if (PlayerCommand.ToLower() == "attack" || PlayerCommand.ToLower() == "hit" || PlayerCommand.ToLower() == "fight")
+                            {
+                                Console.WriteLine("Who do you want to attack");
+                                enemy = Console.ReadLine();
+                            }
+                            else
+                            {
+                                string[] strArray = PlayerCommand.Split(' ');
+                                enemy = strArray[1];
+                                for (int i = 2; i < strArray.Length; i++)
+                                {
+                                    enemy = enemy + " " + strArray[i];
+                                }
+                            }
+                            StartFight(enemy);
+                        }
+                        else
+                            Console.WriteLine(WordWrap("There is nobody in the room to fight"));
+                    }
+                    else if (PlayerCommand.Split(' ')[0].ToLower() == "equip" || PlayerCommand.Split(' ')[0].ToLower() == "wear")
+                    {
+                        EquipItem(PlayerCommand);
+                    }
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "eat" || PlayerCommand.ToLower().Split(' ')[0] == "drink")
+                    {
+                        if (Player.invspace != 20)
+                        {
+                            int index;
+                            string ObjectName = string.Empty;
+
+                            if (PlayerCommand.ToLower() == "eat" || PlayerCommand.ToLower() == "drink")
+                            {
+                                Console.WriteLine("Food in your inventory:\n");
+                                for (index = 0; index < (20 - Player.invspace); index++)
+                                {
+                                    if (Player.inventory[index].Class == "Food" || Player.inventory[index].Class == "Drink")
+                                    {
+                                        Console.WriteLine(WordWrap(Player.inventory[index].Name));
+                                    }
+                                }
+                                Console.Write("\nWhich item would you like to consume?");
+                                ObjectName = Console.ReadLine();
+                            }
+                            else
+                            {
+                                string[] strArray = PlayerCommand.Split(' ');
+                                ObjectName = strArray[1];
+
+                                index = 2;
+                                while (index < strArray.Length)
+                                {
+                                    ObjectName = string.Concat(ObjectName, " ", strArray[index]);
+                                    index++;
+                                    //Console.WriteLine(WordWrap("item is {0}", item);
+                                }
+                                ObjectName = ObjectName.Trim();
+                            }
+                            Console.WriteLine(WordWrap(Consume(ObjectName)));
+                        }
+                        else Console.WriteLine("Your inventory is empty");
+                    }
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "sleep")
+                    {
+                        int index = 0;
+                        string bedItem = string.Empty;
+
+                        if (PlayerCommand.ToLower() == "sleep in" || PlayerCommand.ToLower() == "sleep")
+                        {
+                            Console.Write("What do you want to sleep in?");
+                            bedItem = Console.ReadLine();
+                        }
+                        else if (PlayerCommand.ToLower().Split(' ').Length > 2 && PlayerCommand.ToLower().Split(' ')[0] == "sleep" && PlayerCommand.ToLower().Split(' ')[1] == "in")
+                        {
+                            string[] strArray = PlayerCommand.Split(' ');
+                            bedItem = strArray[2];
+
+                            index = 3;
                             while (index < strArray.Length)
                             {
-                                ObjectName = string.Concat(ObjectName, " ", strArray[index]);
+                                bedItem = string.Concat(bedItem, " ", strArray[index]);
                                 index++;
                                 //Console.WriteLine(WordWrap("item is {0}", item);
                             }
-                            ObjectName = ObjectName.Trim();
+                            bedItem = bedItem.Trim();
                         }
-                        Console.WriteLine(WordWrap(Consume(ObjectName)));
+                        //Console.WriteLine("Trying to sleep in {0}", bedItem);
+                        Rest(bedItem);
                     }
-                    else Console.WriteLine("Your inventory is empty");
-                }
-                else if (PlayerCommand.ToLower().Split(' ')[0] == "sleep")
-                {
-                    int index = 0;
-                    string bedItem = string.Empty;
-
-                    if (PlayerCommand.ToLower() == "sleep in" || PlayerCommand.ToLower() == "sleep")
+                    else if (PlayerCommand.ToLower() == "music browse")
                     {
-                        Console.Write("What do you want to sleep in?");
-                        bedItem = Console.ReadLine();
+                        Music("browse");
                     }
-                    else if (PlayerCommand.ToLower().Split(' ').Length > 2 && PlayerCommand.ToLower().Split(' ')[0] == "sleep" && PlayerCommand.ToLower().Split(' ')[1] == "in")
+                    else if (PlayerCommand.ToLower() == "music start")
                     {
-                        string[] strArray = PlayerCommand.Split(' ');
-                        bedItem = strArray[2];
-
-                        index = 3;
-                        while (index < strArray.Length)
-                        {
-                            bedItem = string.Concat(bedItem, " ", strArray[index]);
-                            index++;
-                            //Console.WriteLine(WordWrap("item is {0}", item);
-                        }
-                        bedItem = bedItem.Trim();
+                        Music("start");
                     }
-                    //Console.WriteLine("Trying to sleep in {0}", bedItem);
-                    Rest(bedItem);
+                    else if (PlayerCommand.ToLower() == "music stop")
+                    {
+                        Music("stop");
+                    }
+                    else if (PlayerCommand.ToLower() == "clear")
+                    {
+                        Console.Clear();
+                        Console.WriteLine(WordWrap(CurrentRoom.Description));
+                    }
+                    else if (PlayerCommand.ToLower() == "main menu")
+                    {
+                        //Run the main menu screen
+                        Player = MainMenu();
+                        ThisFloor = world[Player.CurrentPos[2]];
+                        CurrentRoom = ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
+                        Console.WriteLine(WordWrap(CurrentRoom.Description));
+                    }
+                    else if (PlayerCommand.ToLower() == "save" || PlayerCommand.ToLower() == "save game")
+                    {
+                        string success = SaveGame();
+                        Console.WriteLine(WordWrap(string.Concat("Save ", success)));
+                    }
+                    else if (PlayerCommand.ToLower() == "quit" || PlayerCommand.ToLower() == "exit")
+                    {
+                        Console.WriteLine("Quitting game");
+                        Thread.Sleep(1500);
+                    }
+                    else if (PlayerCommand.ToLower() == "getpos")
+                    {
+                        Console.WriteLine("Row {0}, Col {1}, floor{2}", Player.CurrentPos[0], Player.CurrentPos[1], Player.CurrentPos[2]);
+                    }
+                    else if (PlayerCommand.ToLower() == "turn down for what")
+                    {
+                        char[] c1 = new char[6] { '\u0361', '\u00b0', '\u035c', '\u0296', '\u0361', '\u00b0' };
+                        Console.WriteLine("\n\n(" + c1[0] + c1[1] + c1[2] + c1[3] + c1[4] + c1[5] + ")\n\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
+                    }
                 }
-                else if (PlayerCommand.ToLower() == "music browse")
+                catch
                 {
-                    Music("browse");
-                }
-                else if (PlayerCommand.ToLower() == "music start")
-                {
-                    Music("start");
-                }
-                else if (PlayerCommand.ToLower() == "music stop")
-                {
-                    Music("stop");
-                }
-                else if (PlayerCommand.ToLower() == "clear")
-                {
-                    Console.Clear();
-                    Console.WriteLine(WordWrap(CurrentRoom.Description));
-                }
-                else if (PlayerCommand.ToLower() == "main menu")
-                {
-                    //Run the main menu screen
-                    Player = MainMenu();
-                    ThisFloor = world[Player.CurrentPos[2]];
-                    CurrentRoom = ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
-                    Console.WriteLine(WordWrap(CurrentRoom.Description));
-                }
-                else if (PlayerCommand.ToLower() == "save" || PlayerCommand.ToLower() == "save game")
-                {
-                    string success = SaveGame();
-                    Console.WriteLine(WordWrap(string.Concat("Save ", success)));
-                }
-                else if (PlayerCommand.ToLower() == "quit" || PlayerCommand.ToLower() == "exit")
-                {
-                    Console.WriteLine("Quitting game");
-                    Thread.Sleep(1500);
-                }
-                else if (PlayerCommand.ToLower() == "getpos")
-                {
-                    Console.WriteLine("Row {0}, Col {1}, floor{2}", Player.CurrentPos[0], Player.CurrentPos[1], Player.CurrentPos[2]);
-                }
-                else if (PlayerCommand.ToLower() == "turn down for what")
-                {
-                    char[] c1 = new char[6] {'\u0361','\u00b0','\u035c','\u0296','\u0361','\u00b0'};
-                    Console.WriteLine("\n\n(" + c1[0] + c1[1] + c1[2] + c1[3] + c1[4] + c1[5] + ")\n\n");
-                }
-                else
-                {
-                    Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
+                    Console.WriteLine(WordWrap("\nYou have encountered an error.\nThe game engine was not able to handle the command you entered. Please report this to the developer"));
+                    Console.WriteLine(WordWrap("\nThe command you entered was: " + PlayerCommand + "\n\n"));
                 }
 
                 if (Player.HPBonus <= 0)

@@ -110,4 +110,8 @@ v2.3.3
 v2.3.4
 - Added criteria if questions asked to an enemy
 
+v2.3.5
+- Added try catch to main command entry to allow for errors
+- Improved world
+
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub
