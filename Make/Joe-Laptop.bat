@@ -4,7 +4,7 @@ set /p delBuild=v
 echo Creating Legend-Of-Drongo v%delBuild%.zip
 C:
 cd "C:\Program Files\WinRAR"
-if not exist .\Legend-Of-Drongo MKDIR .\Legend-Of-Drongo .\Legend-Of-Drongo
+if not exist .\Legend-Of-Drongo MKDIR .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\README.txt" .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\LICENSE.md" .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe" .\Legend-Of-Drongo
