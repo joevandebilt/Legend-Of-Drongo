@@ -93,3 +93,22 @@ H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer
 H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
 H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
 H:\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
+G:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe.manifest
+G:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.application
+G:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe
+G:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.pdb
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmNPCEditor.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldDesigner.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMain.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmWorldPicker.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
+G:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application

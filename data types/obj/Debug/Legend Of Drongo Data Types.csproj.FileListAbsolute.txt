@@ -20,3 +20,7 @@ H:\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.pdb
 H:\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.csprojResolveAssemblyReference.cache
 H:\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
 H:\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
+G:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.dll
+G:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.pdb
+G:\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+G:\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb

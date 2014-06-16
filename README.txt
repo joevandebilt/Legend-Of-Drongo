@@ -121,4 +121,8 @@ v2.3.6
 - Improved world
 - Wrote my first #GameDevHaiku
 
+v2.3.7
+- Enabled 'Test world' button on world designer
+- Added args to allow for test world. 
+
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

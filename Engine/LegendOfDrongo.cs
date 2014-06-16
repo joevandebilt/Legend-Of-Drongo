@@ -316,7 +316,7 @@ namespace Legend_Of_Drongo
                             }
                         }
 
-                        Console.Write("\nWhich save would you like to continue: ");
+                        Console.Write("\nWhich world would you like to play?: ");
                         int n;
                         int UserChoice;
 
@@ -357,32 +357,8 @@ namespace Legend_Of_Drongo
                             playername = "Drongo";
                         }
 
+                        Player = DefaultPlayer();
                         Player.name = playername;
-                        Player.HPBonus = 100;
-                        Player.ArmorBonus = 0;
-
-                        //set up starter inventory
-                        Player.inventory = new itemInfo[20];
-                        Player.invspace = 20;
-
-                        //set up game parameters
-                        Player.CurrentPos = new int[3] { 1, 1, 0 }; //Row, Column, Floor
-                        Player.Objective = "";
-                        Player.Money = 100;
-
-                        //set up starter weapon
-                        Player.WeaponHeld.Name = "Fists";
-                        Player.WeaponHeld.BadHit = "Your Knuckles lightly graze your enemies cheek";
-                        Player.WeaponHeld.MedHit = "You hit your enemy with a quick jab to the ribs";
-                        Player.WeaponHeld.GoodHit = "A sound of crunching bone can be heard as your fist hits your enemy in the jaw";
-                        Player.WeaponHeld.AttackMod = 1;
-                        Player.WeaponHeld.CanPickUp = true;
-                        Player.WeaponHeld.InteractionName = new List<string>();
-                        Player.WeaponHeld.InteractionName.Add("fists");
-                        Player.WeaponHeld.InteractionName.Add("hands");
-                        Player.WeaponHeld.Class = "Weapon";
-                        Player.WeaponHeld.Examine = "Your own hands, how they got on the floor I will never know...";
-                        Player.ArmorWorn = new itemInfo[5];
 
                         Console.WriteLine(WordWrap("\n            Loading"));
                         Thread.Sleep(1500);
@@ -415,6 +391,38 @@ namespace Legend_Of_Drongo
                 
                 return (Player);
             
+        }
+
+        public static PlayerProfile DefaultPlayer()
+        {
+            Player.name = "Drongo";
+            Player.HPBonus = 100;
+            Player.ArmorBonus = 0;
+
+            //set up starter inventory
+            Player.inventory = new itemInfo[20];
+            Player.invspace = 20;
+
+            //set up game parameters
+            Player.CurrentPos = new int[3] { 1, 1, 0 }; //Row, Column, Floor
+            Player.Objective = "";
+            Player.Money = 100;
+
+            //set up starter weapon
+            Player.WeaponHeld.Name = "Fists";
+            Player.WeaponHeld.BadHit = "Your Knuckles lightly graze your enemies cheek";
+            Player.WeaponHeld.MedHit = "You hit your enemy with a quick jab to the ribs";
+            Player.WeaponHeld.GoodHit = "A sound of crunching bone can be heard as your fist hits your enemy in the jaw";
+            Player.WeaponHeld.AttackMod = 1;
+            Player.WeaponHeld.CanPickUp = true;
+            Player.WeaponHeld.InteractionName = new List<string>();
+            Player.WeaponHeld.InteractionName.Add("fists");
+            Player.WeaponHeld.InteractionName.Add("hands");
+            Player.WeaponHeld.Class = "Weapon";
+            Player.WeaponHeld.Examine = "Your own hands, how they got on the floor I will never know...";
+            Player.ArmorWorn = new itemInfo[5];
+
+            return Player;
         }
 
         static void Introduction()
@@ -476,9 +484,31 @@ namespace Legend_Of_Drongo
 
         static void Main(string[] args)
         {
-            //path = Directory.GetCurrentDirectory();
+           //path = Directory.GetCurrentDirectory();
+            if (args.Length != 0 && args[0] == "/test")
+            {
+                Player = DefaultPlayer();
 
-            Player = MainMenu();
+                string WorldName = args[1];
+                for (int i = 2; i < args.Length; i++) { WorldName = WorldName + " " + args[i]; }
+                WorldName = WorldName + ".LoD";
+                string SavePath = string.Concat(".\\Worlds\\", WorldName);
+                using (Stream stream = File.Open(SavePath, FileMode.Open))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    WorldState = (WorldFile)bin.Deserialize(stream);
+                }
+                world = WorldState.WorldState;
+                Console.WriteLine("\n\t\tLoading...");
+                Console.Clear();
+                Thread.Sleep(1000);
+                PlayerStatus();
+                Console.WriteLine("Press any key to continue");
+                Console.ReadLine();
+                Console.Clear();
+
+            }
+            else Player = MainMenu();
             ThisFloor = world[Player.CurrentPos[2]] ;
             CurrentRoom = GetRoomInfo(Player.CurrentPos);
 
@@ -497,7 +527,7 @@ namespace Legend_Of_Drongo
 
                 try
                 {
-                    if (PlayerCommand.ToLower() == "help" || PlayerCommand.ToLower() == "commands" || PlayerCommand.ToLower().Contains("how do i"))
+                    if (PlayerCommand.ToLower() == "help" || PlayerCommand.ToLower() == "commands" || PlayerCommand.ToLower().Contains("how do i") || PlayerCommand.ToLower().Contains("how can i"))
                     {
                         Console.WriteLine(WordWrap("Movement"));
                         Console.WriteLine(WordWrap("North - Move North"));
@@ -2744,6 +2774,13 @@ namespace Legend_Of_Drongo
                     bin.Serialize(stream, gamestate);
                 }
                 return ("Success");
+        }
+
+        public static void SaveWorld()
+        {
+            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+            world[Player.CurrentPos[0]] = ThisFloor;
+            WorldState.WorldState = world;
         }
 
         public static bool EventTrigger(string Trigger)

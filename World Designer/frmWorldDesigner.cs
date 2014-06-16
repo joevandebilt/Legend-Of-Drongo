@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Legend_Of_Drongo
 {
@@ -216,47 +217,8 @@ namespace Legend_Of_Drongo
 
         private void cmdSaveWorld_Click(object sender, EventArgs e)
         {
-            string SavePath = Directory.GetCurrentDirectory() + "\\Worlds";
-            bool OverWrite = true;
-            lblEditor.Text = "Saving " + txtWorldName.Text + ".LoD...";  
-
-            //Detect if doesnt exist
-            if (!Directory.Exists(SavePath))
-                Directory.CreateDirectory(SavePath);
-
-            //Are you sure you want to overwrite
-            if (File.Exists(SavePath + "\\" + txtWorldName.Text + ".LoD"))
-            {
-                DialogResult dialogResult = MessageBox.Show("This world already exists\n\nDo you want to overwrite it?", "World Exists", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    OverWrite = true;
-                    SavePath = SavePath + "\\" + txtWorldName.Text + ".LoD";
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    OverWrite = false;
-                }
-            }
-            else SavePath = SavePath + "\\" + txtWorldName.Text + ".LoD";
-
-            if (OverWrite == true)
-            {
-                Thread.Sleep(500);
-                DataTypes.WorldFile ThisWorld = new DataTypes.WorldFile();
-
-                ThisFloor.FloorName = txtFloorName.Text;
-                world[FloorNum] = ThisFloor;
-                ThisWorld.WorldName = txtWorldName.Text;
-                ThisWorld.WorldState = world;
-
-                using (Stream stream = File.Open(SavePath, FileMode.Create))
-                {
-                    BinaryFormatter bin = new BinaryFormatter();
-                    bin.Serialize(stream, ThisWorld);
-                }
-                lblEditor.Text = "Saved at " + DateTime.Now.ToString();
-            }
+            if (SaveWorld()) lblEditor.Text = "Saved at " + DateTime.Now.ToString();
+            else lblEditor.Text = "Save Failed.";
         }
 
         private void cmbLevelSelect_SelectionChangeCommitted(object sender, EventArgs e)
@@ -309,43 +271,94 @@ namespace Legend_Of_Drongo
 
         private void cmdTestWorld_Click(object sender, EventArgs e)
         {
-            WorldCreate WC = new WorldCreate();
-            world = new List<DataTypes.Floor>();
-            world = WC.CreateWorld();
-            FloorNum = 0;
-            ThisFloor = world[0];
-
-            cmbLevelSelect.Items.Clear();
-            int index=1;
-            foreach (DataTypes.Floor floor in world)
+            if (SaveWorld())
             {
-                cmbLevelSelect.Items.Add("Level" + index);
-                index++;
+                lblEditor.Text = "Saved at " + DateTime.Now.ToString();
+
+                Process proc = new Process();
+                if (File.Exists(".\\Legend Of Drongo.exe"))
+                {
+                    proc = Process.Start(".\\Legend Of Drongo.exe", "/test " + txtWorldName.Text);
+                }
+                else MessageBox.Show("Could not find the game engine .exe file, is it missing?");
             }
-            cmbLevelSelect.Items.Add("Add New Level...");
-            tblWorldLevel.Refresh();
+            else lblEditor.Text = "Save Failed.";
         }
 
         private void cmdDeleteLevel_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this level. This action is irreversible.", "Delete Level", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            if (world.Count > 1)
             {
-                //Delte the layer
-                world.RemoveAt(FloorNum);
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this level. This action is irreversible.", "Delete Level", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {                
+                        //Delte the layer
+                        world.RemoveAt(FloorNum);
 
-                if (FloorNum == world.Count) FloorNum = FloorNum - 1;
-                ThisFloor = world[FloorNum];
+                        if (FloorNum == world.Count) FloorNum = FloorNum - 1;
+                        ThisFloor = world[FloorNum];
 
-                cmbLevelSelect.Items.Clear();
-                for (int i = 1; i <= world.Count; i++)
-                {
-                    cmbLevelSelect.Items.Add("Level " + i);
+                        cmbLevelSelect.Items.Clear();
+                        for (int i = 1; i <= world.Count; i++)
+                        {
+                            cmbLevelSelect.Items.Add("Level " + i);
+                        }
+                        cmbLevelSelect.Items.Add("Add New Level...");
+                        tblWorldLevel.Refresh();
+                        cmbLevelSelect.SelectedIndex = FloorNum;
                 }
-                cmbLevelSelect.Items.Add("Add New Level...");
-                tblWorldLevel.Refresh();
-                cmbLevelSelect.SelectedIndex = FloorNum;
             }
+            else MessageBox.Show("You cannot have a world with no floors,");
+        }
+
+        private bool SaveWorld()
+        {
+            try
+            {
+                string SavePath = Directory.GetCurrentDirectory() + "\\Worlds";
+                bool OverWrite = true;
+                lblEditor.Text = "Saving " + txtWorldName.Text + ".LoD...";
+
+                //Detect if doesnt exist
+                if (!Directory.Exists(SavePath))
+                    Directory.CreateDirectory(SavePath);
+
+                //Are you sure you want to overwrite
+                if (File.Exists(SavePath + "\\" + txtWorldName.Text + ".LoD"))
+                {
+                    DialogResult dialogResult = MessageBox.Show("This world already exists\n\nDo you want to overwrite it?", "World Exists", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        OverWrite = true;
+                        SavePath = SavePath + "\\" + txtWorldName.Text + ".LoD";
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        OverWrite = false;
+                    }
+                }
+                else SavePath = SavePath + "\\" + txtWorldName.Text + ".LoD";
+
+                if (OverWrite == true)
+                {
+                    Thread.Sleep(500);
+                    DataTypes.WorldFile ThisWorld = new DataTypes.WorldFile();
+
+                    ThisFloor.FloorName = txtFloorName.Text;
+                    world[FloorNum] = ThisFloor;
+                    ThisWorld.WorldName = txtWorldName.Text;
+                    ThisWorld.WorldState = world;
+
+                    using (Stream stream = File.Open(SavePath, FileMode.Create))
+                    {
+                        BinaryFormatter bin = new BinaryFormatter();
+                        bin.Serialize(stream, ThisWorld);
+                    }
+                    return true;
+                }
+                else return false;
+            }
+            catch { return false; }
         }
     }
 }

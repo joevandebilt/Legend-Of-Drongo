@@ -96,7 +96,6 @@ namespace Legend_Of_Drongo
             // 
             // cmdTestWorld
             // 
-            this.cmdTestWorld.Enabled = false;
             this.cmdTestWorld.Location = new System.Drawing.Point(192, 505);
             this.cmdTestWorld.Name = "cmdTestWorld";
             this.cmdTestWorld.Size = new System.Drawing.Size(150, 33);
