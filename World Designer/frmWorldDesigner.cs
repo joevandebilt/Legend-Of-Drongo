@@ -211,29 +211,7 @@ namespace Legend_Of_Drongo
 
         private Brush GetBrushFor(int row, int column)
         {
-            if (ThisFloor.CurrentFloor[row, column].RoomColour != null)
-            {
-                string Colour = ThisFloor.CurrentFloor[row, column].RoomColour;
-
-                switch (Colour)
-                {
-                    case "Black": return Brushes.Black;
-                    case "Blue": return Brushes.Blue;
-                    case "Brown": return Brushes.Brown;
-                    case "Green": return Brushes.Green;
-                    case "Orange": return Brushes.Orange;
-                    case "Pink": return Brushes.Pink;
-                    case "Purple": return Brushes.Purple;
-                    case "Red": return Brushes.Red;
-                    case "Silver": return Brushes.Silver;
-                    case "White": return Brushes.White;
-                    case "Yellow": return Brushes.Yellow;
-                    case "Light Blue": return Brushes.LightBlue;
-                    case "Light Green": return Brushes.LightGreen;
-                    default: return Brushes.Red;
-                }                
-            }
-            else if (ThisFloor.CurrentFloor[row, column].CanMove == false) return Brushes.Red;
+            if (ThisFloor.CurrentFloor[row,column].CanMove == false) return Brushes.Red;
             else return Brushes.Green;
         }
 
@@ -301,10 +279,6 @@ namespace Legend_Of_Drongo
                 if (File.Exists(".\\Legend Of Drongo.exe"))
                 {
                     proc = Process.Start(".\\Legend Of Drongo.exe", "/test " + txtWorldName.Text);
-                    this.Hide();
-                    while (proc.HasExited == false) { }
-                    this.Show();
-                    
                 }
                 else MessageBox.Show("Could not find the game engine .exe file, is it missing?");
             }
