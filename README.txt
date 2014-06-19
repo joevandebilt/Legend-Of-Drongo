@@ -1,0 +1,128 @@
++-----------------------------------+
+|         Legend Of Drongo          |
+|            Changelog	            |
++-----------------------------------+
+
+Description:
+The Legend of Drongo was a project I started as a means to familiarise myself with C# programming concepts for my studies. Following my studies the project was mothballed and is worked on in sprints as and when I have the time. It is a hobby and is the accumulated skilled I have gained over the past 3 years of dev experience, so naturally some areas of the program are poorly designed and executed. However I am constantly making changes to the engine, and one day hope to release as an indie game. 
+
+Known Bugs:
+- Some iterations of data structures do not check if null, causing crash.
+- Death in custom world moves player to random point at level 1 - FIXED v2.1.4
+- Saves will overwrite based on name, even if playing custom worlds - Fixed v2.1.3
+- Surprise Attack will only allow twice - FIXED v2.1.2
+- When enemy killed, they can still make a move - FIXED v2.3.0
+- Double items being produced? Cell 8,6,1
+
+
+To Do:
+- Finish world.
+- File directories are fixed paths, add in choice of directory.
+- Add new features into Tutorial
+- Add XP system?
+- Re-Add Music System (add music per world + root directoy?)
+
+Changes:
+V1.0.0
+- Created Basic Game engine
+- Added command system
+- Added Data types
+- Created Hard coded world
+- Hard Coded Tutorial
+
+v2.0.1
+- Created World Designer
+- Moved Data structures into new project
+- Changed Engine to Inherit data structures
+- Changed World Designer to Inherit data stuctures
+
+v2.1.1
+- Introduced Seperate World Files in ./Worlds Folder
+- Rewrote Events System
+- Added Knowledge System
+- Allowed for creation and use of custom worlds
+- Removed custom tracks per floor until workaround can be found
+
+v2.1.2
+- Improved Combat system
+- Improved Item interaction system
+
+v2.1.3
+- Added seperate folders for per-world save files
+- Improved Ask about system
+- Asked Scott for money. 
+
+v2.2.0
+- Fixed tab indexes on World editor forms
+- Fixed Event Editor Floor Picked Selected Index bug
+- Made ifnull output for attempting to move into new rooms 
+- Improved Level 2 of Campaign world.
+- Changed Event Data type to carry Item/Enemy/NPC and custom new values.
+- Redesigned Event Editor in World Editor to match new data type.
+- Added Event Actions to ActionTrigger event
+- Redesigned Trigger & Action within Event Editor
+- Added Clone Buttons to event/NPC/Item and Enemy controls
+- Moved Event Trigger to new method
+
+v2.2.4
+- Updated Issues with Combat system
+- Redesigned combat system
+- Ended loops in combat starting system
+- Added Defense bonus of weapon to contribute to defense modifier.
+
+v2.2.5
+- Improved Suprise Attack and Attacked functions
+- Added lockedIn criteria
+- Added being attacked after LockedIn criteria set. 
+- Fixed issue with saving not saving current state of room. 
+
+v2.3.0
+- Fixed issue with non-complete eat command
+- Added command 'drink' to have same affect as 'eat'.
+- Added Itemclass of type Drink
+- Updated Eat(string) method to Consume(string) 
+- Added different output for loss/gain of HP in Consume(string)
+- Updated output of 'help' command
+- Changed Structure of Floor from Array to custom datatype featuring array
+- Change Engine, World Designer to cope
+- Added floor name to frmWorldDesigner
+- Imported World from old class system to new.
+- Added option of custom song per floor to datatype
+- Made txtWeapon on frmEnemyEditor non-editable
+
+v2.3.1
+- Change Event Editor to manage selected cmb box values better
+- Changed HP and damage modifiers to double data type
+
+v2.3.2
+- Fixed rouding of HP to 2 significant figures
+- Altered Item editor to allow double data type inputs and double casts when editing.
+- Fixed Event editor to enable/disable boxes in a more renewable fashion
+- Fixed issue with item interactions not outputting custom text
+- Fixed issue with clearing inventory spaces after item use, item equips and sleeping
+- Fixed issue with dying while trying to sleep in a room... yes that was an actual bug >.<
+- Improved world
+
+v2.3.3
+- Fixed issue with command 'talk' causing crash
+- Improved world. 
+
+v2.3.4
+- Added criteria if questions asked to an enemy
+
+v2.3.5
+- Added try catch to main command entry to allow for errors
+- Improved world
+
+v2.3.6
+- Added extra criteria to examine command to output different information based on each item class.
+- Added line breaks to event text output
+- Fixed issue with rooms not unlocking
+- Improved world
+- Wrote my first #GameDevHaiku
+
+v2.3.7
+- Enabled 'Test world' button on world designer
+- Added args to allow for test world. 
+
+Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub
