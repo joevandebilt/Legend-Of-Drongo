@@ -7,12 +7,13 @@ Description:
 The Legend of Drongo was a project I started as a means to familiarise myself with C# programming concepts for my studies. Following my studies the project was mothballed and is worked on in sprints as and when I have the time. It is a hobby and is the accumulated skilled I have gained over the past 3 years of dev experience, so naturally some areas of the program are poorly designed and executed. However I am constantly making changes to the engine, and one day hope to release as an indie game. 
 
 Known Bugs:
-- Some iterations of data structures do not check if null, causing crash.
+- Some iterations of data structures do not check if null, causing crash. 
 - Death in custom world moves player to random point at level 1 - FIXED v2.1.4
 - Saves will overwrite based on name, even if playing custom worlds - Fixed v2.1.3
 - Surprise Attack will only allow twice - FIXED v2.1.2
 - When enemy killed, they can still make a move - FIXED v2.3.0
-- Double items being produced? Cell 8,6,1
+- Double items being produced? Cell 8,6,1 - FIXED v2.3.2
+- 
 
 
 To Do:
@@ -121,8 +122,14 @@ v2.3.6
 - Improved world
 - Wrote my first #GameDevHaiku
 
-v2.3.7
+v2.4.0
 - Enabled 'Test world' button on world designer
 - Added args to allow for test world. 
+- Hid world editor when world testing is enabled. 
+- Edited room info data type: added room colour for sake of world designer.
+- Added colour picker to world designer room editor
+- Changed default output of null room descriptions to output the world designer coodinates rather than list/array output
+- Optimised form movement
+- Added regions to to engine Main to make easier to look at
 
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

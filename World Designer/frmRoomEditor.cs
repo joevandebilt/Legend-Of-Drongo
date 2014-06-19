@@ -27,8 +27,18 @@ namespace Legend_Of_Drongo
 
         public void PopulateFields()
         {
-            if (Room.CanMove == false) chkCanMove.Checked = false;
-            else chkCanMove.Checked = true;
+            if (Room.CanMove == false)
+            {
+                chkCanMove.Checked = false;
+                lstColourPicker.SelectedIndex  = lstColourPicker.FindString("Red");
+            }
+            else
+            {
+                chkCanMove.Checked = true;
+                lstColourPicker.SelectedIndex = lstColourPicker.FindString("Red");
+            }
+
+            if (Room.RoomColour != null) lstColourPicker.FindString(Room.RoomColour);
 
             if (Room.Description != null) txtDescription.Text = Room.Description;
             if (Room.AltDescription != null) txtAltDescription.Text = Room.AltDescription;
@@ -50,6 +60,7 @@ namespace Legend_Of_Drongo
             Room.Description = txtDescription.Text;
             Room.AltDescription = txtAltDescription.Text;
             Room.SuicideAction = txtSuicide.Text;
+            Room.RoomColour = lstColourPicker.Text;
 
             return true;
         }
