@@ -499,9 +499,10 @@ namespace Legend_Of_Drongo
                     WorldState = (WorldFile)bin.Deserialize(stream);
                 }
                 world = WorldState.WorldState;
-                Console.WriteLine("\n\t\tLoading...");
                 Console.Clear();
+                Console.WriteLine("\n\t\t"+ WorldState.WorldName +" Loading...");
                 Thread.Sleep(1000);
+                Console.Clear();
                 PlayerStatus();
                 Console.WriteLine("Press any key to continue");
                 Console.ReadLine();
@@ -518,15 +519,15 @@ namespace Legend_Of_Drongo
 
             while (PlayerCommand != "quit" && PlayerCommand != "exit")
             {
-
+                //Take in a player command
                 Console.Write(">"); 
                 PlayerCommand = Console.ReadLine();
-                //PlayerCommand.ToLower();
                 PlayerCommand = PlayerCommand.Trim();
                 Console.WriteLine("");
 
                 try
                 {
+                    #region Help
                     if (PlayerCommand.ToLower() == "help" || PlayerCommand.ToLower() == "commands" || PlayerCommand.ToLower().Contains("how do i") || PlayerCommand.ToLower().Contains("how can i"))
                     {
                         Console.WriteLine(WordWrap("Movement"));
@@ -569,80 +570,43 @@ namespace Legend_Of_Drongo
                         Console.WriteLine(WordWrap("Main Menu - Goes back to the Main menu"));
                         Console.WriteLine(WordWrap("Quit - Quits game without saving"));
                     }
-                    else if (PlayerCommand.ToLower() == "north" || PlayerCommand.ToLower() == "go north" || PlayerCommand.ToLower() == "move north")
+                    #endregion
+
+                    #region Movement
+                    else if (
+                                PlayerCommand.ToLower().Split(' ')[0] == "go" || 
+                                PlayerCommand.ToLower().Split(' ')[0] == "move" || 
+                                PlayerCommand.ToLower().Split(' ')[0] == "travel" ||
+                                PlayerCommand.ToLower() == "north" || 
+                                PlayerCommand.ToLower() == "east" || 
+                                PlayerCommand.ToLower() == "south" || 
+                                PlayerCommand.ToLower() == "west"
+                            )
                     {
                         if (!CurrentRoom.LockedIn)
                         {
                             int[] ProposedMove = new int[3];
-
-                            ProposedMove[0] = Player.CurrentPos[0] - 1;
+                            ProposedMove[0] = Player.CurrentPos[0];
                             ProposedMove[1] = Player.CurrentPos[1];
                             ProposedMove[2] = Player.CurrentPos[2];
+                            string Direction = string.Empty;
 
-                            PotentialRoom = GetRoomInfo(ProposedMove);
-                            if (PotentialRoom.CanMove == true)
+                            if (PlayerCommand.ToLower().Split(' ')[0] == "go" || PlayerCommand.ToLower().Split(' ')[0] == "move" || PlayerCommand.ToLower().Split(' ')[0] == "travel") Direction = PlayerCommand.ToLower().Split(' ')[1];
+                            else Direction = PlayerCommand.ToLower();
+
+                            switch (Direction)
                             {
-                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
-                                else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                                CurrentRoom = PotentialRoom;
-                                Player.CurrentPos = ProposedMove;
-                                EventTrigger("moveinto");
+                                case "north": ProposedMove[0] = ProposedMove[0] - 1; break;
+                                case "east": ProposedMove[1] = ProposedMove[1] + 1; break;
+                                case "south": ProposedMove[0] = ProposedMove[0] + 1; break;
+                                case "west": ProposedMove[1] = ProposedMove[1] - 1; break;
+                                default: ProposedMove = Player.CurrentPos; break;
                             }
-                            else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                        }
-                        else
-                        {
-                            Console.WriteLine("You cannot leave the current area");
-                            attacked();
-                        }
-
-                    }
-                    else if (PlayerCommand.ToLower() == "east" || PlayerCommand.ToLower() == "go east" || PlayerCommand.ToLower() == "move east")
-                    {
-                        if (!CurrentRoom.LockedIn)
-                        {
-                            int[] ProposedMove = new int[3];
-
-                            ProposedMove[0] = Player.CurrentPos[0];
-                            ProposedMove[1] = Player.CurrentPos[1] + 1;
-                            ProposedMove[2] = Player.CurrentPos[2];
 
                             PotentialRoom = GetRoomInfo(ProposedMove);
                             if (PotentialRoom.CanMove == true)
                             {
-                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
-                                else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                                CurrentRoom = PotentialRoom;
-                                Player.CurrentPos = ProposedMove;
-                                EventTrigger("moveinto");
-                            }
-                            else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                        }
-                        else
-                        {
-                            Console.WriteLine("You cannot leave the current area");
-                            attacked();
-                        }
-
-                    }
-                    else if (PlayerCommand.ToLower() == "south" || PlayerCommand.ToLower() == "go south" || PlayerCommand.ToLower() == "move south")
-                    {
-                        if (!CurrentRoom.LockedIn)
-                        {
-                            int[] ProposedMove = new int[3];
-
-                            ProposedMove[0] = Player.CurrentPos[0] + 1;
-                            ProposedMove[1] = Player.CurrentPos[1];
-                            ProposedMove[2] = Player.CurrentPos[2];
-
-                            PotentialRoom = GetRoomInfo(ProposedMove);
-                            if (PotentialRoom.CanMove == true)
-                            {
-                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
+                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into Row ") + Char.ConvertFromUtf32(ProposedMove[0] + 65) + " Col " + (ProposedMove[1] + 1) + " Level " + (ProposedMove[2] + 1));
                                 else Console.WriteLine(WordWrap(PotentialRoom.Description));
                                 ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
                                 CurrentRoom = PotentialRoom;
@@ -658,35 +622,9 @@ namespace Legend_Of_Drongo
                             attacked();
                         }
                     }
-                    else if (PlayerCommand.ToLower() == "west" || PlayerCommand.ToLower() == "go west" || PlayerCommand.ToLower() == "move west")
-                    {
-                        if (!CurrentRoom.LockedIn)
-                        {
-                            int[] ProposedMove = new int[3];
+                    #endregion
 
-                            ProposedMove[0] = Player.CurrentPos[0];
-                            ProposedMove[1] = Player.CurrentPos[1] - 1;
-                            ProposedMove[2] = Player.CurrentPos[2];
-
-                            PotentialRoom = GetRoomInfo(ProposedMove);
-                            if (PotentialRoom.CanMove == true)
-                            {
-                                if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into position ") + ProposedMove[0] + "," + ProposedMove[1] + "," + ProposedMove[2]);
-                                else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                                CurrentRoom = PotentialRoom;
-                                Player.CurrentPos = ProposedMove;
-                                EventTrigger("moveinto");
-                            }
-                            else if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("Looks like I can't go that way."));
-                            else Console.WriteLine(WordWrap(PotentialRoom.Description));
-                        }
-                        else
-                        {
-                            Console.WriteLine("You cannot leave the current area");
-                            attacked();
-                        }
-                    }
+                    #region descriptions
                     else if (PlayerCommand.ToLower().Contains("who am i") || PlayerCommand == "whoami")
                     {
                         Console.WriteLine(WordWrap(string.Concat("Your name is ", Player.name)));
@@ -699,6 +637,17 @@ namespace Legend_Of_Drongo
                     {
                         Console.WriteLine(WordWrap(CurrentRoom.Description));
                     }
+                    else if (PlayerCommand.ToLower() == "objective")
+                    {
+                        Console.WriteLine(WordWrap(string.Concat("Your Current Objective is: ", Player.Objective)));
+                    }
+                    else if (PlayerCommand.ToLower() == "money")
+                    {
+                        Console.WriteLine("You currently have {0} gold coins", Player.Money);
+                    }
+                    #endregion
+
+                    #region Read
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "read")
                     {
                         int index;
@@ -732,6 +681,9 @@ namespace Legend_Of_Drongo
 
 
                     }
+                    #endregion
+
+                    #region Inventory
                     else if (PlayerCommand.ToLower() == "inventory")
                     {
                         if (Player.invspace != 20)
@@ -745,14 +697,9 @@ namespace Legend_Of_Drongo
                         }
                         else Console.WriteLine("Your inventory is empty");
                     }
-                    else if (PlayerCommand.ToLower() == "objective")
-                    {
-                        Console.WriteLine(WordWrap(string.Concat("Your Current Objective is: ", Player.Objective)));
-                    }
-                    else if (PlayerCommand.ToLower() == "money")
-                    {
-                        Console.WriteLine("You currently have {0} gold coins", Player.Money);
-                    }
+                    #endregion
+
+                    #region Ask
                     else if (PlayerCommand.Split(' ')[0].ToLower() == "ask")
                     {
                         string Target = string.Empty;
@@ -780,6 +727,9 @@ namespace Legend_Of_Drongo
                         }
                         else Console.WriteLine(WordWrap("Ask who about what?"));
                     }
+                    #endregion
+
+                    #region Take Item
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "take" || PlayerCommand.ToLower().Split(' ')[0] == "pick" || PlayerCommand.ToLower().Split(' ')[0] == "get")
                     {
                         string ObjectName = string.Empty;
@@ -812,10 +762,11 @@ namespace Legend_Of_Drongo
                             }
                             ObjectName = ObjectName.Trim();
                         }
-
                         Console.WriteLine(WordWrap(TakeItem(ObjectName)));
-
                     }
+                    #endregion
+
+                    #region DropItem
                     else if (PlayerCommand.ToLower() == "drop" || PlayerCommand.ToLower().Split(' ')[0] == "drop")
                     {
                         if (Player.invspace != 20)
@@ -857,6 +808,9 @@ namespace Legend_Of_Drongo
                         else
                             Console.WriteLine(WordWrap("There are no items in your inventory"));
                     }
+                    #endregion
+
+                    #region Look At Item
                     else if (PlayerCommand.ToLower() != "look" && (PlayerCommand.ToLower() == "look at" || (PlayerCommand.ToLower().Split(' ')[0] == "look" && PlayerCommand.ToLower().Split(' ')[1] == "at")))
                     {
                         string ObjectName = string.Empty;
@@ -884,6 +838,9 @@ namespace Legend_Of_Drongo
 
                         Console.WriteLine(WordWrap(LookAtObject(ObjectName)));
                     }
+                    #endregion
+
+                    #region Examine Item
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "examine" || PlayerCommand.ToLower() == "examine")
                     {
                         if (Player.invspace != 20)
@@ -924,6 +881,9 @@ namespace Legend_Of_Drongo
                         else
                             Console.WriteLine(WordWrap("There are no items in your inventory"));
                     }
+                    #endregion
+
+                    #region Use Item
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "use" || PlayerCommand.ToLower().Split(' ')[0] == "put")
                     {
                         int index = 0;
@@ -990,6 +950,9 @@ namespace Legend_Of_Drongo
                         }
 
                     }
+                    #endregion
+
+                    #region View Wares
                     else if (PlayerCommand.ToLower() != "view" && PlayerCommand.ToLower().Split(' ')[0] == "view" && PlayerCommand.ToLower().Split(' ')[1] == "wares")
                     {
                         int index;
@@ -1060,6 +1023,9 @@ namespace Legend_Of_Drongo
                         else Console.WriteLine("There is nobody currently selling anything in this area");
 
                     }
+                    #endregion
+
+                    #region Bribe
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "bribe")
                     {
                         int index;
@@ -1117,9 +1083,10 @@ namespace Legend_Of_Drongo
 
                         }
                         else Console.WriteLine(WordWrap("There are no people in the room to bribe"));
-
-
                     }
+                    #endregion
+
+                    #region Buy Item
                     else if (PlayerCommand.Split(' ')[0].ToLower() == "buy")
                     {
                         int index;
@@ -1192,6 +1159,9 @@ namespace Legend_Of_Drongo
                         }
                         else Console.WriteLine("There is nobody willing to buy anything from you here");
                     }
+                    #endregion
+
+                    #region Sell Item
                     else if (PlayerCommand.Split(' ')[0].ToLower() == "sell")
                     {
                         int index;
@@ -1290,6 +1260,9 @@ namespace Legend_Of_Drongo
                         }
                         else Console.WriteLine("There is nobody willing to buy anything from you here");
                     }
+                    #endregion
+
+                    #region Talk to
                     else if (PlayerCommand.Split(' ')[0].ToLower() == "talk")
                     {
                         int index;
@@ -1327,6 +1300,9 @@ namespace Legend_Of_Drongo
                             Console.WriteLine("There are no non-hostile people to talk to");
                         }
                     }
+                    #endregion
+
+                    #region Suicide
                     else if (PlayerCommand.Contains("suicide") || PlayerCommand.ToLower() == "attack self" || PlayerCommand.ToLower() == "hit self" || PlayerCommand.ToLower() == string.Concat("hit ", Player.name.ToLower()) || PlayerCommand.ToLower() == string.Concat("attack ", Player.name.ToLower()) || PlayerCommand.ToLower() == "kill self")
                     {
                         if (PlayerCommand.Contains("suicide") && CurrentRoom.SuicideAction != null) Console.WriteLine(WordWrap(CurrentRoom.SuicideAction));
@@ -1334,6 +1310,9 @@ namespace Legend_Of_Drongo
                         Player.HPBonus = 0;
                         //Console.WriteLine("I GET HERE, and my health is {0}", Player.HPBonus);
                     }
+                    #endregion
+
+                    #region Attack
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "attack" || PlayerCommand.ToLower().Split(' ')[0] == "hit" || PlayerCommand.ToLower().Split(' ')[0] == "fight")
                     {
                         string enemy;
@@ -1396,18 +1375,24 @@ namespace Legend_Of_Drongo
                         else
                             Console.WriteLine(WordWrap("There is nobody in the room to fight"));
                     }
+                    #endregion
+
+                    #region Equip/Wear
                     else if (PlayerCommand.Split(' ')[0].ToLower() == "equip" || PlayerCommand.Split(' ')[0].ToLower() == "wear")
                     {
                         EquipItem(PlayerCommand);
                     }
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "eat" || PlayerCommand.ToLower().Split(' ')[0] == "drink")
+                    #endregion
+
+                    #region eat/drink 
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "eat" || PlayerCommand.ToLower().Split(' ')[0] == "drink" || PlayerCommand.ToLower().Split(' ')[0] == "consume")
                     {
                         if (Player.invspace != 20)
                         {
                             int index;
                             string ObjectName = string.Empty;
 
-                            if (PlayerCommand.ToLower() == "eat" || PlayerCommand.ToLower() == "drink")
+                            if (PlayerCommand.ToLower() == "eat" || PlayerCommand.ToLower() == "drink" || PlayerCommand.ToLower() == "consume")
                             {
                                 Console.WriteLine("Food in your inventory:\n");
                                 for (index = 0; index < (20 - Player.invspace); index++)
@@ -1438,6 +1423,9 @@ namespace Legend_Of_Drongo
                         }
                         else Console.WriteLine("Your inventory is empty");
                     }
+                    #endregion
+
+                    #region Sleep
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "sleep")
                     {
                         int index = 0;
@@ -1465,6 +1453,9 @@ namespace Legend_Of_Drongo
                         //Console.WriteLine("Trying to sleep in {0}", bedItem);
                         Rest(bedItem);
                     }
+                    #endregion
+
+                    #region Music
                     else if (PlayerCommand.ToLower() == "music browse")
                     {
                         Music("browse");
@@ -1477,6 +1468,9 @@ namespace Legend_Of_Drongo
                     {
                         Music("stop");
                     }
+                    #endregion
+
+                    #region Debugging
                     else if (PlayerCommand.ToLower() == "clear")
                     {
                         Console.Clear();
@@ -1502,13 +1496,9 @@ namespace Legend_Of_Drongo
                     }
                     else if (PlayerCommand.ToLower() == "getpos")
                     {
-                        Console.WriteLine("Row {0}, Col {1}, floor{2}", Player.CurrentPos[0], Player.CurrentPos[1], Player.CurrentPos[2]);
+                        Console.WriteLine("Row {0}, Col {1}, Level {2}", Char.ConvertFromUtf32(Player.CurrentPos[0]+65), (Player.CurrentPos[1]+1), (Player.CurrentPos[2] +1 ));
                     }
-                    else if (PlayerCommand.ToLower() == "turn down for what")
-                    {
-                        char[] c1 = new char[6] { '\u0361', '\u00b0', '\u035c', '\u0296', '\u0361', '\u00b0' };
-                        Console.WriteLine("\n\n(" + c1[0] + c1[1] + c1[2] + c1[3] + c1[4] + c1[5] + ")\n\n");
-                    }
+
                     else
                     {
                         Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
@@ -1519,7 +1509,9 @@ namespace Legend_Of_Drongo
                     Console.WriteLine(WordWrap("\nYou have encountered an error.\nThe game engine was not able to handle the command you entered. Please report this to the developer"));
                     Console.WriteLine(WordWrap("\nThe command you entered was: " + PlayerCommand + "\n\n"));
                 }
+                #endregion
 
+                #region GameOver
                 if (Player.HPBonus <= 0)
                 {
                     if (Player.CurrentPos[2] == 0)
@@ -1553,6 +1545,7 @@ namespace Legend_Of_Drongo
                         //Music("start");
                     }
                 }
+                #endregion
 
             }
 
