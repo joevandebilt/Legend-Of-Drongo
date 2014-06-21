@@ -79,6 +79,7 @@ namespace Legend_Of_Drongo
             public int Value;
             public string ItemNeeded;
             public string interactionResponse;
+            public int XP;
         }
 
         [Serializable()]
@@ -94,6 +95,12 @@ namespace Legend_Of_Drongo
             public int[] CurrentPos;
             public string Objective;
             public int Money;
+            public int XP; 
+            public int Level;
+            public double MaxHp;    //Maxium hit points
+            public int Speed;       //Chance of going first in combat
+            public double Strength; //Adds to damage of weapon
+            public int Resitence;   //Adds natural defense to player
         }
 
         [Serializable()]
@@ -108,6 +115,7 @@ namespace Legend_Of_Drongo
             public string DeathMessage;
             public int PayOff;  //the value at which an enemy can be 'bought off' 
             public string PayOffResponse;
+            public int XP;
         }
 
         [Serializable()]
@@ -124,6 +132,7 @@ namespace Legend_Of_Drongo
             public bool willBuy;
             public string MerchantType;
             public bool QuestCharacter;
+            public int XP;
         }
 
         [Serializable()]

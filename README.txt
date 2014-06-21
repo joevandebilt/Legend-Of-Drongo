@@ -13,7 +13,8 @@ Known Bugs:
 - Surprise Attack will only allow twice - FIXED v2.1.2
 - When enemy killed, they can still make a move - FIXED v2.3.0
 - Double items being produced? Cell 8,6,1 - FIXED v2.3.2
-- 
+- Item interaction names being shared across items in same room. - Only occurs for cloned items
+- Could not fight Juan, Terry or Gary in FWWOTT
 
 
 To Do:
@@ -21,7 +22,7 @@ To Do:
 - File directories are fixed paths, add in choice of directory.
 - Add new features into Tutorial
 - Add XP system?
-- Re-Add Music System (add music per world + root directoy?)
+- Re-Add Music System (add music per world + root directory?)
 
 Changes:
 V1.0.0
@@ -35,10 +36,10 @@ v2.0.1
 - Created World Designer
 - Moved Data structures into new project
 - Changed Engine to Inherit data structures
-- Changed World Designer to Inherit data stuctures
+- Changed World Designer to Inherit data structures
 
 v2.1.1
-- Introduced Seperate World Files in ./Worlds Folder
+- Introduced Separate World Files in ./Worlds Folder
 - Rewrote Events System
 - Added Knowledge System
 - Allowed for creation and use of custom worlds
@@ -49,14 +50,14 @@ v2.1.2
 - Improved Item interaction system
 
 v2.1.3
-- Added seperate folders for per-world save files
+- Added separate folders for per-world save files
 - Improved Ask about system
 - Asked Scott for money. 
 
 v2.2.0
 - Fixed tab indexes on World editor forms
 - Fixed Event Editor Floor Picked Selected Index bug
-- Made ifnull output for attempting to move into new rooms 
+- Made if null output for attempting to move into new rooms 
 - Improved Level 2 of Campaign world.
 - Changed Event Data type to carry Item/Enemy/NPC and custom new values.
 - Redesigned Event Editor in World Editor to match new data type.
@@ -69,10 +70,10 @@ v2.2.4
 - Updated Issues with Combat system
 - Redesigned combat system
 - Ended loops in combat starting system
-- Added Defense bonus of weapon to contribute to defense modifier.
+- Added Defence bonus of weapon to contribute to defence modifier.
 
 v2.2.5
-- Improved Suprise Attack and Attacked functions
+- Improved Surprise Attack and Attacked functions
 - Added lockedIn criteria
 - Added being attacked after LockedIn criteria set. 
 - Fixed issue with saving not saving current state of room. 
@@ -80,15 +81,15 @@ v2.2.5
 v2.3.0
 - Fixed issue with non-complete eat command
 - Added command 'drink' to have same affect as 'eat'.
-- Added Itemclass of type Drink
+- Added Item class of type Drink
 - Updated Eat(string) method to Consume(string) 
 - Added different output for loss/gain of HP in Consume(string)
 - Updated output of 'help' command
-- Changed Structure of Floor from Array to custom datatype featuring array
+- Changed Structure of Floor from Array to custom data type featuring array
 - Change Engine, World Designer to cope
 - Added floor name to frmWorldDesigner
 - Imported World from old class system to new.
-- Added option of custom song per floor to datatype
+- Added option of custom song per floor to data type
 - Made txtWeapon on frmEnemyEditor non-editable
 
 v2.3.1
@@ -96,7 +97,7 @@ v2.3.1
 - Changed HP and damage modifiers to double data type
 
 v2.3.2
-- Fixed rouding of HP to 2 significant figures
+- Fixed rounding of HP to 2 significant figures
 - Altered Item editor to allow double data type inputs and double casts when editing.
 - Fixed Event editor to enable/disable boxes in a more renewable fashion
 - Fixed issue with item interactions not outputting custom text
@@ -124,11 +125,11 @@ v2.3.6
 
 v2.4.0
 - Enabled 'Test world' button on world designer
-- Added args to allow for test world. 
+- Added arguments to allow for test world. 
 - Hid world editor when world testing is enabled. 
 - Edited room info data type: added room colour for sake of world designer.
 - Added colour picker to world designer room editor
-- Changed default output of null room descriptions to output the world designer coodinates rather than list/array output
+- Changed default output of null room descriptions to output the world designer coordinates rather than list/array output
 - Optimised form movement
 - Added regions to to engine Main to make easier to look at
 
@@ -136,5 +137,19 @@ v2.4.1
 - Improved error handling to output files with exception details
 - Added ForceError method to test error handling
 
+v2.5.0
+- Added Levelling up values to data types
+- Changed Consume method to match new max health system
+- Changed combat to handle Speed, resistance and strength modifiers
+- Changed combat to add xp from enemies when killed. 
+- Added event giveXP
+- Change Rest method to accommodate new maxHP value
+- Added levelling up method to increase character stats
+- Changed Status method to show Level, XP, speed, strength, resistance, MaxHp
+- Changed KillallEnemies event action to add XP
+- Added XP to items to be gained when: Consumed, Read, Used Correctly
+- Added XP to item data structure and added text field for Item Editor in world
+- Fixed Issue with colour picker on room editor
 
-Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub
+
+If you encounter an error, please email to error file to joevandebilt@live.co.uk, or report it on gitHub

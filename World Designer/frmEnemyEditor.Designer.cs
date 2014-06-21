@@ -49,6 +49,8 @@
             this.cmdCancel = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.txtMoney = new System.Windows.Forms.TextBox();
+            this.txtXP = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 67);
+            this.label3.Location = new System.Drawing.Point(26, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 13);
             this.label3.TabIndex = 14;
@@ -81,7 +83,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(97, 67);
+            this.label4.Location = new System.Drawing.Point(141, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 15;
@@ -134,19 +136,20 @@
             // 
             this.txtWeapon.Location = new System.Drawing.Point(67, 34);
             this.txtWeapon.Name = "txtWeapon";
+            this.txtWeapon.ReadOnly = true;
             this.txtWeapon.Size = new System.Drawing.Size(189, 20);
             this.txtWeapon.TabIndex = 1;
             // 
             // txtHP
             // 
-            this.txtHP.Location = new System.Drawing.Point(41, 64);
+            this.txtHP.Location = new System.Drawing.Point(56, 60);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(38, 20);
             this.txtHP.TabIndex = 3;
             // 
             // txtArmor
             // 
-            this.txtArmor.Location = new System.Drawing.Point(148, 64);
+            this.txtArmor.Location = new System.Drawing.Point(193, 64);
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
             this.txtArmor.TabIndex = 4;
@@ -157,7 +160,7 @@
             this.txtKill.Multiline = true;
             this.txtKill.Name = "txtKill";
             this.txtKill.Size = new System.Drawing.Size(271, 50);
-            this.txtKill.TabIndex = 6;
+            this.txtKill.TabIndex = 7;
             // 
             // txtDeath
             // 
@@ -165,21 +168,21 @@
             this.txtDeath.Multiline = true;
             this.txtDeath.Name = "txtDeath";
             this.txtDeath.Size = new System.Drawing.Size(271, 50);
-            this.txtDeath.TabIndex = 7;
+            this.txtDeath.TabIndex = 8;
             // 
             // txtPayOff
             // 
             this.txtPayOff.Location = new System.Drawing.Point(91, 310);
             this.txtPayOff.Name = "txtPayOff";
             this.txtPayOff.Size = new System.Drawing.Size(38, 20);
-            this.txtPayOff.TabIndex = 8;
+            this.txtPayOff.TabIndex = 9;
             // 
             // txtPayOffResponse
             // 
             this.txtPayOffResponse.Location = new System.Drawing.Point(112, 338);
             this.txtPayOffResponse.Name = "txtPayOffResponse";
             this.txtPayOffResponse.Size = new System.Drawing.Size(175, 20);
-            this.txtPayOffResponse.TabIndex = 9;
+            this.txtPayOffResponse.TabIndex = 10;
             // 
             // cmdItemInspect
             // 
@@ -196,7 +199,7 @@
             this.cmdSaveEnemy.Location = new System.Drawing.Point(16, 379);
             this.cmdSaveEnemy.Name = "cmdSaveEnemy";
             this.cmdSaveEnemy.Size = new System.Drawing.Size(121, 27);
-            this.cmdSaveEnemy.TabIndex = 10;
+            this.cmdSaveEnemy.TabIndex = 11;
             this.cmdSaveEnemy.Text = "Save Enemy";
             this.cmdSaveEnemy.UseVisualStyleBackColor = true;
             this.cmdSaveEnemy.Click += new System.EventHandler(this.cmdSaveEnemy_Click);
@@ -206,7 +209,7 @@
             this.cmdCancel.Location = new System.Drawing.Point(166, 379);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(121, 27);
-            this.cmdCancel.TabIndex = 11;
+            this.cmdCancel.TabIndex = 12;
             this.cmdCancel.Text = "Close Without Saving";
             this.cmdCancel.UseVisualStyleBackColor = true;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
@@ -214,7 +217,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(203, 67);
+            this.label9.Location = new System.Drawing.Point(9, 97);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
             this.label9.TabIndex = 16;
@@ -222,16 +225,34 @@
             // 
             // txtMoney
             // 
-            this.txtMoney.Location = new System.Drawing.Point(249, 64);
+            this.txtMoney.Location = new System.Drawing.Point(55, 94);
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(38, 20);
             this.txtMoney.TabIndex = 5;
+            // 
+            // txtXP
+            // 
+            this.txtXP.Location = new System.Drawing.Point(193, 94);
+            this.txtXP.Name = "txtXP";
+            this.txtXP.Size = new System.Drawing.Size(38, 20);
+            this.txtXP.TabIndex = 6;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(147, 97);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(21, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "XP";
             // 
             // frmEnemyEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 433);
+            this.Controls.Add(this.txtXP);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdSaveEnemy);
             this.Controls.Add(this.cmdItemInspect);
@@ -283,5 +304,7 @@
         private System.Windows.Forms.Button cmdCancel;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtMoney;
+        private System.Windows.Forms.TextBox txtXP;
+        private System.Windows.Forms.Label label10;
     }
 }

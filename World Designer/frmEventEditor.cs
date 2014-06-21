@@ -15,7 +15,7 @@ namespace Legend_Of_Drongo
         public bool ChangeMade;
 
         string[,] Triggers = new string[7,2];
-        string[,] Actions = new string[12,2];
+        string[,] Actions = new string[13,2];
 
         public frmEventEditor(DataTypes.Event thisEvent, int FloorCount)
         {
@@ -50,7 +50,7 @@ namespace Legend_Of_Drongo
             Actions[4,0] = "change description";
             Actions[4,1] = "Change the room description to its alternative";
             Actions[5,0] = "change location";
-            Actions[5,1] = "move player to these coodinates ";
+            Actions[5,1] = "Move player to these coodinates ";
             Actions[6,0] = "change objective";
             Actions[6,1] = "Change the players objective to";
             Actions[7,0] = "output text";
@@ -61,8 +61,10 @@ namespace Legend_Of_Drongo
             Actions[9,1] = "Spawn the following NPCs";
             Actions[10,0] = "spawnEnemy";
             Actions[10,1] = "Spawn the following enemies";
-            Actions[11, 0] = string.Empty;
-            Actions[11, 1] = "Unknown";
+            Actions[11, 0] = "giveXP";
+            Actions[11, 1] = "Award the player XP";
+            Actions[12, 0] = string.Empty;
+            Actions[12, 1] = "Unknown";
             
 
             for (int i = 0; i < (Triggers.Length/2); i++)
@@ -195,7 +197,7 @@ namespace Legend_Of_Drongo
                 cmbCol.Enabled = true;
                 cmbFloor.Enabled = true;
             }
-            else if (Actions[cmbAction.SelectedIndex,0] == "output text" || Actions[cmbAction.SelectedIndex,0] == "change objective")
+            else if (Actions[cmbAction.SelectedIndex, 0] == "output text" || Actions[cmbAction.SelectedIndex, 0] == "change objective" || Actions[cmbAction.SelectedIndex, 0] == "giveXP")
             {
                 txtNewValue.Enabled = true;
             }

@@ -21,6 +21,7 @@ namespace Legend_Of_Drongo
 
             if (ThisItem.Name != null) 
             {
+                Item = new DataTypes.itemInfo();
                 Item = ThisItem;
                 PopulateItem(Item);
             }
@@ -47,27 +48,13 @@ namespace Legend_Of_Drongo
 
             if (ThisItem.Class != null) cmbItemClass.SelectedIndex = cmbItemClass.FindString(ThisItem.Class);
             else cmbItemClass.SelectedIndex = cmbItemClass.FindString("Unknown");
-
-            if (cmbItemClass.Text == "Weapon")
-            {
-                txtDamage.Enabled = true;
-                txtProtection.Enabled = true;
-                txtGoodHit.Enabled = true;
-                txtMedHit.Enabled = true;
-                txtBadHit.Enabled = true;
-            }
-            else if (cmbItemClass.Text == "Interaction Object")
-            {
-                txtItemNeeded.Enabled = true;
-                txtInteractionMessage.Enabled = true;
-            }
-            else if (cmbItemClass.Text.Contains("Armor")) txtProtection.Enabled = true;
-            else if (cmbItemClass.Text == "Food") txtHP.Enabled = true;
             
             txtValue.Text = ThisItem.Value.ToString();
             txtHP.Text = ThisItem.HPmod.ToString();
             txtDamage.Text = ThisItem.AttackMod.ToString();
             txtProtection.Text = ThisItem.DefenseMod.ToString();
+            txtXP.Text = ThisItem.XP.ToString();
+            EnableElements();
 
             if (ThisItem.GoodHit != null) txtGoodHit.Text = ThisItem.GoodHit;
             if (ThisItem.MedHit != null) txtMedHit.Text = ThisItem.MedHit;
@@ -97,6 +84,7 @@ namespace Legend_Of_Drongo
                 {
                     Item.InteractionName.Add(name.Trim());
                 }
+                Array.Clear(Names,0,Names.Length);
             }
             else return false;
 
@@ -114,6 +102,9 @@ namespace Legend_Of_Drongo
 
             if (int.TryParse(txtProtection.Text, out n)) Item.DefenseMod = n;
             else if (txtProtection.Enabled == true) return false;
+
+            if (int.TryParse(txtXP.Text, out n)) Item.XP = n;
+            else if (txtXP.Enabled == true) return false;
 
             if (txtGoodHit.Text != string.Empty)Item.GoodHit = txtGoodHit.Text;
             else if (txtGoodHit.Enabled == true) return false;
@@ -149,6 +140,11 @@ namespace Legend_Of_Drongo
 
         private void cmbItemClass_TextChanged(object sender, EventArgs e)
         {
+            EnableElements();
+        }
+
+        private void EnableElements()
+        {
             txtDamage.Enabled = false;
             txtProtection.Enabled = false;
             txtGoodHit.Enabled = false;
@@ -157,6 +153,7 @@ namespace Legend_Of_Drongo
             txtItemNeeded.Enabled = false;
             txtInteractionMessage.Enabled = false;
             txtHP.Enabled = false;
+            txtXP.Enabled = false;
 
             if (cmbItemClass.Text == "Weapon")
             {
@@ -171,8 +168,15 @@ namespace Legend_Of_Drongo
                 txtItemNeeded.Enabled = true;
                 txtInteractionMessage.Enabled = true;
             }
+            else if (cmbItemClass.Text == "Food")
+            {
+                txtHP.Enabled = true;
+                txtXP.Enabled = true;
+            }
+            else if (cmbItemClass.Text == "Interactive Item") txtXP.Enabled = true;
+            else if (cmbItemClass.Text == "Readable") txtXP.Enabled = true;
             else if (cmbItemClass.Text.Contains("Armor")) txtProtection.Enabled = true;
-            else if (cmbItemClass.Text == "Food") txtHP.Enabled = true;
+            
         }
     }
 }

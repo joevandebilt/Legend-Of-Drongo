@@ -111,10 +111,11 @@ namespace Legend_Of_Drongo
                         playername = "Drongo";
                     }
 
+                    Player = DefaultPlayer();
+
                     //Player.name = "... You do not remember your name...";
                     Player.name = playername;
                     Player.HPBonus = 84;
-                    Player.ArmorBonus = 0;
 
                     //set up starter inventory
                     Player.inventory = new itemInfo[20];
@@ -130,21 +131,6 @@ namespace Legend_Of_Drongo
                     //set up game parameters
                     Player.CurrentPos = new int[3] { 1, 1, 1 }; //Row, Column, Floor
                     Player.Objective = "Find a way out of the forest";
-                    Player.Money = 100;
-
-                    //set up starter weapon
-                    Player.WeaponHeld.Name = "Fists";
-                    Player.WeaponHeld.BadHit = "Your Knuckles lightly graze your enemies cheek";
-                    Player.WeaponHeld.MedHit = "You hit your enemy with a quick jab to the ribs";
-                    Player.WeaponHeld.GoodHit = "A sound of crunching bone can be heard as your fist hits your enemy in the jaw";
-                    Player.WeaponHeld.AttackMod = 1;
-                    Player.WeaponHeld.CanPickUp = true;
-                    Player.WeaponHeld.InteractionName = new List<string>();
-                    Player.WeaponHeld.InteractionName.Add("Fists");
-                    Player.WeaponHeld.InteractionName.Add("Hands");
-                    Player.WeaponHeld.Class = "Weapon";
-                    Player.WeaponHeld.Examine = "Your own hands, how they got on the floor I will never know...";
-                    Player.ArmorWorn = new itemInfo[5];
 
                     Console.Clear();
                     
@@ -421,6 +407,11 @@ namespace Legend_Of_Drongo
             Player.WeaponHeld.Class = "Weapon";
             Player.WeaponHeld.Examine = "Your own hands, how they got on the floor I will never know...";
             Player.ArmorWorn = new itemInfo[5];
+            Player.Level = 1;
+            Player.MaxHp = 100;
+            Player.Speed = 1;
+            Player.Resitence = 0;
+            Player.Strength = 0;
 
             return Player;
         }
@@ -1538,6 +1529,43 @@ namespace Legend_Of_Drongo
                 }
                 #endregion
 
+                #region Level Up
+
+                int XP = Player.XP;
+                int Level = Player.Level;
+                if (XP > 1000 && Level < 2) LevelUp(2);
+                else if (XP > 2250 && Level < 3) LevelUp(3);
+                else if (XP > 3750 && Level < 4) LevelUp(4);
+                else if (XP > 5500 && Level < 5) LevelUp(5);
+                else if (XP > 7500 && Level < 6) LevelUp(6);
+                else if (XP > 10000 && Level < 7) LevelUp(7);
+                else if (XP > 13000 && Level < 8) LevelUp(8);
+                else if (XP > 16500 && Level < 9) LevelUp(9);
+                else if (XP > 20500 && Level < 10) LevelUp(10);
+                else if (XP > 26000 && Level < 11) LevelUp(11);
+                else if (XP > 32000 && Level < 12) LevelUp(12);
+                else if (XP > 39000 && Level < 13) LevelUp(13);
+                else if (XP > 47000 && Level < 14) LevelUp(14);
+                else if (XP > 57000 && Level < 15) LevelUp(15);
+                else if (XP > 69000 && Level < 16) LevelUp(16);
+                else if (XP > 83000 && Level < 17) LevelUp(17);
+                else if (XP > 99000 && Level < 18) LevelUp(18);
+                else if (XP > 119000 && Level < 19) LevelUp(19);
+                else if (XP > 143000 && Level < 20) LevelUp(20);
+                else if (XP > 175000 && Level < 21) LevelUp(21);
+                else if (XP > 210000 && Level < 22) LevelUp(22);
+                else if (XP > 255000 && Level < 23) LevelUp(23);
+                else if (XP > 310000 && Level < 24) LevelUp(24);
+                else if (XP > 375000 && Level < 25) LevelUp(25);
+                else if (XP > 450000 && Level < 26) LevelUp(26);
+                else if (XP > 550000 && Level < 27) LevelUp(27);
+                else if (XP > 675000 && Level < 28) LevelUp(28);
+                else if (XP > 825000 && Level < 29) LevelUp(29);
+                else if (XP > 1000000 && Level < 30) LevelUp(30);
+
+
+                #endregion
+
                 #region GameOver
                 if (Player.HPBonus <= 0)
                 {
@@ -1618,8 +1646,10 @@ namespace Legend_Of_Drongo
         
         public static void PlayerStatus()
         {
-            Console.WriteLine(WordWrap(string.Concat("Your HP is at ", Player.HPBonus, "%")));
+            Console.WriteLine(WordWrap(string.Concat("Your HP is at ", Player.HPBonus, "/",Player.MaxHp,"")));
             if (Player.HPBonus < 20) Console.WriteLine(WordWrap("Your health is low, you should find some food or a place to rest!"));
+            Console.WriteLine("\nCurrent Level: {3}  Current XP: {4}\nStrength: {0}  Speed: {1}  Resistence: {2}", Player.Strength, Player.Speed, Player.Resitence, Player.Level, Player.XP);
+            
             Console.WriteLine(WordWrap(string.Concat("\nYour current weapon is: ", Player.WeaponHeld.Name)));
 
             Console.WriteLine(WordWrap(string.Concat("\nYou current armor is at ", Player.ArmorBonus, "%\n")));
@@ -2128,7 +2158,7 @@ namespace Legend_Of_Drongo
                                 {
                                     if (EventTrigger("iteminteraction") == true) Console.WriteLine(WordWrap(CurrentRoom.items[index].interactionResponse));
                                     else Console.WriteLine("The items interacted, but nothing happened");
-
+                                    Player.inventory[ItemFoundAt] = GainXPfromItem(Player.inventory[ItemFoundAt]);
                                     itemFound = true;
                                     for (int i = ItemFoundAt; i < (20 - Player.invspace); i++)
                                     {
@@ -2178,6 +2208,11 @@ namespace Legend_Of_Drongo
                                 {
                                     itemRead = true;
                                     Response = CurrentRoom.items[counter].Examine;
+                                    if (CurrentRoom.items[counter].XP != 0)
+                                    {
+                                        Player.XP = Player.XP + CurrentRoom.items[counter].XP;
+                                        CurrentRoom.items[counter] = GainXPfromItem(CurrentRoom.items[counter]);
+                                    }
                                 }
                             }
                         }
@@ -2196,6 +2231,7 @@ namespace Legend_Of_Drongo
                         {
                             itemRead = true;
                             Response = Player.inventory[counter].Examine;
+                            Player.inventory[counter] = GainXPfromItem(Player.inventory[counter]);
                         }
                     }
                     counter++;
@@ -2220,15 +2256,16 @@ namespace Legend_Of_Drongo
                     if (Player.inventory[index].HPmod > 0) Response = string.Concat("You gained ", Player.inventory[index].HPmod, "HP from ", ObjectName);
                     else Response = string.Concat("You lost ", Player.inventory[index].HPmod, "HP from ", ObjectName);
                     itemEaten = true;
-                    if (Player.HPBonus > 150) Player.HPBonus = 150;
+                    if (Player.HPBonus > Player.MaxHp) Player.HPBonus = Player.MaxHp;
 
+                    Player.inventory[index] = GainXPfromItem(Player.inventory[index]);
+                    
                     for (int i = index; i < (20 - Player.invspace); i++)
                     {
                         Player.inventory[i] = Player.inventory[i + 1];
                     }
                     Array.Clear(Player.inventory, (20 - Player.invspace), (20 - Player.invspace));
                     Player.invspace = Player.invspace + 1;
-
                 }
                 index++;
             }
@@ -2363,6 +2400,7 @@ namespace Legend_Of_Drongo
 
                             if (ThisEnemy.Money != 0) Console.WriteLine("\nYou take {0} gold coins from {1}'s corpse", ThisEnemy.Money, enemy);
                             Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
+                            Player.XP = Player.XP + ThisEnemy.XP;  //Take XP 
                             
                             EventTrigger("killenemy");
                             if (CurrentRoom.Enemy.Count - 1 != 0)
@@ -2402,10 +2440,10 @@ namespace Legend_Of_Drongo
             TempFighter.name = Player.name;
             TempFighter.HP = Player.HPBonus;
             TempFighter.Weapon = WeaponUsed;
-            TempFighter.AttackMod = WeaponUsed.AttackMod;
-            TempFighter.DefenseMod = Player.ArmorBonus;
+            TempFighter.AttackMod = (WeaponUsed.AttackMod+ Player.Strength);
+            TempFighter.DefenseMod = (Player.ArmorBonus + Player.Resitence);
             TempFighter.isAlive = true;
-            TempFighter.initiative = RNG.Next(5, 100);  //Potentially add a speed bonus here?
+            TempFighter.initiative = RNG.Next(Player.Speed, 100);  //Use players speed bonus
             TempFighter.ID = 99;
             ThisFight.Add(TempFighter);
 
@@ -2503,6 +2541,7 @@ namespace Legend_Of_Drongo
                                 if (ThisEnemy.Money != 0) Console.WriteLine("\nYou take {0} gold coins from {1}'s corpse", ThisEnemy.Money, enemy);
 
                                 Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
+                                Player.XP = Player.XP + ThisEnemy.XP;  //Take XP 
                                 NumOfFighters = NumOfFighters - 1;
 
                                 EventTrigger("killenemy");
@@ -2599,7 +2638,7 @@ namespace Legend_Of_Drongo
                                 bedFound = true;
                                 Console.WriteLine(WordWrap(string.Concat("You lie down on your ", BedItem, " and go to sleep")));
                                 Console.WriteLine("You awaken in the morning feeling refreshed");
-                                Player.HPBonus = 150;
+                                Player.HPBonus = Player.MaxHp;
                             }
                             else
                             {
@@ -2706,6 +2745,7 @@ namespace Legend_Of_Drongo
                             NewEnemy.Money = CurrentRoom.Civilians[index].Money;
                             NewEnemy.HPBonus = CurrentRoom.Civilians[index].HPBonus;
                             NewEnemy.armor = CurrentRoom.Civilians[index].armor;
+                            NewEnemy.XP = CurrentRoom.Civilians[index].XP;
                             NewEnemy.PayOff = 0;
                             NewEnemy.Weapon.Class = "Weapon";
                             NewEnemy.Weapon.AttackMod = 1;
@@ -2869,6 +2909,8 @@ namespace Legend_Of_Drongo
                             newItem.InteractionName.Add(string.Concat(ThisEnemy.name, "'s body"));
                             newItem.InteractionName.Add(ThisEnemy.name);
                             CurrentRoom.items.Add(newItem);
+
+                            Player.XP = Player.XP + ThisEnemy.XP;
                         }
                         EventTrigger("killallenemies");
                         CurrentRoom.Enemy.Clear();   //Overwrite all enemies
@@ -2945,9 +2987,42 @@ namespace Legend_Of_Drongo
                         CurrentRoom.Enemy.Add(Enemy);
                     }
                 }
+                else if (thisEvent.Action == "giveXP")
+                {
+                    int n;
+                    if (int.TryParse(thisEvent.EventValue, out n)) Player.XP = Player.XP + n;
+                }
                 else thisEvent.Triggered = false;
             }
             return thisEvent;
+        }
+
+        public static void LevelUp(int Level)
+        {
+            Player.Speed = Player.Speed + 1;
+            Player.Strength = Player.Strength +0.5;
+            Player.Resitence = Player.Resitence + 1;
+            Player.MaxHp = Player.MaxHp + 5;
+            Player.HPBonus = Player.HPBonus + 5;
+            Player.Level = Level;
+
+            Console.WriteLine("You have advanced to Level {0}", Level);
+        }
+
+        public static itemInfo GainXPfromItem(itemInfo ItemUsed)
+        {
+            if (ItemUsed.XP > 0) Player.XP = Player.XP + ItemUsed.XP;
+            ItemUsed.XP = 0;
+
+            return ItemUsed;
+        }
+
+        public static CivilianProfile GainXPfromNPC(CivilianProfile NPC)
+        {
+            if (NPC.XP > 0) Player.XP = Player.XP + NPC.XP;
+            NPC.XP = 0;
+
+            return NPC;
         }
 
         public static void Music(string Command)
@@ -3045,3 +3120,4 @@ namespace Legend_Of_Drongo
 
     }   //end of class
 }   //end of namespace
+//end of line...

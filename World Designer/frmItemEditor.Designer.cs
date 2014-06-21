@@ -57,6 +57,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtInteractionMessage = new System.Windows.Forms.TextBox();
             this.cmdCancelEdit = new System.Windows.Forms.Button();
+            this.txtXP = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdAddItems
@@ -181,7 +183,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(64, 164);
+            this.label6.Location = new System.Drawing.Point(51, 164);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 21;
@@ -190,7 +192,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(252, 164);
+            this.label7.Location = new System.Drawing.Point(163, 164);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(55, 13);
             this.label7.TabIndex = 22;
@@ -199,7 +201,7 @@
             // txtDamage
             // 
             this.txtDamage.Enabled = false;
-            this.txtDamage.Location = new System.Drawing.Point(119, 161);
+            this.txtDamage.Location = new System.Drawing.Point(106, 161);
             this.txtDamage.Name = "txtDamage";
             this.txtDamage.Size = new System.Drawing.Size(28, 20);
             this.txtDamage.TabIndex = 6;
@@ -207,7 +209,7 @@
             // txtProtection
             // 
             this.txtProtection.Enabled = false;
-            this.txtProtection.Location = new System.Drawing.Point(313, 161);
+            this.txtProtection.Location = new System.Drawing.Point(224, 161);
             this.txtProtection.Name = "txtProtection";
             this.txtProtection.Size = new System.Drawing.Size(28, 20);
             this.txtProtection.TabIndex = 7;
@@ -215,7 +217,7 @@
             // txtHP
             // 
             this.txtHP.Enabled = false;
-            this.txtHP.Location = new System.Drawing.Point(502, 161);
+            this.txtHP.Location = new System.Drawing.Point(365, 161);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(28, 20);
             this.txtHP.TabIndex = 8;
@@ -223,7 +225,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(425, 164);
+            this.label8.Location = new System.Drawing.Point(288, 164);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 13);
             this.label8.TabIndex = 23;
@@ -327,11 +329,30 @@
             this.cmdCancelEdit.UseVisualStyleBackColor = true;
             this.cmdCancelEdit.Click += new System.EventHandler(this.cmdCancelEdit_Click);
             // 
+            // txtXP
+            // 
+            this.txtXP.Enabled = false;
+            this.txtXP.Location = new System.Drawing.Point(473, 161);
+            this.txtXP.Name = "txtXP";
+            this.txtXP.Size = new System.Drawing.Size(28, 20);
+            this.txtXP.TabIndex = 29;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(439, 164);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(21, 13);
+            this.label14.TabIndex = 30;
+            this.label14.Text = "XP";
+            // 
             // frmItemEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 397);
+            this.Controls.Add(this.txtXP);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.cmdCancelEdit);
             this.Controls.Add(this.txtInteractionMessage);
             this.Controls.Add(this.label13);
@@ -399,5 +420,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtInteractionMessage;
         private System.Windows.Forms.Button cmdCancelEdit;
+        private System.Windows.Forms.TextBox txtXP;
+        private System.Windows.Forms.Label label14;
     }
 }

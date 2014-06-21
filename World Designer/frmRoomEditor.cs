@@ -38,7 +38,7 @@ namespace Legend_Of_Drongo
                 lstColourPicker.SelectedIndex = lstColourPicker.FindString("Red");
             }
 
-            if (Room.RoomColour != null) lstColourPicker.FindString(Room.RoomColour);
+            if (Room.RoomColour != null) lstColourPicker.SelectedIndex = lstColourPicker.FindString(Room.RoomColour);
 
             if (Room.Description != null) txtDescription.Text = Room.Description;
             if (Room.AltDescription != null) txtAltDescription.Text = Room.AltDescription;
@@ -117,7 +117,9 @@ namespace Legend_Of_Drongo
         {
             if (lstItems.SelectedIndex > -1)
             {
-                Room.items.Add(Room.items[lstItems.SelectedIndex]);
+                DataTypes.itemInfo NewItem = new DataTypes.itemInfo();
+                NewItem = Room.items[lstItems.SelectedIndex];
+                Room.items.Add(NewItem);
                 GetAllItems();
             }
             else MessageBox.Show("Select an item to clone");

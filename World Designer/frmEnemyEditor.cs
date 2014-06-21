@@ -31,6 +31,7 @@ namespace Legend_Of_Drongo
             txtHP.Text = Enemy.HPBonus.ToString();
             txtArmor.Text = Enemy.armor.ToString();
             txtMoney.Text = Enemy.Money.ToString();
+            txtXP.Text = Enemy.XP.ToString();
 
             if (Enemy.KillMessage != null) txtKill.Text = Enemy.KillMessage;
             if (Enemy.DeathMessage != null) txtDeath.Text = Enemy.DeathMessage;
@@ -55,6 +56,8 @@ namespace Legend_Of_Drongo
             if (int.TryParse(txtArmor.Text, out n)) Enemy.armor= n;
             else return false;
             if (int.TryParse(txtMoney.Text, out n)) Enemy.Money = n;
+            else return false;
+            if (int.TryParse(txtXP.Text, out n)) Enemy.XP = n;
             else return false;
             if (int.TryParse(txtPayOff.Text, out n)) Enemy.PayOff = n;
             else return false;
@@ -87,7 +90,6 @@ namespace Legend_Of_Drongo
 
         private void cmdSaveEnemy_Click(object sender, EventArgs e)
         {
-
             if (SaveEnemy())
             {
                 ChangeMade = true;
