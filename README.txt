@@ -132,4 +132,9 @@ v2.4.0
 - Optimised form movement
 - Added regions to to engine Main to make easier to look at
 
+v2.4.1
+- Improved error handling to output files with exception details
+- Added ForceError method to test error handling
+
+
 Please report any bugs to joevandebilt@live.co.uk with a screenshot of what you can see and if possible which command you ran. Or use GitHub

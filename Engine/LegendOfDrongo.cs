@@ -624,7 +624,7 @@ namespace Legend_Of_Drongo
                     }
                     #endregion
 
-                    #region descriptions
+                    #region Descriptions
                     else if (PlayerCommand.ToLower().Contains("who am i") || PlayerCommand == "whoami")
                     {
                         Console.WriteLine(WordWrap(string.Concat("Your name is ", Player.name)));
@@ -1384,7 +1384,7 @@ namespace Legend_Of_Drongo
                     }
                     #endregion
 
-                    #region eat/drink 
+                    #region Eat/Drink 
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "eat" || PlayerCommand.ToLower().Split(' ')[0] == "drink" || PlayerCommand.ToLower().Split(' ')[0] == "consume")
                     {
                         if (Player.invspace != 20)
@@ -1498,16 +1498,43 @@ namespace Legend_Of_Drongo
                     {
                         Console.WriteLine("Row {0}, Col {1}, Level {2}", Char.ConvertFromUtf32(Player.CurrentPos[0]+65), (Player.CurrentPos[1]+1), (Player.CurrentPos[2] +1 ));
                     }
-
+                    else if (PlayerCommand.ToLower() == "force error" || PlayerCommand.ToLower() == "forceerror")
+                    {
+                        ForceError();
+                    }
                     else
                     {
                         Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Console.WriteLine(WordWrap("\nYou have encountered an error.\nThe game engine was not able to handle the command you entered. Please report this to the developer"));
-                    Console.WriteLine(WordWrap("\nThe command you entered was: " + PlayerCommand + "\n\n"));
+                    string FileName = DateTime.Now.ToString(@"dd-MM-yyyy HHmmss");
+
+                    Console.WriteLine(WordWrap("\nYou have encountered an error.\nThe game engine was not able to handle the command you entered."));
+                    Console.WriteLine(WordWrap("\nAn error report has been created in .\\Errors\\" + FileName + ".txt\nPlease submit this to the developer"));
+
+                    if (!Directory.Exists(".\\Errors")) Directory.CreateDirectory(".\\Errors");
+                    using (StreamWriter file = new System.IO.StreamWriter(@".\Errors\"+FileName+".txt", true))
+                    {
+                        file.WriteLine("---Legend-Of-Drongo---");
+                        file.WriteLine("");
+                        file.WriteLine("Error logged at {0}", DateTime.Now.ToString(@"dd-MM-yyyy HH:mm:ss"));
+                        file.WriteLine("");                        
+                        file.WriteLine("Player Location: Row {0}, Col {1}, Level {2}\n\n", Char.ConvertFromUtf32(Player.CurrentPos[0] + 65), (Player.CurrentPos[1] + 1), (Player.CurrentPos[2] + 1));
+                        file.WriteLine("Command Entered: {0}\n\n", PlayerCommand);
+                        file.WriteLine("");
+                        file.WriteLine("");
+                        file.WriteLine("The stacktrace output can be scary, do not say the words out loud as you may summon a monster!");
+                        file.WriteLine("Error Message: {0}", ex.Message);
+                        file.WriteLine("Stacktrace:");
+                        file.WriteLine(ex.StackTrace);
+                        file.WriteLine("");
+                        file.WriteLine("");
+                        file.WriteLine("End of line...");
+
+                    }
+                    
                 }
                 #endregion
 
@@ -3010,6 +3037,11 @@ namespace Legend_Of_Drongo
             WrappedOutput = tempstring;
             return (WrappedOutput);
         }
-   
+
+        public static void ForceError()
+        {
+            Console.WriteLine(WordWrap(world[-1].CurrentFloor[-1, -1].Description));
+        }
+
     }   //end of class
 }   //end of namespace
