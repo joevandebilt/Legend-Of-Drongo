@@ -260,7 +260,8 @@ namespace Legend_Of_Drongo
         {
             if (lstItems.SelectedIndex > -1)
             {
-                Event.Items.Add(Event.Items[lstItems.SelectedIndex]);
+                DataTypes dt = new DataTypes();
+                Event.Items.Add(dt.CloneItem(Event.Items[lstItems.SelectedIndex]));
                 GetAllItems();
             }
             else MessageBox.Show("Select an item to clone");
@@ -322,7 +323,8 @@ namespace Legend_Of_Drongo
         {
             if (lstNPCs.SelectedIndex > -1)
             {
-                Event.NPCs.Add(Event.NPCs[lstNPCs.SelectedIndex]);
+                DataTypes dt = new DataTypes();
+                Event.NPCs.Add(dt.CloneNPC(Event.NPCs[lstNPCs.SelectedIndex]));
                 GetAllNPCs();
             }
             else MessageBox.Show("Select an NPC to Clone");
@@ -385,7 +387,8 @@ namespace Legend_Of_Drongo
         {
             if (lstEnemies.SelectedIndex > -1)
             {
-                Event.Enemies.Add(Event.Enemies[lstEnemies.SelectedIndex]);
+                DataTypes dt = new DataTypes();
+                Event.Enemies.Add(dt.CloneEnemy(Event.Enemies[lstEnemies.SelectedIndex]));
                 GetAllEnemies();
             }
             else MessageBox.Show("Select an enemy to clone");

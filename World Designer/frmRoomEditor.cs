@@ -117,9 +117,8 @@ namespace Legend_Of_Drongo
         {
             if (lstItems.SelectedIndex > -1)
             {
-                DataTypes.itemInfo NewItem = new DataTypes.itemInfo();
-                NewItem = Room.items[lstItems.SelectedIndex];
-                Room.items.Add(NewItem);
+                DataTypes dt = new DataTypes();
+                Room.items.Add(dt.CloneItem(Room.items[lstItems.SelectedIndex]));
                 GetAllItems();
             }
             else MessageBox.Show("Select an item to clone");
@@ -181,7 +180,8 @@ namespace Legend_Of_Drongo
         {
             if (lstEnemies.SelectedIndex > -1)
             {
-                Room.Enemy.Add(Room.Enemy[lstEnemies.SelectedIndex]);
+                DataTypes dt = new DataTypes();
+                Room.Enemy.Add(dt.CloneEnemy(Room.Enemy[lstEnemies.SelectedIndex]));
                 GetAllEnemies();
             }
             else MessageBox.Show("Select an enemy to clone");
@@ -244,7 +244,8 @@ namespace Legend_Of_Drongo
         {
             if (lstNPCs.SelectedIndex > -1)
             {
-                Room.Civilians.Add(Room.Civilians[lstNPCs.SelectedIndex]);
+                DataTypes dt = new DataTypes();
+                Room.Civilians.Add(dt.CloneNPC(Room.Civilians[lstNPCs.SelectedIndex]));
                 GetAllNPCs();
             }
             else MessageBox.Show("Select an NPC to Clone");
@@ -307,7 +308,8 @@ namespace Legend_Of_Drongo
         {
             if (lstEvents.SelectedIndex > -1)
             {
-                Room.Events.Add(Room.Events[lstEvents.SelectedIndex]);
+                DataTypes dt = new DataTypes();
+                Room.Events.Add(dt.CloneEvent(Room.Events[lstEvents.SelectedIndex]));
                 GetAllEvents();
             }
             else MessageBox.Show("Select an Event to Clone");

@@ -2210,7 +2210,6 @@ namespace Legend_Of_Drongo
                                     Response = CurrentRoom.items[counter].Examine;
                                     if (CurrentRoom.items[counter].XP != 0)
                                     {
-                                        Player.XP = Player.XP + CurrentRoom.items[counter].XP;
                                         CurrentRoom.items[counter] = GainXPfromItem(CurrentRoom.items[counter]);
                                     }
                                 }

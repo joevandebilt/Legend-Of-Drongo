@@ -109,7 +109,8 @@ namespace Legend_Of_Drongo
         {
             if (lstInventory.SelectedIndex > -1)
             {
-                NPC.inventory.Add(NPC.inventory[lstInventory.SelectedIndex]);
+                DataTypes dt = new DataTypes();
+                NPC.inventory.Add(dt.CloneItem(NPC.inventory[lstInventory.SelectedIndex]));
                 GetAllItems();
             }
             else MessageBox.Show("Select an item to clone");
@@ -172,7 +173,8 @@ namespace Legend_Of_Drongo
         {
             if (lstKnowledge.SelectedIndex > -1)
             {
-                NPC.Knowledge.Add(NPC.Knowledge[lstKnowledge.SelectedIndex]);
+                DataTypes dt = new DataTypes();
+                NPC.Knowledge.Add(dt.CloneFact(NPC.Knowledge[lstKnowledge.SelectedIndex]));
                 GetAllKnowledge();
             }
             else MessageBox.Show("Select a knowledge item to clone");

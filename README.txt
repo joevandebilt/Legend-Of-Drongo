@@ -13,7 +13,7 @@ Known Bugs:
 - Surprise Attack will only allow twice - FIXED v2.1.2
 - When enemy killed, they can still make a move - FIXED v2.3.0
 - Double items being produced? Cell 8,6,1 - FIXED v2.3.2
-- Item interaction names being shared across items in same room. - Only occurs for cloned items
+- Item interaction names being shared across items in same room. - Only occurs for cloned items - FIXED v2.5.1
 - Could not fight Juan, Terry or Gary in FWWOTT
 
 
@@ -151,5 +151,8 @@ v2.5.0
 - Added XP to item data structure and added text field for Item Editor in world
 - Fixed Issue with colour picker on room editor
 
+v2.5.1
+- Added Clone Methods for each data object to fix issue with cloning items writing to same memory block. 
+- Fixed issue with reading items earning double XP
 
 If you encounter an error, please email to error file to joevandebilt@live.co.uk, or report it on gitHub

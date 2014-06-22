@@ -155,6 +155,138 @@ namespace Legend_Of_Drongo
             public string Knowledge;
         }
 
+        #region CloningMethods
 
+        public roomInfo CloneRoom(roomInfo Room)
+        {
+            roomInfo NewRoom = new roomInfo();
+
+            NewRoom.Description = Room.Description;
+            NewRoom.AltDescription = Room.AltDescription;
+            NewRoom.CanMove = Room.CanMove;
+            NewRoom.LockedIn = Room.LockedIn;
+            NewRoom.SuicideAction = Room.SuicideAction;
+            NewRoom.RoomColour = Room.RoomColour;
+
+            NewRoom.Events = new List<Event>();
+            NewRoom.Civilians = new List<CivilianProfile>();
+            NewRoom.items = new List<itemInfo>();
+            NewRoom.Enemy = new List<EnemyProfile>();
+
+            foreach (Event newEvent in Room.Events) { NewRoom.Events.Add(CloneEvent(newEvent)); }
+            foreach (CivilianProfile NPC in Room.Civilians) { NewRoom.Civilians.Add(CloneNPC(NPC)); }
+            foreach (itemInfo NewItem in Room.items) { NewRoom.items.Add(CloneItem(NewItem)); }
+            NewRoom.Enemy = Room.Enemy;
+
+            return NewRoom;
+        }
+
+        public itemInfo CloneItem(itemInfo Item)
+        {
+
+            itemInfo NewItem = new itemInfo();
+
+            NewItem.InteractionName = new List<string>();
+            foreach (string name in Item.InteractionName) { NewItem.InteractionName.Add(name); }
+            
+            NewItem.Name = Item.Name;
+            NewItem.Examine = Item.Examine;
+            NewItem.AttackMod = Item.AttackMod;
+            NewItem.DefenseMod = Item.DefenseMod;
+            NewItem.HPmod = Item.HPmod;
+            NewItem.CanPickUp = Item.CanPickUp;
+            NewItem.Class = Item.Class;
+            NewItem.GoodHit = Item.BadHit;
+            NewItem.MedHit = Item.MedHit;
+            NewItem.BadHit = Item.BadHit;
+            NewItem.Value = Item.Value;
+            NewItem.ItemNeeded = Item.ItemNeeded;
+            NewItem.interactionResponse = Item.interactionResponse;
+            NewItem.XP = Item.XP;
+
+            return NewItem;
+        }
+
+        public Event CloneEvent(Event Event)
+        {
+            Event NewEvent = new Event();
+
+            NewEvent.Trigger = Event.Trigger;
+            NewEvent.Action = Event.Action;
+            NewEvent.Coodinates = new int[3];
+
+            NewEvent.Coodinates[0] = Event.Coodinates[0];
+            NewEvent.Coodinates[1] = Event.Coodinates[1];
+            NewEvent.Coodinates[2] = Event.Coodinates[2];
+            
+            NewEvent.EventValue = Event.EventValue;
+
+            NewEvent.Triggered = Event.Triggered;
+
+            NewEvent.Enemies = new List<EnemyProfile>();
+            NewEvent.NPCs = new List<CivilianProfile>();
+            NewEvent.Items = new List<itemInfo>();
+
+            foreach (EnemyProfile NewEnemy in Event.Enemies) { NewEvent.Enemies.Add(CloneEnemy(NewEnemy)); }
+            foreach (CivilianProfile NewNPC in Event.NPCs) { NewEvent.NPCs.Add(CloneNPC(NewNPC)); }
+            foreach (itemInfo NewItem in Event.Items) { NewEvent.Items.Add(CloneItem(NewItem)); }
+
+            return NewEvent;
+        }
+
+        public EnemyProfile CloneEnemy(EnemyProfile Enemy) 
+        { 
+            EnemyProfile NewEnemy = new EnemyProfile();
+
+            NewEnemy.name = Enemy.name;
+            NewEnemy.Weapon = CloneItem(Enemy.Weapon);
+            NewEnemy.HPBonus = Enemy.HPBonus;
+            NewEnemy.armor = Enemy.armor;
+            NewEnemy.Money = Enemy.Money;
+            NewEnemy.KillMessage = Enemy.KillMessage;
+            NewEnemy.DeathMessage = Enemy.DeathMessage;
+            NewEnemy.PayOff = Enemy.PayOff;
+            NewEnemy.PayOffResponse = Enemy.PayOffResponse;
+            NewEnemy.XP = Enemy.XP;
+
+            return NewEnemy;
+        }
+
+        public CivilianProfile CloneNPC(CivilianProfile NPC) 
+        { 
+            CivilianProfile NewNPC = new CivilianProfile();
+
+            NewNPC.name = NPC.name;
+            NewNPC.TalkToResponse = NPC.TalkToResponse;
+
+            NewNPC.inventory = new List<itemInfo>();
+            foreach (itemInfo item in NPC.inventory) { NewNPC.inventory.Add(CloneItem(item)); }
+
+            NewNPC.Knowledge = new List<Facts>();
+            foreach (Facts fact in NPC.Knowledge) { NewNPC.Knowledge.Add(CloneFact(fact)); }
+
+            NewNPC.HPBonus = NPC.HPBonus;
+            NewNPC.armor = NPC.armor;
+            NewNPC.Money = NPC.Money;
+            NewNPC.willSell = NPC.willSell;
+            NewNPC.willBuy = NPC.willBuy;
+            NewNPC.MerchantType = NPC.MerchantType;
+            NewNPC.QuestCharacter = NPC.QuestCharacter;
+            NewNPC.XP = NPC.XP;
+
+            return NewNPC;
+        }
+
+        public Facts CloneFact(Facts Fact)
+        {
+            Facts NewFact = new Facts();
+
+            NewFact.Topic = Fact.Topic;
+            NewFact.Knowledge = Fact.Knowledge;
+
+            return NewFact;
+        }
+
+        #endregion
     }
 }
