@@ -44,6 +44,7 @@ namespace Legend_Of_Drongo
 
                 ThisFloor = world[0];
                 txtFloorName.Text = ThisFloor.FloorName;
+                txtMusicPath.Text = ThisFloor.FloorSong;
                 cmbLevelSelect.Items.Clear();
                 for (int i=1;i<=world.Count;i++)
                 {
@@ -287,6 +288,7 @@ namespace Legend_Of_Drongo
                 FloorNum = index;   //Set floor number to selected index
                 ThisFloor = world[index];   //Load in the floor
                 txtFloorName.Text = ThisFloor.FloorName;
+                txtMusicPath.Text = ThisFloor.FloorSong;
             }
             tblWorldLevel.Refresh(); //Draw the grid
         }
@@ -385,6 +387,19 @@ namespace Legend_Of_Drongo
                 else return false;
             }
             catch { return false; }
+        }
+
+        private void cmdPickMusic_Click(object sender, EventArgs e)
+        {
+            frmMusicPicker NewForm = new frmMusicPicker();
+            NewForm.ShowDialog();
+
+            string MusicPath = NewForm.MusicPath;
+            if (MusicPath != string.Empty)
+            {
+                txtMusicPath.Text = MusicPath;
+                ThisFloor.FloorSong = MusicPath;
+            }
         }
     }
 }

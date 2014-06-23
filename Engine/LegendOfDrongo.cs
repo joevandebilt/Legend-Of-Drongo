@@ -2938,6 +2938,9 @@ namespace Legend_Of_Drongo
                 }
                 else if (thisEvent.Action.ToLower() == "change location") //change floor
                 {
+                    bool newFloor = false;
+                    if (thisEvent.Coodinates[2] != Player.CurrentPos[2]) newFloor = true;   //If the player is changing floors
+                    
                     //ThisEvent will remain bool untriggered as will allow multiple re-use
                     Console.ReadLine();
                     world[Player.CurrentPos[2]] = ThisFloor;    //save floor to list. 
@@ -2949,13 +2952,20 @@ namespace Legend_Of_Drongo
                     Console.Clear();    //clear the screen
                     Console.WriteLine(WordWrap(CurrentRoom.Description));
 
-                    //MusicPlayer.SoundLocation = SongList[Player.CurrentPos[2]];
-                    //Music("start");
+                    if (newFloor == true && ThisFloor.FloorSong != null && File.Exists(ThisFloor.FloorSong))
+                    {
+                        MusicPlayer.SoundLocation = ThisFloor.FloorSong;
+                        Music("Start");
+                    }
                 }
                 else if (thisEvent.Action.ToLower() == "change objective")
                 {
                     Player.Objective = thisEvent.EventValue;
                     Console.WriteLine("Your current objective has changed.");
+                }
+                else if (thisEvent.Action.ToLower() == "custom description")
+                {
+                    CurrentRoom.Description = thisEvent.EventValue;
                 }
                 else if (thisEvent.Action.ToLower() == "output text")
                 {

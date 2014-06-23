@@ -118,7 +118,6 @@ F:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe.man
 F:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.application
 F:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe
 F:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.pdb
-F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
 F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
 F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEventEditor.resources
 F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmItemEditor.resources
@@ -131,3 +130,5 @@ F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.fr
 F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
 F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
 F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
+F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMusicPicker.resources
+F:\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache

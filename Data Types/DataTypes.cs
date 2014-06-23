@@ -173,9 +173,9 @@ namespace Legend_Of_Drongo
             NewRoom.items = new List<itemInfo>();
             NewRoom.Enemy = new List<EnemyProfile>();
 
-            foreach (Event newEvent in Room.Events) { NewRoom.Events.Add(CloneEvent(newEvent)); }
-            foreach (CivilianProfile NPC in Room.Civilians) { NewRoom.Civilians.Add(CloneNPC(NPC)); }
-            foreach (itemInfo NewItem in Room.items) { NewRoom.items.Add(CloneItem(NewItem)); }
+            if (Room.Events != null) foreach (Event newEvent in Room.Events) { NewRoom.Events.Add(CloneEvent(newEvent)); }
+            if (Room.Civilians != null) foreach (CivilianProfile NPC in Room.Civilians) { NewRoom.Civilians.Add(CloneNPC(NPC)); }
+            if (Room.items != null) foreach (itemInfo NewItem in Room.items) { NewRoom.items.Add(CloneItem(NewItem)); }
             NewRoom.Enemy = Room.Enemy;
 
             return NewRoom;
@@ -187,7 +187,7 @@ namespace Legend_Of_Drongo
             itemInfo NewItem = new itemInfo();
 
             NewItem.InteractionName = new List<string>();
-            foreach (string name in Item.InteractionName) { NewItem.InteractionName.Add(name); }
+            if (Item.InteractionName != null) foreach (string name in Item.InteractionName) { NewItem.InteractionName.Add(name); }
             
             NewItem.Name = Item.Name;
             NewItem.Examine = Item.Examine;
@@ -227,9 +227,9 @@ namespace Legend_Of_Drongo
             NewEvent.NPCs = new List<CivilianProfile>();
             NewEvent.Items = new List<itemInfo>();
 
-            foreach (EnemyProfile NewEnemy in Event.Enemies) { NewEvent.Enemies.Add(CloneEnemy(NewEnemy)); }
-            foreach (CivilianProfile NewNPC in Event.NPCs) { NewEvent.NPCs.Add(CloneNPC(NewNPC)); }
-            foreach (itemInfo NewItem in Event.Items) { NewEvent.Items.Add(CloneItem(NewItem)); }
+            if (Event.Enemies != null) foreach (EnemyProfile NewEnemy in Event.Enemies) { NewEvent.Enemies.Add(CloneEnemy(NewEnemy)); }
+            if (Event.NPCs != null) foreach (CivilianProfile NewNPC in Event.NPCs) { NewEvent.NPCs.Add(CloneNPC(NewNPC)); }
+            if (Event.Items != null) foreach (itemInfo NewItem in Event.Items) { NewEvent.Items.Add(CloneItem(NewItem)); }
 
             return NewEvent;
         }
@@ -260,10 +260,10 @@ namespace Legend_Of_Drongo
             NewNPC.TalkToResponse = NPC.TalkToResponse;
 
             NewNPC.inventory = new List<itemInfo>();
-            foreach (itemInfo item in NPC.inventory) { NewNPC.inventory.Add(CloneItem(item)); }
+            if (NPC.inventory != null) foreach (itemInfo item in NPC.inventory) { NewNPC.inventory.Add(CloneItem(item)); }
 
             NewNPC.Knowledge = new List<Facts>();
-            foreach (Facts fact in NPC.Knowledge) { NewNPC.Knowledge.Add(CloneFact(fact)); }
+            if (NPC.Knowledge != null) foreach (Facts fact in NPC.Knowledge) { NewNPC.Knowledge.Add(CloneFact(fact)); }
 
             NewNPC.HPBonus = NPC.HPBonus;
             NewNPC.armor = NPC.armor;

@@ -59,6 +59,10 @@ namespace Legend_Of_Drongo
             this.txtWorldName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFloorName = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtMusicPath = new System.Windows.Forms.TextBox();
+            this.cmdPickMusic = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdMainMenu
@@ -141,13 +145,14 @@ namespace Legend_Of_Drongo
             // 
             // lblEditor
             // 
-            this.lblEditor.AutoSize = true;
+            this.lblEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditor.Location = new System.Drawing.Point(276, 45);
+            this.lblEditor.Location = new System.Drawing.Point(33, 42);
             this.lblEditor.Name = "lblEditor";
-            this.lblEditor.Size = new System.Drawing.Size(97, 16);
+            this.lblEditor.Size = new System.Drawing.Size(396, 20);
             this.lblEditor.TabIndex = 11;
             this.lblEditor.Text = "Editing Cell 1,A";
+            this.lblEditor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -358,16 +363,56 @@ namespace Legend_Of_Drongo
             // 
             // txtFloorName
             // 
-            this.txtFloorName.Location = new System.Drawing.Point(435, 12);
+            this.txtFloorName.Location = new System.Drawing.Point(516, 11);
             this.txtFloorName.Name = "txtFloorName";
             this.txtFloorName.Size = new System.Drawing.Size(149, 20);
             this.txtFloorName.TabIndex = 35;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(446, 14);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(64, 13);
+            this.label22.TabIndex = 36;
+            this.label22.Text = "Level Name";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(446, 45);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(64, 13);
+            this.label23.TabIndex = 38;
+            this.label23.Text = "Level Music";
+            // 
+            // txtMusicPath
+            // 
+            this.txtMusicPath.Location = new System.Drawing.Point(516, 42);
+            this.txtMusicPath.Name = "txtMusicPath";
+            this.txtMusicPath.ReadOnly = true;
+            this.txtMusicPath.Size = new System.Drawing.Size(131, 20);
+            this.txtMusicPath.TabIndex = 37;
+            // 
+            // cmdPickMusic
+            // 
+            this.cmdPickMusic.Location = new System.Drawing.Point(649, 42);
+            this.cmdPickMusic.Name = "cmdPickMusic";
+            this.cmdPickMusic.Size = new System.Drawing.Size(25, 20);
+            this.cmdPickMusic.TabIndex = 39;
+            this.cmdPickMusic.Text = "...";
+            this.cmdPickMusic.UseVisualStyleBackColor = true;
+            this.cmdPickMusic.Click += new System.EventHandler(this.cmdPickMusic_Click);
             // 
             // frmWorldDesigner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 548);
+            this.Controls.Add(this.cmdPickMusic);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.txtMusicPath);
+            this.Controls.Add(this.label22);
             this.Controls.Add(this.txtFloorName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtWorldName);
@@ -437,5 +482,9 @@ namespace Legend_Of_Drongo
         private System.Windows.Forms.TextBox txtWorldName;
         private System.Windows.Forms.Label label1;
         private TextBox txtFloorName;
+        private Label label22;
+        private Label label23;
+        private TextBox txtMusicPath;
+        private Button cmdPickMusic;
     }
 }

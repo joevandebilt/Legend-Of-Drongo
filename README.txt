@@ -14,15 +14,13 @@ Known Bugs:
 - When enemy killed, they can still make a move - FIXED v2.3.0
 - Double items being produced? Cell 8,6,1 - FIXED v2.3.2
 - Item interaction names being shared across items in same room. - Only occurs for cloned items - FIXED v2.5.1
-- Could not fight Juan, Terry or Gary in FWWOTT
+- Could not fight Juan, Terry or Gary in FWOTT (CANNOT REPLICATE)
 
 
 To Do:
 - Finish world.
-- File directories are fixed paths, add in choice of directory.
+- File directories are fixed paths, add in choice of directory. - Omitted
 - Add new features into Tutorial
-- Add XP system?
-- Re-Add Music System (add music per world + root directory?)
 
 Changes:
 V1.0.0
@@ -154,5 +152,12 @@ v2.5.0
 v2.5.1
 - Added Clone Methods for each data object to fix issue with cloning items writing to same memory block. 
 - Fixed issue with reading items earning double XP
+
+v2.5.2
+- Added frmMusicPicker to add music per floor
+- Added Level Music & Level name elements to frmWorldDesigner
+- Added floorMusic check to change location event, to start playing floor music in the event that one has been specified
+- Moved Event Actions and Triggers from Array into Lists
+- Added Event Action to set custom description of a room
 
 If you encounter an error, please email to error file to joevandebilt@live.co.uk, or report it on gitHub
