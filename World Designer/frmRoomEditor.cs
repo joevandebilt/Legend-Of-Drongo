@@ -35,7 +35,7 @@ namespace Legend_Of_Drongo
             else
             {
                 chkCanMove.Checked = true;
-                lstColourPicker.SelectedIndex = lstColourPicker.FindString("Red");
+                lstColourPicker.SelectedIndex = lstColourPicker.FindString("Green");
             }
 
             if (Room.RoomColour != null) lstColourPicker.SelectedIndex = lstColourPicker.FindString(Room.RoomColour);

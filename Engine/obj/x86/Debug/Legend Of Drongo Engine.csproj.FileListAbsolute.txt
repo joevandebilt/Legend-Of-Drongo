@@ -33,3 +33,8 @@ F:\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
 F:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe
 F:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.pdb
 F:\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo.exe
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo.pdb
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo.exe
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo.pdb
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache

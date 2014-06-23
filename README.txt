@@ -160,4 +160,10 @@ v2.5.2
 - Moved Event Actions and Triggers from Array into Lists
 - Added Event Action to set custom description of a room
 
+v2.5.3
+- Improved bribing semantics & running
+- Removed KillAllEnemies trigger from payoff method
+- Added GainXpfromEnemy Method
+- Added XP to food items in world
+
 If you encounter an error, please email to error file to joevandebilt@live.co.uk, or report it on gitHub

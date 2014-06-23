@@ -1043,21 +1043,27 @@ namespace Legend_Of_Drongo
                                     Console.WriteLine("You cannot bribe somebody with that amount");
                                 }
                             }
-                            else if (PlayerCommand.Split(' ')[0].ToLower() == "bribe" && PlayerCommand.Split(' ').Length == 2)
+                            else if (PlayerCommand.Split(' ')[0].ToLower() == "bribe")
                             {
                                 WhoToBribe = PlayerCommand.Split(' ')[1];
-                                Console.Write("How much do you want to give {0}? ", PlayerCommand.Split(' ')[1]);
-                                Int32.TryParse(Console.ReadLine(), out BribeAmount);
-                                if (BribeAmount == 0)
+                                int i = 2;
+                                int n;
+                                bool AmountFound = false;
+                                while (AmountFound == false && i < PlayerCommand.Split(' ').Length)
                                 {
-                                    dontrun = true;
-                                    Console.WriteLine("You cannot bribe somebody with that amount");
+                                    if (Int32.TryParse(PlayerCommand.Split(' ')[i], out n))
+                                    {
+                                        BribeAmount = n;
+                                        AmountFound = true;
+                                    }
+                                    else WhoToBribe = string.Concat(WhoToBribe, " ", PlayerCommand.Split(' ')[i]);
+                                    i++;
                                 }
-                            }
-                            else if (PlayerCommand.Split(' ')[0].ToLower() == "bribe" && PlayerCommand.Split(' ').Length == 3)
-                            {
-                                WhoToBribe = PlayerCommand.Split(' ')[1];
-                                Int32.TryParse(PlayerCommand.Split(' ')[2], out BribeAmount);
+                                if (AmountFound == false) 
+                                {
+                                    Console.Write("How much do you want to give {0}? ", WhoToBribe);
+                                    Int32.TryParse(Console.ReadLine(), out BribeAmount);
+                                }
                                 if (BribeAmount == 0)
                                 {
                                     dontrun = true;
@@ -1834,27 +1840,16 @@ namespace Legend_Of_Drongo
                         notHostile.willSell = false;
                         notHostile.Money = CurrentRoom.Enemy[index].Money + amount;
                         notHostile.QuestCharacter = false;
+                        notHostile.XP = 0;
                         CurrentRoom.Civilians.Add(notHostile);
 
                         Player.Money = Player.Money - amount;
-                        
-                        //int counter = 0;
+                        CurrentRoom.Enemy[index] = GainXPfromEnemy(CurrentRoom.Enemy[index]);
 
-                        if (CurrentRoom.Enemy.Count - 1 != 0)
-                        {
-                            for (int i = index; i < (CurrentRoom.Enemy.Count - 1); i++)
-                            {
-                                CurrentRoom.Enemy[i] = CurrentRoom.Enemy[i + 1];
-                            }
-                            CurrentRoom.items.RemoveAt(CurrentRoom.Enemy.Count - 1);
-                        }
-                        else
-                        {
-                            EventTrigger("killallenemies");
-                            CurrentRoom.Enemy.Clear();
-                            //break;
-                        }
-                        EventTrigger("payoff");
+                        //int counter = 0;
+                        
+                            CurrentRoom.Enemy.RemoveAt(index);
+                            EventTrigger("payoff");                        
                     }
                     else
                     {
@@ -3016,6 +3011,14 @@ namespace Legend_Of_Drongo
             Player.Level = Level;
 
             Console.WriteLine("You have advanced to Level {0}", Level);
+        }
+
+        public static EnemyProfile GainXPfromEnemy(EnemyProfile Enemy)
+        {
+            if (Enemy.XP > 0) Player.XP = Player.XP + Enemy.XP;
+            Enemy.XP = 0;
+
+            return Enemy;
         }
 
         public static itemInfo GainXPfromItem(itemInfo ItemUsed)

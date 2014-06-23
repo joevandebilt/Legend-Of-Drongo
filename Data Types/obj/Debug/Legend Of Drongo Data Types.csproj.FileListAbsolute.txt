@@ -28,3 +28,7 @@ F:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.dll
 F:\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.pdb
 F:\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
 F:\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo Data Types.dll
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo Data Types.pdb
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb

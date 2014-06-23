@@ -100,13 +100,13 @@ namespace Legend_Of_Drongo
 
             foreach (Description thisDesc in Triggers)
             {
-                cmbTrigger.Items.Add(desc.LongDesc);
+                cmbTrigger.Items.Add(thisDesc.LongDesc);
             }
             cmbTrigger.Items.Add("Unknown");
 
             foreach (Description thisDesc in Actions)
             {
-                cmbTrigger.Items.Add(desc.LongDesc);
+                cmbAction.Items.Add(thisDesc.LongDesc);
             }
 
             Event = thisEvent;
@@ -161,7 +161,7 @@ namespace Legend_Of_Drongo
             Event.Trigger = Triggers[cmbTrigger.FindString(cmbTrigger.Text)].ShortDesc;
             Event.Action = Actions[cmbAction.FindString(cmbAction.Text)].ShortDesc;
 
-            if (cmbAction.SelectedIndex == 0 || cmbAction.SelectedIndex == 1 || cmbAction.SelectedIndex == 3 || cmbAction.SelectedIndex == 4)
+            if (cmbRow.Enabled = true && cmbCol.Enabled == true && cmbFloor.Enabled == true)
             {
                 if (Event.Coodinates == null) Event.Coodinates = new int[3];
 
