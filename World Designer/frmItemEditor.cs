@@ -178,5 +178,11 @@ namespace Legend_Of_Drongo
             else if (cmbItemClass.Text.Contains("Armor")) txtProtection.Enabled = true;
             
         }
+
+        private void cmdHelp_Click(object sender, EventArgs e)
+        {
+            frmHelp NewForm = new frmHelp();
+            NewForm.Show();
+        }
     }
 }

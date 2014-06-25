@@ -97,5 +97,11 @@ namespace Legend_Of_Drongo
             }
             else MessageBox.Show("There is a problem saving the enemy. Check fields");
         }
+
+        private void cmdHelp_Click(object sender, EventArgs e)
+        {
+            frmHelp NewForm = new frmHelp();
+            NewForm.Show();
+        }
     }
 }

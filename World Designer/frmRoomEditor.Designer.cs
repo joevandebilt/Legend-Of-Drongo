@@ -184,6 +184,7 @@
             this.cmdFormHelp.TabIndex = 7;
             this.cmdFormHelp.Text = "Help";
             this.cmdFormHelp.UseVisualStyleBackColor = true;
+            this.cmdFormHelp.Click += new System.EventHandler(this.cmdFormHelp_Click);
             // 
             // txtSuicide
             // 

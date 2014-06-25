@@ -58,6 +58,7 @@
             this.cmdSaveKnowledge = new System.Windows.Forms.Button();
             this.cmdCloneItem = new System.Windows.Forms.Button();
             this.cmdCloneKnowledge = new System.Windows.Forms.Button();
+            this.cmdHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdCancel
@@ -339,11 +340,22 @@
             this.cmdCloneKnowledge.UseVisualStyleBackColor = true;
             this.cmdCloneKnowledge.Click += new System.EventHandler(this.cmdCloneKnowledge_Click);
             // 
+            // cmdHelp
+            // 
+            this.cmdHelp.Location = new System.Drawing.Point(515, 312);
+            this.cmdHelp.Name = "cmdHelp";
+            this.cmdHelp.Size = new System.Drawing.Size(123, 28);
+            this.cmdHelp.TabIndex = 59;
+            this.cmdHelp.Text = "Help";
+            this.cmdHelp.UseVisualStyleBackColor = true;
+            this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
+            // 
             // frmNPCEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 363);
+            this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.cmdCloneKnowledge);
             this.Controls.Add(this.cmdCloneItem);
             this.Controls.Add(this.cmdSaveKnowledge);
@@ -413,5 +425,6 @@
         private System.Windows.Forms.Button cmdSaveKnowledge;
         private System.Windows.Forms.Button cmdCloneItem;
         private System.Windows.Forms.Button cmdCloneKnowledge;
+        private System.Windows.Forms.Button cmdHelp;
     }
 }

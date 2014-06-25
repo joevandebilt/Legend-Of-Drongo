@@ -54,6 +54,7 @@
             this.cmdCloneEnemy = new System.Windows.Forms.Button();
             this.cmdCloneNPC = new System.Windows.Forms.Button();
             this.cmdCloneItem = new System.Windows.Forms.Button();
+            this.cmdHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -321,7 +322,7 @@
             this.cmdCloneNPC.TabIndex = 43;
             this.cmdCloneNPC.Text = "||";
             this.cmdCloneNPC.UseVisualStyleBackColor = true;
-            this.cmdCloneNPC.Click +=new System.EventHandler(this.cmdCloneNPC_Click);
+            this.cmdCloneNPC.Click += new System.EventHandler(this.cmdCloneNPC_Click);
             // 
             // cmdCloneItem
             // 
@@ -333,11 +334,22 @@
             this.cmdCloneItem.UseVisualStyleBackColor = true;
             this.cmdCloneItem.Click += new System.EventHandler(this.cmdCloneItem_Click);
             // 
+            // cmdHelp
+            // 
+            this.cmdHelp.Location = new System.Drawing.Point(563, 288);
+            this.cmdHelp.Name = "cmdHelp";
+            this.cmdHelp.Size = new System.Drawing.Size(108, 24);
+            this.cmdHelp.TabIndex = 45;
+            this.cmdHelp.Text = "Cancel";
+            this.cmdHelp.UseVisualStyleBackColor = true;
+            this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
+            // 
             // frmEventEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 324);
+            this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.cmdCloneEnemy);
             this.Controls.Add(this.cmdCloneNPC);
             this.Controls.Add(this.cmdCloneItem);
@@ -399,5 +411,6 @@
         private System.Windows.Forms.Button cmdCloneEnemy;
         private System.Windows.Forms.Button cmdCloneNPC;
         private System.Windows.Forms.Button cmdCloneItem;
+        private System.Windows.Forms.Button cmdHelp;
     }
 }

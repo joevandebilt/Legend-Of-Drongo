@@ -152,3 +152,5 @@ D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\World Design
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
+D:\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmHelp.resources
+D:\Dropbox\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmMusicPicker.resources

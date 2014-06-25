@@ -63,13 +63,14 @@ namespace Legend_Of_Drongo
             this.label23 = new System.Windows.Forms.Label();
             this.txtMusicPath = new System.Windows.Forms.TextBox();
             this.cmdPickMusic = new System.Windows.Forms.Button();
+            this.cmdHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdMainMenu
             // 
-            this.cmdMainMenu.Location = new System.Drawing.Point(504, 505);
+            this.cmdMainMenu.Location = new System.Drawing.Point(551, 503);
             this.cmdMainMenu.Name = "cmdMainMenu";
-            this.cmdMainMenu.Size = new System.Drawing.Size(150, 33);
+            this.cmdMainMenu.Size = new System.Drawing.Size(103, 33);
             this.cmdMainMenu.TabIndex = 8;
             this.cmdMainMenu.Text = "Main Menu";
             this.cmdMainMenu.UseVisualStyleBackColor = true;
@@ -79,7 +80,7 @@ namespace Legend_Of_Drongo
             // 
             this.cmdSaveWorld.Location = new System.Drawing.Point(36, 505);
             this.cmdSaveWorld.Name = "cmdSaveWorld";
-            this.cmdSaveWorld.Size = new System.Drawing.Size(150, 33);
+            this.cmdSaveWorld.Size = new System.Drawing.Size(103, 33);
             this.cmdSaveWorld.TabIndex = 5;
             this.cmdSaveWorld.Text = "Save World";
             this.cmdSaveWorld.UseVisualStyleBackColor = true;
@@ -100,9 +101,9 @@ namespace Legend_Of_Drongo
             // 
             // cmdTestWorld
             // 
-            this.cmdTestWorld.Location = new System.Drawing.Point(192, 505);
+            this.cmdTestWorld.Location = new System.Drawing.Point(145, 505);
             this.cmdTestWorld.Name = "cmdTestWorld";
-            this.cmdTestWorld.Size = new System.Drawing.Size(150, 33);
+            this.cmdTestWorld.Size = new System.Drawing.Size(103, 33);
             this.cmdTestWorld.TabIndex = 10;
             this.cmdTestWorld.Text = "Test World";
             this.cmdTestWorld.UseVisualStyleBackColor = true;
@@ -336,9 +337,9 @@ namespace Legend_Of_Drongo
             // 
             // cmdDeleteLevel
             // 
-            this.cmdDeleteLevel.Location = new System.Drawing.Point(348, 505);
+            this.cmdDeleteLevel.Location = new System.Drawing.Point(254, 505);
             this.cmdDeleteLevel.Name = "cmdDeleteLevel";
-            this.cmdDeleteLevel.Size = new System.Drawing.Size(150, 33);
+            this.cmdDeleteLevel.Size = new System.Drawing.Size(103, 33);
             this.cmdDeleteLevel.TabIndex = 32;
             this.cmdDeleteLevel.Text = "Delete Level";
             this.cmdDeleteLevel.UseVisualStyleBackColor = true;
@@ -404,11 +405,22 @@ namespace Legend_Of_Drongo
             this.cmdPickMusic.UseVisualStyleBackColor = true;
             this.cmdPickMusic.Click += new System.EventHandler(this.cmdPickMusic_Click);
             // 
+            // cmdHelp
+            // 
+            this.cmdHelp.Location = new System.Drawing.Point(442, 505);
+            this.cmdHelp.Name = "cmdHelp";
+            this.cmdHelp.Size = new System.Drawing.Size(103, 33);
+            this.cmdHelp.TabIndex = 40;
+            this.cmdHelp.Text = "Help";
+            this.cmdHelp.UseVisualStyleBackColor = true;
+            this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
+            // 
             // frmWorldDesigner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 548);
+            this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.cmdPickMusic);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.txtMusicPath);
@@ -486,5 +498,6 @@ namespace Legend_Of_Drongo
         private Label label23;
         private TextBox txtMusicPath;
         private Button cmdPickMusic;
+        private Button cmdHelp;
     }
 }

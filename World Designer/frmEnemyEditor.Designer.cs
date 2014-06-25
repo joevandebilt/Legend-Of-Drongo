@@ -51,6 +51,7 @@
             this.txtMoney = new System.Windows.Forms.TextBox();
             this.txtXP = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.cmdHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -198,7 +199,7 @@
             // 
             this.cmdSaveEnemy.Location = new System.Drawing.Point(16, 379);
             this.cmdSaveEnemy.Name = "cmdSaveEnemy";
-            this.cmdSaveEnemy.Size = new System.Drawing.Size(121, 27);
+            this.cmdSaveEnemy.Size = new System.Drawing.Size(101, 27);
             this.cmdSaveEnemy.TabIndex = 11;
             this.cmdSaveEnemy.Text = "Save Enemy";
             this.cmdSaveEnemy.UseVisualStyleBackColor = true;
@@ -246,11 +247,22 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "XP";
             // 
+            // cmdHelp
+            // 
+            this.cmdHelp.Location = new System.Drawing.Point(123, 378);
+            this.cmdHelp.Name = "cmdHelp";
+            this.cmdHelp.Size = new System.Drawing.Size(37, 28);
+            this.cmdHelp.TabIndex = 42;
+            this.cmdHelp.Text = "Help";
+            this.cmdHelp.UseVisualStyleBackColor = true;
+            this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
+            // 
             // frmEnemyEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 433);
+            this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.txtXP);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cmdCancel);
@@ -306,5 +318,6 @@
         private System.Windows.Forms.TextBox txtMoney;
         private System.Windows.Forms.TextBox txtXP;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button cmdHelp;
     }
 }

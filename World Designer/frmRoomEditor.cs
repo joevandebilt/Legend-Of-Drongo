@@ -342,5 +342,11 @@ namespace Legend_Of_Drongo
 
         #endregion
 
+        private void cmdFormHelp_Click(object sender, EventArgs e)
+        {
+            frmHelp NewForm = new frmHelp();
+            NewForm.Show();
+        }
+
     }
 }

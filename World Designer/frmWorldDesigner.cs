@@ -401,5 +401,11 @@ namespace Legend_Of_Drongo
                 ThisFloor.FloorSong = MusicPath;
             }
         }
+
+        private void cmdHelp_Click(object sender, EventArgs e)
+        {
+            frmHelp NewForm = new frmHelp();
+            NewForm.Show();
+        }
     }
 }

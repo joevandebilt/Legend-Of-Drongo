@@ -521,45 +521,10 @@ namespace Legend_Of_Drongo
                     #region Help
                     if (PlayerCommand.ToLower() == "help" || PlayerCommand.ToLower() == "commands" || PlayerCommand.ToLower().Contains("how do i") || PlayerCommand.ToLower().Contains("how can i"))
                     {
-                        Console.WriteLine(WordWrap("Movement"));
-                        Console.WriteLine(WordWrap("North - Move North"));
-                        Console.WriteLine(WordWrap("East - Move East"));
-                        Console.WriteLine(WordWrap("South - Move South"));
-                        Console.WriteLine(WordWrap("West - Move West"));
-                        Console.WriteLine(WordWrap("\nInteraction and Items"));
-                        Console.WriteLine(WordWrap("Attack - Attacks an enemy with equipped weapon"));
-                        Console.WriteLine(WordWrap("Bribe - Pay off people to look the other way"));
-                        Console.WriteLine(WordWrap("Talk To - Talk to non hostile people"));
-                        Console.WriteLine(WordWrap("Ask - Ask a person about a thing"));
-                        Console.WriteLine(WordWrap("View Wares - See the wares of a merchant"));
-                        Console.WriteLine(WordWrap("Buy - Buy items from merchants"));
-                        Console.WriteLine(WordWrap("Sell - Sell an item to a willing merchant"));
-                        Console.WriteLine(WordWrap("Take - picks up an item"));
-                        Console.WriteLine(WordWrap("Drop - Drops an item"));
-                        Console.WriteLine(WordWrap("Sleep in - go to sleep in a bed or bed like item"));
-                        Console.WriteLine(WordWrap("Use - Uses an item on something"));
-                        Console.WriteLine(WordWrap("Equip - Equip weapons and armor"));
-                        Console.WriteLine(WordWrap("Eat - Eats an item in your inventory"));
-                        Console.WriteLine(WordWrap("Drink - Drink an item in your inventory"));
-                        Console.WriteLine(WordWrap("\nDescriptions"));
-                        Console.WriteLine(WordWrap("Describe - Gets the description of the current area you are in"));
-                        Console.WriteLine(WordWrap("Read - Read an item, a sign or a other readable items"));
-                        Console.WriteLine(WordWrap("Status - Gets status of player, including health, armor and Weapon Status"));
-                        Console.WriteLine(WordWrap("Inventory - lists items in inventory"));
-                        Console.WriteLine(WordWrap("Objective - Tells you your current objective"));
-                        Console.WriteLine(WordWrap("Money - Tells you how much money you have"));
-                        Console.WriteLine(WordWrap("Look At - Inspect objects in your current area"));
-                        Console.WriteLine(WordWrap("Examine - Examine items in your inventory to a greater detail"));
-                        Console.WriteLine(WordWrap("Who am I - Tells you your name"));
-                        Console.WriteLine(WordWrap("\nMusic"));
-                        Console.WriteLine(WordWrap("Music Play - Start playing music"));
-                        Console.WriteLine(WordWrap("Music Browse - Browse music to play"));
-                        Console.WriteLine(WordWrap("Music Stop - Stop music playing"));
-                        Console.WriteLine(WordWrap("\nControl"));
-                        Console.WriteLine(WordWrap("Clear - Clears the current window of all text"));
-                        Console.WriteLine(WordWrap("Save - Saves your characters current progress"));
-                        Console.WriteLine(WordWrap("Main Menu - Goes back to the Main menu"));
-                        Console.WriteLine(WordWrap("Quit - Quits game without saving"));
+                        using (StreamReader file = new System.IO.StreamReader(@".\System Files\GameEngineHelp.sys", true))
+                        {
+                            Console.WriteLine(WordWrap(file.ReadToEnd()));
+                        }
                     }
                     #endregion
 
@@ -2503,6 +2468,7 @@ namespace Legend_Of_Drongo
                         if (ThisFight[Counter].name.ToLower() == enemy.ToLower())
                         {
                             EnemyProfile ThisEnemy = CurrentRoom.Enemy[ThisFight[Counter].ID];
+                            ThisEnemy.PayOff = 0;   //Do not allow the player to bribe the enemy after attacking them
                             Fortitude = RNG.Next(1, 100);
                             if (Fortitude > ThisEnemy.armor) ThisEnemy.HPBonus = ThisEnemy.HPBonus - BaseAttack;
                             else ThisEnemy.HPBonus = ThisEnemy.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * ThisEnemy.armor);

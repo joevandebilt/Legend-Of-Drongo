@@ -1,0 +1,44 @@
+Movement
+North - Move North
+East - Move East
+South - Move South
+West - Move West
+
+Interaction and Items
+Attack - Attacks an enemy with equipped weapon
+Bribe - Pay off people to look the other way
+Talk To - Talk to non hostile people
+Ask - Ask a person about a thing
+View Wares - See the wares of a merchant
+Buy - Buy items from merchants
+Sell - Sell an item to a willing merchant
+Take - picks up an item
+Drop - Drops an item
+Sleep in - go to sleep in a bed or bed like item
+Use - Uses an item on something
+Equip - Equip weapons and armor
+Eat - Eats an item in your inventory
+Drink - Drink an item in your inventory
+
+Descriptions
+Describe - Gets the description of the current area you are in
+Read - Read an item, a sign or a other readable items
+Status - Gets status of player, including health, armor and Weapon
+Status
+Inventory - lists items in inventory
+Objective - Tells you your current objective
+Money - Tells you how much money you have
+Look At - Inspect objects in your current area
+Examine - Examine items in your inventory to a greater detail
+Who am I - Tells you your name
+
+Music
+Music Play - Start playing music
+Music Browse - Browse music to play
+Music Stop - Stop music playing
+
+Control
+Clear - Clears the current window of all text
+Save - Saves your characters current progress
+Main Menu - Goes back to the Main menu
+Quit - Quits game without saving

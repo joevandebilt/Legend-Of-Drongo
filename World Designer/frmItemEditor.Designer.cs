@@ -59,13 +59,14 @@
             this.cmdCancelEdit = new System.Windows.Forms.Button();
             this.txtXP = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.cmdHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdAddItems
             // 
-            this.cmdAddItems.Location = new System.Drawing.Point(104, 357);
+            this.cmdAddItems.Location = new System.Drawing.Point(95, 357);
             this.cmdAddItems.Name = "cmdAddItems";
-            this.cmdAddItems.Size = new System.Drawing.Size(160, 28);
+            this.cmdAddItems.Size = new System.Drawing.Size(123, 28);
             this.cmdAddItems.TabIndex = 14;
             this.cmdAddItems.Text = "Save Item";
             this.cmdAddItems.UseVisualStyleBackColor = true;
@@ -321,9 +322,9 @@
             // 
             // cmdCancelEdit
             // 
-            this.cmdCancelEdit.Location = new System.Drawing.Point(270, 357);
+            this.cmdCancelEdit.Location = new System.Drawing.Point(224, 357);
             this.cmdCancelEdit.Name = "cmdCancelEdit";
-            this.cmdCancelEdit.Size = new System.Drawing.Size(160, 28);
+            this.cmdCancelEdit.Size = new System.Drawing.Size(123, 28);
             this.cmdCancelEdit.TabIndex = 15;
             this.cmdCancelEdit.Text = "Close Without Saving";
             this.cmdCancelEdit.UseVisualStyleBackColor = true;
@@ -346,11 +347,22 @@
             this.label14.TabIndex = 30;
             this.label14.Text = "XP";
             // 
+            // cmdHelp
+            // 
+            this.cmdHelp.Location = new System.Drawing.Point(353, 357);
+            this.cmdHelp.Name = "cmdHelp";
+            this.cmdHelp.Size = new System.Drawing.Size(123, 28);
+            this.cmdHelp.TabIndex = 41;
+            this.cmdHelp.Text = "Help";
+            this.cmdHelp.UseVisualStyleBackColor = true;
+            this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
+            // 
             // frmItemEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 397);
+            this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.txtXP);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.cmdCancelEdit);
@@ -422,5 +434,6 @@
         private System.Windows.Forms.Button cmdCancelEdit;
         private System.Windows.Forms.TextBox txtXP;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button cmdHelp;
     }
 }

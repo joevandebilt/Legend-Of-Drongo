@@ -166,4 +166,10 @@ v2.5.3
 - Added GainXpfromEnemy Method
 - Added XP to food items in world
 
+v2.5.4
+- Added Help Section
+- Wrote Help.txt and added it to the basic file set. 
+- Changed combat to not allow bribes after an enemy has been attacked
+- Moved engine 'help' command to output text file containing help file. 
+
 If you encounter an error, please email to error file to joevandebilt@live.co.uk, or report it on gitHub
