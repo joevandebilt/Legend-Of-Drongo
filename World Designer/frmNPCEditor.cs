@@ -84,9 +84,12 @@ namespace Legend_Of_Drongo
         public void GetAllItems()
         {
             lstInventory.Items.Clear();
-            foreach (DataTypes.itemInfo Item in NPC.inventory)
+            if (NPC.inventory != null)
             {
-                lstInventory.Items.Add(Item.Name + " - " + Item.Class + "  " + Item.Value);
+                foreach (DataTypes.itemInfo Item in NPC.inventory)
+                {
+                    lstInventory.Items.Add(Item.Name + " - " + Item.Class + "  " + Item.Value);
+                }
             }
         }
 
@@ -195,12 +198,14 @@ namespace Legend_Of_Drongo
             lstKnowledge.Items.Clear();
             int StringLength;
 
-
-            foreach (DataTypes.Facts fact in NPC.Knowledge)
+            if (NPC.Knowledge != null)
             {
-                if (fact.Knowledge.Length > 23) StringLength = 23;
-                else StringLength = fact.Knowledge.Length;
-                lstKnowledge.Items.Add(fact.Topic + " - " + fact.Knowledge.Substring(0,StringLength) + "...");
+                foreach (DataTypes.Facts fact in NPC.Knowledge)
+                {
+                    if (fact.Knowledge.Length > 23) StringLength = 23;
+                    else StringLength = fact.Knowledge.Length;
+                    lstKnowledge.Items.Add(fact.Topic + " - " + fact.Knowledge.Substring(0, StringLength) + "...");
+                }
             }
         }
 

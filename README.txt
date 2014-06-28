@@ -20,7 +20,8 @@ Known Bugs:
 To Do:
 - Finish world.
 - File directories are fixed paths, add in choice of directory. - Omitted
-- Add new features into Tutorial
+- Add time of day function? 
+- Add need to sleep parameter?
 
 Changes:
 V1.0.0
@@ -162,7 +163,7 @@ v2.5.2
 
 v2.5.3
 - Improved bribing semantics & running
-- Removed KillAllEnemies trigger from payoff method
+- Removed KillAllEnemies trigger from pay off method
 - Added GainXpfromEnemy Method
 - Added XP to food items in world
 
@@ -171,5 +172,14 @@ v2.5.4
 - Wrote Help.txt and added it to the basic file set. 
 - Changed combat to not allow bribes after an enemy has been attacked
 - Moved engine 'help' command to output text file containing help file. 
+
+v2.5.5
+- Added parameters to accept upper case file extensions, such as WAV or Wav
+- Fixed music browse command
+- Allowed music browse to accept both name and number of songs, i.e input 1 for song 1 or input name of song 1 to play.
+- Improved Tutorial world to show off new features. 
+- Added Null Checks to foreach loops
+- Added Explored bool to room class
+- Add Draw map function to draw local area that has been explored. 
 
 If you encounter an error, please email to error file to joevandebilt@live.co.uk, or report it on gitHub

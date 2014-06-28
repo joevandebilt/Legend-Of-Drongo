@@ -503,6 +503,14 @@ namespace Legend_Of_Drongo
             else Player = MainMenu();
             ThisFloor = world[Player.CurrentPos[2]] ;
             CurrentRoom = GetRoomInfo(Player.CurrentPos);
+            CurrentRoom.Explored = true;
+
+            //The starting floor has a song that is not the one currently playing
+            if (ThisFloor.FloorSong != null && File.Exists(ThisFloor.FloorSong) && ThisFloor.FloorSong != MusicPlayer.SoundLocation)
+            {
+                MusicPlayer.SoundLocation = ThisFloor.FloorSong;
+                Music("Start");
+            }
 
             Console.WriteLine(WordWrap(CurrentRoom.Description));
 
@@ -559,7 +567,8 @@ namespace Legend_Of_Drongo
                                 default: ProposedMove = Player.CurrentPos; break;
                             }
 
-                            PotentialRoom = GetRoomInfo(ProposedMove);
+                            ThisFloor.CurrentFloor[ProposedMove[0], ProposedMove[1]].Explored = true;
+                            PotentialRoom = GetRoomInfo(ProposedMove);                            
                             if (PotentialRoom.CanMove == true)
                             {
                                 if (PotentialRoom.Description == null || PotentialRoom.Description == string.Empty) Console.WriteLine(WordWrap("I Successfully move into Row ") + Char.ConvertFromUtf32(ProposedMove[0] + 65) + " Col " + (ProposedMove[1] + 1) + " Level " + (ProposedMove[2] + 1));
@@ -575,7 +584,7 @@ namespace Legend_Of_Drongo
                         else
                         {
                             Console.WriteLine("You cannot leave the current area");
-                            attacked();
+                            if (CurrentRoom.Enemy != null) attacked();
                         }
                     }
                     #endregion
@@ -1417,6 +1426,13 @@ namespace Legend_Of_Drongo
                     }
                     #endregion
 
+                    #region Map
+                    else if (PlayerCommand.ToLower() == "map" || PlayerCommand.ToLower() == "view map" || PlayerCommand.ToLower() == "draw map")
+                    {
+                        DrawMap();
+                    }
+                    #endregion
+
                     #region Music
                     else if (PlayerCommand.ToLower() == "music browse")
                     {
@@ -2236,7 +2252,7 @@ namespace Legend_Of_Drongo
             double BaseAttack = 0;
             int Fortitude;
             Random RNG = new Random();
-
+            Console.WriteLine();
             foreach (EnemyProfile Enemy in CurrentRoom.Enemy)
             {
                 if (Player.HPBonus > 0)
@@ -2248,20 +2264,20 @@ namespace Legend_Of_Drongo
                     {
                         //bad attack
                         BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you\n", Enemy.Weapon.BadHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you", Enemy.Weapon.Name, "\n", Enemy.Weapon.BadHit)));
 
                     }
                     else if (BaseAttack == 2)
                     {
                         //Medium Strong Attack
                         BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you\n", Enemy.Weapon.MedHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you", Enemy.Weapon.Name, "\n", Enemy.Weapon.MedHit)));
                     }
                     else if (BaseAttack == 3)
                     {
                         //Strong Attack
                         BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you\n", Enemy.Weapon.GoodHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you", Enemy.Weapon.Name, "\n", Enemy.Weapon.GoodHit)));
                     }
                     
                     Fortitude = RNG.Next(1, 100);
@@ -2276,6 +2292,7 @@ namespace Legend_Of_Drongo
                 }
             }
             Player.HPBonus = Math.Round((double)Player.HPBonus,2);
+
         }
         
         public static void SurpriseAttack(string enemy)
@@ -2533,20 +2550,20 @@ namespace Legend_Of_Drongo
                     {
                         //bad attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you\n", ThisFight[index].Weapon.BadHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you with their ", ThisFight[index].Weapon.Name,"\n", ThisFight[index].Weapon.BadHit)));
 
                     }
                     else if (BaseAttack == 2)
                     {
                         //Medium Strong Attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you\n", ThisFight[index].Weapon.MedHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you", ThisFight[index].Weapon.Name, "\n", ThisFight[index].Weapon.MedHit)));
                     }
                     else if (BaseAttack == 3)
                     {
                         //Strong Attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you\n", ThisFight[index].Weapon.GoodHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you", ThisFight[index].Weapon.Name, "\n", ThisFight[index].Weapon.GoodHit)));
                     }
 
                     Fortitude = RNG.Next(1, 100);
@@ -2739,6 +2756,73 @@ namespace Legend_Of_Drongo
 
             }
             else Console.WriteLine("There is nobody around here to fight");
+        }
+
+        public static void DrawMap()
+        {
+            int row;
+            int col;
+            Console.Clear();
+            Console.WriteLine("* Dead End");
+            Console.WriteLine("X Blocked");
+            Console.WriteLine("┼ Path\n");
+            for (row = 0; row<10;row++)
+            {
+                Console.Write("\t");
+                for (col = 0; col<10;col++)
+                {
+                    //Draw the map
+                    roomInfo TempRoom = new roomInfo();
+                    TempRoom = ThisFloor.CurrentFloor[row, col];
+                    if (TempRoom.Explored == true)
+                    {
+                        if (TempRoom.CanMove == true)
+                        {
+                            if (row > 0 && row < 10 && col > 0 && col < 10)
+                            {
+                                bool north = false;
+                                bool east = false;
+                                bool south = false;
+                                bool west = false;
+
+                                if (ThisFloor.CurrentFloor[row - 1, col].CanMove == true) north = true;
+                                if (ThisFloor.CurrentFloor[row + 1, col].CanMove == true) south = true;
+                                if (ThisFloor.CurrentFloor[row, col - 1].CanMove == true) west = true;
+                                if (ThisFloor.CurrentFloor[row, col + 1].CanMove == true) east = true;
+
+                                /*
+                                 *      http://www.theasciicode.com.ar/ 
+                                 */
+
+                                //North Combinations
+                                if (north == true && south == true && east == true && west == true) Console.Write("┼");
+                                else if (north == true && south == true && east == true && west == false) Console.Write("├");
+                                else if (north == true && south == true && east == false && west == true) Console.Write("┤");
+                                else if (north == true && south == true && east == false && west == false) Console.Write("│");
+                                else if (north == true && south == false && east == true && west == true) Console.Write("┴");
+                                else if (north == true && south == false && east == true && west == false) Console.Write("└");
+                                else if (north == true && south == false && east == false && west == true) Console.Write("┘");
+                                    
+                                //South Combinations
+                                else if (north == false && south == true && east == true && west == true) Console.Write("┬");
+                                else if (north == false && south == true && east == true && west == false) Console.Write("┌");
+                                else if (north == false && south == true && east == false && west == true) Console.Write("┐");
+
+                                //East West Combinations
+                                else if (north == false && south == false && east == true && west == true) Console.Write("─");
+                                else Console.Write("X");
+                            }
+                        }
+                        else Console.Write("*");
+                    }
+                    else Console.Write(" ");
+                }
+                Console.Write("\n");
+            }
+            Console.WriteLine();
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine(WordWrap(CurrentRoom.Description));
         }
 
         public static string SaveGame()
@@ -3012,20 +3096,19 @@ namespace Legend_Of_Drongo
             }
            else if (Command.ToLower() == "browse")
            {
-               System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\Music");
-               int NumOfSongs = dir.GetFiles().Length;
+               DirectoryInfo dir = new DirectoryInfo(".\\Music");
                int index = 0;
-               string[] SongList = new string[NumOfSongs];
+               List<string> SongList = new List<string>();
 
-               if (NumOfSongs != 0)
+               if (dir.GetFiles().Length != 0)
                {
                    Console.WriteLine(WordWrap("Select a song from the list below:\n\n"));
                    foreach (FileInfo file in dir.GetFiles())    //Find Songs in music directory
                    {
-                       if (file.Name.Split('.')[0].ToLower() == "wav")  //Wav only files
+                       if (file.Name.Split('.')[(file.Name.Split('.').Length -1)].ToLower() == "wav")  //Wav only files
                        {
                            Console.WriteLine(WordWrap(string.Concat((index + 1), ": ",file.Name.Split('.')[0])));
-                           SongList[index] = file.Name;
+                           SongList.Add(file.Name);
                            index++;
                        }
                    }
@@ -3035,11 +3118,28 @@ namespace Legend_Of_Drongo
 
                    if (Int32.TryParse(UserChoice, out songChosen))
                    {
-
-                       MusicPlayer.SoundLocation = string.Concat(".\\Music\\", SongList[songChosen - 1]);
-                       MusicPlayer.PlayLooping();
+                       if (songChosen <= SongList.Count && songChosen >= 1)
+                       {
+                           MusicPlayer.SoundLocation = string.Concat(".\\Music\\", SongList[songChosen - 1]);
+                           MusicPlayer.PlayLooping();
+                       }
+                       else Console.WriteLine("Not a valid song choice");
                    }
-                   else Console.WriteLine("Not a valid song choice");
+                   else
+                   {
+                       bool found = false;
+                       foreach (FileInfo file in dir.GetFiles())    //Find Songs in music directory
+                       {
+                           if (file.Name.Split('.')[0].ToLower() == UserChoice.ToLower().Trim())
+                           {
+                               MusicPlayer.SoundLocation = string.Concat(".\\Music\\", file.Name);
+                               MusicPlayer.PlayLooping();
+                               found = true;
+                           }
+                       }
+                       if (!found) Console.WriteLine("Not a valid song choice");
+                   }
+                   
                }
                else
                {

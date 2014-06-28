@@ -25,7 +25,7 @@ namespace Legend_Of_Drongo
         {
             if (Directory.Exists(".\\Music"))
             {
-                System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\Music");
+                DirectoryInfo dir = new DirectoryInfo(".\\Music");
                 int NumOfFiles = (dir.GetFiles().Length);
 
                 int index = 0;
@@ -34,7 +34,7 @@ namespace Legend_Of_Drongo
                 {
                     foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
                     {
-                        if (file.Name.Split('.')[1].ToLower() == "wav") lstMusicBox.Items.Add(string.Concat((file.Name.Split('.')[0])));
+                        if (file.Name.Split('.')[(file.Name.Split('.').Length -1)].ToLower() == "wav") lstMusicBox.Items.Add(string.Concat((file.Name.Split('.')[0])));
                         index++;
                     }
                     if (index == 0) lstMusicBox.Items.Add("No .Wav files found");
@@ -48,7 +48,13 @@ namespace Legend_Of_Drongo
         {
             if (lstMusicBox.SelectedIndex > -1)
             {
-                MusicPath = ".\\Music\\" + lstMusicBox.Text + ".wav";
+                DirectoryInfo dir = new DirectoryInfo(".\\Music");
+                foreach (FileInfo file in dir.GetFiles())
+                {
+                    if (file.Name.Split('.')[0] == lstMusicBox.Text) MusicPath = MusicPath = ".\\Music\\" + file.Name;
+                }
+
+                
                 return true;
             }
             else MessageBox.Show("Please select a valid file first");

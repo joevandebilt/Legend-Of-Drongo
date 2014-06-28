@@ -35,6 +35,7 @@ namespace Legend_Of_Drongo
             public bool LockedIn;           //If a player is allowed to leave the room
             public string SuicideAction;    //Special string for if the user wishes to commit suicide.
             public string RoomColour;
+            public bool Explored;
             public List<Event> Events;
             public List<CivilianProfile> Civilians; 
             public List<itemInfo> items;        //a list of items (list due to players being able to drop items on the floor)
