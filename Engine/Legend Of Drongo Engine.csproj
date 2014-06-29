@@ -60,6 +60,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmLegendOfDrongo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLegendOfDrongo.Designer.cs">
+      <DependentUpon>frmLegendOfDrongo.cs</DependentUpon>
+    </Compile>
     <Compile Include="LegendOfDrongo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +108,11 @@
       <Project>{16A4E1A2-EC9C-470F-BED2-05DA707CABAC}</Project>
       <Name>Legend Of Drongo Data Types</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmLegendOfDrongo.resx">
+      <DependentUpon>frmLegendOfDrongo.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

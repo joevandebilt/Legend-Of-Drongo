@@ -38,3 +38,5 @@ D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Engine\obj\x
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo.exe
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo.pdb
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend_Of_Drongo.frmLegendOfDrongo.resources
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csproj.GenerateResource.Cache

@@ -23,6 +23,7 @@ namespace Legend_Of_Drongo
         public struct WorldFile //Stores the details of the world
         {
             public string WorldName;
+            public int WorldTime;
             public List<Floor> WorldState;
         }
 
@@ -96,6 +97,7 @@ namespace Legend_Of_Drongo
             public int[] CurrentPos;
             public string Objective;
             public int Money;
+            public int DaysSinceSleep;
             public int XP; 
             public int Level;
             public double MaxHp;    //Maxium hit points

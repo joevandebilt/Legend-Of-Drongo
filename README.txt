@@ -182,4 +182,15 @@ v2.5.5
 - Added Explored bool to room class
 - Add Draw map function to draw local area that has been explored. 
 
+v2.5.6
+- Added time to game
+- Time of day output has been added
+- The time command has been added to help file
+- WorldState class now has time attribute, recording number of minutes in the day
+- Player class now has DaysSinceSleep which records how long since the player has slept
+- DaysSinceSleep now effects speed and strength bonus'
+- Sleeping sets time of day to 8am, recovers HP and sets days since sleep to 0
+- if Days Since sleep reaches 4 player dies. 
+
+
 If you encounter an error, please email to error file to joevandebilt@live.co.uk, or report it on gitHub

@@ -38,8 +38,10 @@ namespace Legend_Of_Drongo
         public static SoundPlayer MusicPlayer = new SoundPlayer();
 
         public static object myLock = new object();
+        
         public static bool stopProcessing = false;
-   
+        public static bool stopTime = false; 
+
         public static PlayerProfile MainMenu()
         {
             Player = new PlayerProfile();
@@ -393,6 +395,7 @@ namespace Legend_Of_Drongo
             Player.CurrentPos = new int[3] { 1, 1, 0 }; //Row, Column, Floor
             Player.Objective = "";
             Player.Money = 100;
+            Player.DaysSinceSleep = 0;
 
             //set up starter weapon
             Player.WeaponHeld.Name = "Fists";
@@ -505,6 +508,10 @@ namespace Legend_Of_Drongo
             CurrentRoom = GetRoomInfo(Player.CurrentPos);
             CurrentRoom.Explored = true;
 
+            WorldState.WorldTime = 512;
+            Thread TimeThread = new Thread(TimeTicker);
+            TimeThread.Start();
+            
             //The starting floor has a song that is not the one currently playing
             if (ThisFloor.FloorSong != null && File.Exists(ThisFloor.FloorSong) && ThisFloor.FloorSong != MusicPlayer.SoundLocation)
             {
@@ -1433,6 +1440,14 @@ namespace Legend_Of_Drongo
                     }
                     #endregion
 
+                    #region Time
+                    else if (PlayerCommand.ToLower() == "time" || PlayerCommand.ToLower() == "the time" || PlayerCommand.ToLower() == "what is the time" || PlayerCommand.ToLower() == "what time is it" || PlayerCommand.ToLower() == "thetime") 
+                    {
+                        TimeSpan ts = TimeSpan.FromMinutes(WorldState.WorldTime);
+                        Console.WriteLine(string.Concat(ts.Hours, ":", ts.Minutes));
+                    }
+                    #endregion
+
                     #region Music
                     else if (PlayerCommand.ToLower() == "music browse")
                     {
@@ -1474,7 +1489,7 @@ namespace Legend_Of_Drongo
                     }
                     else if (PlayerCommand.ToLower() == "getpos")
                     {
-                        Console.WriteLine("Row {0}, Col {1}, Level {2}", Char.ConvertFromUtf32(Player.CurrentPos[0]+65), (Player.CurrentPos[1]+1), (Player.CurrentPos[2] +1 ));
+                        Console.WriteLine("Row {0}, Col {1}, Level {2}", Char.ConvertFromUtf32(Player.CurrentPos[0] + 65), (Player.CurrentPos[1] + 1), (Player.CurrentPos[2] + 1));
                     }
                     else if (PlayerCommand.ToLower() == "force error" || PlayerCommand.ToLower() == "forceerror")
                     {
@@ -1588,9 +1603,9 @@ namespace Legend_Of_Drongo
                     }
                 }
                 #endregion
-
             }
-
+            lock (myLock) { stopTime = true; }
+            TimeThread.Join();
         }
 
         public static roomInfo GetRoomInfo(int[] UserPos)
@@ -2416,10 +2431,10 @@ namespace Legend_Of_Drongo
             TempFighter.name = Player.name;
             TempFighter.HP = Player.HPBonus;
             TempFighter.Weapon = WeaponUsed;
-            TempFighter.AttackMod = (WeaponUsed.AttackMod+ Player.Strength);
+            TempFighter.AttackMod = (WeaponUsed.AttackMod + (Player.Strength - (0.5*Player.DaysSinceSleep)));
             TempFighter.DefenseMod = (Player.ArmorBonus + Player.Resitence);
             TempFighter.isAlive = true;
-            TempFighter.initiative = RNG.Next(Player.Speed, 100);  //Use players speed bonus
+            TempFighter.initiative = RNG.Next((Player.Speed - Convert.ToInt32(Math.Round((0.5 * Player.DaysSinceSleep)))), 100);  //Use players speed bonus
             TempFighter.ID = 99;
             ThisFight.Add(TempFighter);
 
@@ -2616,6 +2631,8 @@ namespace Legend_Of_Drongo
                                 Console.WriteLine(WordWrap(string.Concat("You lie down on your ", BedItem, " and go to sleep")));
                                 Console.WriteLine("You awaken in the morning feeling refreshed");
                                 Player.HPBonus = Player.MaxHp;
+                                WorldState.WorldTime = 480;
+                                Player.DaysSinceSleep = 0;
                             }
                             else
                             {
@@ -2763,12 +2780,17 @@ namespace Legend_Of_Drongo
             int row;
             int col;
             Console.Clear();
+            //Console.CursorSize
+            Console.WriteLine("Map of " + ThisFloor.FloorName);
+            Console.WriteLine("──────────────────────");
             Console.WriteLine("* Dead End");
             Console.WriteLine("X Blocked");
-            Console.WriteLine("┼ Path\n");
+            Console.WriteLine("┼ Path\n\n");
+
+            Console.Write("\t┌────────────┐\n");
             for (row = 0; row<10;row++)
             {
-                Console.Write("\t");
+                Console.Write("\t│ ");
                 for (col = 0; col<10;col++)
                 {
                     //Draw the map
@@ -2816,10 +2838,11 @@ namespace Legend_Of_Drongo
                         else Console.Write("*");
                     }
                     else Console.Write(" ");
+                    
                 }
-                Console.Write("\n");
+                Console.Write(" │\n");
             }
-            Console.WriteLine();
+            Console.WriteLine("\t└────────────┘");
             Console.ReadLine();
             Console.Clear();
             Console.WriteLine(WordWrap(CurrentRoom.Description));
@@ -3085,6 +3108,35 @@ namespace Legend_Of_Drongo
             NPC.XP = 0;
 
             return NPC;
+        }
+
+        public static void TimeTicker()
+        {
+            while (stopTime == false)
+            {
+                lock (myLock)
+                {
+                    if (stopTime == true) break;
+                }
+                WorldState.WorldTime = WorldState.WorldTime + 1;
+                if (WorldState.WorldTime == 1440) WorldState.WorldTime = 0;
+                else if (WorldState.WorldTime == 360) Console.WriteLine("\n\nThe sun rises in the distance, morning has come\n>");
+                else if (WorldState.WorldTime == 480)
+                {
+                    Player.DaysSinceSleep = Player.DaysSinceSleep + 1;
+                    if (Player.DaysSinceSleep == 1) Console.WriteLine("\n\nYou have been awake for 24 hours, perhaps you should take some rest?\n>");
+                    else if (Player.DaysSinceSleep == 2) Console.WriteLine("\n\nYou have been awake for 48 hours, Take some rest soon!\n>");
+                    else if (Player.DaysSinceSleep == 3) Console.WriteLine("\n\nYou have been awake for 72 hours, you need to find a place to sleep!\n>");
+                    else if (Player.DaysSinceSleep == 4)
+                    {
+                        Console.WriteLine("\n\nHaving been awake for 96 hours your body shuts down. Your fall into a deep sleep. Never to wake up...\n>");
+                        Player.HPBonus = 0;
+                    }
+                }
+                else if (WorldState.WorldTime == 1200) Console.WriteLine("\n\nThe sun sets over the horizon, night has come\n>");
+                Thread.Sleep(15000);
+            }
+            lock (myLock) { stopProcessing = true; }
         }
 
         public static void Music(string Command)
