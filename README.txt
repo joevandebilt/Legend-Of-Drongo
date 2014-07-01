@@ -1,6 +1,6 @@
 +---------------------------------------+
-|           Legend Of Drongo            |
-|             Changelog                 |
+|			Legend Of Drongo			|
+|				Changelog				|
 +---------------------------------------+
 
 Description:
