@@ -7,21 +7,19 @@ Description:
 The Legend of Drongo was a project I started as a means to familiarise myself with C# programming concepts for my studies. Following my studies the project was mothballed and is worked on in sprints as and when I have the time. It is a hobby and is the accumulated skilled I have gained over the past 3 years of dev experience, so naturally some areas of the program are poorly designed and executed. However I am constantly making changes to the engine, and one day hope to release as an indie game. 
 
 Known Bugs:
-- Some iterations of data structures do not check if null, causing crash. 
 - Death in custom world moves player to random point at level 1 - FIXED v2.1.4
 - Saves will overwrite based on name, even if playing custom worlds - Fixed v2.1.3
 - Surprise Attack will only allow twice - FIXED v2.1.2
 - When enemy killed, they can still make a move - FIXED v2.3.0
 - Double items being produced? Cell 8,6,1 - FIXED v2.3.2
 - Item interaction names being shared across items in same room. - Only occurs for cloned items - FIXED v2.5.1
-- Could not fight Juan, Terry or Gary in FWOTT (CANNOT REPLICATE)
+- Could not fight Juan, Terry or Gary in FWOTT - CANNOT REPLICATE
 
 
 To Do:
 - Finish world.
 - File directories are fixed paths, add in choice of directory. - Omitted
-- Add time of day function? 
-- Add need to sleep parameter?
+- Set up default players for existing worlds. 
 
 Changes:
 V1.0.0
@@ -192,5 +190,15 @@ v2.5.6
 - Sleeping sets time of day to 8am, recovers HP and sets days since sleep to 0
 - if Days Since sleep reaches 4 player dies. 
 
+v2.5.7
+- Added end credits function to game engine
+- Added World author string to world datatype
+- Added List of strings to world datatype as credits
+- Added frmEndCredits to world designer to add end custom end credits to game
+- Added run credits and end game to event actions
+- Completed building tutorial mission
+- Added default player editor to world designer
+- Made default player inherit from world file rather than code
+- Enabled Item Editor to lock out class if a particular item class is intended to be used. 
 
-If you encounter an error, please email to error file to joevandebilt@live.co.uk, or report it on gitHub
+If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub

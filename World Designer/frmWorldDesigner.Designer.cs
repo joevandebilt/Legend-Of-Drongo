@@ -64,11 +64,15 @@ namespace Legend_Of_Drongo
             this.txtMusicPath = new System.Windows.Forms.TextBox();
             this.cmdPickMusic = new System.Windows.Forms.Button();
             this.cmdHelp = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txtAuthor = new System.Windows.Forms.TextBox();
+            this.cmdEndCredits = new System.Windows.Forms.Button();
+            this.cmdDefaultPlayer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdMainMenu
             // 
-            this.cmdMainMenu.Location = new System.Drawing.Point(551, 503);
+            this.cmdMainMenu.Location = new System.Drawing.Point(551, 539);
             this.cmdMainMenu.Name = "cmdMainMenu";
             this.cmdMainMenu.Size = new System.Drawing.Size(103, 33);
             this.cmdMainMenu.TabIndex = 8;
@@ -78,7 +82,7 @@ namespace Legend_Of_Drongo
             // 
             // cmdSaveWorld
             // 
-            this.cmdSaveWorld.Location = new System.Drawing.Point(36, 505);
+            this.cmdSaveWorld.Location = new System.Drawing.Point(36, 541);
             this.cmdSaveWorld.Name = "cmdSaveWorld";
             this.cmdSaveWorld.Size = new System.Drawing.Size(103, 33);
             this.cmdSaveWorld.TabIndex = 5;
@@ -92,7 +96,7 @@ namespace Legend_Of_Drongo
             this.cmbLevelSelect.Items.AddRange(new object[] {
             "Level 1",
             "Add New Level..."});
-            this.cmbLevelSelect.Location = new System.Drawing.Point(279, 12);
+            this.cmbLevelSelect.Location = new System.Drawing.Point(278, 14);
             this.cmbLevelSelect.Name = "cmbLevelSelect";
             this.cmbLevelSelect.Size = new System.Drawing.Size(150, 21);
             this.cmbLevelSelect.TabIndex = 9;
@@ -101,7 +105,7 @@ namespace Legend_Of_Drongo
             // 
             // cmdTestWorld
             // 
-            this.cmdTestWorld.Location = new System.Drawing.Point(145, 505);
+            this.cmdTestWorld.Location = new System.Drawing.Point(145, 541);
             this.cmdTestWorld.Name = "cmdTestWorld";
             this.cmdTestWorld.Size = new System.Drawing.Size(103, 33);
             this.cmdTestWorld.TabIndex = 10;
@@ -126,7 +130,7 @@ namespace Legend_Of_Drongo
             this.tblWorldLevel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tblWorldLevel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tblWorldLevel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.tblWorldLevel.Location = new System.Drawing.Point(36, 91);
+            this.tblWorldLevel.Location = new System.Drawing.Point(36, 127);
             this.tblWorldLevel.Name = "tblWorldLevel";
             this.tblWorldLevel.RowCount = 10;
             this.tblWorldLevel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -148,7 +152,7 @@ namespace Legend_Of_Drongo
             // 
             this.lblEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditor.Location = new System.Drawing.Point(33, 42);
+            this.lblEditor.Location = new System.Drawing.Point(33, 78);
             this.lblEditor.Name = "lblEditor";
             this.lblEditor.Size = new System.Drawing.Size(396, 20);
             this.lblEditor.TabIndex = 11;
@@ -158,7 +162,7 @@ namespace Legend_Of_Drongo
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(61, 75);
+            this.label2.Location = new System.Drawing.Point(61, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 13);
             this.label2.TabIndex = 12;
@@ -167,7 +171,7 @@ namespace Legend_Of_Drongo
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(120, 75);
+            this.label3.Location = new System.Drawing.Point(120, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 13);
             this.label3.TabIndex = 13;
@@ -176,7 +180,7 @@ namespace Legend_Of_Drongo
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(180, 75);
+            this.label4.Location = new System.Drawing.Point(180, 111);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 13);
             this.label4.TabIndex = 14;
@@ -185,7 +189,7 @@ namespace Legend_Of_Drongo
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(244, 75);
+            this.label5.Location = new System.Drawing.Point(244, 111);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(13, 13);
             this.label5.TabIndex = 15;
@@ -194,7 +198,7 @@ namespace Legend_Of_Drongo
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(306, 75);
+            this.label6.Location = new System.Drawing.Point(306, 111);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(13, 13);
             this.label6.TabIndex = 16;
@@ -203,7 +207,7 @@ namespace Legend_Of_Drongo
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(368, 75);
+            this.label7.Location = new System.Drawing.Point(368, 111);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(13, 13);
             this.label7.TabIndex = 17;
@@ -212,7 +216,7 @@ namespace Legend_Of_Drongo
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(426, 75);
+            this.label8.Location = new System.Drawing.Point(426, 111);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(13, 13);
             this.label8.TabIndex = 18;
@@ -221,7 +225,7 @@ namespace Legend_Of_Drongo
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(489, 75);
+            this.label9.Location = new System.Drawing.Point(489, 111);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(13, 13);
             this.label9.TabIndex = 19;
@@ -230,7 +234,7 @@ namespace Legend_Of_Drongo
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(550, 75);
+            this.label10.Location = new System.Drawing.Point(550, 111);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(13, 13);
             this.label10.TabIndex = 20;
@@ -239,7 +243,7 @@ namespace Legend_Of_Drongo
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(614, 75);
+            this.label11.Location = new System.Drawing.Point(614, 111);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(19, 13);
             this.label11.TabIndex = 21;
@@ -248,7 +252,7 @@ namespace Legend_Of_Drongo
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 109);
+            this.label12.Location = new System.Drawing.Point(12, 145);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(14, 13);
             this.label12.TabIndex = 22;
@@ -257,7 +261,7 @@ namespace Legend_Of_Drongo
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 147);
+            this.label13.Location = new System.Drawing.Point(12, 183);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(14, 13);
             this.label13.TabIndex = 23;
@@ -266,7 +270,7 @@ namespace Legend_Of_Drongo
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(12, 186);
+            this.label14.Location = new System.Drawing.Point(12, 222);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(14, 13);
             this.label14.TabIndex = 24;
@@ -275,7 +279,7 @@ namespace Legend_Of_Drongo
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 227);
+            this.label15.Location = new System.Drawing.Point(12, 263);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(15, 13);
             this.label15.TabIndex = 25;
@@ -284,7 +288,7 @@ namespace Legend_Of_Drongo
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(12, 265);
+            this.label16.Location = new System.Drawing.Point(12, 301);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(14, 13);
             this.label16.TabIndex = 26;
@@ -293,7 +297,7 @@ namespace Legend_Of_Drongo
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(12, 304);
+            this.label17.Location = new System.Drawing.Point(12, 340);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(13, 13);
             this.label17.TabIndex = 27;
@@ -302,7 +306,7 @@ namespace Legend_Of_Drongo
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(12, 344);
+            this.label18.Location = new System.Drawing.Point(12, 380);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(15, 13);
             this.label18.TabIndex = 28;
@@ -311,7 +315,7 @@ namespace Legend_Of_Drongo
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 384);
+            this.label19.Location = new System.Drawing.Point(12, 420);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(15, 13);
             this.label19.TabIndex = 29;
@@ -320,7 +324,7 @@ namespace Legend_Of_Drongo
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(12, 421);
+            this.label20.Location = new System.Drawing.Point(12, 457);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(10, 13);
             this.label20.TabIndex = 30;
@@ -329,7 +333,7 @@ namespace Legend_Of_Drongo
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(12, 464);
+            this.label21.Location = new System.Drawing.Point(12, 500);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(12, 13);
             this.label21.TabIndex = 31;
@@ -337,7 +341,7 @@ namespace Legend_Of_Drongo
             // 
             // cmdDeleteLevel
             // 
-            this.cmdDeleteLevel.Location = new System.Drawing.Point(254, 505);
+            this.cmdDeleteLevel.Location = new System.Drawing.Point(254, 541);
             this.cmdDeleteLevel.Name = "cmdDeleteLevel";
             this.cmdDeleteLevel.Size = new System.Drawing.Size(103, 33);
             this.cmdDeleteLevel.TabIndex = 32;
@@ -347,7 +351,7 @@ namespace Legend_Of_Drongo
             // 
             // txtWorldName
             // 
-            this.txtWorldName.Location = new System.Drawing.Point(85, 12);
+            this.txtWorldName.Location = new System.Drawing.Point(84, 14);
             this.txtWorldName.Name = "txtWorldName";
             this.txtWorldName.Size = new System.Drawing.Size(186, 20);
             this.txtWorldName.TabIndex = 33;
@@ -356,7 +360,7 @@ namespace Legend_Of_Drongo
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 16);
+            this.label1.Location = new System.Drawing.Point(12, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 34;
@@ -364,7 +368,7 @@ namespace Legend_Of_Drongo
             // 
             // txtFloorName
             // 
-            this.txtFloorName.Location = new System.Drawing.Point(516, 11);
+            this.txtFloorName.Location = new System.Drawing.Point(515, 13);
             this.txtFloorName.Name = "txtFloorName";
             this.txtFloorName.Size = new System.Drawing.Size(149, 20);
             this.txtFloorName.TabIndex = 35;
@@ -372,7 +376,7 @@ namespace Legend_Of_Drongo
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(446, 14);
+            this.label22.Location = new System.Drawing.Point(445, 16);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(64, 13);
             this.label22.TabIndex = 36;
@@ -381,7 +385,7 @@ namespace Legend_Of_Drongo
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(446, 45);
+            this.label23.Location = new System.Drawing.Point(445, 47);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(64, 13);
             this.label23.TabIndex = 38;
@@ -389,7 +393,7 @@ namespace Legend_Of_Drongo
             // 
             // txtMusicPath
             // 
-            this.txtMusicPath.Location = new System.Drawing.Point(516, 42);
+            this.txtMusicPath.Location = new System.Drawing.Point(515, 44);
             this.txtMusicPath.Name = "txtMusicPath";
             this.txtMusicPath.ReadOnly = true;
             this.txtMusicPath.Size = new System.Drawing.Size(131, 20);
@@ -397,7 +401,7 @@ namespace Legend_Of_Drongo
             // 
             // cmdPickMusic
             // 
-            this.cmdPickMusic.Location = new System.Drawing.Point(649, 42);
+            this.cmdPickMusic.Location = new System.Drawing.Point(648, 44);
             this.cmdPickMusic.Name = "cmdPickMusic";
             this.cmdPickMusic.Size = new System.Drawing.Size(25, 20);
             this.cmdPickMusic.TabIndex = 39;
@@ -407,7 +411,7 @@ namespace Legend_Of_Drongo
             // 
             // cmdHelp
             // 
-            this.cmdHelp.Location = new System.Drawing.Point(442, 505);
+            this.cmdHelp.Location = new System.Drawing.Point(442, 541);
             this.cmdHelp.Name = "cmdHelp";
             this.cmdHelp.Size = new System.Drawing.Size(103, 33);
             this.cmdHelp.TabIndex = 40;
@@ -415,11 +419,51 @@ namespace Legend_Of_Drongo
             this.cmdHelp.UseVisualStyleBackColor = true;
             this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(19, 44);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(59, 13);
+            this.label24.TabIndex = 41;
+            this.label24.Text = "Created By";
+            // 
+            // txtAuthor
+            // 
+            this.txtAuthor.Location = new System.Drawing.Point(84, 41);
+            this.txtAuthor.Name = "txtAuthor";
+            this.txtAuthor.Size = new System.Drawing.Size(148, 20);
+            this.txtAuthor.TabIndex = 42;
+            // 
+            // cmdEndCredits
+            // 
+            this.cmdEndCredits.Location = new System.Drawing.Point(336, 38);
+            this.cmdEndCredits.Name = "cmdEndCredits";
+            this.cmdEndCredits.Size = new System.Drawing.Size(92, 23);
+            this.cmdEndCredits.TabIndex = 43;
+            this.cmdEndCredits.Text = "Edit End Credits";
+            this.cmdEndCredits.UseVisualStyleBackColor = true;
+            this.cmdEndCredits.Click += new System.EventHandler(this.cmdEndCredits_Click);
+            // 
+            // cmdDefaultPlayer
+            // 
+            this.cmdDefaultPlayer.Location = new System.Drawing.Point(238, 39);
+            this.cmdDefaultPlayer.Name = "cmdDefaultPlayer";
+            this.cmdDefaultPlayer.Size = new System.Drawing.Size(92, 23);
+            this.cmdDefaultPlayer.TabIndex = 44;
+            this.cmdDefaultPlayer.Text = "Default Player";
+            this.cmdDefaultPlayer.UseVisualStyleBackColor = true;
+            this.cmdDefaultPlayer.Click += new System.EventHandler(this.cmdDefaultPlayer_Click);
+            // 
             // frmWorldDesigner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 548);
+            this.ClientSize = new System.Drawing.Size(686, 586);
+            this.Controls.Add(this.cmdDefaultPlayer);
+            this.Controls.Add(this.cmdEndCredits);
+            this.Controls.Add(this.txtAuthor);
+            this.Controls.Add(this.label24);
             this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.cmdPickMusic);
             this.Controls.Add(this.label23);
@@ -499,5 +543,9 @@ namespace Legend_Of_Drongo
         private TextBox txtMusicPath;
         private Button cmdPickMusic;
         private Button cmdHelp;
+        private Label label24;
+        private TextBox txtAuthor;
+        private Button cmdEndCredits;
+        private Button cmdDefaultPlayer;
     }
 }

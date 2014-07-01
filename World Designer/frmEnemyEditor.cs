@@ -75,7 +75,7 @@ namespace Legend_Of_Drongo
         {
             DataTypes.itemInfo NewItem = new DataTypes.itemInfo();
             NewItem = Enemy.Weapon;
-            frmItemEditor NewForm = new frmItemEditor(NewItem);
+            frmItemEditor NewForm = new frmItemEditor(NewItem, "Weapon");
 
             NewForm.ShowDialog();
             NewItem = NewForm.Item;

@@ -17,6 +17,8 @@ namespace Legend_Of_Drongo
     {
         //Set up the Grid
         public List<DataTypes.Floor> world = new List<DataTypes.Floor>();
+        public List<string> Credits = new List<string>();
+        public DataTypes.PlayerProfile ThisPlayer = new DataTypes.PlayerProfile();
         DataTypes.Floor ThisFloor;
         int FloorNum = 0;
 
@@ -24,11 +26,11 @@ namespace Legend_Of_Drongo
         {
 
             InitializeComponent();
-                      
+
             //Check If New World
             if (LoadWorld == true)
             {
-                string LoadPath = string.Concat(Directory.GetCurrentDirectory() , "\\Worlds\\" , WorldName);
+                string LoadPath = string.Concat(Directory.GetCurrentDirectory(), "\\Worlds\\", WorldName);
                 //MessageBox.Show(LoadPath);
 
 
@@ -40,13 +42,17 @@ namespace Legend_Of_Drongo
 
                 }
                 txtWorldName.Text = WorldState.WorldName;
+                txtAuthor.Text = WorldState.WorldAuthor;
                 world = WorldState.WorldState;
+
+                if (WorldState.Credits != null) foreach (string credit in WorldState.Credits) { Credits.Add(credit); }
 
                 ThisFloor = world[0];
                 txtFloorName.Text = ThisFloor.FloorName;
                 txtMusicPath.Text = ThisFloor.FloorSong;
+                ThisPlayer = WorldState.DefaultPlayer;
                 cmbLevelSelect.Items.Clear();
-                for (int i=1;i<=world.Count;i++)
+                for (int i = 1; i <= world.Count; i++)
                 {
                     cmbLevelSelect.Items.Add("Level " + i);
                 }
@@ -85,12 +91,14 @@ namespace Legend_Of_Drongo
                 this.tblWorldLevel.CellPaint += new TableLayoutCellPaintEventHandler(tblWorldLevel_CellPaint);
                 txtFloorName.Text = "Level 1";
                 lblEditor.Text = "Default Starting Position is B:2";
+
+                ThisPlayer = DefaultPlayer();
             }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-           if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
 
             // Confirm user wants to close
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to quit?\n\nAll Unsaved progress will be lost?", "Quit World Designer", MessageBoxButtons.YesNo);
@@ -232,7 +240,7 @@ namespace Legend_Of_Drongo
                     case "Light Blue": return Brushes.LightBlue;
                     case "Light Green": return Brushes.LightGreen;
                     default: return Brushes.Red;
-                }                
+                }
             }
             else if (ThisFloor.CurrentFloor[row, column].CanMove == false) return Brushes.Red;
             else return Brushes.Green;
@@ -252,8 +260,8 @@ namespace Legend_Of_Drongo
             //MessageBox.Show(cmbLevelSelect.Items.Count.ToString());
 
             world[FloorNum] = ThisFloor; //Save Current Floor - unnecessary but why not eh?
-            
-            if ((index +1) == cmbLevelSelect.Items.Count)   //Adding new floor
+
+            if ((index + 1) == cmbLevelSelect.Items.Count)   //Adding new floor
             {
                 FloorNum = index;
                 cmbLevelSelect.Items[index] = "Level " + (index + 1);
@@ -281,7 +289,7 @@ namespace Legend_Of_Drongo
                     ThisFloor.CurrentFloor[9, y].CanMove = false;
                 }
                 world.Add(ThisFloor);
-                txtFloorName.Text = "Level " + (index +1);
+                txtFloorName.Text = "Level " + (index + 1);
             }
             else
             {
@@ -306,7 +314,7 @@ namespace Legend_Of_Drongo
                     this.Hide();
                     while (proc.HasExited == false) { }
                     this.Show();
-                    
+
                 }
                 else MessageBox.Show("Could not find the game engine .exe file, is it missing?");
             }
@@ -319,21 +327,21 @@ namespace Legend_Of_Drongo
             {
                 DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this level. This action is irreversible.", "Delete Level", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
-                {                
-                        //Delte the layer
-                        world.RemoveAt(FloorNum);
+                {
+                    //Delte the layer
+                    world.RemoveAt(FloorNum);
 
-                        if (FloorNum == world.Count) FloorNum = FloorNum - 1;
-                        ThisFloor = world[FloorNum];
+                    if (FloorNum == world.Count) FloorNum = FloorNum - 1;
+                    ThisFloor = world[FloorNum];
 
-                        cmbLevelSelect.Items.Clear();
-                        for (int i = 1; i <= world.Count; i++)
-                        {
-                            cmbLevelSelect.Items.Add("Level " + i);
-                        }
-                        cmbLevelSelect.Items.Add("Add New Level...");
-                        tblWorldLevel.Refresh();
-                        cmbLevelSelect.SelectedIndex = FloorNum;
+                    cmbLevelSelect.Items.Clear();
+                    for (int i = 1; i <= world.Count; i++)
+                    {
+                        cmbLevelSelect.Items.Add("Level " + i);
+                    }
+                    cmbLevelSelect.Items.Add("Add New Level...");
+                    tblWorldLevel.Refresh();
+                    cmbLevelSelect.SelectedIndex = FloorNum;
                 }
             }
             else MessageBox.Show("You cannot have a world with no floors,");
@@ -375,7 +383,13 @@ namespace Legend_Of_Drongo
                     ThisFloor.FloorName = txtFloorName.Text;
                     world[FloorNum] = ThisFloor;
                     ThisWorld.WorldName = txtWorldName.Text;
+                    ThisWorld.WorldAuthor = txtAuthor.Text;
                     ThisWorld.WorldState = world;
+                    ThisWorld.DefaultPlayer = ThisPlayer;
+
+                    if (ThisWorld.Credits == null) ThisWorld.Credits = new List<string>(); 
+                    ThisWorld.Credits.Clear();
+                    foreach (string credit in Credits) { ThisWorld.Credits.Add(credit); }
 
                     using (Stream stream = File.Open(SavePath, FileMode.Create))
                     {
@@ -406,6 +420,64 @@ namespace Legend_Of_Drongo
         {
             frmHelp NewForm = new frmHelp();
             NewForm.Show();
+        }
+
+        private void cmdEndCredits_Click(object sender, EventArgs e)
+        {
+            frmEndCredits NewForm = new frmEndCredits(txtAuthor.Text, Credits);
+            NewForm.ShowDialog();
+
+            Credits.Clear();
+            foreach (string credit in NewForm.EndCredits) { Credits.Add(credit); }
+        }
+
+        private void cmdDefaultPlayer_Click(object sender, EventArgs e)
+        {
+            frmPlayerEditor NewForm = new frmPlayerEditor(ThisPlayer);
+            NewForm.ShowDialog();
+
+            ThisPlayer = NewForm.Player;
+        }
+
+        public static DataTypes.PlayerProfile DefaultPlayer()
+        {
+            DataTypes.PlayerProfile Player = new DataTypes.PlayerProfile();
+            Player.name = "Drongo";
+            Player.HPBonus = 100;
+            Player.ArmorBonus = 0;
+
+            //Set up starter inventory
+            Player.inventory = new DataTypes.itemInfo[20];
+            Player.invspace = 20;
+
+            //Set up game parameters
+            Player.CurrentPos = new int[3] { 1, 1, 0 }; //Row, Column, Floor
+            Player.Objective = "";
+            Player.Money = 100;
+            Player.DaysSinceSleep = 0;
+
+            //Set up starter weapon
+            Player.WeaponHeld.Name = "Fists";
+            Player.WeaponHeld.BadHit = "Your Knuckles lightly graze your enemies cheek";
+            Player.WeaponHeld.MedHit = "You hit your enemy with a quick jab to the ribs";
+            Player.WeaponHeld.GoodHit = "A sound of crunching bone can be heard as your fist hits your enemy in the jaw";
+            Player.WeaponHeld.AttackMod = 1;
+            Player.WeaponHeld.CanPickUp = true;
+            Player.WeaponHeld.InteractionName = new List<string>();
+            Player.WeaponHeld.InteractionName.Add("fists");
+            Player.WeaponHeld.InteractionName.Add("hands");
+            Player.WeaponHeld.Class = "Weapon";
+            Player.WeaponHeld.Examine = "Your own hands, how they got on the floor I will never know...";
+            Player.ArmorWorn = new DataTypes.itemInfo[5];
+
+            //Set Up Stats
+            Player.Level = 1;
+            Player.MaxHp = 100;
+            Player.Speed = 1;
+            Player.Resitence = 0;
+            Player.Strength = 0;
+
+            return Player;
         }
     }
 }

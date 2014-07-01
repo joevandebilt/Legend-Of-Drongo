@@ -78,6 +78,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateWorld.cs" />
+    <Compile Include="frmEndCredits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEndCredits.Designer.cs">
+      <DependentUpon>frmEndCredits.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEnemyEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,12 @@
     <Compile Include="frmNPCEditor.Designer.cs">
       <DependentUpon>frmNPCEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPlayerEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlayerEditor.Designer.cs">
+      <DependentUpon>frmPlayerEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmWorldDesigner.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +152,9 @@
     <Compile Include="frmRoomEditor.Designer.cs">
       <DependentUpon>frmRoomEditor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmEndCredits.resx">
+      <DependentUpon>frmEndCredits.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEnemyEditor.resx">
       <DependentUpon>frmEnemyEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNPCEditor.resx">
       <DependentUpon>frmNPCEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlayerEditor.resx">
+      <DependentUpon>frmPlayerEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWorldDesigner.resx">
       <DependentUpon>frmWorldDesigner.cs</DependentUpon>

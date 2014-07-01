@@ -96,7 +96,7 @@ namespace Legend_Of_Drongo
         private void cmdAddItem_Click(object sender, EventArgs e)
         {
             DataTypes.itemInfo NewItem = new DataTypes.itemInfo();
-            frmItemEditor NewForm = new frmItemEditor(NewItem);
+            frmItemEditor NewForm = new frmItemEditor(NewItem, string.Empty);
             NewForm.ShowDialog();
 
             if (NewForm.ChangeMade == true)
@@ -131,7 +131,7 @@ namespace Legend_Of_Drongo
             {
                 DataTypes.itemInfo EditItem = new DataTypes.itemInfo();
                 EditItem = NPC.inventory[lstInventory.SelectedIndex];
-                frmItemEditor NewForm = new frmItemEditor(EditItem);
+                frmItemEditor NewForm = new frmItemEditor(EditItem,string.Empty);
                 NewForm.ShowDialog();
 
                 if (NewForm.ChangeMade == true)

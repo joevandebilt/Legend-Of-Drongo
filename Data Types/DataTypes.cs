@@ -24,7 +24,10 @@ namespace Legend_Of_Drongo
         {
             public string WorldName;
             public int WorldTime;
+            public string WorldAuthor;
             public List<Floor> WorldState;
+            public List<string> Credits;
+            public PlayerProfile DefaultPlayer;
         }
 
         [Serializable()]
