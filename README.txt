@@ -1,7 +1,7 @@
-+-----------------------------------+
-|         Legend Of Drongo          |
-|            Changelog	            |
-+-----------------------------------+
++---------------------------------------+
+|           Legend Of Drongo            |
+|				        Changelog               |
++---------------------------------------+
 
 Description:
 The Legend of Drongo was a project I started as a means to familiarise myself with C# programming concepts for my studies. Following my studies the project was mothballed and is worked on in sprints as and when I have the time. It is a hobby and is the accumulated skilled I have gained over the past 3 years of dev experience, so naturally some areas of the program are poorly designed and executed. However I am constantly making changes to the engine, and one day hope to release as an indie game. 
