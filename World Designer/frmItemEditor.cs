@@ -14,54 +14,53 @@ namespace Legend_Of_Drongo
         public DataTypes.itemInfo Item;
         public bool ChangeMade;
 
-        public frmItemEditor(DataTypes.itemInfo ThisItem)
+        public frmItemEditor(DataTypes.itemInfo ThisItem, string ItemClass)
         {
             InitializeComponent();
             ChangeMade = false;
-
-            if (ThisItem.Name != null) 
-            {
-                Item = new DataTypes.itemInfo();
-                Item = ThisItem;
-                PopulateItem(Item);
-            }
-            else cmbItemClass.SelectedIndex = cmbItemClass.FindString("Object");
+            Item = ThisItem;
+            PopulateItem(ItemClass);
         }
 
-        public void PopulateItem(DataTypes.itemInfo ThisItem)
+        public void PopulateItem(string Class)
         {
-            if (ThisItem.Name != null) txtName.Text = ThisItem.Name;
-            if (ThisItem.Examine != null) txtDescription.Text = ThisItem.Examine;
+            if (Item.Name != null) txtName.Text = Item.Name;
+            if (Item.Examine != null) txtDescription.Text = Item.Examine;
 
-            if (ThisItem.CanPickUp == false) chkPickup.Checked = false;
+            if (Item.CanPickUp == false) chkPickup.Checked = false;
             else chkPickup.Checked = true;
 
-            if (ThisItem.InteractionName != null)
+            if (Item.InteractionName != null)
             {
                 txtInteraction.Clear();
-                txtInteraction.Text = ThisItem.InteractionName[0];
-                for (int i = 1; i < ThisItem.InteractionName.Count; i++)
+                txtInteraction.Text = Item.InteractionName[0];
+                for (int i = 1; i < Item.InteractionName.Count; i++)
                 {
-                    txtInteraction.Text = string.Concat(txtInteraction.Text, ", ", ThisItem.InteractionName[i]);
+                    txtInteraction.Text = string.Concat(txtInteraction.Text, ", ", Item.InteractionName[i]);
                 }
             }
 
-            if (ThisItem.Class != null) cmbItemClass.SelectedIndex = cmbItemClass.FindString(ThisItem.Class);
+            if (Item.Class != null) cmbItemClass.SelectedIndex = cmbItemClass.FindString(Item.Class);
+            else if (Class != string.Empty)
+            {
+                cmbItemClass.SelectedIndex = cmbItemClass.FindString(Class);
+                cmbItemClass.Enabled = false;
+            }
             else cmbItemClass.SelectedIndex = cmbItemClass.FindString("Unknown");
             
-            txtValue.Text = ThisItem.Value.ToString();
-            txtHP.Text = ThisItem.HPmod.ToString();
-            txtDamage.Text = ThisItem.AttackMod.ToString();
-            txtProtection.Text = ThisItem.DefenseMod.ToString();
-            txtXP.Text = ThisItem.XP.ToString();
+            txtValue.Text = Item.Value.ToString();
+            txtHP.Text = Item.HPmod.ToString();
+            txtDamage.Text = Item.AttackMod.ToString();
+            txtProtection.Text = Item.DefenseMod.ToString();
+            txtXP.Text = Item.XP.ToString();
             EnableElements();
 
-            if (ThisItem.GoodHit != null) txtGoodHit.Text = ThisItem.GoodHit;
-            if (ThisItem.MedHit != null) txtMedHit.Text = ThisItem.MedHit;
-            if (ThisItem.BadHit != null) txtBadHit.Text = ThisItem.BadHit;
+            if (Item.GoodHit != null) txtGoodHit.Text = Item.GoodHit;
+            if (Item.MedHit != null) txtMedHit.Text = Item.MedHit;
+            if (Item.BadHit != null) txtBadHit.Text = Item.BadHit;
 
-            if (ThisItem.ItemNeeded != null) txtItemNeeded.Text = ThisItem.ItemNeeded;
-            if (ThisItem.interactionResponse != null) txtInteractionMessage.Text = ThisItem.interactionResponse;
+            if (Item.ItemNeeded != null) txtItemNeeded.Text = Item.ItemNeeded;
+            if (Item.interactionResponse != null) txtInteractionMessage.Text = Item.interactionResponse;
         }
 
         private bool SaveItem()

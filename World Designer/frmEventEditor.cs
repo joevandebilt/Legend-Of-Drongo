@@ -93,6 +93,9 @@ namespace Legend_Of_Drongo
             desc.ShortDesc = "giveXP";
             desc.LongDesc = "Award the player XP";
             Actions.Add(desc);
+            desc.ShortDesc = "EndCredits";
+            desc.LongDesc = "Run the End Credits and end the Game";
+            Actions.Add(desc);
             desc.ShortDesc = string.Empty;
             desc.LongDesc = "Unknown";
             Actions.Add(desc);
@@ -150,6 +153,8 @@ namespace Legend_Of_Drongo
             }
 
             if (Event.EventValue != null) txtNewValue.Text = Event.EventValue;
+            if (Event.ReUsable == true) chkReUse.Checked = true;
+            else chkReUse.Checked = false;
 
             GetAllNPCs();
             GetAllItems();
@@ -172,6 +177,9 @@ namespace Legend_Of_Drongo
 
             if (txtNewValue.Text != string.Empty) Event.EventValue = txtNewValue.Text;
             else if (txtNewValue.Enabled == true) return false;
+
+            if (chkReUse.Checked == true) Event.ReUsable = true;
+            else Event.ReUsable = false;
 
             //Items, NPCs and Enemies should save to the event in their own procedures
 
@@ -282,7 +290,7 @@ namespace Legend_Of_Drongo
         private void cmdAddItem_Click(object sender, EventArgs e)
         {
             DataTypes.itemInfo NewItem = new DataTypes.itemInfo();
-            frmItemEditor NewForm = new frmItemEditor(NewItem);
+            frmItemEditor NewForm = new frmItemEditor(NewItem,string.Empty);
             NewForm.ShowDialog();
 
             NewItem = NewForm.Item;
@@ -317,7 +325,7 @@ namespace Legend_Of_Drongo
             {
                 DataTypes.itemInfo EditItem = new DataTypes.itemInfo();
                 EditItem = Event.Items[lstItems.SelectedIndex];
-                frmItemEditor NewForm = new frmItemEditor(EditItem);
+                frmItemEditor NewForm = new frmItemEditor(EditItem,string.Empty);
                 NewForm.ShowDialog();
 
                 EditItem = NewForm.Item;

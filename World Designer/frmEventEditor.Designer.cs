@@ -55,6 +55,7 @@
             this.cmdCloneNPC = new System.Windows.Forms.Button();
             this.cmdCloneItem = new System.Windows.Forms.Button();
             this.cmdHelp = new System.Windows.Forms.Button();
+            this.chkReUse = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -344,11 +345,22 @@
             this.cmdHelp.UseVisualStyleBackColor = true;
             this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
             // 
+            // chkReUse
+            // 
+            this.chkReUse.AutoSize = true;
+            this.chkReUse.Location = new System.Drawing.Point(15, 50);
+            this.chkReUse.Name = "chkReUse";
+            this.chkReUse.Size = new System.Drawing.Size(107, 17);
+            this.chkReUse.TabIndex = 46;
+            this.chkReUse.Text = "Re-Usable Event";
+            this.chkReUse.UseVisualStyleBackColor = true;
+            // 
             // frmEventEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 324);
+            this.Controls.Add(this.chkReUse);
             this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.cmdCloneEnemy);
             this.Controls.Add(this.cmdCloneNPC);
@@ -412,5 +424,6 @@
         private System.Windows.Forms.Button cmdCloneNPC;
         private System.Windows.Forms.Button cmdCloneItem;
         private System.Windows.Forms.Button cmdHelp;
+        private System.Windows.Forms.CheckBox chkReUse;
     }
 }

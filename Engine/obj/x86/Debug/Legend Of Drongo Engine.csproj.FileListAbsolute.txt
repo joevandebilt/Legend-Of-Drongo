@@ -40,3 +40,17 @@ D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Leg
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend_Of_Drongo.frmLegendOfDrongo.resources
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csproj.GenerateResource.Cache
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo.exe
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo.pdb
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo.exe
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo.pdb
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend_Of_Drongo.frmLegendOfDrongo.resources
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Engine\obj\x86\Debug\Legend Of Drongo Engine.csproj.GenerateResource.Cache
+F:\Personal Files\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
+F:\Personal Files\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
+F:\Personal Files\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe
+F:\Personal Files\Legend-Of-Drongo\Compiled\Legend Of Drongo.pdb
+F:\Personal Files\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
+F:\Personal Files\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend_Of_Drongo.frmLegendOfDrongo.resources
+F:\Personal Files\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csproj.GenerateResource.Cache

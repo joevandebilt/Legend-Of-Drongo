@@ -21,13 +21,40 @@ World Editor
 > Name each floor to keep track of them.
 > Select Music using the music Picker (see Music picker)
 > To edit a room, select the cell and the room editor will open for that cell (See room editor)
+> Enter your own personal name as the world creator, this will be shown in the end credits
+> Press the end credits button to write custom end credits (See End Credits)
+> Press the default player button to set up the default player (See default player)
 
+End Credits
+------------------------
+The end credits is triggered as an event, it will show each line of the end credits starting with the first two static lines which cannot be changed. After the credits roll the player will return to the main menu. 
+> Each line is a new item. 
 
 Music Picker
 ------------------------
 > The music picker will populate all .wav files contained within the Music Folder, you can add your own custom music here with this method. 
 > The music file selected will begin playing when the player moves to that floor, allowing you to set a custom soundtrack for each floor.
 > If the music remains blank the game will continue to play the music from the previous floor. 
+
+Default Player
+------------------------
+The default player is how the player starts the game. 
+> Default name is the name the player will take if they do not enter a valid name
+> Inventory sets up their starting inventory, max 20 items. 
+	+  Will create a new item
+	|| Will Clone a selected item
+	-  Will remove a selected item
+> Starting objective will be the first objective the player has
+> Starting money is how much money the player begins with. 
+> Starting position is the grid reference where the player starts the game. I.E B2 top left, I9 Bottom right.
+> Speed is the player initial speed at level 0
+> Strength is the player initial strength at level 0
+> Resitence is the player initial resistence at level 0
+> Starting HP is how much HP the player has at the start of the game
+> Max HP is how much HP the player can have at level 0 (increases by 5 per level)
+> Armor and weapons are set up by double clicking on the fields, see Item Editor for how to create an item.
+> Save default player
+> Reset to default creates blank template
 
 
 Room Editor

@@ -32,3 +32,11 @@ D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Leg
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo Data Types.pdb
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
 D:\Users\joe.vandebilt\Documents\Programming\Legend-Of-Drongo\trunk\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo Data Types.dll
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Compiled\Legend Of Drongo Data Types.pdb
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+D:\Users\joe.vandebilt\Documents\SVN\Legend-Of-Drongo\trunk\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
+F:\Personal Files\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.dll
+F:\Personal Files\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.pdb
+F:\Personal Files\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+F:\Personal Files\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb

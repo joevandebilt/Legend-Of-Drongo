@@ -103,39 +103,9 @@ namespace Legend_Of_Drongo
                 if (Menu.Key == ConsoleKey.N)
                 {
                     Player = new PlayerProfile();
-                    validChoice = true;
-                    Console.Clear();
-                    Console.Write("What is your name?: ");
-
-                    string playername = Console.ReadLine();
-                    if (playername == "")
-                    {
-                        playername = "Drongo";
-                    }
-
-                    Player = DefaultPlayer();
-
-                    //Player.name = "... You do not remember your name...";
-                    Player.name = playername;
-                    Player.HPBonus = 84;
-
-                    //set up starter inventory
-                    Player.inventory = new itemInfo[20];
-                    Player.inventory[0].Name = "Apple";
-                    Player.inventory[0].HPmod = 5;
-                    Player.inventory[0].Class = "Food";
-                    Player.inventory[0].Examine = "Looks like a fresh apple";
-                    Player.inventory[0].CanPickUp = true;
-                    Player.inventory[0].InteractionName = new List<string>();
-                    Player.inventory[0].InteractionName.Add("apple");
-                    Player.invspace = 19;
-
-                    //set up game parameters
-                    Player.CurrentPos = new int[3] { 1, 1, 1 }; //Row, Column, Floor
-                    Player.Objective = "Find a way out of the forest";
-
-                    Console.Clear();
+                    validChoice = true;                   
                     
+                    Console.Clear();                    
                     Thread Intro = new Thread(Introduction);
                     Intro.Start();
 
@@ -161,6 +131,13 @@ namespace Legend_Of_Drongo
                     }
                     world = WorldState.WorldState;
 
+                    Console.Clear();
+                    Player = WorldState.DefaultPlayer;
+                    Console.Write("What is your name?: ");
+                    string playername = Console.ReadLine();
+                    if (playername != string.Empty) Player.name = playername;
+                    Console.Clear();
+
                     PlayerStatus();
                     Console.WriteLine(WordWrap("\nYour current objective is: {0}"), Player.Objective);
                     Console.WriteLine(WordWrap("Press any key to start your adventure..."));
@@ -171,52 +148,19 @@ namespace Legend_Of_Drongo
                 {
                     Player = new PlayerProfile();
                     validChoice = true;
-                    Console.Clear();
-
-                        Console.Write("What is your name?: ");
-
-                        string playername = Console.ReadLine();
-                        if (playername == "")
-                        {
-                            playername = "Drongo";
-                        }
-
-                    Player.name = playername;
-                    Player.HPBonus = 100;
-                    Player.ArmorBonus = 0;
-
-                    //set up starter inventory
-                    Player.inventory = new itemInfo[20];
-                    Player.invspace = 20;
-
-                    //set up game parameters
-                    Player.CurrentPos = new int[3] { 1, 1, 0 }; //Row, Column, Floor
-                    Player.Objective = "Complete the tutorial";
-                    Player.Money = 100;
-
-                    //set up starter weapon
-                    Player.WeaponHeld.Name = "Fists";
-                    Player.WeaponHeld.BadHit = "Your Knuckles lightly graze your enemies cheek";
-                    Player.WeaponHeld.MedHit = "You hit your enemy with a quick jab to the ribs";
-                    Player.WeaponHeld.GoodHit = "A sound of crunching bone can be heard as your fist hits your enemy in the jaw";
-                    Player.WeaponHeld.AttackMod = 1;
-                    Player.WeaponHeld.CanPickUp = true;
-                    Player.WeaponHeld.InteractionName = new List<string>();
-                    Player.WeaponHeld.InteractionName.Add("fists");
-                    Player.WeaponHeld.InteractionName.Add("hands");
-                    Player.WeaponHeld.Class = "Weapon";
-                    Player.WeaponHeld.Examine = "Your own hands, how they got on the floor I will never know...";
-                    Player.ArmorWorn = new itemInfo[5];
-
-
+                    
                     //Load Tutorial World
                     using (Stream stream = File.Open(".\\Worlds\\LoDTutorial.LoD", FileMode.Open))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
                         WorldState = (WorldFile)bin.Deserialize(stream);
-
                     }
                     world = WorldState.WorldState;
+                    Console.Clear();
+                    Player = WorldState.DefaultPlayer;
+                    Console.Write("What is your name?: ");
+                    string playername = Console.ReadLine();
+                    if (playername != string.Empty) Player.name = playername;
                     Console.Clear();
                 }
                 else if (Menu.Key == ConsoleKey.L)
@@ -337,17 +281,11 @@ namespace Legend_Of_Drongo
                         world = WorldState.WorldState;
 
                         Console.Clear();
+                        Player = WorldState.DefaultPlayer;
                         Console.Write("What is your name?: ");
-
                         string playername = Console.ReadLine();
-                        if (playername == "")
-                        {
-                            playername = "Drongo";
-                        }
-
-                        Player = DefaultPlayer();
-                        Player.name = playername;
-
+                        if (playername != string.Empty) Player.name = playername;
+                        Console.Clear();
                         Console.WriteLine(WordWrap("\n            Loading"));
                         Thread.Sleep(1500);
                         Console.Clear();
@@ -371,52 +309,12 @@ namespace Legend_Of_Drongo
                 else if (Menu.Key == ConsoleKey.Q)
                 {
                     validChoice = true;
+                    //lock (stopTime) { stopTime = true; }
                     Environment.Exit(0);
                 }
                 Console.Clear();
             }
-                
-                
-                return (Player);
-            
-        }
-
-        public static PlayerProfile DefaultPlayer()
-        {
-            Player.name = "Drongo";
-            Player.HPBonus = 100;
-            Player.ArmorBonus = 0;
-
-            //set up starter inventory
-            Player.inventory = new itemInfo[20];
-            Player.invspace = 20;
-
-            //set up game parameters
-            Player.CurrentPos = new int[3] { 1, 1, 0 }; //Row, Column, Floor
-            Player.Objective = "";
-            Player.Money = 100;
-            Player.DaysSinceSleep = 0;
-
-            //set up starter weapon
-            Player.WeaponHeld.Name = "Fists";
-            Player.WeaponHeld.BadHit = "Your Knuckles lightly graze your enemies cheek";
-            Player.WeaponHeld.MedHit = "You hit your enemy with a quick jab to the ribs";
-            Player.WeaponHeld.GoodHit = "A sound of crunching bone can be heard as your fist hits your enemy in the jaw";
-            Player.WeaponHeld.AttackMod = 1;
-            Player.WeaponHeld.CanPickUp = true;
-            Player.WeaponHeld.InteractionName = new List<string>();
-            Player.WeaponHeld.InteractionName.Add("fists");
-            Player.WeaponHeld.InteractionName.Add("hands");
-            Player.WeaponHeld.Class = "Weapon";
-            Player.WeaponHeld.Examine = "Your own hands, how they got on the floor I will never know...";
-            Player.ArmorWorn = new itemInfo[5];
-            Player.Level = 1;
-            Player.MaxHp = 100;
-            Player.Speed = 1;
-            Player.Resitence = 0;
-            Player.Strength = 0;
-
-            return Player;
+            return (Player);
         }
 
         static void Introduction()
@@ -481,8 +379,6 @@ namespace Legend_Of_Drongo
            //path = Directory.GetCurrentDirectory();
             if (args.Length != 0 && args[0] == "/test")
             {
-                Player = DefaultPlayer();
-
                 string WorldName = args[1];
                 for (int i = 2; i < args.Length; i++) { WorldName = WorldName + " " + args[i]; }
                 WorldName = WorldName + ".LoD";
@@ -493,6 +389,7 @@ namespace Legend_Of_Drongo
                     WorldState = (WorldFile)bin.Deserialize(stream);
                 }
                 world = WorldState.WorldState;
+                Player = WorldState.DefaultPlayer;
                 Console.Clear();
                 Console.WriteLine("\n\t\t"+ WorldState.WorldName +" Loading...");
                 Thread.Sleep(1000);
@@ -501,9 +398,9 @@ namespace Legend_Of_Drongo
                 Console.WriteLine("Press any key to continue");
                 Console.ReadLine();
                 Console.Clear();
-
             }
             else Player = MainMenu();
+            
             ThisFloor = world[Player.CurrentPos[2]] ;
             CurrentRoom = GetRoomInfo(Player.CurrentPos);
             CurrentRoom.Explored = true;
@@ -965,32 +862,36 @@ namespace Legend_Of_Drongo
 
                             while (vendorFound == false && CurrentRoom.Civilians != null && index < CurrentRoom.Civilians.Count)
                             {
-                                if (VendorName.ToLower() == CurrentRoom.Civilians[index].name.ToLower() && CurrentRoom.Civilians[index].willSell == true)
+                                if (VendorName.ToLower() == CurrentRoom.Civilians[index].name.ToLower())
                                 {
-                                    vendorFound = true;
-                                    Console.WriteLine();
-                                    Console.WriteLine("Item\t\t\tClass\t\t\tPrice");
-                                    for (int Count = 0; Count < CurrentRoom.Civilians[index].inventory.Count; Count++)
+                                    if (CurrentRoom.Civilians[index].willSell == true)
                                     {
-                                        if (CurrentRoom.Civilians[index].inventory[Count].Name == null) Console.Write("null\t\t");
-                                        if (CurrentRoom.Civilians[index].inventory[Count].Name.Length < 8) Console.Write("{0}\t\t", CurrentRoom.Civilians[index].inventory[Count].Name);
-                                        else if (CurrentRoom.Civilians[index].inventory[Count].Name.Length <= 15) Console.Write("{0}\t", CurrentRoom.Civilians[index].inventory[Count].Name);
-                                        else Console.Write(CurrentRoom.Civilians[index].inventory[Count].Name);
+                                        vendorFound = true;
+                                        Console.WriteLine();
+                                        Console.WriteLine("Item\t\t\tClass\t\t\tPrice");
+                                        for (int Count = 0; Count < CurrentRoom.Civilians[index].inventory.Count; Count++)
+                                        {
+                                            if (CurrentRoom.Civilians[index].inventory[Count].Name == null) Console.Write("null\t\t");
+                                            if (CurrentRoom.Civilians[index].inventory[Count].Name.Length < 8) Console.Write("{0}\t\t", CurrentRoom.Civilians[index].inventory[Count].Name);
+                                            else if (CurrentRoom.Civilians[index].inventory[Count].Name.Length <= 15) Console.Write("{0}\t", CurrentRoom.Civilians[index].inventory[Count].Name);
+                                            else Console.Write(CurrentRoom.Civilians[index].inventory[Count].Name);
 
-                                        if (CurrentRoom.Civilians[index].inventory[Count].Class == null) Console.Write("null\t\t\t");
-                                        else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length < 8) Console.Write("{0}\t\t\t", CurrentRoom.Civilians[index].inventory[Count].Class);
-                                        else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length <= 15) Console.Write("{0}\t\t", CurrentRoom.Civilians[index].inventory[Count].Class);
-                                        else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length <= 21) Console.Write("{0}\t", CurrentRoom.Civilians[index].inventory[Count].Class);
-                                        else Console.Write(CurrentRoom.Civilians[index].inventory[Count].Class);
+                                            if (CurrentRoom.Civilians[index].inventory[Count].Class == null) Console.Write("null\t\t\t");
+                                            else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length < 8) Console.Write("{0}\t\t\t", CurrentRoom.Civilians[index].inventory[Count].Class);
+                                            else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length <= 15) Console.Write("{0}\t\t", CurrentRoom.Civilians[index].inventory[Count].Class);
+                                            else if (CurrentRoom.Civilians[index].inventory[Count].Class.Length <= 21) Console.Write("{0}\t", CurrentRoom.Civilians[index].inventory[Count].Class);
+                                            else Console.Write(CurrentRoom.Civilians[index].inventory[Count].Class);
 
-                                        if (CurrentRoom.Civilians[index].inventory[Count].Value != 0) Console.Write("\t{0}\n", CurrentRoom.Civilians[index].inventory[Count].Value);
-                                        else Console.Write("\tnull\n");
-                                        //Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].inventory[Count].Name, "\t", CurrentRoom.Civilians[index].inventory[Count].Class, "\t",CurrentRoom.Civilians[index].inventory[Count].Value)));
+                                            if (CurrentRoom.Civilians[index].inventory[Count].Value != 0) Console.Write("\t{0}\n", CurrentRoom.Civilians[index].inventory[Count].Value);
+                                            else Console.Write("\tnull\n");
+                                            //Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].inventory[Count].Name, "\t", CurrentRoom.Civilians[index].inventory[Count].Class, "\t",CurrentRoom.Civilians[index].inventory[Count].Value)));
+                                        }
                                     }
-                                }
-                                else Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].name, " is not willing to sell you anything")));
+                                    else Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].name, " is not willing to sell you anything")));
+                                }                                
                                 index++;
                             }
+                            if (!vendorFound) Console.WriteLine(VendorName + " is either not here or not a merchant");
                         }
                         else Console.WriteLine("There is nobody currently selling anything in this area");
 
@@ -1485,7 +1386,7 @@ namespace Legend_Of_Drongo
                     else if (PlayerCommand.ToLower() == "quit" || PlayerCommand.ToLower() == "exit")
                     {
                         Console.WriteLine("Quitting game");
-                        Thread.Sleep(1500);
+                        //Thread.Sleep(1500);
                     }
                     else if (PlayerCommand.ToLower() == "getpos")
                     {
@@ -1495,10 +1396,11 @@ namespace Legend_Of_Drongo
                     {
                         ForceError();
                     }
-                    else
+                    else if (PlayerCommand.ToLower() == "endcredits" )
                     {
-                        Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
+                        EndCredits();
                     }
+                    else Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
                 }
                 catch (Exception ex)
                 {
@@ -1679,6 +1581,7 @@ namespace Legend_Of_Drongo
             if (Player.ArmorWorn[4].Name == null)   Console.WriteLine("/   \\"); //boots
             else    Console.WriteLine(" ╝ ╚     - Boots Armor: {0} - {1}%", Player.ArmorWorn[4].Name, Player.ArmorWorn[4].DefenseMod);
 
+            Console.WriteLine(WordWrap("\nYour current objective is: {0}"), Player.Objective);
         }
 
         public static void ExamineItem(string Objectname)
@@ -2561,24 +2464,25 @@ namespace Legend_Of_Drongo
                 {
                     BaseAttack = RNG.Next(1, 3);
 
+                    Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you with their ", ThisFight[index].Weapon.Name,"\n")));
                     if (BaseAttack == 1)
                     {
                         //bad attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you with their ", ThisFight[index].Weapon.Name,"\n", ThisFight[index].Weapon.BadHit)));
+                        Console.WriteLine(WordWrap(string.Concat(ThisFight[index].Weapon.BadHit)));
 
                     }
                     else if (BaseAttack == 2)
                     {
                         //Medium Strong Attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you", ThisFight[index].Weapon.Name, "\n", ThisFight[index].Weapon.MedHit)));
+                        Console.WriteLine(WordWrap(string.Concat(ThisFight[index].Weapon.MedHit)));
                     }
                     else if (BaseAttack == 3)
                     {
                         //Strong Attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you", ThisFight[index].Weapon.Name, "\n", ThisFight[index].Weapon.GoodHit)));
+                        Console.WriteLine(WordWrap(string.Concat(ThisFight[index].Weapon.GoodHit)));
                     }
 
                     Fortitude = RNG.Next(1, 100);
@@ -3069,7 +2973,15 @@ namespace Legend_Of_Drongo
                     int n;
                     if (int.TryParse(thisEvent.EventValue, out n)) Player.XP = Player.XP + n;
                 }
+                else if (thisEvent.Action == "EndCredits")
+                {
+                    Console.ReadKey();
+                    EndCredits();
+                }
                 else thisEvent.Triggered = false;
+
+                //If an event is re-usable allow it to be triggered again
+                if (thisEvent.Triggered == true && thisEvent.ReUsable == true) thisEvent.Triggered = false; 
             }
             return thisEvent;
         }
@@ -3083,7 +2995,7 @@ namespace Legend_Of_Drongo
             Player.HPBonus = Player.HPBonus + 5;
             Player.Level = Level;
 
-            Console.WriteLine("You have advanced to Level {0}", Level);
+            Console.WriteLine("You have Levelled up!");
         }
 
         public static EnemyProfile GainXPfromEnemy(EnemyProfile Enemy)
@@ -3112,29 +3024,35 @@ namespace Legend_Of_Drongo
 
         public static void TimeTicker()
         {
+            int index = 1;
             while (stopTime == false)
             {
                 lock (myLock)
                 {
                     if (stopTime == true) break;
                 }
-                WorldState.WorldTime = WorldState.WorldTime + 1;
-                if (WorldState.WorldTime == 1440) WorldState.WorldTime = 0;
-                else if (WorldState.WorldTime == 360) Console.WriteLine("\n\nThe sun rises in the distance, morning has come\n>");
-                else if (WorldState.WorldTime == 480)
+                index++;
+                if (index == 15)
                 {
-                    Player.DaysSinceSleep = Player.DaysSinceSleep + 1;
-                    if (Player.DaysSinceSleep == 1) Console.WriteLine("\n\nYou have been awake for 24 hours, perhaps you should take some rest?\n>");
-                    else if (Player.DaysSinceSleep == 2) Console.WriteLine("\n\nYou have been awake for 48 hours, Take some rest soon!\n>");
-                    else if (Player.DaysSinceSleep == 3) Console.WriteLine("\n\nYou have been awake for 72 hours, you need to find a place to sleep!\n>");
-                    else if (Player.DaysSinceSleep == 4)
+                    WorldState.WorldTime = WorldState.WorldTime + 1;
+                    if (WorldState.WorldTime == 1440) WorldState.WorldTime = 0;
+                    else if (WorldState.WorldTime == 360) Console.WriteLine("\n\nThe sun rises in the distance, morning has come\n>");
+                    else if (WorldState.WorldTime == 480)
                     {
-                        Console.WriteLine("\n\nHaving been awake for 96 hours your body shuts down. Your fall into a deep sleep. Never to wake up...\n>");
-                        Player.HPBonus = 0;
+                        Player.DaysSinceSleep = Player.DaysSinceSleep + 1;
+                        if (Player.DaysSinceSleep == 1) Console.WriteLine("\n\nYou have been awake for 24 hours, perhaps you should take some rest?\n>");
+                        else if (Player.DaysSinceSleep == 2) Console.WriteLine("\n\nYou have been awake for 48 hours, Take some rest soon!\n>");
+                        else if (Player.DaysSinceSleep == 3) Console.WriteLine("\n\nYou have been awake for 72 hours, you need to find a place to sleep!\n>");
+                        else if (Player.DaysSinceSleep == 4)
+                        {
+                            Console.WriteLine("\n\nHaving been awake for 96 hours your body shuts down. Your fall into a deep sleep. Never to wake up...\n>");
+                            Player.HPBonus = 0;
+                        }
                     }
+                    else if (WorldState.WorldTime == 1200) Console.WriteLine("\n\nThe sun sets over the horizon, night has come\n>");
+                    index = 1;
                 }
-                else if (WorldState.WorldTime == 1200) Console.WriteLine("\n\nThe sun sets over the horizon, night has come\n>");
-                Thread.Sleep(15000);
+                Thread.Sleep(1000);
             }
             lock (myLock) { stopProcessing = true; }
         }
@@ -3241,6 +3159,41 @@ namespace Legend_Of_Drongo
             }
             WrappedOutput = tempstring;
             return (WrappedOutput);
+        }
+
+        public static void EndCredits()
+        {
+            Console.Clear();
+            int Linebreaks = 20;
+            int Counter = 0;
+            int StartLine = 0;
+            int i;
+            List<string> Credits = new List<string>();
+            Credits.Add("Game Developed by Joe van de Bilt");
+            if (WorldState.WorldAuthor != null) Credits.Add("World Designed by " + WorldState.WorldAuthor);
+            if (WorldState.Credits != null) foreach (string Credit in WorldState.Credits) { Credits.Add(Credit); }
+            while (Counter < (Credits.Count + 20))
+            {
+                for (i = 0; i < Linebreaks; i++) { Console.WriteLine(); }
+                for (i = StartLine; i <= Counter; i++) 
+                {
+                    if (i >= Credits.Count) Console.WriteLine();
+                    else Console.WriteLine("\t\t"+Credits[i]+"\n\n"); 
+                }
+                Counter = Counter + 1;
+                Linebreaks = Linebreaks - 1;
+                if (Linebreaks <= 0) StartLine++;
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
+            Console.Clear();
+            Console.WriteLine("\n\n\n\t\tThank you for Playing");
+            Console.ReadKey();
+            //Run the main menu screen
+            Player = MainMenu();
+            ThisFloor = world[Player.CurrentPos[2]];
+            CurrentRoom = ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
+            Console.WriteLine(WordWrap(CurrentRoom.Description));
         }
 
         public static void ForceError()

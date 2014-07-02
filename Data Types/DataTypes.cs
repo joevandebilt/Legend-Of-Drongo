@@ -24,7 +24,10 @@ namespace Legend_Of_Drongo
         {
             public string WorldName;
             public int WorldTime;
+            public string WorldAuthor;
             public List<Floor> WorldState;
+            public List<string> Credits;
+            public PlayerProfile DefaultPlayer;
         }
 
         [Serializable()]
@@ -52,7 +55,7 @@ namespace Legend_Of_Drongo
         }
 
         [Serializable()]
-        public struct Fighter
+        public struct Fighter   //Sets up a fighting profile for enemies and player
         {
             public string name;
             public int initiative;
@@ -65,7 +68,7 @@ namespace Legend_Of_Drongo
         }
 
         [Serializable()]
-        public struct itemInfo
+        public struct itemInfo  //Stores information on items
         {
             public List<string> InteractionName;
             public string Examine;
@@ -85,7 +88,7 @@ namespace Legend_Of_Drongo
         }
 
         [Serializable()]
-        public struct PlayerProfile
+        public struct PlayerProfile     //The main players data structures
         {
             public string name;
             public itemInfo[] inventory;
@@ -107,7 +110,7 @@ namespace Legend_Of_Drongo
         }
 
         [Serializable()]
-        public struct EnemyProfile
+        public struct EnemyProfile  //The profile of an enemy 
         {
             public string name;
             public itemInfo Weapon;
@@ -122,7 +125,7 @@ namespace Legend_Of_Drongo
         }
 
         [Serializable()]
-        public struct CivilianProfile
+        public struct CivilianProfile   //The profile of an NPC 
         {
             public string name;
             public string TalkToResponse;
@@ -139,7 +142,7 @@ namespace Legend_Of_Drongo
         }
 
         [Serializable()]
-        public struct Event
+        public struct Event     //Stores a world event
         {
             public string Trigger;
             public string Action;
@@ -149,6 +152,7 @@ namespace Legend_Of_Drongo
             public List<itemInfo> Items;
             public List<EnemyProfile> Enemies;
             public bool Triggered;
+            public bool ReUsable;
         }
 
         [Serializable()]
