@@ -190,11 +190,7 @@ v2.5.6
 - Sleeping sets time of day to 8am, recovers HP and sets days since sleep to 0
 - if Days Since sleep reaches 4 player dies. 
 
-<<<<<<< HEAD
 v2.6.0
-=======
-v2.5.7
->>>>>>> 0a1e5630dab3653f2f9754d90ccf69c03e5ff3cf
 - Added end credits function to game engine
 - Added World author string to world datatype
 - Added List of strings to world datatype as credits

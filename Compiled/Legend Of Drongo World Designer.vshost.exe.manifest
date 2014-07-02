@@ -25,7 +25,6 @@
 
          If you want to utilize File and Registry Virtualization for backward 
          compatibility then delete the requestedExecutionLevel node.
-<<<<<<< HEAD
     -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
@@ -76,56 +75,4 @@
       <dsig:DigestValue>ci4sggTOPa61ApigL10kmiScnVU=</dsig:DigestValue>
     </hash>
   </file>
-=======
-    -->
-        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
-      </requestedPrivileges>
-    </security>
-  </trustInfo>
-  <dependency>
-    <dependentOS>
-      <osVersionInfo>
-        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
-      </osVersionInfo>
-    </dependentOS>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
-      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Legend Of Drongo Data Types.dll" size="8704">
-      <assemblyIdentity name="Legend Of Drongo Data Types" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>1W15HT4A4Hb0LMmQi11TULLHF0o=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Legend Of Drongo World Designer.exe" size="477696">
-      <assemblyIdentity name="Legend Of Drongo World Designer" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5ksC+yvVTfmR2X344OfpdmzZzLI=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <file name="Drongo.ico" size="134344">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>ci4sggTOPa61ApigL10kmiScnVU=</dsig:DigestValue>
-    </hash>
-  </file>
->>>>>>> 0a1e5630dab3653f2f9754d90ccf69c03e5ff3cf
 </asmv1:assembly>
