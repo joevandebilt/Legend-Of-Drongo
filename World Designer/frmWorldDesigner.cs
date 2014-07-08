@@ -17,8 +17,10 @@ namespace Legend_Of_Drongo
     {
         //Set up the Grid
         public List<DataTypes.Floor> world = new List<DataTypes.Floor>();
-        public List<string> Credits = new List<string>();
         public DataTypes.PlayerProfile ThisPlayer = new DataTypes.PlayerProfile();
+
+        public List<string> Credits = new List<string>();
+        
         DataTypes.Floor ThisFloor;
         int FloorNum = 0;
 
@@ -385,6 +387,7 @@ namespace Legend_Of_Drongo
                     ThisWorld.WorldName = txtWorldName.Text;
                     ThisWorld.WorldAuthor = txtAuthor.Text;
                     ThisWorld.WorldState = world;
+
                     ThisWorld.DefaultPlayer = ThisPlayer;
 
                     if (ThisWorld.Credits == null) ThisWorld.Credits = new List<string>(); 
@@ -447,7 +450,7 @@ namespace Legend_Of_Drongo
             Player.ArmorBonus = 0;
 
             //Set up starter inventory
-            Player.inventory = new DataTypes.itemInfo[20];
+            Player.inventory = new List<DataTypes.itemInfo>();
             Player.invspace = 20;
 
             //Set up game parameters

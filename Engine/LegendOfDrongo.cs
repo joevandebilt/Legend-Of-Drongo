@@ -139,7 +139,6 @@ namespace Legend_Of_Drongo
                     Console.Clear();
 
                     PlayerStatus();
-                    Console.WriteLine(WordWrap("\nYour current objective is: {0}"), Player.Objective);
                     Console.WriteLine(WordWrap("Press any key to start your adventure..."));
                     Console.ReadKey();
                     Console.Clear();
@@ -210,8 +209,6 @@ namespace Legend_Of_Drongo
                         Console.Clear();
 
                         PlayerStatus();
-
-                        Console.WriteLine(WordWrap("\n\nYour current objective is: {0}"), Player.Objective);
                         Console.WriteLine(WordWrap("Press any key to continue your adventure..."));
                         Console.ReadKey();
                         Console.Clear();
@@ -602,36 +599,39 @@ namespace Legend_Of_Drongo
                     else if (PlayerCommand.ToLower().Split(' ')[0] == "take" || PlayerCommand.ToLower().Split(' ')[0] == "pick" || PlayerCommand.ToLower().Split(' ')[0] == "get")
                     {
                         string ObjectName = string.Empty;
-
-                        if (PlayerCommand.ToLower() == "take" || PlayerCommand.ToLower() == "pick" || PlayerCommand.ToLower() == "pick up" || PlayerCommand.ToLower() == "get")
+                        if (Player.invspace > 0)
                         {
-                            Console.Write("What do you want to pick up?: ");
-                            ObjectName = Console.ReadLine();
-                        }
-                        else
-                        {
-                            string[] strArray = PlayerCommand.Split(' ');
-                            int index = 2;
-                            if (strArray[0].ToLower() == "take" || strArray[0].ToLower() == "get")
+                            if (PlayerCommand.ToLower() == "take" || PlayerCommand.ToLower() == "pick" || PlayerCommand.ToLower() == "pick up" || PlayerCommand.ToLower() == "get")
                             {
-                                index = 2;
-                                ObjectName = strArray[1];
+                                Console.Write("What do you want to pick up?: ");
+                                ObjectName = Console.ReadLine();
                             }
-                            else if (strArray[0] == "pick" && strArray[1] == "up")
+                            else
                             {
-                                index = 3;
-                                ObjectName = strArray[2];
-                            }
+                                string[] strArray = PlayerCommand.Split(' ');
+                                int index = 2;
+                                if (strArray[0].ToLower() == "take" || strArray[0].ToLower() == "get")
+                                {
+                                    index = 2;
+                                    ObjectName = strArray[1];
+                                }
+                                else if (strArray[0] == "pick" && strArray[1] == "up")
+                                {
+                                    index = 3;
+                                    ObjectName = strArray[2];
+                                }
 
-                            while (index < strArray.Length)
-                            {
-                                ObjectName = string.Concat(ObjectName, " ", strArray[index]);
-                                index++;
-                                //Console.WriteLine(WordWrap("item is {0}", item);
+                                while (index < strArray.Length)
+                                {
+                                    ObjectName = string.Concat(ObjectName, " ", strArray[index]);
+                                    index++;
+                                    //Console.WriteLine(WordWrap("item is {0}", item);
+                                }
+                                ObjectName = ObjectName.Trim();
                             }
-                            ObjectName = ObjectName.Trim();
+                            Console.WriteLine(WordWrap(TakeItem(ObjectName)));
                         }
-                        Console.WriteLine(WordWrap(TakeItem(ObjectName)));
+                        else Console.WriteLine("There is no space in your inventory to pick anything up");
                     }
                     #endregion
 
@@ -972,56 +972,17 @@ namespace Legend_Of_Drongo
                         string vendor = string.Empty;
                         string ItemName = string.Empty;
 
-                        if (CurrentRoom.Civilians != null)
+                        if (Player.invspace > 0)
                         {
-                            if (PlayerCommand.ToLower() == "buy")
+                            if (CurrentRoom.Civilians != null)
                             {
-                                Console.Write("What item do you want to buy? ");
-                                ItemName = Console.ReadLine();
-
-
-                                //player didn't specify item or person
-                                Console.WriteLine("Civilians in the room:\n");
-
-                                for (index = 0; index < CurrentRoom.Civilians.Count; index++)
+                                if (PlayerCommand.ToLower() == "buy")
                                 {
-                                    if (CurrentRoom.Civilians[index].willSell == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
+                                    Console.Write("What item do you want to buy? ");
+                                    ItemName = Console.ReadLine();
 
-                                }
-                                Console.Write("\nWho do you want to buy from? ");
-                                vendor = Console.ReadLine();
 
-                            }
-                            else if (PlayerCommand.Split(' ').Length >= 2)
-                            {
-                                //ItemName = PlayerCommand.Split(' ')[1].ToLower();
-                                ItemName = PlayerCommand.Split(' ')[1].ToLower();
-                                bool itemFound = false;
-                                bool vendorFound = false;
-                                index = 2;
-
-                                while (index < (PlayerCommand.Split(' ').Length))
-                                {
-                                    if (PlayerCommand.Split(' ')[index].ToLower() == "from")
-                                    {
-                                        itemFound = true;
-                                        index++;
-                                        vendor = PlayerCommand.Split(' ')[index].ToLower();
-                                        vendorFound = true;
-                                    }
-                                    else if (itemFound == false)
-                                    {
-                                        ItemName = string.Concat(ItemName, " ", PlayerCommand.Split(' ')[index].ToLower());
-                                    }
-                                    else
-                                    {
-                                        vendor = string.Concat(vendor, " ", PlayerCommand.Split(' ')[index].ToLower());
-                                    }
-                                    index++;
-                                }
-
-                                if (vendorFound == false)
-                                {
+                                    //player didn't specify item or person
                                     Console.WriteLine("Civilians in the room:\n");
 
                                     for (index = 0; index < CurrentRoom.Civilians.Count; index++)
@@ -1029,14 +990,57 @@ namespace Legend_Of_Drongo
                                         if (CurrentRoom.Civilians[index].willSell == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
 
                                     }
-                                    Console.Write("\nWho do you want to buy {0} from? ", ItemName);
+                                    Console.Write("\nWho do you want to buy from? ");
                                     vendor = Console.ReadLine();
-                                }
 
+                                }
+                                else if (PlayerCommand.Split(' ').Length >= 2)
+                                {
+                                    //ItemName = PlayerCommand.Split(' ')[1].ToLower();
+                                    ItemName = PlayerCommand.Split(' ')[1].ToLower();
+                                    bool itemFound = false;
+                                    bool vendorFound = false;
+                                    index = 2;
+
+                                    while (index < (PlayerCommand.Split(' ').Length))
+                                    {
+                                        if (PlayerCommand.Split(' ')[index].ToLower() == "from")
+                                        {
+                                            itemFound = true;
+                                            index++;
+                                            vendor = PlayerCommand.Split(' ')[index].ToLower();
+                                            vendorFound = true;
+                                        }
+                                        else if (itemFound == false)
+                                        {
+                                            ItemName = string.Concat(ItemName, " ", PlayerCommand.Split(' ')[index].ToLower());
+                                        }
+                                        else
+                                        {
+                                            vendor = string.Concat(vendor, " ", PlayerCommand.Split(' ')[index].ToLower());
+                                        }
+                                        index++;
+                                    }
+
+                                    if (vendorFound == false)
+                                    {
+                                        Console.WriteLine("Civilians in the room:\n");
+
+                                        for (index = 0; index < CurrentRoom.Civilians.Count; index++)
+                                        {
+                                            if (CurrentRoom.Civilians[index].willSell == true) Console.WriteLine(string.Concat(CurrentRoom.Civilians[index].name, " - ", CurrentRoom.Civilians[index].MerchantType));
+
+                                        }
+                                        Console.Write("\nWho do you want to buy {0} from? ", ItemName);
+                                        vendor = Console.ReadLine();
+                                    }
+
+                                }
+                                BuyItem(ItemName, vendor);
                             }
-                            BuyItem(ItemName, vendor);
+                            else Console.WriteLine("There is nobody willing to buy anything from you here");
                         }
-                        else Console.WriteLine("There is nobody willing to buy anything from you here");
+                        else Console.WriteLine("There is no space in your inventory to buy anything.");
                     }
                     #endregion
 
@@ -1677,7 +1681,7 @@ namespace Legend_Of_Drongo
                     {
                         if (CurrentRoom.items[index].InteractionName[counter].ToLower() == ObjectName.ToLower() && CurrentRoom.items[index].CanPickUp == true)
                         {
-                            Player.inventory[20 - Player.invspace] = CurrentRoom.items[index];
+                            Player.inventory.Add(CurrentRoom.items[index]);
                             Player.invspace = Player.invspace - 1;
                             itemToTake = true;
 
@@ -1798,12 +1802,7 @@ namespace Legend_Of_Drongo
             if (itemFound == true)
             {
                 CurrentRoom.items.Add(ItemToDrop);  //add dropped item to current room
-
-                for (int i = DropIndex; i < (20 - Player.invspace ); i++)
-                {
-                    Player.inventory[i] = Player.inventory[i + 1];
-                }
-                Array.Clear(Player.inventory,(20 - Player.invspace),1);
+                Player.inventory.RemoveAt(DropIndex);
                 Player.invspace = Player.invspace + 1;
 
             }             
@@ -1889,11 +1888,7 @@ namespace Legend_Of_Drongo
                                     Player.ArmorWorn[armorPOS] = Player.inventory[index];
                                     Player.ArmorBonus = Player.ArmorBonus + Player.inventory[index].DefenseMod;
 
-                                    for (int i = index; i < (20 - Player.invspace); i++)    //remove item from inventory as it isn't replacing anything
-                                    {
-                                        Player.inventory[i] = Player.inventory[i + 1];
-                                    }
-                                    Array.Clear(Player.inventory, (20 - Player.invspace), 1);
+                                    Player.inventory.RemoveAt(index);    //remove item from inventory as it isn't replacing anything
                                     Player.invspace = Player.invspace + 1;
                                     Console.WriteLine(WordWrap(string.Concat("You have equipped ", item, " as your ", armorType.Split('-')[1], " armor")));
 
@@ -1901,11 +1896,7 @@ namespace Legend_Of_Drongo
                                 if (Player.ArmorBonus > 100) Player.ArmorBonus = 100;
                      
                             }
-                            else
-                            {
-                                Console.WriteLine(WordWrap(string.Concat("You cannot equip ", item)));
-                            }
-
+                            else Console.WriteLine(WordWrap(string.Concat("You cannot equip ", item)));
                         }
                     }
                     if (itemFound == false)
@@ -1945,12 +1936,8 @@ namespace Legend_Of_Drongo
                             {
                                 if (ItemSold.Name == Player.inventory[Counter].Name)
                                 {
-                                    for (int i = Counter; i < (20 - Player.invspace); i++)
-                                    {
-                                        Player.inventory[i] = Player.inventory[i + 1];
-                                    }
+                                    Player.inventory.RemoveAt(Counter);
                                     itemfound = true;
-                                    Array.Clear(Player.inventory, (20 - Player.invspace), (20 - Player.invspace));
                                     Player.invspace = Player.invspace + 1;
                                 }
                                 Counter++;
@@ -1997,7 +1984,7 @@ namespace Legend_Of_Drongo
                                     if (Player.Money >= item.Value)
                                     {
                                         Player.Money = Player.Money + item.Value;
-                                        Player.inventory[(20 - Player.invspace)] = item;
+                                        Player.inventory.Add(item);
                                         Player.invspace = Player.invspace - 1;
                                         Console.WriteLine(WordWrap(string.Concat("You have successfully purchased ", itemName, " for ", item.Value, " gold coins")));
 
@@ -2054,11 +2041,7 @@ namespace Legend_Of_Drongo
                                     else Console.WriteLine("The items interacted, but nothing happened");
                                     Player.inventory[ItemFoundAt] = GainXPfromItem(Player.inventory[ItemFoundAt]);
                                     itemFound = true;
-                                    for (int i = ItemFoundAt; i < (20 - Player.invspace); i++)
-                                    {
-                                        Player.inventory[i] = Player.inventory[i + 1];
-                                    }
-                                    Array.Clear(Player.inventory, (20 - Player.invspace), 1);
+                                    Player.inventory.RemoveAt(ItemFoundAt);
                                     Player.invspace = Player.invspace + 1;                                    
                                 }
                             }
@@ -2152,12 +2135,7 @@ namespace Legend_Of_Drongo
                     if (Player.HPBonus > Player.MaxHp) Player.HPBonus = Player.MaxHp;
 
                     Player.inventory[index] = GainXPfromItem(Player.inventory[index]);
-                    
-                    for (int i = index; i < (20 - Player.invspace); i++)
-                    {
-                        Player.inventory[i] = Player.inventory[i + 1];
-                    }
-                    Array.Clear(Player.inventory, (20 - Player.invspace), (20 - Player.invspace));
+                    //Player.inventory.RemoveAt(index);
                     Player.invspace = Player.invspace + 1;
                 }
                 index++;

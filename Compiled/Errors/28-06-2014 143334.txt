@@ -1,0 +1,23 @@
+---Legend-Of-Drongo---
+
+Error logged at 28-06-2014 14:33:34
+
+Player Location: Row B, Col 2, Level 2
+
+
+Command Entered: music browse
+
+
+
+
+The stacktrace output can be scary, do not say the words out loud as you may summon a monster!
+Error Message: Please be sure a sound file exists at the specified location.
+Stacktrace:
+   at System.Media.SoundPlayer.ValidateSoundFile(String fileName)
+   at System.Media.SoundPlayer.LoadAndPlay(Int32 flags)
+   at System.Media.SoundPlayer.PlayLooping()
+   at Legend_Of_Drongo.LegendOfDrongoEngine.Music(String Command) in C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\LegendOfDrongo.cs:line 3047
+   at Legend_Of_Drongo.LegendOfDrongoEngine.Main(String[] args) in C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Engine\LegendOfDrongo.cs:line 1430
+
+
+End of line...

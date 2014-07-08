@@ -19,7 +19,7 @@ Known Bugs:
 To Do:
 - Finish world.
 - File directories are fixed paths, add in choice of directory. - Omitted
-- Set up default players for existing worlds. 
+- Expandable inventory size?
 
 Changes:
 V1.0.0
@@ -200,5 +200,11 @@ v2.6.0
 - Added default player editor to world designer
 - Made default player inherit from world file rather than code
 - Enabled Item Editor to lock out class if a particular item class is intended to be used. 
+
+v2.6.1
+- Changed player inventory to list
+- Changed inventory interactions to compensate for lists as opposed to arrays
+- Made space in inventory prevent pickups/buys (fixed stack overflow)
+- Converted existing worlds to new data structures
 
 If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub

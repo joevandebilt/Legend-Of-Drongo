@@ -31,6 +31,39 @@ namespace Legend_Of_Drongo
         }
 
         [Serializable()]
+        public struct PlayerProfile     //The main players data structures
+        {
+            public string name;
+            public List<itemInfo> inventory;
+            public int invspace;
+            public double HPBonus;
+            public int ArmorBonus;
+            public itemInfo WeaponHeld;
+            public itemInfo[] ArmorWorn;
+            public int[] CurrentPos;
+            public string Objective;
+            public int Money;
+            public int DaysSinceSleep;
+            public int XP;
+            public int Level;
+            public double MaxHp;    //Maxium hit points
+            public int Speed;       //Chance of going first in combat
+            public double Strength; //Adds to damage of weapon
+            public int Resitence;   //Adds natural defense to player
+        }
+
+        //[Serializable()]
+        //public struct WorldFile //Stores the details of the world
+        //{
+        //    public string WorldName;
+        //    public int WorldTime;
+        //    public string WorldAuthor;
+        //    public List<Floor> WorldState;
+        //    public List<string> Credits;
+        //    public newPlayerProfile DefaultPlayer;
+        //}
+
+        [Serializable()]
         public struct roomInfo  //Stores the details of the current room
         {
             public string Description;
@@ -87,27 +120,27 @@ namespace Legend_Of_Drongo
             public int XP;
         }
 
-        [Serializable()]
-        public struct PlayerProfile     //The main players data structures
-        {
-            public string name;
-            public itemInfo[] inventory;
-            public int invspace;
-            public double HPBonus;
-            public int ArmorBonus;
-            public itemInfo WeaponHeld;
-            public itemInfo[] ArmorWorn;
-            public int[] CurrentPos;
-            public string Objective;
-            public int Money;
-            public int DaysSinceSleep;
-            public int XP; 
-            public int Level;
-            public double MaxHp;    //Maxium hit points
-            public int Speed;       //Chance of going first in combat
-            public double Strength; //Adds to damage of weapon
-            public int Resitence;   //Adds natural defense to player
-        }
+        //[Serializable()]
+        //public struct PlayerProfile     //The main players data structures
+        //{
+        //    public string name;
+        //    public itemInfo[] inventory;
+        //    public int invspace;
+        //    public double HPBonus;
+        //    public int ArmorBonus;
+        //    public itemInfo WeaponHeld;
+        //    public itemInfo[] ArmorWorn;
+        //    public int[] CurrentPos;
+        //    public string Objective;
+        //    public int Money;
+        //    public int DaysSinceSleep;
+        //    public int XP;
+        //    public int Level;
+        //    public double MaxHp;    //Maxium hit points
+        //    public int Speed;       //Chance of going first in combat
+        //    public double Strength; //Adds to damage of weapon
+        //    public int Resitence;   //Adds natural defense to player
+        //}
 
         [Serializable()]
         public struct EnemyProfile  //The profile of an enemy 

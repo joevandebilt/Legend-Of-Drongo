@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlayerEditor));
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblInv = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -82,14 +82,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Default Name";
             // 
-            // label2
+            // lblInv
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Inventory";
+            this.lblInv.AutoSize = true;
+            this.lblInv.Location = new System.Drawing.Point(12, 32);
+            this.lblInv.Name = "lblInv";
+            this.lblInv.Size = new System.Drawing.Size(77, 13);
+            this.lblInv.TabIndex = 1;
+            this.lblInv.Text = "Inventory 0/20";
             // 
             // label3
             // 
@@ -213,6 +213,7 @@
             this.lstInventory.Name = "lstInventory";
             this.lstInventory.Size = new System.Drawing.Size(345, 82);
             this.lstInventory.TabIndex = 15;
+            this.lstInventory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstInventory_MouseDoubleClick);
             // 
             // txtObjective
             // 
@@ -504,7 +505,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblInv);
             this.Controls.Add(this.label1);
             this.Name = "frmPlayerEditor";
             this.Text = "Player Editor";
@@ -517,7 +518,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblInv;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

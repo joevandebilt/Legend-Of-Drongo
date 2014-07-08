@@ -60,6 +60,7 @@ namespace Legend_Of_Drongo
             }
             else { cmbRow.SelectedIndex = 1; cmbCol.SelectedIndex = 1; cmbFloor.SelectedIndex = 0; }
 
+            lblInv.Text = "Inventory " + (20 - Player.invspace) + "/20";
             PopulateInventory();
         }
 
@@ -81,7 +82,7 @@ namespace Legend_Of_Drongo
             DataTypes.itemInfo EditItem = new DataTypes.itemInfo();
             if (Position == 5) Player.ArmorBonus = Player.ArmorBonus - Player.WeaponHeld.DefenseMod;
             else Player.ArmorBonus = Player.ArmorBonus - Player.ArmorWorn[Position].DefenseMod;
-            if (Position == 5) if (Player.WeaponHeld.Name != null) EditItem = Player.WeaponHeld;
+            if (Position == 5) { if (Player.WeaponHeld.Name != null) EditItem = Player.WeaponHeld; }
             else if (Player.ArmorWorn[Position].Name != null) EditItem = Player.ArmorWorn[Position];
 
             string ItemClass = "Unknown";
@@ -124,8 +125,9 @@ namespace Legend_Of_Drongo
 
                 if (NewForm.ChangeMade == true)
                 {
-                    Player.inventory[20 - Player.invspace] = NewForm.Item;
+                    Player.inventory.Add(NewForm.Item);
                     Player.invspace = Player.invspace - 1;
+                    lblInv.Text = "Inventory " + (20 - Player.invspace) + "/20";
                 }
             }
             else MessageBox.Show("The player inventory is full, you cannot add more items");
@@ -138,8 +140,10 @@ namespace Legend_Of_Drongo
             {
                 if (lstInventory.SelectedIndex > -1)
                 {
-                    Player.inventory[20 - Player.invspace] = Player.inventory[lstInventory.SelectedIndex];
+                    DataTypes dt = new DataTypes();
+                    Player.inventory.Add(dt.CloneItem(Player.inventory[lstInventory.SelectedIndex]));
                     Player.invspace = Player.invspace - 1;
+                    lblInv.Text = "Inventory " + (20 - Player.invspace) + "/20";
                     PopulateInventory();
                 }
             }
@@ -150,12 +154,10 @@ namespace Legend_Of_Drongo
         {
             if (lstInventory.SelectedIndex > -1)
             {
-                for (int i = lstInventory.SelectedIndex; i < (20 - Player.invspace); i++)
-                {
-                    Player.inventory[i] = Player.inventory[i + 1];
-                }
-                Array.Clear(Player.inventory, (20 - Player.invspace), 1);
+                Player.inventory.RemoveAt(lstInventory.SelectedIndex);
                 Player.invspace = Player.invspace + 1;
+                lblInv.Text = "Inventory " + (20 - Player.invspace) + "/20";
+
                 PopulateInventory();
             }
         }
@@ -226,7 +228,7 @@ namespace Legend_Of_Drongo
             Player.ArmorBonus = 0;
 
             //Set up starter inventory
-            Player.inventory = new DataTypes.itemInfo[20];
+            Player.inventory = new List<DataTypes.itemInfo>();
             Player.invspace = 20;
 
             //Set up game parameters
@@ -257,6 +259,21 @@ namespace Legend_Of_Drongo
             Player.Strength = 0;
 
             PopulatePlayer();
+        }
+
+        private void lstInventory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lstInventory.SelectedIndex > -1)
+            {
+                DataTypes.itemInfo EditItem = new DataTypes.itemInfo();
+                EditItem = Player.inventory[lstInventory.SelectedIndex];
+                frmItemEditor NewForm = new frmItemEditor(EditItem, string.Empty);
+                NewForm.ShowDialog();
+
+                EditItem = NewForm.Item;
+                Player.inventory[lstInventory.SelectedIndex] = EditItem;
+                PopulateInventory();
+            }
         }
     }
 }
