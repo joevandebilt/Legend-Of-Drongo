@@ -207,4 +207,9 @@ v2.6.1
 - Made space in inventory prevent pickups/buys (fixed stack overflow)
 - Converted existing worlds to new data structures
 
+v2.6.2
+- Added increasing inventory size with levelling up
+- Lowered inventory space at starting level to 10.
+- Changed all inventory checks to use maxitems value rather than hard coded 20
+
 If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub

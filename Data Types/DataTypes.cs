@@ -50,18 +50,8 @@ namespace Legend_Of_Drongo
             public int Speed;       //Chance of going first in combat
             public double Strength; //Adds to damage of weapon
             public int Resitence;   //Adds natural defense to player
+            public int MaxItems;
         }
-
-        //[Serializable()]
-        //public struct WorldFile //Stores the details of the world
-        //{
-        //    public string WorldName;
-        //    public int WorldTime;
-        //    public string WorldAuthor;
-        //    public List<Floor> WorldState;
-        //    public List<string> Credits;
-        //    public newPlayerProfile DefaultPlayer;
-        //}
 
         [Serializable()]
         public struct roomInfo  //Stores the details of the current room

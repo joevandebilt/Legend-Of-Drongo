@@ -451,7 +451,8 @@ namespace Legend_Of_Drongo
 
             //Set up starter inventory
             Player.inventory = new List<DataTypes.itemInfo>();
-            Player.invspace = 20;
+            Player.MaxItems = 10;
+            Player.invspace = Player.MaxItems;
 
             //Set up game parameters
             Player.CurrentPos = new int[3] { 1, 1, 0 }; //Row, Column, Floor

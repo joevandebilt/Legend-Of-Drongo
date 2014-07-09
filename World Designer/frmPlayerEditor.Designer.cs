@@ -70,6 +70,7 @@
             this.cmbCol = new System.Windows.Forms.ComboBox();
             this.cmbRow = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.txtMaxItems = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,9 +88,9 @@
             this.lblInv.AutoSize = true;
             this.lblInv.Location = new System.Drawing.Point(12, 32);
             this.lblInv.Name = "lblInv";
-            this.lblInv.Size = new System.Drawing.Size(77, 13);
+            this.lblInv.Size = new System.Drawing.Size(65, 13);
             this.lblInv.TabIndex = 1;
-            this.lblInv.Text = "Inventory 0/20";
+            this.lblInv.Text = "Inventory 0/";
             // 
             // label3
             // 
@@ -461,11 +462,22 @@
             this.label16.TabIndex = 40;
             this.label16.Text = "Starting Position";
             // 
+            // txtMaxItems
+            // 
+            this.txtMaxItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMaxItems.Location = new System.Drawing.Point(76, 32);
+            this.txtMaxItems.Multiline = true;
+            this.txtMaxItems.Name = "txtMaxItems";
+            this.txtMaxItems.Size = new System.Drawing.Size(22, 13);
+            this.txtMaxItems.TabIndex = 42;
+            this.txtMaxItems.Text = "20";
+            // 
             // frmPlayerEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 528);
+            this.Controls.Add(this.txtMaxItems);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.cmbFloor);
             this.Controls.Add(this.cmbCol);
@@ -558,5 +570,6 @@
         private System.Windows.Forms.ComboBox cmbCol;
         private System.Windows.Forms.ComboBox cmbRow;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtMaxItems;
     }
 }

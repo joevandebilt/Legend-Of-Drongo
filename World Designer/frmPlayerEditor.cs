@@ -60,7 +60,8 @@ namespace Legend_Of_Drongo
             }
             else { cmbRow.SelectedIndex = 1; cmbCol.SelectedIndex = 1; cmbFloor.SelectedIndex = 0; }
 
-            lblInv.Text = "Inventory " + (20 - Player.invspace) + "/20";
+            txtMaxItems.Text = Player.MaxItems.ToString();
+            lblInv.Text = "Inventory " + (Player.MaxItems - Player.invspace) + "/";
             PopulateInventory();
         }
 
@@ -127,7 +128,7 @@ namespace Legend_Of_Drongo
                 {
                     Player.inventory.Add(NewForm.Item);
                     Player.invspace = Player.invspace - 1;
-                    lblInv.Text = "Inventory " + (20 - Player.invspace) + "/20";
+                    lblInv.Text = "Inventory " + (Player.MaxItems - Player.invspace) + "/";
                 }
             }
             else MessageBox.Show("The player inventory is full, you cannot add more items");
@@ -143,7 +144,7 @@ namespace Legend_Of_Drongo
                     DataTypes dt = new DataTypes();
                     Player.inventory.Add(dt.CloneItem(Player.inventory[lstInventory.SelectedIndex]));
                     Player.invspace = Player.invspace - 1;
-                    lblInv.Text = "Inventory " + (20 - Player.invspace) + "/20";
+                    lblInv.Text = "Inventory " + (Player.MaxItems - Player.invspace) + "/";
                     PopulateInventory();
                 }
             }
@@ -156,7 +157,7 @@ namespace Legend_Of_Drongo
             {
                 Player.inventory.RemoveAt(lstInventory.SelectedIndex);
                 Player.invspace = Player.invspace + 1;
-                lblInv.Text = "Inventory " + (20 - Player.invspace) + "/20";
+                lblInv.Text = "Inventory " + (Player.MaxItems - Player.invspace) + "/";
 
                 PopulateInventory();
             }
@@ -188,6 +189,8 @@ namespace Legend_Of_Drongo
             else return false;
             if (int.TryParse(txtResist.Text, out i)) Player.Resitence = i;
             else return false;
+            if (int.TryParse(txtMaxItems.Text, out i)) Player.MaxItems = i;
+            else return false;
 
             if (Player.CurrentPos == null) Player.CurrentPos = new int[3];
             Player.CurrentPos[0] = cmbRow.SelectedIndex;
@@ -204,7 +207,7 @@ namespace Legend_Of_Drongo
             if (Player.inventory != null)
             {
                 lstInventory.Items.Clear();
-                for (int i = 0; i < (20 - Player.invspace); i++)
+                for (int i = 0; i < (Player.MaxItems - Player.invspace); i++)
                 {
                     lstInventory.Items.Add(Player.inventory[i].Name);
                 }
@@ -229,7 +232,8 @@ namespace Legend_Of_Drongo
 
             //Set up starter inventory
             Player.inventory = new List<DataTypes.itemInfo>();
-            Player.invspace = 20;
+            Player.MaxItems = 10;
+            Player.invspace = Player.MaxItems;
 
             //Set up game parameters
             Player.CurrentPos = new int[3] { 1, 1, 0 }; //Row, Column, Floor
@@ -257,6 +261,7 @@ namespace Legend_Of_Drongo
             Player.Speed = 1;
             Player.Resitence = 0;
             Player.Strength = 0;
+            
 
             PopulatePlayer();
         }
