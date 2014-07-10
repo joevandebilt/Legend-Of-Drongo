@@ -49,16 +49,22 @@ namespace Legend_Of_Drongo
             bool validChoice = false;
             Console.Clear();
 
-            MusicPlayer.SoundLocation = ".\\Music\\Warning.wav";
-            Music("Start");
+            if (File.Exists(".\\Music\\Warning.wav"))
+            {
+                MusicPlayer.SoundLocation = ".\\Music\\Warning.wav";
+                Music("Start");
+            }
 
             Console.WriteLine(WordWrap("This game uses music files throughout and can appear be very loud. Before continuing it may be wise to mute or lower the volume on this application"));
             Console.WriteLine("Press [Enter] to continue");
             Console.ReadLine();
             Console.Clear();
 
-            MusicPlayer.SoundLocation = ".\\Music\\Quartis.wav";
-            Music("Start");
+            if (File.Exists(".\\Music\\Quartis.wav"))
+            {
+                MusicPlayer.SoundLocation = ".\\Music\\Quartis.wav";
+                Music("Start");
+            }
             Console.SetWindowSize(70, 50);
             Console.Title = "Legend of Drongo";
 
@@ -118,7 +124,7 @@ namespace Legend_Of_Drongo
                             {
                                 stopProcessing = true;
                             }
-                            Console.WriteLine("\n           SKIPPING INTRO");
+                            Console.WriteLine("\n           SKIPPING");
                         }
                     }
                     Intro.Join();
@@ -555,9 +561,11 @@ namespace Legend_Of_Drongo
                         if (Player.inventory.Count != 0)
                         {
                             Console.WriteLine(WordWrap(string.Concat("You are currently using ", (Player.MaxItems - Player.invspace), "/",Player.MaxItems," of your inventory\n")));
-                            for (int index = 0; index < (Player.MaxItems - Player.invspace); index++)
+                            int index=1;
+                            foreach (itemInfo Item in Player.inventory)
                             {
-                                Console.WriteLine(WordWrap(string.Concat((index + 1), ": ", Player.inventory[index].Name)));
+                                Console.WriteLine(WordWrap(string.Concat(index, ": ", Item.Name)));
+                                index++;
                             }
                             Console.WriteLine("");
                         }
@@ -645,9 +653,11 @@ namespace Legend_Of_Drongo
                             if (PlayerCommand.ToLower() == "drop")
                             {
                                 Console.WriteLine(WordWrap("What do you want to drop?: "));
-                                for (int index = 0; index < (Player.MaxItems - Player.invspace); index++)
+                                int index = 1;
+                                foreach (itemInfo Item in Player.inventory)
                                 {
-                                    Console.WriteLine(WordWrap(string.Concat((index + 1), ": ", Player.inventory[index].Name)));
+                                    Console.WriteLine(WordWrap(string.Concat(index, ": ", Item.Name)));
+                                    index++;
                                 }
                                 Console.Write("\nSlot Number: ");
                                 int Menu = Convert.ToInt32(Console.ReadLine());
@@ -719,9 +729,11 @@ namespace Legend_Of_Drongo
                             if (PlayerCommand.ToLower() == "examine")
                             {
                                 Console.WriteLine(WordWrap("What item do you want to examine?: "));
-                                for (int index = 0; index < (Player.MaxItems - Player.invspace); index++)
+                                int index = 1;
+                                foreach (itemInfo Item in Player.inventory)
                                 {
-                                    Console.WriteLine(WordWrap("{0}: {1}"), (index + 1), Player.inventory[index].Name);
+                                    Console.WriteLine(WordWrap("{0}: {1}"), index, Item.Name);
+                                    index++;
                                 }
                                 Console.Write("\nSlot Number: ");
                                 int Menu = Convert.ToInt32(Console.ReadLine());
@@ -1062,7 +1074,7 @@ namespace Legend_Of_Drongo
                                 index = 0;
                                 bool itemfound = false;
 
-                                while (itemfound == false && index < (Player.MaxItems - Player.invspace))
+                                while (itemfound == false && index < Player.inventory.Count)
                                 {
                                     if (ItemName.ToLower() == Player.inventory[index].Name.ToLower())
                                     {
@@ -1115,7 +1127,7 @@ namespace Legend_Of_Drongo
                                 index = 0;
                                 itemFound = false;
 
-                                while (itemFound == false && index < (Player.MaxItems - Player.invspace))
+                                while (itemFound == false && index < Player.inventory.Count)
                                 {
                                     if (ItemName.ToLower() == Player.inventory[index].Name.ToLower())
                                     {
@@ -1278,11 +1290,11 @@ namespace Legend_Of_Drongo
                             if (PlayerCommand.ToLower() == "eat" || PlayerCommand.ToLower() == "drink" || PlayerCommand.ToLower() == "consume")
                             {
                                 Console.WriteLine("Food in your inventory:\n");
-                                for (index = 0; index < (Player.MaxItems - Player.invspace); index++)
+                                foreach (itemInfo Item in Player.inventory)
                                 {
-                                    if (Player.inventory[index].Class == "Food" || Player.inventory[index].Class == "Drink")
+                                    if (Item.Class == "Food" || Item.Class == "Drink")
                                     {
-                                        Console.WriteLine(WordWrap(Player.inventory[index].Name));
+                                        Console.WriteLine(WordWrap(Item.Name));
                                     }
                                 }
                                 Console.Write("\nWhich item would you like to consume?");
@@ -1603,11 +1615,11 @@ namespace Legend_Of_Drongo
                     }
                 }
             }
-            for (index = 0; index < (Player.MaxItems - Player.invspace); index++)    //Then check players inventory
+            foreach (itemInfo Item in Player.inventory)
             {
-                if (Player.inventory[index].Name.ToLower() == Objectname.ToLower())
+                if (Item.Name.ToLower() == Objectname.ToLower())
                 {
-                    invItem = Player.inventory[index];
+                    invItem = Item;
                 }
             }
             for (index = 0; index < 5; index++)     //Then check the players armor
@@ -1745,7 +1757,7 @@ namespace Legend_Of_Drongo
                         notHostile.QuestCharacter = false;
                         notHostile.XP = 0;
                         CurrentRoom.Civilians.Add(notHostile);
-
+                        SaveWorld();
                         Player.Money = Player.Money - amount;
                         CurrentRoom.Enemy[index] = GainXPfromEnemy(CurrentRoom.Enemy[index]);
 
@@ -1788,7 +1800,7 @@ namespace Legend_Of_Drongo
                 CurrentRoom.items = new List<itemInfo>();
             }
 
-            for (index=0;index < (Player.MaxItems - Player.invspace);index++)
+            for (index=0;index < Player.inventory.Count;index++)
             {
                 if (Player.inventory[index].Name.ToLower() == ObjectName.ToLower())
                 {
@@ -1819,7 +1831,7 @@ namespace Legend_Of_Drongo
                     {
                         Console.WriteLine(WordWrap("Specify an item to equip:\n"));
 
-                        for (index = 0; index < (Player.MaxItems - Player.invspace); index++)
+                        for (index = 0; index < Player.inventory.Count; index++)
                         {
                             if (Player.inventory[index].Class == "Weapon" || Player.inventory[index].Class.Contains("Armor"))
                             {
@@ -1844,7 +1856,7 @@ namespace Legend_Of_Drongo
                     bool itemFound = false;
                     itemInfo tempItem = new itemInfo();
 
-                    for (index = 0; index < (Player.MaxItems - Player.invspace); index++)
+                    for (index = 0; index < Player.inventory.Count; index++)
                     {
                         if (item.ToLower() == Player.inventory[index].Name.ToLower())
                         {
@@ -1932,7 +1944,7 @@ namespace Legend_Of_Drongo
 
                             int Counter = 0;
                             bool itemfound = false;
-                            while (itemfound == false && Counter < (Player.MaxItems - Player.invspace))
+                            while (itemfound == false && Counter < Player.inventory.Count)
                             {
                                 if (ItemSold.Name == Player.inventory[Counter].Name)
                                 {
@@ -2015,7 +2027,7 @@ namespace Legend_Of_Drongo
             int Counter = 0;
             int ItemFoundAt = 0;
 
-            for (index = 0; index < (Player.MaxItems - Player.invspace); index++)
+            for (index = 0; index < Player.inventory.Count; index++)
             {
                 if (Player.inventory[index].Name.ToLower() == item.ToLower())
                 {
@@ -2062,7 +2074,7 @@ namespace Legend_Of_Drongo
             string Response = "You cannot read that item";
             int TotalItems = 0;
             if (CurrentRoom.items != null) TotalItems = TotalItems + CurrentRoom.items.Count;
-            if (Player.inventory.Count != 0) TotalItems = TotalItems + (Player.MaxItems - Player.invspace);
+            if (Player.inventory.Count != 0) TotalItems = TotalItems + Player.inventory.Count;
 
             int index = 0;
             bool itemFound = false;
@@ -2098,7 +2110,7 @@ namespace Legend_Of_Drongo
 
                 counter = 0; 
 
-                while (Player.inventory.Count != 0 && itemRead == false && counter < (Player.MaxItems - Player.invspace))
+                while (Player.inventory.Count != 0 && itemRead == false && counter < Player.inventory.Count)
                 {
                     if (item.ToLower() == Player.inventory[counter].Name.ToLower())
                     {
@@ -2124,7 +2136,7 @@ namespace Legend_Of_Drongo
             string Response = "You cannot consume that item";
             bool itemEaten = false;
 
-            while (itemEaten == false && index < (Player.MaxItems - Player.invspace))
+            while (itemEaten == false && index < Player.inventory.Count)
             {
                 if (Player.inventory[index].Name.ToLower() == ObjectName.ToLower() && (Player.inventory[index].Class == "Food" || Player.inventory[index].Class == "Drink"))
                 {
@@ -2732,8 +2744,10 @@ namespace Legend_Of_Drongo
 
         public static string SaveGame()
         {
+            DirectoryInfo dir = new DirectoryInfo(".\\Saves\\");
+            if (!dir.Exists) Directory.CreateDirectory(".\\Saves\\");
             string playername = Player.name;
-            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\Saves\\" + WorldState.WorldName);
+            dir = new DirectoryInfo(".\\Saves\\" + WorldState.WorldName);
             bool namefound = false;
             if (!dir.Exists) Directory.CreateDirectory(".\\Saves\\" + WorldState.WorldName);
             foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
@@ -2788,7 +2802,7 @@ namespace Legend_Of_Drongo
         public static void SaveWorld()
         {
             ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-            world[Player.CurrentPos[0]] = ThisFloor;
+            world[Player.CurrentPos[2]] = ThisFloor;
             WorldState.WorldState = world;
         }
 
@@ -3175,12 +3189,9 @@ namespace Legend_Of_Drongo
             CurrentRoom = ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
             Console.WriteLine(WordWrap(CurrentRoom.Description));
         }
+        
+        public static void ForceError() { Console.WriteLine(WordWrap(world[-1].CurrentFloor[-1, -1].Description)); } //Debugging Only
 
-        public static void ForceError()
-        {
-            Console.WriteLine(WordWrap(world[-1].CurrentFloor[-1, -1].Description));
-        }
-
-    }   //end of class
-}   //end of namespace
+    }
+}
 //end of line...

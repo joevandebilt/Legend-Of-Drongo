@@ -14,12 +14,12 @@ Known Bugs:
 - Double items being produced? Cell 8,6,1 - FIXED v2.3.2
 - Item interaction names being shared across items in same room. - Only occurs for cloned items - FIXED v2.5.1
 - Could not fight Juan, Terry or Gary in FWOTT - CANNOT REPLICATE
+- Can pick up items but more than 4 not shown. - Fixed V2.6.3
 
 
 To Do:
 - Finish world.
 - File directories are fixed paths, add in choice of directory. - Omitted
-- Expandable inventory size?
 
 Changes:
 V1.0.0
@@ -211,5 +211,12 @@ v2.6.2
 - Added increasing inventory size with levelling up
 - Lowered inventory space at starting level to 10.
 - Changed all inventory checks to use maxitems value rather than hard coded 20
+
+v2.6.3
+- Fixed bribe function
+- Fixed picking up items issue
+- Added ifnull lines to directory usage
+- Changed build path of data types dll into System Files folder
+- Fixed issue with invspace not resetting when maxitems is changed
 
 If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub

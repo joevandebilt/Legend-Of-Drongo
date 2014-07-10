@@ -189,7 +189,11 @@ namespace Legend_Of_Drongo
             else return false;
             if (int.TryParse(txtResist.Text, out i)) Player.Resitence = i;
             else return false;
-            if (int.TryParse(txtMaxItems.Text, out i)) Player.MaxItems = i;
+            if (int.TryParse(txtMaxItems.Text, out i))
+            {
+                Player.MaxItems = i;
+                Player.invspace = Player.MaxItems - Player.inventory.Count;
+            }
             else return false;
 
             if (Player.CurrentPos == null) Player.CurrentPos = new int[3];
@@ -207,10 +211,7 @@ namespace Legend_Of_Drongo
             if (Player.inventory != null)
             {
                 lstInventory.Items.Clear();
-                for (int i = 0; i < (Player.MaxItems - Player.invspace); i++)
-                {
-                    lstInventory.Items.Add(Player.inventory[i].Name);
-                }
+                foreach (DataTypes.itemInfo Item in Player.inventory) { lstInventory.Items.Add(Item.Name); }
             }
         }
 

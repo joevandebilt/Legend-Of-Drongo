@@ -1,0 +1,7 @@
+D:\Users\joe.vandebilt\Documents\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe
+D:\Users\joe.vandebilt\Documents\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.pdb
+D:\Users\joe.vandebilt\Documents\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Release\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
+D:\Users\joe.vandebilt\Documents\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Release\Legend_Of_Drongo.frmLegendOfDrongo.resources
+D:\Users\joe.vandebilt\Documents\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Release\Legend Of Drongo Engine.csproj.GenerateResource.Cache
+D:\Users\joe.vandebilt\Documents\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Release\Legend Of Drongo.exe
+D:\Users\joe.vandebilt\Documents\Dropbox\Programming\Legend-Of-Drongo\Engine\obj\x86\Release\Legend Of Drongo.pdb
