@@ -15,7 +15,9 @@ Known Bugs:
 - Item interaction names being shared across items in same room. - Only occurs for cloned items - FIXED v2.5.1
 - Could not fight Juan, Terry or Gary in FWOTT - CANNOT REPLICATE
 - Can pick up items but more than 4 not shown. - Fixed V2.6.3
-
+- Talk Man (missing word to) - Fixed v2.6.4
+- Singular use of command 'use' - Fixed v2.6.4
+- Attacking a man with a null inventory - Fixed v2.6.4
 
 To Do:
 - Finish world.
@@ -218,5 +220,8 @@ v2.6.3
 - Added ifnull lines to directory usage
 - Changed build path of data types dll into System Files folder
 - Fixed issue with invspace not resetting when maxitems is changed
+
+v2.6.4
+cv
 
 If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub

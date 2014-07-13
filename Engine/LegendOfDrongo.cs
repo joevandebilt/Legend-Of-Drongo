@@ -779,7 +779,7 @@ namespace Legend_Of_Drongo
                                 Console.Write("What do you want to {0}: ", PlayerCommand.ToLower().Split(' ')[0]);
                                 item = Console.ReadLine();
 
-                                Console.Write("\n\nWhat do you want to {1} {0} {2}?", item, PlayerCommand.ToLower().Split(' ')[0], PlayerCommand.ToLower().Split(' ')[2]);
+                                Console.Write("\n\nWhat do you want to {1} {0} on?", item, PlayerCommand.ToLower().Split(' ')[0]);
                                 target = Console.ReadLine();
                             }
                             else if (CurrentRoom.items != null)
@@ -1178,17 +1178,11 @@ namespace Legend_Of_Drongo
                             }
                             else
                             {
-                                string[] strArray = PlayerCommand.Split(' ');
-
-                                NPCname = strArray[2];
-
-                                for (index = 3; index < strArray.Length; index++)
-                                {
-                                    NPCname = string.Concat(NPCname, " ", strArray[index]);
-                                }
-
+                                string[] strArray = PlayerCommand.Split(' ');                                
+                                foreach (string word in strArray) { if (word != "to" && word != "talk") NPCname = string.Concat(NPCname, " ", word); }
                             }
-                            Console.WriteLine(WordWrap(TalkToNPC(NPCname)));
+                            if (NPCname == string.Empty) Console.WriteLine("Talk to who?");
+                            else Console.WriteLine(WordWrap(TalkToNPC(NPCname.Trim())));
                         }
                         else
                         {
@@ -2147,7 +2141,7 @@ namespace Legend_Of_Drongo
                     if (Player.HPBonus > Player.MaxHp) Player.HPBonus = Player.MaxHp;
 
                     Player.inventory[index] = GainXPfromItem(Player.inventory[index]);
-                    //Player.inventory.RemoveAt(index);
+                    Player.inventory.RemoveAt(index);
                     Player.invspace = Player.invspace + 1;
                 }
                 index++;
@@ -2172,20 +2166,20 @@ namespace Legend_Of_Drongo
                     {
                         //bad attack
                         BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you", Enemy.Weapon.Name, "\n", Enemy.Weapon.BadHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you with their ", Enemy.Weapon.Name, "\n", Enemy.Weapon.BadHit)));
 
                     }
                     else if (BaseAttack == 2)
                     {
                         //Medium Strong Attack
                         BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you", Enemy.Weapon.Name, "\n", Enemy.Weapon.MedHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you with their ", Enemy.Weapon.Name, "\n", Enemy.Weapon.MedHit)));
                     }
                     else if (BaseAttack == 3)
                     {
                         //Strong Attack
                         BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you", Enemy.Weapon.Name, "\n", Enemy.Weapon.GoodHit)));
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you with their ", Enemy.Weapon.Name, "\n", Enemy.Weapon.GoodHit)));
                     }
                     
                     Fortitude = RNG.Next(1, 100);
@@ -2429,6 +2423,8 @@ namespace Legend_Of_Drongo
                                 Player.XP = Player.XP + ThisEnemy.XP;  //Take XP 
                                 NumOfFighters = NumOfFighters - 1;
 
+                                SaveWorld();
+
                                 EventTrigger("killenemy");
                                 CurrentRoom.Enemy.RemoveAt(ThisFight[Counter].ID);
 
@@ -2643,13 +2639,16 @@ namespace Legend_Of_Drongo
 
                             if (CurrentRoom.items == null) CurrentRoom.items = new List<itemInfo>();
 
-                            for (int counter = 0; counter < CurrentRoom.Civilians[index].inventory.Count; counter++)
+                            if (CurrentRoom.Civilians[index].inventory != null && CurrentRoom.Civilians[index].inventory.Count > 0)
                             {
-                                if (CurrentRoom.Civilians[index].inventory[counter].Class == "Weapon" && NewEnemy.Weapon.AttackMod < CurrentRoom.Civilians[index].inventory[counter].AttackMod)
+                                for (int counter = 0; counter < CurrentRoom.Civilians[index].inventory.Count; counter++)
                                 {
-                                    NewEnemy.Weapon = CurrentRoom.Civilians[index].inventory[counter];
+                                    if (CurrentRoom.Civilians[index].inventory[counter].Class == "Weapon" && NewEnemy.Weapon.AttackMod < CurrentRoom.Civilians[index].inventory[counter].AttackMod)
+                                    {
+                                        NewEnemy.Weapon = CurrentRoom.Civilians[index].inventory[counter];
+                                    }
+                                    else CurrentRoom.items.Add(CurrentRoom.Civilians[index].inventory[counter]);
                                 }
-                                else CurrentRoom.items.Add(CurrentRoom.Civilians[index].inventory[counter]);
                             }
                             CurrentRoom.Enemy.Add(NewEnemy);
                             CurrentRoom.Civilians.RemoveAt(index);
@@ -2847,6 +2846,7 @@ namespace Legend_Of_Drongo
                 {
                     if (!CurrentRoom.LockedIn) CurrentRoom.LockedIn = true;
                     else CurrentRoom.LockedIn = false;
+                    SaveWorld();
                 }
                 else if (thisEvent.Action.ToLower() == "kill all enemies") //kill all
                 {

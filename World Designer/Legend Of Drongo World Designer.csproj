@@ -215,12 +215,6 @@
     <None Include="Resources\Image1.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data Types\Legend Of Drongo Data Types.csproj">
-      <Project>{16A4E1A2-EC9C-470F-BED2-05DA707CABAC}</Project>
-      <Name>Legend Of Drongo Data Types</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
@@ -244,6 +238,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Drongo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data Types\Legend Of Drongo Data Types.csproj">
+      <Project>{16A4E1A2-EC9C-470F-BED2-05DA707CABAC}</Project>
+      <Name>Legend Of Drongo Data Types</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

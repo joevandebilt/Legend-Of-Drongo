@@ -13,7 +13,6 @@ COPY "C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\README.txt" .\Legend-Of-
 COPY "C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\LICENSE.md" .\Legend-Of-Drongo
 COPY "C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe" .\Legend-Of-Drongo
 COPY "C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe" .\Legend-Of-Drongo
-COPY "C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.dll" .\Legend-Of-Drongo
 XCOPY "C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiled\Music" .\Legend-Of-Drongo\Music /E
 XCOPY "C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiled\Saves" .\Legend-Of-Drongo\Saves /E
 XCOPY "C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiled\Worlds" .\Legend-Of-Drongo\Worlds /E
