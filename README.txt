@@ -221,7 +221,14 @@ v2.6.3
 - Changed build path of data types dll into System Files folder
 - Fixed issue with invspace not resetting when maxitems is changed
 
-v2.6.4
-cv
+v2.6.4 (Thanks to David for the bug report)
+- Fixed Talk Man bug
+- Fixed singular use of command 'use'
+- Fixed Attacking an NPC with a null inventory
+- Fixed items not being removed from inventory when consumed (infinite food glitch)
+- Removed Status Appearing twice in help file
+- Cleaned up Spelling
+- Fixed enemies dropping weapons issue
+- Fixed locking in room issue.
 
 If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub
