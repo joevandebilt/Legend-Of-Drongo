@@ -519,6 +519,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblInv);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPlayerEditor";
             this.Text = "Player Editor";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

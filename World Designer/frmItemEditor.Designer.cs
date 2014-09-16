@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmItemEditor));
             this.cmdAddItems = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -248,7 +249,7 @@
             this.txtGoodHit.Name = "txtGoodHit";
             this.txtGoodHit.Size = new System.Drawing.Size(463, 20);
             this.txtGoodHit.TabIndex = 9;
-            this.txtGoodHit.Text = "Hitting the enemy the weapon deals a good amount of damage";
+            this.txtGoodHit.Text = "The weapon deals a high amount of damage";
             // 
             // txtMedHit
             // 
@@ -257,7 +258,7 @@
             this.txtMedHit.Name = "txtMedHit";
             this.txtMedHit.Size = new System.Drawing.Size(463, 20);
             this.txtMedHit.TabIndex = 10;
-            this.txtMedHit.Text = "Hitting the enemy the weapon deals a medium amount of damage";
+            this.txtMedHit.Text = "The weapon deals a medium amount of damage";
             // 
             // label10
             // 
@@ -275,7 +276,7 @@
             this.txtBadHit.Name = "txtBadHit";
             this.txtBadHit.Size = new System.Drawing.Size(463, 20);
             this.txtBadHit.TabIndex = 11;
-            this.txtBadHit.Text = "Barely hitting the enemy the weapon deals a bad amount of damage";
+            this.txtBadHit.Text = "The weapon deals a low amount of damage";
             // 
             // label11
             // 
@@ -394,6 +395,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmdAddItems);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmItemEditor";
             this.Text = "Item Editor";
             this.ResumeLayout(false);

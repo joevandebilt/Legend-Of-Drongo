@@ -46,6 +46,8 @@ namespace Legend_Of_Drongo
             if (NPC.inventory != null) GetAllItems();
             if (NPC.Knowledge != null) GetAllKnowledge();
 
+            if (!string.IsNullOrEmpty(NPC.Donation)) txtDonate.Text = NPC.Donation;
+
         }
 
         public bool  SaveNPC()
@@ -75,6 +77,8 @@ namespace Legend_Of_Drongo
 
             if (chkWillSell.Checked == true) NPC.willSell = true;
             else NPC.willSell = false;
+
+            if (!string.IsNullOrEmpty(txtDonate.Text)) NPC.Donation = txtDonate.Text;
 
             return true;
 
@@ -211,20 +215,22 @@ namespace Legend_Of_Drongo
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DataTypes.Facts thisFact = new DataTypes.Facts();
-            thisFact = NPC.Knowledge[lstKnowledge.SelectedIndex];
+            if (lstKnowledge.SelectedIndex > -1)
+            {
+                DataTypes.Facts thisFact = new DataTypes.Facts();
+                thisFact = NPC.Knowledge[lstKnowledge.SelectedIndex];
 
-            thisFact.Topic = txtTopic.Text;
-            thisFact.Knowledge = txtKnowledge.Text;
+                thisFact.Topic = txtTopic.Text;
+                thisFact.Knowledge = txtKnowledge.Text;
 
-            txtTopic.Clear();
-            txtKnowledge.Clear();
+                txtTopic.Clear();
+                txtKnowledge.Clear();
 
-            txtTopic.Enabled = false;
-            txtKnowledge.Enabled = false;
+                txtTopic.Enabled = false;
+                txtKnowledge.Enabled = false;
 
-            NPC.Knowledge[lstKnowledge.SelectedIndex] = thisFact;
-
+                NPC.Knowledge[lstKnowledge.SelectedIndex] = thisFact;
+            }
             GetAllKnowledge();
         }
 

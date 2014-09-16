@@ -95,6 +95,7 @@
             this.Controls.Add(this.cmdQuit);
             this.Controls.Add(this.cmdNewWorld);
             this.Controls.Add(this.cmdLoadWorld);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "LoD World Designer";
             this.Load += new System.EventHandler(this.frmMain_Load);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEventEditor));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbTrigger = new System.Windows.Forms.ComboBox();
@@ -50,12 +51,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtNewValue = new System.Windows.Forms.TextBox();
+            this.txtOutcomeValue = new System.Windows.Forms.TextBox();
             this.cmdCloneEnemy = new System.Windows.Forms.Button();
             this.cmdCloneNPC = new System.Windows.Forms.Button();
             this.cmdCloneItem = new System.Windows.Forms.Button();
             this.cmdHelp = new System.Windows.Forms.Button();
             this.chkReUse = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtTriggerValue = new System.Windows.Forms.TextBox();
+            this.chkBuilding = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -83,6 +87,7 @@
             this.cmbTrigger.Name = "cmbTrigger";
             this.cmbTrigger.Size = new System.Drawing.Size(299, 21);
             this.cmbTrigger.TabIndex = 1;
+            this.cmbTrigger.TextChanged += new System.EventHandler(this.cmbTrigger_TextChanged);
             // 
             // cmbAction
             // 
@@ -293,17 +298,17 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 83);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 13);
+            this.label6.Size = new System.Drawing.Size(116, 13);
             this.label6.TabIndex = 40;
-            this.label6.Text = "New Value";
+            this.label6.Text = "Specific Trigger Criteria";
             // 
-            // txtNewValue
+            // txtOutcomeValue
             // 
-            this.txtNewValue.Enabled = false;
-            this.txtNewValue.Location = new System.Drawing.Point(86, 80);
-            this.txtNewValue.Name = "txtNewValue";
-            this.txtNewValue.Size = new System.Drawing.Size(668, 20);
-            this.txtNewValue.TabIndex = 41;
+            this.txtOutcomeValue.Enabled = false;
+            this.txtOutcomeValue.Location = new System.Drawing.Point(123, 106);
+            this.txtOutcomeValue.Name = "txtOutcomeValue";
+            this.txtOutcomeValue.Size = new System.Drawing.Size(800, 20);
+            this.txtOutcomeValue.TabIndex = 41;
             // 
             // cmdCloneEnemy
             // 
@@ -341,7 +346,7 @@
             this.cmdHelp.Name = "cmdHelp";
             this.cmdHelp.Size = new System.Drawing.Size(108, 24);
             this.cmdHelp.TabIndex = 45;
-            this.cmdHelp.Text = "Cancel";
+            this.cmdHelp.Text = "Help";
             this.cmdHelp.UseVisualStyleBackColor = true;
             this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
             // 
@@ -355,17 +360,47 @@
             this.chkReUse.Text = "Re-Usable Event";
             this.chkReUse.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 109);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(105, 13);
+            this.label7.TabIndex = 40;
+            this.label7.Text = "New Outcome Value";
+            // 
+            // txtTriggerValue
+            // 
+            this.txtTriggerValue.Enabled = false;
+            this.txtTriggerValue.Location = new System.Drawing.Point(134, 80);
+            this.txtTriggerValue.Name = "txtTriggerValue";
+            this.txtTriggerValue.Size = new System.Drawing.Size(789, 20);
+            this.txtTriggerValue.TabIndex = 41;
+            // 
+            // chkBuilding
+            // 
+            this.chkBuilding.AutoSize = true;
+            this.chkBuilding.Location = new System.Drawing.Point(761, 50);
+            this.chkBuilding.Name = "chkBuilding";
+            this.chkBuilding.Size = new System.Drawing.Size(104, 17);
+            this.chkBuilding.TabIndex = 47;
+            this.chkBuilding.Text = "Apply to Building";
+            this.chkBuilding.UseVisualStyleBackColor = true;
+            // 
             // frmEventEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 324);
+            this.Controls.Add(this.chkBuilding);
             this.Controls.Add(this.chkReUse);
             this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.cmdCloneEnemy);
             this.Controls.Add(this.cmdCloneNPC);
             this.Controls.Add(this.cmdCloneItem);
-            this.Controls.Add(this.txtNewValue);
+            this.Controls.Add(this.txtTriggerValue);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtOutcomeValue);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cmdRemoveNPC);
             this.Controls.Add(this.cmdAddNPC);
@@ -388,6 +423,7 @@
             this.Controls.Add(this.cmbTrigger);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmEventEditor";
             this.Text = "frmEventEditor";
             this.ResumeLayout(false);
@@ -419,11 +455,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtNewValue;
+        private System.Windows.Forms.TextBox txtOutcomeValue;
         private System.Windows.Forms.Button cmdCloneEnemy;
         private System.Windows.Forms.Button cmdCloneNPC;
         private System.Windows.Forms.Button cmdCloneItem;
         private System.Windows.Forms.Button cmdHelp;
         private System.Windows.Forms.CheckBox chkReUse;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtTriggerValue;
+        private System.Windows.Forms.CheckBox chkBuilding;
     }
 }

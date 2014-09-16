@@ -13,3 +13,9 @@ C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.pdb
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Data Types\obj\Release\Legend Of Drongo Data Types.dll
 C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Data Types\obj\Release\Legend Of Drongo Data Types.pdb
+C:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Data Types\obj\Release\Legend Of Drongo Data Types.csprojResolveAssemblyReference.cache
+C:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.dll
+C:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.pdb
+C:\Dropbox\Programming\Legend-Of-Drongo\Data Types\obj\Release\Legend Of Drongo Data Types.csprojResolveAssemblyReference.cache
+C:\Dropbox\Programming\Legend-Of-Drongo\Data Types\obj\Release\Legend Of Drongo Data Types.dll
+C:\Dropbox\Programming\Legend-Of-Drongo\Data Types\obj\Release\Legend Of Drongo Data Types.pdb

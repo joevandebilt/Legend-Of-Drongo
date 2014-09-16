@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHelp));
             this.rtbHelp = new System.Windows.Forms.RichTextBox();
             this.cmdClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             this.ClientSize = new System.Drawing.Size(688, 405);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.rtbHelp);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmHelp";
             this.Text = "frmHelp";
             this.ResumeLayout(false);

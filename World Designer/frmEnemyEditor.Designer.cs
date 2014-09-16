@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEnemyEditor));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,6 +53,10 @@
             this.txtXP = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cmdHelp = new System.Windows.Forms.Button();
+            this.txtTeam = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbBehaviour = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -84,7 +89,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(141, 67);
+            this.label4.Location = new System.Drawing.Point(112, 63);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 15;
@@ -93,7 +98,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 313);
+            this.label5.Location = new System.Drawing.Point(9, 336);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 19;
@@ -102,7 +107,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 120);
+            this.label6.Location = new System.Drawing.Point(8, 143);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 13);
             this.label6.TabIndex = 17;
@@ -111,7 +116,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 213);
+            this.label7.Location = new System.Drawing.Point(8, 236);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 13);
             this.label7.TabIndex = 18;
@@ -120,7 +125,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 341);
+            this.label8.Location = new System.Drawing.Point(9, 364);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(93, 13);
             this.label8.TabIndex = 20;
@@ -150,14 +155,14 @@
             // 
             // txtArmor
             // 
-            this.txtArmor.Location = new System.Drawing.Point(193, 64);
+            this.txtArmor.Location = new System.Drawing.Point(164, 60);
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
             this.txtArmor.TabIndex = 4;
             // 
             // txtKill
             // 
-            this.txtKill.Location = new System.Drawing.Point(16, 141);
+            this.txtKill.Location = new System.Drawing.Point(12, 164);
             this.txtKill.Multiline = true;
             this.txtKill.Name = "txtKill";
             this.txtKill.Size = new System.Drawing.Size(271, 50);
@@ -165,7 +170,7 @@
             // 
             // txtDeath
             // 
-            this.txtDeath.Location = new System.Drawing.Point(16, 229);
+            this.txtDeath.Location = new System.Drawing.Point(12, 252);
             this.txtDeath.Multiline = true;
             this.txtDeath.Name = "txtDeath";
             this.txtDeath.Size = new System.Drawing.Size(271, 50);
@@ -173,14 +178,14 @@
             // 
             // txtPayOff
             // 
-            this.txtPayOff.Location = new System.Drawing.Point(91, 310);
+            this.txtPayOff.Location = new System.Drawing.Point(87, 333);
             this.txtPayOff.Name = "txtPayOff";
             this.txtPayOff.Size = new System.Drawing.Size(38, 20);
             this.txtPayOff.TabIndex = 9;
             // 
             // txtPayOffResponse
             // 
-            this.txtPayOffResponse.Location = new System.Drawing.Point(112, 338);
+            this.txtPayOffResponse.Location = new System.Drawing.Point(108, 361);
             this.txtPayOffResponse.Name = "txtPayOffResponse";
             this.txtPayOffResponse.Size = new System.Drawing.Size(175, 20);
             this.txtPayOffResponse.TabIndex = 10;
@@ -197,7 +202,7 @@
             // 
             // cmdSaveEnemy
             // 
-            this.cmdSaveEnemy.Location = new System.Drawing.Point(16, 379);
+            this.cmdSaveEnemy.Location = new System.Drawing.Point(12, 402);
             this.cmdSaveEnemy.Name = "cmdSaveEnemy";
             this.cmdSaveEnemy.Size = new System.Drawing.Size(101, 27);
             this.cmdSaveEnemy.TabIndex = 11;
@@ -207,7 +212,7 @@
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(166, 379);
+            this.cmdCancel.Location = new System.Drawing.Point(162, 402);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(121, 27);
             this.cmdCancel.TabIndex = 12;
@@ -218,7 +223,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(9, 97);
+            this.label9.Location = new System.Drawing.Point(204, 89);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
             this.label9.TabIndex = 16;
@@ -226,14 +231,14 @@
             // 
             // txtMoney
             // 
-            this.txtMoney.Location = new System.Drawing.Point(55, 94);
+            this.txtMoney.Location = new System.Drawing.Point(249, 86);
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(38, 20);
             this.txtMoney.TabIndex = 5;
             // 
             // txtXP
             // 
-            this.txtXP.Location = new System.Drawing.Point(193, 94);
+            this.txtXP.Location = new System.Drawing.Point(249, 60);
             this.txtXP.Name = "txtXP";
             this.txtXP.Size = new System.Drawing.Size(38, 20);
             this.txtXP.TabIndex = 6;
@@ -241,7 +246,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(147, 97);
+            this.label10.Location = new System.Drawing.Point(222, 63);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 13);
             this.label10.TabIndex = 22;
@@ -249,7 +254,7 @@
             // 
             // cmdHelp
             // 
-            this.cmdHelp.Location = new System.Drawing.Point(123, 378);
+            this.cmdHelp.Location = new System.Drawing.Point(119, 401);
             this.cmdHelp.Name = "cmdHelp";
             this.cmdHelp.Size = new System.Drawing.Size(37, 28);
             this.cmdHelp.TabIndex = 42;
@@ -257,11 +262,48 @@
             this.cmdHelp.UseVisualStyleBackColor = true;
             this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
             // 
+            // txtTeam
+            // 
+            this.txtTeam.Location = new System.Drawing.Point(56, 86);
+            this.txtTeam.Name = "txtTeam";
+            this.txtTeam.Size = new System.Drawing.Size(38, 20);
+            this.txtTeam.TabIndex = 43;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(16, 89);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(34, 13);
+            this.label11.TabIndex = 44;
+            this.label11.Text = "Team";
+            // 
+            // cmbBehaviour
+            // 
+            this.cmbBehaviour.FormattingEnabled = true;
+            this.cmbBehaviour.Location = new System.Drawing.Point(67, 112);
+            this.cmbBehaviour.Name = "cmbBehaviour";
+            this.cmbBehaviour.Size = new System.Drawing.Size(220, 21);
+            this.cmbBehaviour.TabIndex = 45;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 115);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 46;
+            this.label12.Text = "Behaviour";
+            // 
             // frmEnemyEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 433);
+            this.ClientSize = new System.Drawing.Size(299, 441);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.cmbBehaviour);
+            this.Controls.Add(this.txtTeam);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.txtXP);
             this.Controls.Add(this.label10);
@@ -286,6 +328,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmEnemyEditor";
             this.Text = "Enemy Editor";
             this.ResumeLayout(false);
@@ -319,5 +362,9 @@
         private System.Windows.Forms.TextBox txtXP;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button cmdHelp;
+        private System.Windows.Forms.TextBox txtTeam;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbBehaviour;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -34,6 +34,9 @@ namespace Legend_Of_Drongo
             desc.ShortDesc = "killallenemies";
             desc.LongDesc = "Player kills all enemies in the room";
             Triggers.Add(desc);
+            desc.ShortDesc = "killenemy";
+            desc.LongDesc = "Players kills 1 enemy in a room";
+            Triggers.Add(desc);
             desc.ShortDesc = "moveinto";
             desc.LongDesc = "Player moves into the current room";
             Triggers.Add(desc);
@@ -49,22 +52,38 @@ namespace Legend_Of_Drongo
             desc.ShortDesc = "iteminteraction";
             desc.LongDesc = "Player uses an interaction item correctly";
             Triggers.Add(desc);
-            desc.ShortDesc = "killenemy";
-            desc.LongDesc = "Players kills 1 enemy in a room";
+            desc.ShortDesc = "donate";
+            desc.LongDesc = "Player donates the correct thing to an NPC";
             Triggers.Add(desc);
+            desc.ShortDesc = "sleeps";
+            desc.LongDesc = "Player goes to sleep";
+            Triggers.Add(desc);
+            
 
             //Actions
-            desc.ShortDesc = "unlock";
-            desc.LongDesc = "Unlock a locked cell at ";
+            desc.ShortDesc = "unlockroom";
+            desc.LongDesc = "Unlock a locked room at ";
             Actions.Add(desc);
-            desc.ShortDesc = "lock";
-            desc.LongDesc = "Lock a cell at ";
+            desc.ShortDesc = "lockroom";
+            desc.LongDesc = "Lock a room at ";
+            Actions.Add(desc);
+            desc.ShortDesc = "unlockbuilding";
+            desc.LongDesc = "Unlock a locked building located in room ";
+            Actions.Add(desc);
+            desc.ShortDesc = "lockbuilding";
+            desc.LongDesc = "Lock a building located in room ";
             Actions.Add(desc);
             desc.ShortDesc = "LockIn";
-            desc.LongDesc = "Lock/Unlock current room";
+            desc.LongDesc = "Lock/Unlock current room or building";
             Actions.Add(desc);
             desc.ShortDesc = "kill all enemies";
             desc.LongDesc = "Kill all enemies in the room";
+            Actions.Add(desc);
+            desc.ShortDesc = "remove all npcs";
+            desc.LongDesc = "Remove all npcs in the room";
+            Actions.Add(desc);
+            desc.ShortDesc = "remove all items";
+            desc.LongDesc = "Remove all items in the room";
             Actions.Add(desc);
             desc.ShortDesc = "change description";
             desc.LongDesc = "Change the room description to its alternative";
@@ -152,9 +171,13 @@ namespace Legend_Of_Drongo
                 cmbFloor.SelectedIndex = Event.Coodinates[2];
             }
 
-            if (Event.EventValue != null) txtNewValue.Text = Event.EventValue;
+            if (Event.EventValue != null) txtOutcomeValue.Text = Event.EventValue;
+            if (Event.triggerCriteria != null) txtTriggerValue.Text = Event.triggerCriteria;
             if (Event.ReUsable == true) chkReUse.Checked = true;
             else chkReUse.Checked = false;
+
+            if (Event.ApplyToBuilding == true) chkBuilding.Checked = true;
+            else chkBuilding.Checked = false;
 
             GetAllNPCs();
             GetAllItems();
@@ -175,10 +198,16 @@ namespace Legend_Of_Drongo
                 Event.Coodinates[2] = cmbFloor.SelectedIndex;
             }
 
-            if (txtNewValue.Text != string.Empty) Event.EventValue = txtNewValue.Text;
-            else if (txtNewValue.Enabled == true) return false;
+            if (txtOutcomeValue.Text != string.Empty) Event.EventValue = txtOutcomeValue.Text;
+            else if (txtOutcomeValue.Enabled == true) return false;
 
+            //Trigger criteria is allowed to be null
+            if (txtTriggerValue.Text != string.Empty) Event.triggerCriteria = txtTriggerValue.Text;
+            
             if (chkReUse.Checked == true) Event.ReUsable = true;
+            else Event.ReUsable = false;
+
+            if (chkBuilding.Checked == true) Event.ApplyToBuilding = true;
             else Event.ReUsable = false;
 
             //Items, NPCs and Enemies should save to the event in their own procedures
@@ -187,6 +216,11 @@ namespace Legend_Of_Drongo
         }
 
         private void cmbAction_TextChanged(object sender, EventArgs e)
+        {
+            SetEnabledElements();
+        }
+
+        private void cmbTrigger_TextChanged(object sender, EventArgs e)
         {
             SetEnabledElements();
         }
@@ -212,7 +246,8 @@ namespace Legend_Of_Drongo
             cmbRow.Enabled = false;
             cmbCol.Enabled = false;
             cmbFloor.Enabled = false;
-            txtNewValue.Enabled = false;
+            txtOutcomeValue.Enabled = false;
+            txtTriggerValue.Enabled = false;
 
             lstItems.Enabled = false;
             cmdAddItem.Enabled = false;
@@ -229,45 +264,66 @@ namespace Legend_Of_Drongo
             cmdCloneEnemy.Enabled = false;
             cmdRemoveEnemy.Enabled = false;
 
-            //Check if coodinate box should be enabled
-            if (Actions[cmbAction.SelectedIndex].ShortDesc == "unlock" || Actions[cmbAction.SelectedIndex].ShortDesc == "lock" || Actions[cmbAction.SelectedIndex].ShortDesc == "change description" || Actions[cmbAction.SelectedIndex].ShortDesc == "change location")
-            {
-                cmbRow.Enabled = true;
-                cmbCol.Enabled = true;
-                cmbFloor.Enabled = true;
-            }
-            else if (Actions[cmbAction.SelectedIndex].ShortDesc == "output text" || Actions[cmbAction.SelectedIndex].ShortDesc == "change objective" || Actions[cmbAction.SelectedIndex].ShortDesc == "giveXP")
-            {
-                txtNewValue.Enabled = true;
-            }
-            else if (Actions[cmbAction.SelectedIndex].ShortDesc == "custom description")
-            {
-                cmbRow.Enabled = true;
-                cmbCol.Enabled = true;
-                cmbFloor.Enabled = true;
-                txtNewValue.Enabled = true;
-            }
-            else if (Actions[cmbAction.SelectedIndex].ShortDesc == "spawnItems")
-            {
-                lstItems.Enabled = true;
-                cmdAddItem.Enabled = true;
-                cmdCloneItem.Enabled = true;
-                cmdRemoveItem.Enabled = true;
-            }
-            else if (Actions[cmbAction.SelectedIndex].ShortDesc == "spawnNPC")
-            {
-                lstNPCs.Enabled = true;
-                cmdAddNPC.Enabled = true;
-                cmdCloneNPC.Enabled = true;
-                cmdRemoveNPC.Enabled = true;
+            chkBuilding.Enabled = false;
 
-            }
-            else if (Actions[cmbAction.SelectedIndex].ShortDesc == "spawnEnemy")
+            if (cmbTrigger.SelectedIndex > -1 && cmbTrigger.SelectedIndex < Triggers.Count)
             {
-                lstEnemies.Enabled = true;
-                cmdAddEnemy.Enabled = true;
-                cmdCloneEnemy.Enabled = true;
-                cmdRemoveEnemy.Enabled = true;
+                //Trigger criteria
+                if (Triggers[cmbTrigger.SelectedIndex].ShortDesc == "killenemy" ||
+                        Triggers[cmbTrigger.SelectedIndex].ShortDesc == "itempickup" ||
+                        Triggers[cmbTrigger.SelectedIndex].ShortDesc == "payoff" ||
+                        Triggers[cmbTrigger.SelectedIndex].ShortDesc == "iteminteraction" ||
+                        Triggers[cmbTrigger.SelectedIndex].ShortDesc == "donate"
+                    )
+                {
+                    txtTriggerValue.Enabled = true;
+                }
+            }
+
+            if (cmbAction.SelectedIndex > -1 && cmbAction.SelectedIndex < Actions.Count)
+            {
+                //Action criteria
+                if (Actions[cmbAction.SelectedIndex].ShortDesc == "unlockroom" || Actions[cmbAction.SelectedIndex].ShortDesc == "lockroom" || Actions[cmbAction.SelectedIndex].ShortDesc == "unlockbuilding" || Actions[cmbAction.SelectedIndex].ShortDesc == "lockbuilding" || Actions[cmbAction.SelectedIndex].ShortDesc == "change description" || Actions[cmbAction.SelectedIndex].ShortDesc == "change location")
+                {
+                    cmbRow.Enabled = true;
+                    cmbCol.Enabled = true;
+                    cmbFloor.Enabled = true;
+                    chkBuilding.Enabled = true;
+                }
+                else if (Actions[cmbAction.SelectedIndex].ShortDesc == "output text" || Actions[cmbAction.SelectedIndex].ShortDesc == "change objective" || Actions[cmbAction.SelectedIndex].ShortDesc == "giveXP")
+                {
+                    txtOutcomeValue.Enabled = true;
+                }
+                else if (Actions[cmbAction.SelectedIndex].ShortDesc == "custom description")
+                {
+                    cmbRow.Enabled = true;
+                    cmbCol.Enabled = true;
+                    cmbFloor.Enabled = true;
+                    txtOutcomeValue.Enabled = true;
+                    chkBuilding.Enabled = true;
+                }
+                else if (Actions[cmbAction.SelectedIndex].ShortDesc == "spawnItems")
+                {
+                    lstItems.Enabled = true;
+                    cmdAddItem.Enabled = true;
+                    cmdCloneItem.Enabled = true;
+                    cmdRemoveItem.Enabled = true;
+                }
+                else if (Actions[cmbAction.SelectedIndex].ShortDesc == "spawnNPC")
+                {
+                    lstNPCs.Enabled = true;
+                    cmdAddNPC.Enabled = true;
+                    cmdCloneNPC.Enabled = true;
+                    cmdRemoveNPC.Enabled = true;
+
+                }
+                else if (Actions[cmbAction.SelectedIndex].ShortDesc == "spawnEnemy")
+                {
+                    lstEnemies.Enabled = true;
+                    cmdAddEnemy.Enabled = true;
+                    cmdCloneEnemy.Enabled = true;
+                    cmdRemoveEnemy.Enabled = true;
+                }
             }
         }
 

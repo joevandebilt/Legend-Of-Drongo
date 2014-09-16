@@ -1,0 +1,7 @@
+#Options for Legend Of Drongo
+
+#Enable debugging options
+DebugOptions: true
+
+#Clear Console after each command
+ClearConsole: true

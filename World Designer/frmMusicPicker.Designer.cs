@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMusicPicker));
             this.cmdSelect = new System.Windows.Forms.Button();
             this.cmdRefresh = new System.Windows.Forms.Button();
             this.cmdBack = new System.Windows.Forms.Button();
@@ -92,6 +93,7 @@
             this.Controls.Add(this.cmdBack);
             this.Controls.Add(this.cmdRefresh);
             this.Controls.Add(this.cmdSelect);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMusicPicker";
             this.Text = "Music Browser";
             this.ResumeLayout(false);

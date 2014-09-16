@@ -16,7 +16,7 @@ namespace Legend_Of_Drongo
         {
             InitializeComponent();
 
-            using (StreamReader file = new System.IO.StreamReader(@".\System Files\WorldEditHelp.sys", true))
+            using (StreamReader file = new StreamReader(@".\System Files\WorldEditHelp.sys", true))
             {
                 rtbHelp.Text = file.ReadToEnd();
             }

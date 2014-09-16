@@ -1,6 +1,6 @@
 +---------------------------------------+
 |			Legend Of Drongo			|
-|				Changelog				|
+|				Readme					|
 +---------------------------------------+
 
 Description:
@@ -18,10 +18,13 @@ Known Bugs:
 - Talk Man (missing word to) - Fixed v2.6.4
 - Singular use of command 'use' - Fixed v2.6.4
 - Attacking a man with a null inventory - Fixed v2.6.4
+- Returning to main menu in game cannot restart timer thread. Fixed v3.0.0
+- Using give command to bribe fails. Fixed v3.0.0
 
 To Do:
 - Finish world.
 - File directories are fixed paths, add in choice of directory. - Omitted
+- Speed up generating world graphics 
 
 Changes:
 V1.0.0
@@ -230,5 +233,43 @@ v2.6.4 (Thanks to David for the bug report)
 - Cleaned up Spelling
 - Fixed enemies dropping weapons issue
 - Fixed locking in room issue.
+
+v3.0.0
+- Made console clear after every command to make it nicer to look at (could be reverted)
+- Improved main world, added XP to items/enemies
+- Improved Tutorial World. Hopefully finished it. 
+- Improved time/lack of sleep system
+- Stopped itempickup event firing when pickup fails
+- Added Building class to data types
+- Added behaviour and team attributes to enemy class
+- Altered Enemy Editor to allow for team & behaviour
+- Altered combat method to compensate for enemy behaviour, introduced find enemy method.
+- Added building support to game engine
+- Added buildings to frmRoomEditor in the world designer
+- Added Room->Building and Building->Room conversion methods.
+- Created first version of town Miracid
+- Updated World Editor help file
+- Updated Game Engine help file
+- Added Icons to the world designer. 
+- Made attacked function have only 1 enemy in the room attack the player, rather than all.
+- Improved Item functions a great deal
+- Added regions to functions
+- Grouped functions into regions
+- Added Remove all enemies and remove all items to event actions
+- Added Sleeps to event triggers
+- Wrote IsValidCommand method to improve deciphering of user semantics
+- Removed IsValidCommand method as it was a total bust. Man what was I thinking
+- Improved Merchant types
+- Formatted output of the time properly
+- Added give item method and main menu entry
+- Upgraded command semantics checks to not include string splitting, reduce crashes on command entry
+- Improved Website
+- Added criteria to event triggers, i.e specific enemy/weapon/item uses trigger events
+- Added options to game to be held in external text file
+- Fixed null behaviour issues
+- Set default behaviour for NPCs becoming enemies
+- Fixed Cloning methods to account for new datatypes
+- Altered Saveworld, GetRoomInfo and MainMenu options to compensate for building types
+- Made Floor size changeable to suit different areas.
 
 If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub

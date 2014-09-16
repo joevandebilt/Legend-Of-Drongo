@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNPCEditor));
             this.cmdCancel = new System.Windows.Forms.Button();
             this.cmdSaveNPC = new System.Windows.Forms.Button();
             this.txtTalkTo = new System.Windows.Forms.TextBox();
@@ -59,6 +60,8 @@
             this.cmdCloneItem = new System.Windows.Forms.Button();
             this.cmdCloneKnowledge = new System.Windows.Forms.Button();
             this.cmdHelp = new System.Windows.Forms.Button();
+            this.txtDonate = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdCancel
@@ -91,21 +94,21 @@
             // 
             // txtArmor
             // 
-            this.txtArmor.Location = new System.Drawing.Point(558, 18);
+            this.txtArmor.Location = new System.Drawing.Point(493, 22);
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
             this.txtArmor.TabIndex = 3;
             // 
             // txtMoney
             // 
-            this.txtMoney.Location = new System.Drawing.Point(425, 58);
+            this.txtMoney.Location = new System.Drawing.Point(583, 22);
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(39, 20);
             this.txtMoney.TabIndex = 4;
             // 
             // txtHP
             // 
-            this.txtHP.Location = new System.Drawing.Point(425, 22);
+            this.txtHP.Location = new System.Drawing.Point(398, 22);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(38, 20);
             this.txtHP.TabIndex = 2;
@@ -129,7 +132,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(507, 21);
+            this.label4.Location = new System.Drawing.Point(442, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 24;
@@ -138,7 +141,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(379, 61);
+            this.label9.Location = new System.Drawing.Point(537, 25);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
             this.label9.TabIndex = 22;
@@ -147,7 +150,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(388, 25);
+            this.label3.Location = new System.Drawing.Point(361, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 13);
             this.label3.TabIndex = 23;
@@ -198,11 +201,12 @@
             this.cmbMerchType.Items.AddRange(new object[] {
             "All",
             "Armor",
-            "Food",
+            "Food & Drink",
             "None",
-            "Object",
+            "Objects & Items",
             "Readable",
-            "Weapons"});
+            "Weapons",
+            "Weapons & Armor"});
             this.cmbMerchType.Location = new System.Drawing.Point(98, 136);
             this.cmbMerchType.Name = "cmbMerchType";
             this.cmbMerchType.Size = new System.Drawing.Size(138, 21);
@@ -350,11 +354,29 @@
             this.cmdHelp.UseVisualStyleBackColor = true;
             this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
             // 
+            // txtDonate
+            // 
+            this.txtDonate.Location = new System.Drawing.Point(417, 55);
+            this.txtDonate.Name = "txtDonate";
+            this.txtDonate.Size = new System.Drawing.Size(171, 20);
+            this.txtDonate.TabIndex = 60;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(361, 58);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 13);
+            this.label8.TabIndex = 61;
+            this.label8.Text = "Donation";
+            // 
             // frmNPCEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 363);
+            this.Controls.Add(this.txtDonate);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.cmdCloneKnowledge);
             this.Controls.Add(this.cmdCloneItem);
@@ -386,6 +408,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmNPCEditor";
             this.Text = "NPC Editor";
             this.ResumeLayout(false);
@@ -426,5 +449,7 @@
         private System.Windows.Forms.Button cmdCloneItem;
         private System.Windows.Forms.Button cmdCloneKnowledge;
         private System.Windows.Forms.Button cmdHelp;
+        private System.Windows.Forms.TextBox txtDonate;
+        private System.Windows.Forms.Label label8;
     }
 }

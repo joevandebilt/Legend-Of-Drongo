@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWorldPicker));
             this.button1 = new System.Windows.Forms.Button();
             this.cmdLoadWorld = new System.Windows.Forms.Button();
             this.lstWorlds = new System.Windows.Forms.ListBox();
@@ -72,6 +73,7 @@
             this.Controls.Add(this.lstWorlds);
             this.Controls.Add(this.cmdLoadWorld);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmWorldPicker";
             this.Text = "Choose A World";
             this.ResumeLayout(false);

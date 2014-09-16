@@ -1,10 +1,13 @@
 ﻿/*  
- * This game is protected under the Artistic License 2.0
- *      Copyright (c) 2014 Joseph Benjamin van de Bilt
+ *              This game is protected under the Artistic License 2.0
+ *                  Copyright (c) 2014 Joseph Benjamin van de Bilt
  *
- *      Everyone is permitted to copy and distribute verbatim copies
- *      of this license document, but changing it is not allowed.
- * 
+ *          This license establishes the terms under which a given free software
+ *          Package may be copied, modified, distributed, and/or redistributed.
+ *          The intent is that the Copyright Holder maintains some artistic
+ *          control over the development of that Package while still keeping the
+ *          Package available as open source and free software.
+ *      
  *  Should you wish to contact the copyright holder at any point please do so at joevandebilt@live.co.uk
  *  
  */
@@ -40,7 +43,11 @@ namespace Legend_Of_Drongo
         public static object myLock = new object();
         
         public static bool stopProcessing = false;
-        public static bool stopTime = false; 
+        public static int stopTime = 1; //1 = go, 0=pause, -1 = Stop
+        
+        //Game Options
+        public static bool DebugEnabled = false;
+        public static bool ClearConsole = false;
 
         public static PlayerProfile MainMenu()
         {
@@ -319,7 +326,7 @@ namespace Legend_Of_Drongo
             }
             return (Player);
         }
-
+        
         static void Introduction()
         {
             string[] intro = new string[15];
@@ -404,11 +411,41 @@ namespace Legend_Of_Drongo
             }
             else Player = MainMenu();
             
+            //Check for optional Options File
+            if (File.Exists(".\\Options.txt"))
+            {
+                using (StreamReader sr = new StreamReader(".\\Options.txt",true))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string[] LineWords = sr.ReadLine().Split(':');
+                        if (!string.IsNullOrEmpty(LineWords[0]) && LineWords[0][0] != '#')
+                        {                            
+                            if (LineWords[0] == "DebugOptions")
+                            {
+                                if (LineWords[1].Trim().ToLower() == "true") DebugEnabled = true;
+                                else if (LineWords[1].Trim().ToLower() == "false") DebugEnabled = false;
+                            }
+                            else if (LineWords[0] == "ClearConsole")
+                            {
+                                if (LineWords[1].Trim().ToLower() == "true") ClearConsole = true;
+                                else if (LineWords[1].Trim().ToLower() == "false") ClearConsole = false;
+                            }
+                        }
+                    }
+                }
+            }
+
             ThisFloor = world[Player.CurrentPos[2]] ;
             CurrentRoom = GetRoomInfo(Player.CurrentPos);
             CurrentRoom.Explored = true;
-
-            WorldState.WorldTime = 512;
+            //if (Player.InBuilding == true)
+            //{
+            //    CurrentRoom = GoIntoBuilding(CurrentRoom.Building);
+            //    Player.InBuilding = true;
+            //}
+            
+            WorldState.WorldTime = 512; //Set the clock to 8am and start ticking
             Thread TimeThread = new Thread(TimeTicker);
             TimeThread.Start();
             
@@ -422,14 +459,18 @@ namespace Legend_Of_Drongo
             Console.WriteLine(WordWrap(CurrentRoom.Description));
 
             string PlayerCommand = string.Empty;
+            bool QuitGame = false;
 
-            while (PlayerCommand != "quit" && PlayerCommand != "exit")
+            while (QuitGame == false)
             {
                 //Take in a player command
                 Console.Write(">"); 
                 PlayerCommand = Console.ReadLine();
-                PlayerCommand = PlayerCommand.Trim();
-                Console.WriteLine("");
+                PlayerCommand = CleanPlayerInput(PlayerCommand);    //Clean the input of unusual characters
+
+                if (!ClearConsole) Console.WriteLine("");
+                else Console.Clear();
+                
 
                 try
                 {
@@ -444,13 +485,13 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Movement
-                    else if (
-                                PlayerCommand.ToLower().Split(' ')[0] == "go" || 
-                                PlayerCommand.ToLower().Split(' ')[0] == "move" || 
+                    else if (   
+                                (PlayerCommand.ToLower().Split(' ')[0] == "go" && PlayerCommand.ToLower().Split(' ')[1] != "into" ) ||
+                                PlayerCommand.ToLower().Split(' ')[0] == "move" ||
                                 PlayerCommand.ToLower().Split(' ')[0] == "travel" ||
-                                PlayerCommand.ToLower() == "north" || 
-                                PlayerCommand.ToLower() == "east" || 
-                                PlayerCommand.ToLower() == "south" || 
+                                PlayerCommand.ToLower() == "north" ||
+                                PlayerCommand.ToLower() == "east" ||
+                                PlayerCommand.ToLower() == "south" ||
                                 PlayerCommand.ToLower() == "west"
                             )
                     {
@@ -461,7 +502,6 @@ namespace Legend_Of_Drongo
                             ProposedMove[1] = Player.CurrentPos[1];
                             ProposedMove[2] = Player.CurrentPos[2];
                             string Direction = string.Empty;
-
                             if (PlayerCommand.ToLower().Split(' ')[0] == "go" || PlayerCommand.ToLower().Split(' ')[0] == "move" || PlayerCommand.ToLower().Split(' ')[0] == "travel") Direction = PlayerCommand.ToLower().Split(' ')[1];
                             else Direction = PlayerCommand.ToLower();
 
@@ -496,72 +536,131 @@ namespace Legend_Of_Drongo
                     }
                     #endregion
 
+                    #region Buildings
+                    else if ((PlayerCommand.ToLower().Split(' ')[0] == "go" && PlayerCommand.ToLower().Split(' ')[1] == "into") || PlayerCommand.ToLower().Split(' ')[0] == "enter")
+                    {
+                        if (!Player.InBuilding)
+                        {
+                            if (CurrentRoom.Building.BuildingName != null)
+                            {
+                                if (!CurrentRoom.LockedIn)
+                                {
+                                    string target = string.Empty;
+                                    if (PlayerCommand.ToLower().Split(' ')[0] == "go" && PlayerCommand.ToLower().Split(' ')[1] == "into")
+                                    {
+                                        for (int i = 2; i < PlayerCommand.Split(' ').Length; i++)
+                                        {
+                                            target = target + " " + PlayerCommand.Split(' ')[i];
+                                        }
+                                    }
+                                    else if (PlayerCommand.ToLower().Split(' ')[0] == "enter")
+                                    {
+                                        for (int i = 1; i < PlayerCommand.Split(' ').Length; i++)
+                                        {
+                                            target = target + " " + PlayerCommand.Split(' ')[i];
+                                        }
+                                    }
+                                    target = target.Trim();
+
+                                    if (target != string.Empty && target.ToLower() == CurrentRoom.Building.BuildingName.ToLower())
+                                    {
+                                        if (CurrentRoom.Building.CanMove == true)
+                                        {
+                                            SaveWorld();
+                                            CurrentRoom = GoIntoBuilding(CurrentRoom.Building);
+                                            Console.WriteLine(WordWrap(CurrentRoom.Description));
+                                            EventTrigger("moveinto");
+                                        }
+                                        else Console.WriteLine(WordWrap(target + " is locked."));
+                                    }
+                                    else if (target != CurrentRoom.Building.BuildingName) Console.WriteLine(target + " is not something you can enter.");
+                                    else Console.WriteLine("Go into where?");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You cannot leave the current area");
+                                    if (CurrentRoom.Enemy != null) attacked();
+                                }
+                            }
+                            else Console.WriteLine("There is no building here to enter");
+                        }
+                        else Console.WriteLine("You are Already inside a building");
+                    }
+                    else if (PlayerCommand.ToLower().Split(' ')[0] == "leave")
+                    {
+                        if (Player.InBuilding == true)
+                        {
+                            if (!CurrentRoom.LockedIn)
+                            {
+                                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]].Building = LeaveBuilding(CurrentRoom);
+                                CurrentRoom = GetRoomInfo(Player.CurrentPos);
+                                Console.WriteLine(WordWrap(CurrentRoom.Description));
+                                EventTrigger("moveinto");
+                            }
+                            else
+                            {
+                                Console.WriteLine("You cannot leave the current area");
+                                if (CurrentRoom.Enemy != null) attacked();
+                            }
+                        }
+                        else Console.WriteLine(WordWrap("You are not currently inside a building"));
+                    }
+                    #endregion
+
                     #region Descriptions
-                    else if (PlayerCommand.ToLower().Contains("who am i") || PlayerCommand == "whoami")
+                    else if (CommandContains(PlayerCommand, "who am i") || CommandContains(PlayerCommand, "whoami"))
                     {
                         Console.WriteLine(WordWrap(string.Concat("Your name is ", Player.name)));
                     }
-                    else if (PlayerCommand.ToLower() == "status")
+                    else if (CommandContains(PlayerCommand, "status"))
                     {
                         PlayerStatus();
                     }
-                    else if (PlayerCommand.ToLower() == "describe")
+                    else if (CommandContains(PlayerCommand, "describe"))
                     {
                         Console.WriteLine(WordWrap(CurrentRoom.Description));
                     }
-                    else if (PlayerCommand.ToLower() == "objective")
+                    else if (CommandContains(PlayerCommand, "objective"))
                     {
                         Console.WriteLine(WordWrap(string.Concat("Your Current Objective is: ", Player.Objective)));
                     }
-                    else if (PlayerCommand.ToLower() == "money")
+                    else if (CommandContains(PlayerCommand, "money"))
                     {
                         Console.WriteLine("You currently have {0} gold coins", Player.Money);
                     }
                     #endregion
 
                     #region Read
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "read")
+                    else if (CommandContains(PlayerCommand, "read"))
                     {
-                        int index;
-                        string readitem;
-
                         if (CurrentRoom.items != null || Player.inventory.Count != 0)
                         {
-
-                            if (PlayerCommand.ToLower().Split(' ').Length == 1)
+                            string target = string.Empty;
+                            if (PlayerCommand.ToLower().Split(' ').Length != 1)
                             {
-                                Console.Write("What do you want to read?");
-                                readitem = Console.ReadLine();
+                                for (int i = 1; i < PlayerCommand.ToLower().Split(' ').Length; i++)
+                                {
+                                    target = target + PlayerCommand.ToLower().Split(' ')[i];
+                                }
                             }
                             else
                             {
-                                string[] strArray = PlayerCommand.Split(' ');
-                                index = 2;
-                                readitem = strArray[1];
-
-                                while (index < strArray.Length)
-                                {
-                                    readitem = string.Concat(readitem, " ", strArray[index]);
-                                    index++;
-                                    //Console.WriteLine(WordWrap("item is {0}", item);
-                                }
-                                readitem = readitem.Trim();
+                                Console.Write("What do you want to read?\n>");
+                                target = Console.ReadLine();
                             }
-                            Console.WriteLine(WordWrap(ReadItem(readitem)));
+                            Console.WriteLine(WordWrap(ReadItem(target.Trim())));
                         }
                         else Console.WriteLine("There is nothing to read");
-
-
                     }
                     #endregion
 
                     #region Inventory
-                    else if (PlayerCommand.ToLower() == "inventory")
+                    else if (CommandContains(PlayerCommand, "inventory"))
                     {
                         if (Player.inventory.Count != 0)
                         {
-                            Console.WriteLine(WordWrap(string.Concat("You are currently using ", (Player.MaxItems - Player.invspace), "/",Player.MaxItems," of your inventory\n")));
-                            int index=1;
+                            Console.WriteLine(WordWrap(string.Concat("You are currently using ", (Player.MaxItems - Player.invspace), "/", Player.MaxItems, " of your inventory\n")));
+                            int index = 1;
                             foreach (itemInfo Item in Player.inventory)
                             {
                                 Console.WriteLine(WordWrap(string.Concat(index, ": ", Item.Name)));
@@ -574,7 +673,7 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Ask
-                    else if (PlayerCommand.Split(' ')[0].ToLower() == "ask")
+                    else if (CommandContains(PlayerCommand, "ask about"))
                     {
                         string Target = string.Empty;
                         string Topic = string.Empty;
@@ -604,7 +703,7 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Take Item
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "take" || PlayerCommand.ToLower().Split(' ')[0] == "pick" || PlayerCommand.ToLower().Split(' ')[0] == "get")
+                    else if (CommandContains(PlayerCommand, "take") || CommandContains(PlayerCommand, "pick") || CommandContains(PlayerCommand, "get"))
                     {
                         string ObjectName = string.Empty;
                         if (Player.invspace > 0)
@@ -637,14 +736,14 @@ namespace Legend_Of_Drongo
                                 }
                                 ObjectName = ObjectName.Trim();
                             }
-                            Console.WriteLine(WordWrap(TakeItem(ObjectName)));
+                            TakeItem(ObjectName);
                         }
                         else Console.WriteLine("There is no space in your inventory to pick anything up");
                     }
                     #endregion
 
                     #region DropItem
-                    else if (PlayerCommand.ToLower() == "drop" || PlayerCommand.ToLower().Split(' ')[0] == "drop")
+                    else if (CommandContains(PlayerCommand, "drop"))
                     {
                         if (Player.inventory.Count != 0)
                         {
@@ -690,11 +789,11 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Look At Item
-                    else if (PlayerCommand.ToLower() != "look" && (PlayerCommand.ToLower() == "look at" || (PlayerCommand.ToLower().Split(' ')[0] == "look" && PlayerCommand.ToLower().Split(' ')[1] == "at")))
+                    else if (CommandContains(PlayerCommand, "look at"))
                     {
                         string ObjectName = string.Empty;
 
-                        if (PlayerCommand == "look at")
+                        if (PlayerCommand.ToLower() == "look at")
                         {
                             Console.Write("What do you want to look at?: ");
                             ObjectName = Console.ReadLine();
@@ -715,18 +814,18 @@ namespace Legend_Of_Drongo
                             ObjectName = ObjectName.Trim();
                         }
 
-                        Console.WriteLine(WordWrap(LookAtObject(ObjectName)));
+                        Console.WriteLine(WordWrap(LookAtItem(ObjectName)));
                     }
                     #endregion
 
                     #region Examine Item
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "examine" || PlayerCommand.ToLower() == "examine")
+                    else if (CommandContains(PlayerCommand, "examine") || CommandContains(PlayerCommand, "inspect"))
                     {
                         if (Player.inventory.Count != 0)
                         {
                             string ObjectName = string.Empty;
 
-                            if (PlayerCommand.ToLower() == "examine")
+                            if (PlayerCommand.ToLower() == "examine" || PlayerCommand.ToLower() == "inspect")
                             {
                                 Console.WriteLine(WordWrap("What item do you want to examine?: "));
                                 int index = 1;
@@ -765,7 +864,7 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Use Item
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "use" || PlayerCommand.ToLower().Split(' ')[0] == "put")
+                    else if (CommandContains(PlayerCommand, "use") || CommandContains(PlayerCommand, "put"))
                     {
                         int index = 0;
                         string item = string.Empty;
@@ -834,7 +933,7 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region View Wares
-                    else if (PlayerCommand.ToLower() != "view" && PlayerCommand.ToLower().Split(' ')[0] == "view" && PlayerCommand.ToLower().Split(' ')[1] == "wares")
+                    else if (CommandContains(PlayerCommand, "view wares"))
                     {
                         int index;
                         string VendorName;
@@ -900,7 +999,7 @@ namespace Legend_Of_Drongo
                                         }
                                     }
                                     else Console.WriteLine(WordWrap(string.Concat(CurrentRoom.Civilians[index].name, " is not willing to sell you anything")));
-                                }                                
+                                }
                                 index++;
                             }
                             if (!vendorFound) Console.WriteLine(VendorName + " is either not here or not a merchant");
@@ -911,7 +1010,7 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Bribe
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "bribe")
+                    else if (CommandContains(PlayerCommand, "bribe"))
                     {
                         int index;
                         string WhoToBribe = string.Empty;
@@ -953,7 +1052,7 @@ namespace Legend_Of_Drongo
                                     else WhoToBribe = string.Concat(WhoToBribe, " ", PlayerCommand.Split(' ')[i]);
                                     i++;
                                 }
-                                if (AmountFound == false) 
+                                if (AmountFound == false)
                                 {
                                     Console.Write("How much do you want to give {0}? ", WhoToBribe);
                                     Int32.TryParse(Console.ReadLine(), out BribeAmount);
@@ -978,7 +1077,7 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Buy Item
-                    else if (PlayerCommand.Split(' ')[0].ToLower() == "buy")
+                    else if (CommandContains(PlayerCommand, "buy"))
                     {
                         int index;
                         string vendor = string.Empty;
@@ -1057,7 +1156,7 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Sell Item
-                    else if (PlayerCommand.Split(' ')[0].ToLower() == "sell")
+                    else if (CommandContains(PlayerCommand, "sell"))
                     {
                         int index;
                         string vendor = string.Empty;
@@ -1149,7 +1248,6 @@ namespace Legend_Of_Drongo
                                     Console.Write("\nWho do you want to {0} sell to? ", ItemName);
                                     vendor = Console.ReadLine();
                                 }
-
                             }
                             SellItem(ItemToSell, vendor);
                         }
@@ -1157,8 +1255,39 @@ namespace Legend_Of_Drongo
                     }
                     #endregion
 
+                    #region Give Item
+                    else if (CommandContains(PlayerCommand, "give"))
+                    {
+                        string itemName = string.Empty;
+                        string targetNPC = string.Empty;
+                        bool itemFound = false;
+
+                        for (int i = 1; i < PlayerCommand.Split(' ').Length; i++)
+                        {
+                            if (PlayerCommand.Split(' ')[i].ToLower() == "to") itemFound = true;
+                            else if (!itemFound) itemName = itemName + " " + PlayerCommand.Split(' ')[i];
+                            else targetNPC = targetNPC + " " + PlayerCommand.Split(' ')[i];
+                        }
+                        if (!string.IsNullOrEmpty(itemName) && string.IsNullOrEmpty(targetNPC))
+                        {
+                            Console.Write(WordWrap(string.Concat("Who do you want to give ", itemName.Trim(), " to? ")));
+                            targetNPC = Console.ReadLine();
+
+                        }
+                        else if (!itemFound && targetNPC == string.Empty)
+                        {
+                            Console.Write(WordWrap(string.Concat("What item do you want to give? ")));
+                            itemName = Console.ReadLine();
+                            Console.Write(WordWrap(string.Concat("Who do you want to give ", itemName.Trim(), " to? ")));
+                            targetNPC = Console.ReadLine();
+                        }
+                        //if (itemName.Trim().ToLower() == "gold") Console.WriteLine(WordWrap("You cannot gift gold at this time"));
+                        else GiveItem(itemName.Trim(), targetNPC.Trim());
+                    }
+                    #endregion
+
                     #region Talk to
-                    else if (PlayerCommand.Split(' ')[0].ToLower() == "talk")
+                    else if (CommandContains(PlayerCommand, "talk"))
                     {
                         int index;
                         string NPCname = string.Empty;
@@ -1178,7 +1307,7 @@ namespace Legend_Of_Drongo
                             }
                             else
                             {
-                                string[] strArray = PlayerCommand.Split(' ');                                
+                                string[] strArray = PlayerCommand.Split(' ');
                                 foreach (string word in strArray) { if (word != "to" && word != "talk") NPCname = string.Concat(NPCname, " ", word); }
                             }
                             if (NPCname == string.Empty) Console.WriteLine("Talk to who?");
@@ -1202,7 +1331,7 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Attack
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "attack" || PlayerCommand.ToLower().Split(' ')[0] == "hit" || PlayerCommand.ToLower().Split(' ')[0] == "fight")
+                    else if (CommandContains(PlayerCommand, "attack") || CommandContains(PlayerCommand, "hit") || CommandContains(PlayerCommand, "fight"))
                     {
                         string enemy;
                         int index;
@@ -1267,14 +1396,14 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Equip/Wear
-                    else if (PlayerCommand.Split(' ')[0].ToLower() == "equip" || PlayerCommand.Split(' ')[0].ToLower() == "wear")
+                    else if (CommandContains(PlayerCommand, "equip") || CommandContains(PlayerCommand, "wear"))
                     {
                         EquipItem(PlayerCommand);
                     }
                     #endregion
 
-                    #region Eat/Drink 
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "eat" || PlayerCommand.ToLower().Split(' ')[0] == "drink" || PlayerCommand.ToLower().Split(' ')[0] == "consume")
+                    #region Eat/Drink
+                    else if (CommandContains(PlayerCommand, "eat") || CommandContains(PlayerCommand, "drink") || CommandContains(PlayerCommand, "consume"))
                     {
                         if (Player.inventory.Count != 0)
                         {
@@ -1308,14 +1437,14 @@ namespace Legend_Of_Drongo
                                 }
                                 ObjectName = ObjectName.Trim();
                             }
-                            Console.WriteLine(WordWrap(Consume(ObjectName)));
+                            Console.WriteLine(WordWrap(ConsumeItem(ObjectName)));
                         }
                         else Console.WriteLine("Your inventory is empty");
                     }
                     #endregion
 
                     #region Sleep
-                    else if (PlayerCommand.ToLower().Split(' ')[0] == "sleep")
+                    else if (CommandContains(PlayerCommand, "sleep") || CommandContains(PlayerCommand, "sleep in") || CommandContains(PlayerCommand, "go to sleep"))
                     {
                         int index = 0;
                         string bedItem = string.Empty;
@@ -1345,17 +1474,17 @@ namespace Legend_Of_Drongo
                     #endregion
 
                     #region Map
-                    else if (PlayerCommand.ToLower() == "map" || PlayerCommand.ToLower() == "view map" || PlayerCommand.ToLower() == "draw map")
+                    else if ((CommandContains(PlayerCommand, "map")))
                     {
                         DrawMap();
                     }
                     #endregion
 
                     #region Time
-                    else if (PlayerCommand.ToLower() == "time" || PlayerCommand.ToLower() == "the time" || PlayerCommand.ToLower() == "what is the time" || PlayerCommand.ToLower() == "what time is it" || PlayerCommand.ToLower() == "thetime") 
+                    else if (CommandContains(PlayerCommand, "time"))
                     {
                         TimeSpan ts = TimeSpan.FromMinutes(WorldState.WorldTime);
-                        Console.WriteLine(string.Concat(ts.Hours, ":", ts.Minutes));
+                        Console.WriteLine("The time is " + ts.ToString("hh':'mm"));
                     }
                     #endregion
 
@@ -1374,21 +1503,23 @@ namespace Legend_Of_Drongo
                     }
                     #endregion
 
-                    #region Debugging
+                    #region Control
                     else if (PlayerCommand.ToLower() == "clear")
                     {
                         Console.Clear();
                         Console.WriteLine(WordWrap(CurrentRoom.Description));
                     }
-                    else if (PlayerCommand.ToLower() == "main menu")
+                    else if (PlayerCommand.ToLower() == "main menu" || PlayerCommand.ToLower() == "mainmenu")
                     {
                         //Run the main menu screen
+                        lock (myLock) { stopTime = 0; } //Pause the clock
                         Player = MainMenu();
-                        ThisFloor = world[Player.CurrentPos[2]];
-                        CurrentRoom = ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
+                        lock (myLock) { stopTime = 1; } //Start the clock
+                        //ThisFloor = world[Player.CurrentPos[2]];
+                        CurrentRoom = GetRoomInfo(Player.CurrentPos);
                         Console.WriteLine(WordWrap(CurrentRoom.Description));
                     }
-                    else if (PlayerCommand.ToLower() == "save" || PlayerCommand.ToLower() == "save game")
+                    else if (CommandContains(PlayerCommand, "save"))
                     {
                         string success = SaveGame();
                         Console.WriteLine(WordWrap(string.Concat("Save ", success)));
@@ -1396,19 +1527,66 @@ namespace Legend_Of_Drongo
                     else if (PlayerCommand.ToLower() == "quit" || PlayerCommand.ToLower() == "exit")
                     {
                         Console.WriteLine("Quitting game");
-                        //Thread.Sleep(1500);
+                        QuitGame = true;
                     }
-                    else if (PlayerCommand.ToLower() == "getpos")
+                    
+                    #endregion
+
+                    #region Easter Eggs
+
+                    else if (CommandContains(PlayerCommand, "typical"))
                     {
-                        Console.WriteLine("Row {0}, Col {1}, Level {2}", Char.ConvertFromUtf32(Player.CurrentPos[0] + 65), (Player.CurrentPos[1] + 1), (Player.CurrentPos[2] + 1));
+                        Console.WriteLine("I know right?\n");
                     }
-                    else if (PlayerCommand.ToLower() == "force error" || PlayerCommand.ToLower() == "forceerror")
+                    #endregion
+
+                    #region Debugging
+
+                    else if (DebugEnabled == true)
                     {
-                        ForceError();
-                    }
-                    else if (PlayerCommand.ToLower() == "endcredits" )
-                    {
-                        EndCredits();
+                        if (CommandContains(PlayerCommand, "getpos"))
+                        {
+                            Console.WriteLine("Row {0}, Col {1}, Level {2}", Char.ConvertFromUtf32(Player.CurrentPos[0] + 65), (Player.CurrentPos[1] + 1), (Player.CurrentPos[2] + 1));
+                        }
+                        else if (CommandContains(PlayerCommand, "movepos"))
+                        {
+                            SaveWorld();
+                            string[] Command = PlayerCommand.Split(' ');
+                            bool fail = false;
+                            int[] NewCoods = new int[3];
+
+                            int Row;
+                            if (Int32.TryParse(Command[1], out Row)) NewCoods[0] = Row;
+                            else
+                            {
+                                char ThisChar = Command[1].ToUpper().ToCharArray()[0];
+                                int temp = (int)Convert.ToChar(ThisChar);
+                                temp = temp - 65;
+                                NewCoods[0] = temp;
+                            }
+
+                            int Col;
+                            if (Int32.TryParse(Command[2], out Col)) NewCoods[1] = Col - 1;
+                            else fail = true;
+
+                            int Floor;
+                            if (Int32.TryParse(Command[3], out Floor)) NewCoods[2] = Floor - 1;
+                            else fail = true;
+
+                            if (!fail)
+                            {
+                                Player.CurrentPos[0] = NewCoods[0];
+                                Player.CurrentPos[1] = NewCoods[1];
+                                Player.CurrentPos[2] = NewCoods[2];
+
+                                CurrentRoom = GetRoomInfo(Player.CurrentPos);
+                                Console.WriteLine(CurrentRoom.Description);
+                                EventTrigger("moveinto");
+                            }
+                            else Console.WriteLine("Command Failed");
+
+                        }
+                        else Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
                     }
                     else Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
                 }
@@ -1430,7 +1608,16 @@ namespace Legend_Of_Drongo
                         file.WriteLine("Command Entered: {0}\n\n", PlayerCommand);
                         file.WriteLine("");
                         file.WriteLine("");
-                        file.WriteLine("The stacktrace output can be scary, do not say the words out loud as you may summon a monster!");
+
+                        Random rng = new Random();
+                        int output = rng.Next(1,3);
+                        switch (output)
+                        {
+                            case 1: file.WriteLine("The stacktrace output can be scary, do not say the words out loud as you may summon a demon!"); break;
+                            case 2: file.WriteLine("The stacktrace output can be scary, some say it can read your very soul!"); break;
+                            case 3: file.WriteLine("The stacktrace output can be scary, don't believe it's lies about being sentient!"); break;
+                        }
+                                
                         file.WriteLine("Error Message: {0}", ex.Message);
                         file.WriteLine("Stacktrace:");
                         file.WriteLine(ex.StackTrace);
@@ -1485,9 +1672,13 @@ namespace Legend_Of_Drongo
                 {
                     if (Player.CurrentPos[2] == 0)
                     {
+                        lock (myLock) { stopTime = 0; }
+                        
                         Console.WriteLine("\n\n     Your adventure has come to an end :(");
                         Console.ReadLine();
+
                         Player = MainMenu();
+                        lock (myLock) { stopTime = 1; }
                         ThisFloor = world[Player.CurrentPos[2]];
                         CurrentRoom = ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]];
                         Console.WriteLine(WordWrap(CurrentRoom.Description));
@@ -1498,7 +1689,7 @@ namespace Legend_Of_Drongo
                         Console.ReadLine();
                         Console.Clear();
                         Console.WriteLine(WordWrap("\n\n\tYou fall through darkness and smoke\n\tuntil you feel your feet softly make contact with ground"));
-                        //Console.ReadLine();
+                                                
                         Player.HPBonus = 60;
                         world[(Player.CurrentPos[2])] = ThisFloor;
                         Player.CurrentPos[0] = 1;
@@ -1507,126 +1698,114 @@ namespace Legend_Of_Drongo
                         ThisFloor = world[0];
                         CurrentRoom = GetRoomInfo(Player.CurrentPos);
                         EventTrigger("moveinto");
-                        //Console.Clear();
-                        //Console.WriteLine(WordWrap(CurrentRoom.Description));
-                        
-                        //MusicPlayer.SoundLocation = ".\\music\\Scary 8-Bit.wav";
-                        //Music("start");
                     }
                 }
                 #endregion
             }
-            lock (myLock) { stopTime = true; }
-            TimeThread.Join();
+            lock (myLock) { stopTime = -1; }
+            TimeThread.Join();  //Wait for the time thread to stop safely before quitting
         }
+
+        #region Movement Functions
 
         public static roomInfo GetRoomInfo(int[] UserPos)
         {
+            //SaveWorld();
+
             roomInfo ThisRoom = new roomInfo();
 
             //ThisFloor = world[UserPos[2]];
-            ThisRoom = ThisFloor.CurrentFloor[UserPos[0],UserPos[1]];
+
+            ThisFloor = world[UserPos[2]];
+
+            DataTypes dt = new DataTypes();
+            if (Player.InBuilding) ThisRoom = dt.BuildingIntoRoom(ThisFloor.CurrentFloor[UserPos[0], UserPos[1]].Building);
+            else ThisRoom = ThisFloor.CurrentFloor[UserPos[0], UserPos[1]];
 
             return(ThisRoom);
         }
 
-        public static string LookAtObject(string ObjectName)
+        public static roomInfo GoIntoBuilding(Building thisBuilding)
         {
-            int index = 0;
-            int counter = 0;
-            string Description = string.Concat("Cannot find ", ObjectName, " in the area");
+            Console.WriteLine("Entering " + thisBuilding.BuildingName);
+            Thread.Sleep(1000);
+
+            DataTypes dt = new DataTypes();
+            roomInfo ThisRoom = new roomInfo();
+            ThisRoom = dt.BuildingIntoRoom(thisBuilding);
+            Player.InBuilding = true;
+
+            return ThisRoom;
+        }
+
+        public static Building LeaveBuilding(roomInfo thisRoom)
+        {
+            Building thisBuilding = new Building();
+
+            Console.WriteLine("Leaving " + thisRoom.RoomName);
+            Thread.Sleep(1000);
+
+            DataTypes dt = new DataTypes();
+            thisBuilding = dt.RoomIntoBuilding(thisRoom);
+            Player.InBuilding = false;
+
+            return thisBuilding;
+        }
+
+        #endregion
+        
+        #region Item Functions
+
+        public static bool IsItemName(itemInfo Item, string Name)
+        {
+            //will return true if name matches item name or interaction name
             bool itemFound = false;
+            int index = 0;
+
+            if (Name.ToLower() == Item.Name.ToLower()) itemFound = true;
+            if (Item.InteractionName != null)
+            {
+                while (itemFound == false && index < Item.InteractionName.Count)
+                {
+                    if (Name.ToLower() == Item.InteractionName[index].ToLower()) itemFound = true;
+                    index++;
+                }
+            }
+
+            return itemFound;
+        }
+
+        public static string LookAtItem(string ObjectName)
+        {
+            //returns the item description if it is looked at
+            string Description = string.Concat("Cannot find ", ObjectName, " in the area");
 
             if (CurrentRoom.items != null)
             {
-                //Console.WriteLine("I get here ");
-                while (itemFound == false && index < CurrentRoom.items.Count)
+                foreach (itemInfo Item in CurrentRoom.items)
                 {
-                    if (CurrentRoom.items[index].InteractionName != null)
+                    if (IsItemName(Item, ObjectName) == true)
                     {
-                        while (itemFound == false && counter < CurrentRoom.items[index].InteractionName.Count)
-                        {
-                            if (CurrentRoom.items[index].InteractionName[counter].ToLower() == ObjectName.ToLower())
-                                Description = CurrentRoom.items[index].Examine;
-                            counter++;
-                        }
-                        counter = 0;
+                        Description = Item.Examine;
+                        break;
                     }
-                    index++;
                 }
             }
             return (Description);
         }
-        
-        public static void PlayerStatus()
-        {
-            Console.WriteLine(WordWrap(string.Concat("Your HP is at ", Player.HPBonus, "/",Player.MaxHp,"")));
-            if (Player.HPBonus < 20) Console.WriteLine(WordWrap("Your health is low, you should find some food or a place to rest!"));
-            Console.WriteLine("\nCurrent Level: {3}  Current XP: {4}\nStrength: {0}  Speed: {1}  Resistence: {2}", Player.Strength, Player.Speed, Player.Resitence, Player.Level, Player.XP);
-            
-            Console.WriteLine(WordWrap(string.Concat("\nYour current weapon is: ", Player.WeaponHeld.Name)));
-
-            Console.WriteLine(WordWrap(string.Concat("\nYou current armor is at ", Player.ArmorBonus, "%\n")));
-
-            if (Player.ArmorWorn[0].Name == null)   Console.WriteLine("  0");   //head
-            else    Console.WriteLine(string.Concat(" {0}      - Head armor: ", Player.ArmorWorn[0].Name," - ", Player.ArmorWorn[0].DefenseMod,"%"));
-
-            if (Player.ArmorWorn[1].Name == null)   Console.WriteLine(" /|\\"); //chest
-            else    Console.WriteLine("╔=╬=╗     - Chest Armor: {0} - {1}%", Player.ArmorWorn[1].Name, Player.ArmorWorn[1].DefenseMod);
-
-            if (Player.ArmorWorn[2].Name == null)   //gloves
-            {
-                Console.WriteLine("/ | \\");
-                Console.WriteLine("  |");
-            }
-            else
-            {
-                Console.WriteLine("║ ║ ║    - Glove Armor: {0} - {1}%", Player.ArmorWorn[2].Name, Player.ArmorWorn[2].DefenseMod); 
-                Console.WriteLine("Û ║ Û ");
-            }
-
-            if (Player.ArmorWorn[3].Name == null)   Console.WriteLine(" / \\"); //Legs
-            else    Console.WriteLine(" / \\     - Leg Armor: {0} - {1}%", Player.ArmorWorn[3].Name, Player.ArmorWorn[3].DefenseMod);
-            
-            if (Player.ArmorWorn[4].Name == null)   Console.WriteLine("/   \\"); //boots
-            else    Console.WriteLine(" ╝ ╚     - Boots Armor: {0} - {1}%", Player.ArmorWorn[4].Name, Player.ArmorWorn[4].DefenseMod);
-
-            Console.WriteLine(WordWrap("\nYour current objective is: {0}"), Player.Objective);
-        }
-
+                
         public static void ExamineItem(string Objectname)
         {
             int index;
             itemInfo invItem = new itemInfo();
 
-            if (CurrentRoom.items != null)  //Check current room for items to inspect
-            {
-                foreach (itemInfo Item in CurrentRoom.items)
-                {
-                    if (Item.Name.ToLower() == Objectname.ToLower())
-                    {
-                        invItem = Item;
-                    }
-                }
-            }
-            foreach (itemInfo Item in Player.inventory)
-            {
-                if (Item.Name.ToLower() == Objectname.ToLower())
-                {
-                    invItem = Item;
-                }
-            }
+            if (CurrentRoom.items != null) foreach (itemInfo Item in CurrentRoom.items) { if (IsItemName(Item,Objectname)) invItem = Item; }
+            if (Player.inventory != null) foreach (itemInfo Item in Player.inventory) { if (IsItemName(Item, Objectname)) invItem = Item; }
             for (index = 0; index < 5; index++)     //Then check the players armor
             {
-                if (Player.ArmorWorn[index].Name != null)
-                {
-                    if (Player.ArmorWorn[index].Name.ToLower() == Objectname.ToLower())
-                    {
-                        invItem = Player.ArmorWorn[index];
-                    }
-                }
+                if (Player.ArmorWorn[index].Name != null) if (IsItemName(Player.ArmorWorn[index],Objectname)) invItem = Player.ArmorWorn[index];
             }
-            if (Player.WeaponHeld.Name.ToLower() == Objectname.ToLower()) invItem = Player.WeaponHeld;  //Then check their weapon held
+            if (IsItemName(Player.WeaponHeld,Objectname)) invItem = Player.WeaponHeld;  //Then check their weapon held
 
             if (invItem.Name != null)
             {
@@ -1669,157 +1848,67 @@ namespace Legend_Of_Drongo
             else Console.WriteLine(WordWrap("Item not found in your intentory"));
         }
 
-        public static string TakeItem(string ObjectName)
+        public static void TakeItem(string ObjectName)
         {
-            int index;
-            int counter;
-            string ReturnString = "that item does not appear to be here...";
+            int index = 0;
+            string ReturnString = "That item does not appear to be here...";
             bool itemToTake = false;
 
             if (CurrentRoom.items != null)
             {
-                index = 0;
-                //for (index = 0; index < CurrentRoom.items.Count; index++)
-                while (itemToTake == false && CurrentRoom.items != null && index < CurrentRoom.items.Count)
-                {
-                    counter = 0;
-                    while (itemToTake == false && CurrentRoom.items[index].InteractionName != null && counter < CurrentRoom.items[index].InteractionName.Count)
+               while (itemToTake == false && index < CurrentRoom.items.Count)
+               {
+                   itemInfo Item = CurrentRoom.items[index];
+                    if (IsItemName(Item, ObjectName) == true && Item.CanPickUp == true)
                     {
-                        if (CurrentRoom.items[index].InteractionName[counter].ToLower() == ObjectName.ToLower() && CurrentRoom.items[index].CanPickUp == true)
-                        {
-                            Player.inventory.Add(CurrentRoom.items[index]);
-                            Player.invspace = Player.invspace - 1;
-                            itemToTake = true;
+                        Player.inventory.Add(Item);
+                        Player.invspace = Player.invspace - 1;
+                        itemToTake = true;
 
-                            ReturnString = string.Concat("You have picked up ", CurrentRoom.items[index].Name);
-                            CurrentRoom.items.RemoveAt(index);
-                        }
-                        else if (CurrentRoom.items[index].InteractionName[counter].ToLower() == ObjectName.ToLower() && CurrentRoom.items[index].CanPickUp == false)
+                        ReturnString = string.Concat("You have picked up ", Item.Name);
+                        Console.WriteLine(WordWrap((ReturnString)));
+                        CurrentRoom.items.RemoveAt(index);
+                        bool canstillpickup = false;
+                        if (CurrentRoom.Events != null && CurrentRoom.items != null)
                         {
-                            ReturnString = string.Concat("You cannot pick up ", ObjectName);
+                            EventTrigger("itempickup",Item.Name);
+                            foreach (itemInfo RoomItem in CurrentRoom.items) { if (RoomItem.CanPickUp == true) canstillpickup = true; }
                         }
-                        counter++;
+                        if (canstillpickup == false) EventTrigger("allitempickup");
                     }
+                    else if (IsItemName(Item, ObjectName) == true && Item.CanPickUp == false) ReturnString = string.Concat("You cannot pick up ", ObjectName);
                     index++;
                 }
-                bool canstillpickup = false;
-                if (CurrentRoom.Events != null && CurrentRoom.items != null)
-                {
-                    for (index = 0; index < CurrentRoom.items.Count; index++)
-                    {
-                        if (CurrentRoom.items[index].CanPickUp == true) canstillpickup = true;
-                    }   
-                }
-                EventTrigger("itempickup");
-                if (canstillpickup == false) EventTrigger("allitempickup");
+                if (!itemToTake) Console.WriteLine(WordWrap((ReturnString)));
             }
-            return (ReturnString);
-        }
-
-        public static void PayOff(string EnemyName, int amount)
-        {
-            int index = 0;
-            bool enemyfound = false;
-
-            //Console.WriteLine("!! Trying to pay off {0} with amount {1} !!\n", EnemyName, amount);
-
-            while (CurrentRoom.Enemy != null && index < CurrentRoom.Enemy.Count)
-            {
-                if (EnemyName.ToLower() == CurrentRoom.Enemy[index].name.ToLower())
-                {
-                    enemyfound = true;
-
-                    if (CurrentRoom.Enemy[index].PayOff == 0)
-                    {
-                        Console.WriteLine(WordWrap(string.Concat(EnemyName, " will not accept a bribe from you\n")));
-                        attacked();
-                    }
-                    else if (amount >= CurrentRoom.Enemy[index].PayOff)     //enemy will accept more than the bribe amount
-                    {
-                        Console.WriteLine(WordWrap(string.Concat(EnemyName, " has accepted your bribe. \"", CurrentRoom.Enemy[index].PayOffResponse, "\" says your opponent as they holster their weapon and stand down")));
-                        if (CurrentRoom.Civilians == null) CurrentRoom.Civilians = new List<CivilianProfile>();
-                        CivilianProfile notHostile = new CivilianProfile(); //convert enemy to non hostile civilian
-
-                        notHostile.name = CurrentRoom.Enemy[index].name;
-                        notHostile.TalkToResponse = CurrentRoom.Enemy[index].PayOffResponse;
-                        notHostile.inventory = new List<itemInfo>();
-                        notHostile.inventory.Add(CurrentRoom.Enemy[index].Weapon);
-                        notHostile.HPBonus = CurrentRoom.Enemy[index].HPBonus;
-                        notHostile.armor = CurrentRoom.Enemy[index].armor;
-                        notHostile.willSell = false;
-                        notHostile.Money = CurrentRoom.Enemy[index].Money + amount;
-                        notHostile.QuestCharacter = false;
-                        notHostile.XP = 0;
-                        CurrentRoom.Civilians.Add(notHostile);
-                        SaveWorld();
-                        Player.Money = Player.Money - amount;
-                        CurrentRoom.Enemy[index] = GainXPfromEnemy(CurrentRoom.Enemy[index]);
-
-                        //int counter = 0;
-                        
-                            CurrentRoom.Enemy.RemoveAt(index);
-                            EventTrigger("payoff");                        
-                    }
-                    else
-                    {
-                        Console.WriteLine(WordWrap(string.Concat("Enemy ", CurrentRoom.Enemy[index].name, " examines the coins and decides you haven't given them enough. They attack in response.\n")));
-                        Player.Money = Player.Money - amount;
-                        EnemyProfile Enemy = CurrentRoom.Enemy[index];
-                        Enemy.Money = Enemy.Money + amount;
-                        Enemy.PayOff = 0;
-                        CurrentRoom.Enemy[index] = Enemy;
-                        attacked();
-                    }
-                }
-                index++;
-            }
-            if (enemyfound == false)
-            {
-                Console.WriteLine(WordWrap(string.Concat(EnemyName, " was not found in the current area")));
-            }
-
-
+            else Console.WriteLine(WordWrap((ReturnString)));
         }
 
         public static string DropItem(string ObjectName)
         {
-            int index;
-            itemInfo ItemToDrop = new itemInfo();
             bool itemFound = false;
-            int DropIndex = 0;
             string Response = "That item is not in your inventory";
 
-            if (CurrentRoom.items == null)
-            {
-                CurrentRoom.items = new List<itemInfo>();
-            }
+            if (CurrentRoom.items == null) CurrentRoom.items = new List<itemInfo>();
 
-            for (index=0;index < Player.inventory.Count;index++)
+            for (int index = 0; index < Player.inventory.Count && itemFound == false; index++) 
             {
-                if (Player.inventory[index].Name.ToLower() == ObjectName.ToLower())
+                if (IsItemName(Player.inventory[index],ObjectName) == true)
                 {
-                    ItemToDrop = Player.inventory[index];
                     itemFound = true;
-                    DropIndex = index;
                     Response = string.Concat("Dropping ", ObjectName, " from your inventory");
+                    CurrentRoom.items.Add(Player.inventory[index]);  //add dropped item to current room
+                    Player.inventory.RemoveAt(index);
+                    Player.invspace = Player.invspace + 1;
                 }
             }
-
-            if (itemFound == true)
-            {
-                CurrentRoom.items.Add(ItemToDrop);  //add dropped item to current room
-                Player.inventory.RemoveAt(DropIndex);
-                Player.invspace = Player.invspace + 1;
-
-            }             
-                
             return (Response);
         }
 
         public static void EquipItem(string PlayerCommand)
         {
             int index;
-            string item;
+            string item = string.Empty;
 
                     if (PlayerCommand.ToLower() == "equip")
                     {
@@ -1834,25 +1923,22 @@ namespace Legend_Of_Drongo
                         }
                         Console.Write("\nWhich item would you like to equip: ");
                         item = Console.ReadLine();
-
                     }
                     else
                     {
                         string[] strArray = PlayerCommand.Split(' ');
-                        item = strArray[1];
-                        for (index = 2; index < strArray.Length; index++)
+                        for (index = 1; index < strArray.Length; index++)
                         {
                             item = string.Concat(item, " ", strArray[index]);
-                            //Console.WriteLine(WordWrap("item is {0}", item);
                         }
                     }
-
+                    item = item.Trim();
                     bool itemFound = false;
                     itemInfo tempItem = new itemInfo();
 
-                    for (index = 0; index < Player.inventory.Count; index++)
+                    for (index = 0; index < Player.inventory.Count && !itemFound; index++)
                     {
-                        if (item.ToLower() == Player.inventory[index].Name.ToLower())
+                        if (IsItemName(Player.inventory[index],item))
                         {
                             itemFound = true;
                             if (Player.inventory[index].Class == "Weapon")
@@ -1900,7 +1986,6 @@ namespace Legend_Of_Drongo
 
                                 }
                                 if (Player.ArmorBonus > 100) Player.ArmorBonus = 100;
-                     
                             }
                             else Console.WriteLine(WordWrap(string.Concat("You cannot equip ", item)));
                         }
@@ -1910,150 +1995,42 @@ namespace Legend_Of_Drongo
                         Console.WriteLine(WordWrap("Item not found in your inventory, use 'inventory' to see items you possess"));
                     }
         }
-
-        public static void SellItem(itemInfo ItemSold, string Vendor)
-        {
-            int index = 0;
-            bool vendorFound = false;
-
-            if (CurrentRoom.Civilians != null)
-            {
-                while (index < CurrentRoom.Civilians.Count)
-                {
-                    if (Vendor.ToLower() == CurrentRoom.Civilians[index].name.ToLower() && CurrentRoom.Civilians[index].willBuy == true)
-                    {
-                        vendorFound = true;
-                        if (CurrentRoom.Civilians[index].MerchantType == "All" || ItemSold.Class.Contains(CurrentRoom.Civilians[index].MerchantType))
-                        {
-                            Player.Money = Player.Money + ItemSold.Value;
-                            Console.WriteLine(WordWrap(string.Concat("Sucessfully sold ", ItemSold.Name, " to ", Vendor, " for ", ItemSold.Value, " gold coins.")));
-                            ItemSold.Value = ItemSold.Value + (((ItemSold.Value / 100) * 10) +10);
-
-                            CivilianProfile Civy = CurrentRoom.Civilians[index];
-
-                            if (Civy.inventory == null) Civy.inventory = new List<itemInfo>();
-
-                            Civy.inventory.Add(ItemSold);
-                            CurrentRoom.Civilians[index] = Civy;
-
-                            int Counter = 0;
-                            bool itemfound = false;
-                            while (itemfound == false && Counter < Player.inventory.Count)
-                            {
-                                if (ItemSold.Name == Player.inventory[Counter].Name)
-                                {
-                                    Player.inventory.RemoveAt(Counter);
-                                    itemfound = true;
-                                    Player.invspace = Player.invspace + 1;
-                                }
-                                Counter++;
-                            }
-                        }
-                        else Console.WriteLine(WordWrap(string.Concat(Vendor, " will not buy items of that type from you")));
-                    }
-                    index++;
-                }
-                if (vendorFound == false) Console.WriteLine(WordWrap(string.Concat(Vendor, " cannot be found here for some reason")));
-
-            }
-            else
-            {
-                Console.WriteLine("There is nobody here willing to trade");
-            }
-
-        }
-
-        public static void BuyItem(string itemName, string vendor)
-        {
-            itemInfo item = new itemInfo();
-            int index = 0;
-            int counter = 0;
-            if (CurrentRoom.Civilians.Count != 0)
-            {
-                bool itemFound = false;
-                bool vendorFound = false;
-
-                while (itemFound == false && index < CurrentRoom.Civilians.Count)
-                {
-                    if (CurrentRoom.Civilians[index].inventory != null && CurrentRoom.Civilians[index].name.ToLower() == vendor.ToLower() && CurrentRoom.Civilians[index].willSell == true)
-                    {
-                        vendorFound = true;
-
-                        if (CurrentRoom.Civilians[index].willSell == true)
-                        {
-                            while (itemFound == false && counter < CurrentRoom.Civilians[index].inventory.Count)
-                            {
-                                if (itemName.ToLower() == CurrentRoom.Civilians[index].inventory[counter].Name.ToLower())
-                                {
-                                    item = CurrentRoom.Civilians[index].inventory[counter];
-
-                                    if (Player.Money >= item.Value)
-                                    {
-                                        Player.Money = Player.Money + item.Value;
-                                        Player.inventory.Add(item);
-                                        Player.invspace = Player.invspace - 1;
-                                        Console.WriteLine(WordWrap(string.Concat("You have successfully purchased ", itemName, " for ", item.Value, " gold coins")));
-
-                                        CurrentRoom.Civilians[index].inventory.RemoveAt(counter);
-
-                                    }
-                                    else Console.WriteLine(WordWrap(string.Concat(itemName, " costs ", item.Value, " gold coins and you only have ", Player.Money, ". You cannot afford this")));
-                                    itemFound = true;
-                                }
-                                else counter++;
-                            }
-                        }
-                        else Console.WriteLine(WordWrap(string.Concat(vendor, "is not willing to sell anything to you")));
-                    }
-                    index++;
-                }
-                if (itemFound == false && vendorFound == true) Console.WriteLine(WordWrap(string.Concat("The merchant does not seem to be selling ", itemName)));
-                else if (itemFound == false && vendorFound == false) Console.WriteLine(WordWrap(string.Concat(vendor, " is not willing to sell anything to you.")));
-            }
-            else    Console.WriteLine("There are no people in the area to buy from");
-        }
-
+               
         public static void UseItem(string item, string target)
         {
             int index = 0;
             bool itemFound = false;
             bool itemInInventory = false;
-            int Counter = 0;
             int ItemFoundAt = 0;
 
             for (index = 0; index < Player.inventory.Count; index++)
             {
-                if (Player.inventory[index].Name.ToLower() == item.ToLower())
+                if (IsItemName(Player.inventory[index], item))
                 {
-                        itemInInventory = true;
-                        ItemFoundAt = index;
+                    itemInInventory = true;
+                    ItemFoundAt = index;
                 }
             }
 
             if (itemInInventory == true)
-            {   
+            {
                 index = 0;
                 if (CurrentRoom.items != null && itemInInventory == true)
                 {
                     while (itemFound == false && index < CurrentRoom.items.Count)
                     {
-                        while (itemFound == false && Counter < CurrentRoom.items[index].InteractionName.Count)
+                        if (IsItemName(CurrentRoom.items[index], target))
                         {
-                            if (CurrentRoom.items[index].InteractionName[Counter].ToLower() == target.ToLower())
+                            if (CurrentRoom.items[index].Class != null && CurrentRoom.items[index].Class == "Interaction Object" && item.ToLower() == CurrentRoom.items[index].ItemNeeded.ToLower())
                             {
-                                if (CurrentRoom.items[index].Class != null && CurrentRoom.items[index].Class == "Interaction Object" && item.ToLower() == CurrentRoom.items[index].ItemNeeded.ToLower())
-                                {
-                                    if (EventTrigger("iteminteraction") == true) Console.WriteLine(WordWrap(CurrentRoom.items[index].interactionResponse));
-                                    else Console.WriteLine("The items interacted, but nothing happened");
-                                    Player.inventory[ItemFoundAt] = GainXPfromItem(Player.inventory[ItemFoundAt]);
-                                    itemFound = true;
-                                    Player.inventory.RemoveAt(ItemFoundAt);
-                                    Player.invspace = Player.invspace + 1;                                    
-                                }
+                                if (EventTrigger("iteminteraction",CurrentRoom.items[index].Name) == true) Console.WriteLine(WordWrap(CurrentRoom.items[index].interactionResponse));
+                                else Console.WriteLine("The items interacted, but nothing happened");
+                                Player.inventory[ItemFoundAt] = GainXPfromItem(Player.inventory[ItemFoundAt]);
+                                itemFound = true;
+                                Player.inventory.RemoveAt(ItemFoundAt);
+                                Player.invspace = Player.invspace + 1;
                             }
-                            Counter++;
                         }
-                        Counter = 0;
                         index++;
                     }
                     if (itemFound == false) Console.WriteLine(WordWrap(string.Concat("Tried to use ", item, " on ", target, " but it failed")));
@@ -2080,33 +2057,27 @@ namespace Legend_Of_Drongo
                 counter = 0;
                 while (CurrentRoom.items != null && itemRead == false && counter < CurrentRoom.items.Count)
                 {
-                    if (CurrentRoom.items[counter].InteractionName != null && CurrentRoom.items[counter].Class != null)
+                    if (IsItemName(CurrentRoom.items[counter], item))
                     {
-                        for (int i = 0; i < CurrentRoom.items[counter].InteractionName.Count;i++)
+                        itemFound = true;
+                        if (CurrentRoom.items[counter].Class == "Readable")
                         {
-                            if (item.ToLower() == CurrentRoom.items[counter].Name.ToLower())
+                            itemRead = true;
+                            Response = CurrentRoom.items[counter].Examine;
+                            if (CurrentRoom.items[counter].XP != 0)
                             {
-                                itemFound = true;
-                                if (CurrentRoom.items[counter].Class == "Readable")
-                                {
-                                    itemRead = true;
-                                    Response = CurrentRoom.items[counter].Examine;
-                                    if (CurrentRoom.items[counter].XP != 0)
-                                    {
-                                        CurrentRoom.items[counter] = GainXPfromItem(CurrentRoom.items[counter]);
-                                    }
-                                }
+                                CurrentRoom.items[counter] = GainXPfromItem(CurrentRoom.items[counter]);
                             }
                         }
                     }
                     counter++;
                 }
 
-                counter = 0; 
+                counter = 0;
 
                 while (Player.inventory.Count != 0 && itemRead == false && counter < Player.inventory.Count)
                 {
-                    if (item.ToLower() == Player.inventory[counter].Name.ToLower())
+                    if (IsItemName(Player.inventory[counter], item))
                     {
                         itemFound = true;
                         if (Player.inventory[counter].Class != null && Player.inventory[counter].Class == "Readable")
@@ -2118,13 +2089,13 @@ namespace Legend_Of_Drongo
                     }
                     counter++;
                 }
-                index ++;
+                index++;
             }
             if (itemFound == false) { Response = string.Concat("Cannot find ", item, " in the current area"); }
-            return(Response);
+            return (Response);
         }
 
-        public static string Consume(string ObjectName)
+        public static string ConsumeItem(string ObjectName)
         {
             int index = 0;
             string Response = "You cannot consume that item";
@@ -2132,7 +2103,7 @@ namespace Legend_Of_Drongo
 
             while (itemEaten == false && index < Player.inventory.Count)
             {
-                if (Player.inventory[index].Name.ToLower() == ObjectName.ToLower() && (Player.inventory[index].Class == "Food" || Player.inventory[index].Class == "Drink"))
+                if (IsItemName(Player.inventory[index], ObjectName) == true && (Player.inventory[index].Class == "Food" || Player.inventory[index].Class == "Drink"))
                 {
                     Player.HPBonus = Player.HPBonus + Player.inventory[index].HPmod;
                     if (Player.inventory[index].HPmod > 0) Response = string.Concat("You gained ", Player.inventory[index].HPmod, "HP from ", ObjectName);
@@ -2148,6 +2119,322 @@ namespace Legend_Of_Drongo
             }
             return (Response);
         }
+        
+        #endregion
+
+        #region Merchant Functions
+
+        public static void SellItem(itemInfo ItemSold, string Vendor)
+        {
+            int index = 0;
+            bool vendorFound = false;
+
+            if (CurrentRoom.Civilians != null)
+            {
+                while (index < CurrentRoom.Civilians.Count)
+                {
+                    if (Vendor.ToLower() == CurrentRoom.Civilians[index].name.ToLower())
+                    {
+                        vendorFound = true;
+                        if (CurrentRoom.Civilians[index].willBuy == true &&( CurrentRoom.Civilians[index].MerchantType == "All" || ItemSold.Class.Contains(CurrentRoom.Civilians[index].MerchantType)))
+                        {
+                            int cost = -1;
+                            if (ItemSold.Value == 0)    //Item is worthless
+                            {
+                                Console.WriteLine(WordWrap(ItemSold.Name + " is not worth anything. Do you want to give it away?"));
+                                Console.Write("\n>");
+                                string response = Console.ReadLine();
+
+                                if (response.ToLower() == "yes" || response.ToLower() == "y" || response.ToLower() == "hell yeah")
+                                {
+                                    cost = 0;
+                                }
+                            }
+                            else if (CurrentRoom.Civilians[index].Money == 0)   //Merchant has no money to buy
+                            {
+                                Console.WriteLine(WordWrap(CurrentRoom.Civilians[index].name + " does not have any money. Do you want to give it as a gift?"));
+                                Console.Write("\n>");
+                                string response = Console.ReadLine();
+
+                                if (response.ToLower() == "yes" || response.ToLower() == "y" || response.ToLower() == "hell yeah")
+                                {
+                                    cost = 0;
+                                }
+                            }
+                            else if (CurrentRoom.Civilians[index].Money < ItemSold.Value) //Merchant doesn't have enough money to buy
+                            {
+                                Console.WriteLine(WordWrap(CurrentRoom.Civilians[index].name + " only has " + CurrentRoom.Civilians[index].Money + " gold. Do you want to sell " + ItemSold.Name + " for " + CurrentRoom.Civilians[index].Money + " gold?"));
+                                Console.Write("\n>");
+                                string response = Console.ReadLine();
+
+                                if (response.ToLower() == "yes" || response.ToLower() == "y" || response.ToLower() == "hell yeah")
+                                {
+                                    cost = CurrentRoom.Civilians[index].Money;
+                                }
+                            }
+                            else    //Merchant will buy at face value
+                            {
+                                
+                                Console.WriteLine(WordWrap(string.Concat("Sucessfully sold ", ItemSold.Name, " to ", Vendor, " for ", ItemSold.Value, " gold coins.")));
+                                cost = ItemSold.Value;
+                            }
+                            CivilianProfile Civy = CurrentRoom.Civilians[index];
+                            if (Civy.inventory == null) Civy.inventory = new List<itemInfo>();
+                            ItemSold.Value = ItemSold.Value + (((ItemSold.Value / 100) * 10) + 10);
+                            Civy.inventory.Add(ItemSold);
+                            Civy.Money = Civy.Money - cost;
+                            Player.Money = Player.Money + cost;
+                            if (Civy.Money > 0) Civy.Money = 0; //technically shouldn't happen but whatever
+                            CurrentRoom.Civilians[index] = Civy;
+
+                            int Counter = 0;
+                            bool itemfound = false;
+                            while (itemfound == false && Counter < Player.inventory.Count)
+                            {
+                                if (ItemSold.Name == Player.inventory[Counter].Name)
+                                {
+                                    Player.inventory.RemoveAt(Counter);
+                                    itemfound = true;
+                                    Player.invspace = Player.invspace + 1;
+                                }
+                                Counter++;
+                            }
+                        }
+                        else Console.WriteLine(WordWrap(string.Concat(Vendor, " will not buy items of that type from you")));
+                    }
+                    index++;
+                }
+                if (vendorFound == false) Console.WriteLine(WordWrap(string.Concat(Vendor, " does not appear to be in the local area")));
+
+            }
+            else Console.WriteLine("There is nobody here willing to trade");
+        }
+
+        public static void BuyItem(string itemName, string vendor)
+        {
+            itemInfo item = new itemInfo();
+            int index = 0;
+            int counter = 0;
+            if (CurrentRoom.Civilians.Count != 0)
+            {
+                bool itemFound = false;
+                bool vendorFound = false;
+
+                while (itemFound == false && index < CurrentRoom.Civilians.Count)
+                {
+                    if (CurrentRoom.Civilians[index].inventory != null && CurrentRoom.Civilians[index].name.ToLower() == vendor.ToLower() && CurrentRoom.Civilians[index].willSell == true)
+                    {
+                        vendorFound = true;
+                        if (CurrentRoom.Civilians[index].willSell == true)
+                        {
+                            while (itemFound == false && counter < CurrentRoom.Civilians[index].inventory.Count)
+                            {
+                                if (IsItemName(CurrentRoom.Civilians[index].inventory[counter], itemName))
+                                {
+                                    item = CurrentRoom.Civilians[index].inventory[counter];
+
+                                    if (Player.Money >= item.Value)
+                                    {
+                                        Player.Money = Player.Money - item.Value;
+                                        Player.inventory.Add(item);
+                                        Player.invspace = Player.invspace - 1;
+                                        Console.WriteLine(WordWrap(string.Concat("You have successfully purchased ", itemName, " for ", item.Value, " gold coins")));
+
+                                        CurrentRoom.Civilians[index].inventory.RemoveAt(counter);
+                                    }
+                                    else Console.WriteLine(WordWrap(string.Concat(itemName, " costs ", item.Value, " gold coins and you only have ", Player.Money, ". You cannot afford this")));
+                                    itemFound = true;
+                                }
+                                else counter++;
+                            }
+                        }
+                        else Console.WriteLine(WordWrap(string.Concat(vendor, "is not willing to sell anything to you")));
+                    }
+                    index++;
+                }
+                if (itemFound == false && vendorFound == true) Console.WriteLine(WordWrap(string.Concat("The merchant does not seem to be selling ", itemName)));
+                else if (itemFound == false && vendorFound == false) Console.WriteLine(WordWrap(string.Concat(vendor, " is not willing to sell anything to you.")));
+            }
+            else Console.WriteLine("There are no people in the area to buy from");
+        }
+
+        public static void GiveItem(string ItemName, string NPC)
+        {
+            int index;
+            bool NPCFound = false;
+            bool GivingMoney = false;
+            int MoneyAmount = 0;
+            itemInfo ItemGiven = new itemInfo();
+            
+            if (CurrentRoom.Civilians != null || CurrentRoom.Enemy != null)
+            {
+                int n;
+                if (ItemName.Split(' ').Length >= 2 && (ItemName.Split(' ')[1].ToLower() == "gold" || ItemName.Split(' ')[1].ToLower() == "money" || ItemName.Split(' ')[1].ToLower() == "coins") && (Int32.TryParse(ItemName.Split(' ')[0], out n)))    //Player is giving gold
+                {
+
+                    if (n <= Player.Money)
+                    {
+                        GivingMoney = true;
+                        MoneyAmount = n;
+                    }
+                    else MoneyAmount = -1;
+                }
+                else
+                {
+                    for (index = 0; index < Player.inventory.Count; index++)
+                    {
+                        if (IsItemName(Player.inventory[index], ItemName))
+                        {
+                            ItemGiven = Player.inventory[index];
+                            Player.inventory.RemoveAt(index);
+                            Player.invspace++;
+                            GivingMoney = false;
+                        }
+                    }
+                }
+                index = 0;
+                while (CurrentRoom.Civilians != null && index < CurrentRoom.Civilians.Count && !NPCFound && (ItemGiven.Name != null || GivingMoney))
+                {
+                    if (NPC.ToLower() == CurrentRoom.Civilians[index].name.ToLower())
+                    {
+                        NPCFound = true;
+                        if (!GivingMoney) Console.Write(WordWrap("Do you want to give " + ItemGiven.Name + " as a gift to " + CurrentRoom.Civilians[index].name +"? "));
+                        else Console.Write(WordWrap("Do you want to give " + ItemName + " as a gift to " + CurrentRoom.Civilians[index].name + "? "));
+                        string response = Console.ReadLine();
+
+                        if (response.ToLower() == "yes" || response.ToLower() == "y" || response.ToLower() == "hell yeah")
+                        {
+                            if (!GivingMoney)
+                            {
+                                CivilianProfile Civy = CurrentRoom.Civilians[index];
+                                if (Civy.inventory == null) Civy.inventory = new List<itemInfo>();
+                                Civy.inventory.Add(ItemGiven);
+                                CurrentRoom.Civilians[index] = Civy;
+                            }
+                            else
+                            {
+                                CivilianProfile Civy = CurrentRoom.Civilians[index];
+                                Civy.Money = Civy.Money + MoneyAmount;
+                                CurrentRoom.Civilians[index] = Civy;
+                                Player.Money = Player.Money - MoneyAmount;
+                            }
+                            Console.WriteLine(WordWrap(string.Concat("\nYou have given ", ItemName, " to ", NPC)));
+
+                            int val;
+                            if (!GivingMoney && CurrentRoom.Events != null)
+                            {
+                                if (ItemName.ToLower() == CurrentRoom.Civilians[index].Donation.ToLower()) EventTrigger("donate",NPC);
+                            }
+                            else if (GivingMoney == true && CurrentRoom.Events != null)
+                            {
+                                if (Int32.TryParse(CurrentRoom.Civilians[index].Donation, out val))
+                                {
+                                    if (MoneyAmount >= val) EventTrigger("donate",NPC);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine(WordWrap(string.Concat("\nYou did not give ", ItemName, " to ", NPC)));
+                            Player.inventory.Add(ItemGiven);
+                            Player.invspace--;
+                        }
+                    }
+                    index++;
+                }
+                if (NPCFound == false)
+                {
+                    if (CurrentRoom.Enemy != null && GivingMoney == true)   //Check to see if player is trying to bribe an enemy
+                    {
+                        index = 0;
+                        while (index < CurrentRoom.Enemy.Count)
+                        {
+                            if (CurrentRoom.Enemy[index].name.ToLower() == NPC.ToLower())
+                            {
+                                PayOff(CurrentRoom.Enemy[index].name, MoneyAmount);
+                                index = CurrentRoom.Enemy.Count + 1;
+                                NPCFound = true;
+                            }
+                            index++;
+                        }
+                    }
+
+                    if (!NPCFound) Console.WriteLine(WordWrap(string.Concat("Could not find ", NPC, " here")));
+                }
+                else if (!GivingMoney && MoneyAmount == -1) Console.WriteLine(WordWrap(string.Concat("You do not have ", ItemName)));
+                else if (ItemGiven.Name == null && !GivingMoney) Console.WriteLine(WordWrap(string.Concat("Could not find ", ItemName, " in your inventory")));
+                
+            }
+            else Console.WriteLine("There is nobody here to give items to");
+        }
+
+        #endregion
+        
+        #region Combat Functions
+
+        public static void PayOff(string EnemyName, int amount)
+        {
+            int index = 0;
+            bool enemyfound = false;
+
+            //Console.WriteLine("!! Trying to pay off {0} with amount {1} !!\n", EnemyName, amount);
+
+            while (CurrentRoom.Enemy != null && index < CurrentRoom.Enemy.Count)
+            {
+                if (EnemyName.ToLower() == CurrentRoom.Enemy[index].name.ToLower())
+                {
+                    enemyfound = true;
+
+                    if (CurrentRoom.Enemy[index].PayOff == 0)
+                    {
+                        Console.WriteLine(WordWrap(string.Concat(EnemyName, " will not accept a bribe from you\n")));
+                        attacked();
+                    }
+                    else if (amount >= CurrentRoom.Enemy[index].PayOff)     //enemy will accept more than the bribe amount
+                    {
+                        Console.WriteLine(WordWrap(string.Concat(EnemyName, " has accepted your bribe. \"", CurrentRoom.Enemy[index].PayOffResponse, "\" says your opponent as they holster their weapon and stand down")));
+                        if (CurrentRoom.Civilians == null) CurrentRoom.Civilians = new List<CivilianProfile>();
+                        CivilianProfile notHostile = new CivilianProfile(); //convert enemy to non hostile civilian
+
+                        notHostile.name = CurrentRoom.Enemy[index].name;
+                        notHostile.TalkToResponse = CurrentRoom.Enemy[index].PayOffResponse;
+                        notHostile.inventory = new List<itemInfo>();
+                        notHostile.inventory.Add(CurrentRoom.Enemy[index].Weapon);
+                        notHostile.HPBonus = CurrentRoom.Enemy[index].HPBonus;
+                        notHostile.armor = CurrentRoom.Enemy[index].armor;
+                        notHostile.willSell = false;
+                        notHostile.Money = CurrentRoom.Enemy[index].Money + amount;
+                        notHostile.QuestCharacter = false;
+                        notHostile.XP = 0;
+                        CurrentRoom.Civilians.Add(notHostile);
+                        SaveWorld();
+                        Player.Money = Player.Money - amount;
+                        CurrentRoom.Enemy[index] = GainXPfromEnemy(CurrentRoom.Enemy[index]);
+
+                        EventTrigger("payoff", CurrentRoom.Enemy[index].name);
+                        CurrentRoom.Enemy.RemoveAt(index);
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine(WordWrap(string.Concat("Enemy ", CurrentRoom.Enemy[index].name, " examines the coins and decides you haven't given them enough. They attack in response.\n")));
+                        Player.Money = Player.Money - amount;
+                        EnemyProfile Enemy = CurrentRoom.Enemy[index];
+                        Enemy.Money = Enemy.Money + amount;
+                        Enemy.PayOff = 0;
+                        CurrentRoom.Enemy[index] = Enemy;
+                        attacked();
+                    }
+                }
+                index++;
+            }
+            if (enemyfound == false)
+            {
+                Console.WriteLine(WordWrap(string.Concat(EnemyName, " was not found in the current area")));
+            }
+
+
+        }
 
         public static void attacked()
         {
@@ -2155,32 +2442,28 @@ namespace Legend_Of_Drongo
             int Fortitude;
             Random RNG = new Random();
             Console.WriteLine();
-            foreach (EnemyProfile Enemy in CurrentRoom.Enemy)
-            {
+            EnemyProfile Enemy = CurrentRoom.Enemy[RNG.Next(0, (CurrentRoom.Enemy.Count - 1))]; //Attack player with a random enemy
+            
                 if (Player.HPBonus > 0)
                 {
-                    Thread.Sleep(1500);
                     BaseAttack = RNG.Next(1, 3);
 
                     if (BaseAttack == 1)
                     {
                         //bad attack
-                        BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
                         Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you with their ", Enemy.Weapon.Name, "\n", Enemy.Weapon.BadHit)));
-
                     }
                     else if (BaseAttack == 2)
                     {
                         //Medium Strong Attack
-                        BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
                         Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you with their ", Enemy.Weapon.Name, "\n", Enemy.Weapon.MedHit)));
                     }
                     else if (BaseAttack == 3)
                     {
                         //Strong Attack
-                        BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
                         Console.WriteLine(WordWrap(string.Concat("Enemy ", Enemy.name, " attacks you with their ", Enemy.Weapon.Name, "\n", Enemy.Weapon.GoodHit)));
                     }
+                    BaseAttack = BaseAttack * Enemy.Weapon.AttackMod;
                     
                     Fortitude = RNG.Next(1, 100);
                     if (Fortitude > Player.ArmorBonus) Player.HPBonus = Player.HPBonus - BaseAttack;
@@ -2191,10 +2474,8 @@ namespace Legend_Of_Drongo
                         if (Enemy.KillMessage != null)  Console.WriteLine(WordWrap(string.Concat("\n", Enemy.KillMessage)));
                         else Console.WriteLine(WordWrap(string.Concat("\n\n", Enemy.name, " has killed you with their ", Enemy.Weapon.Name)));
                     }
-                }
             }
             Player.HPBonus = Math.Round((double)Player.HPBonus,2);
-
         }
         
         public static void SurpriseAttack(string enemy)
@@ -2280,7 +2561,7 @@ namespace Legend_Of_Drongo
                             Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
                             Player.XP = Player.XP + ThisEnemy.XP;  //Take XP 
                             
-                            EventTrigger("killenemy");
+                            EventTrigger("killenemy",ThisEnemy.name);
                             if (CurrentRoom.Enemy.Count - 1 != 0)
                             {
                                 //Remove the fighter
@@ -2323,8 +2604,9 @@ namespace Legend_Of_Drongo
             TempFighter.isAlive = true;
             TempFighter.initiative = RNG.Next((Player.Speed - Convert.ToInt32(Math.Round((0.5 * Player.DaysSinceSleep)))), 100);  //Use players speed bonus
             TempFighter.ID = 99;
+            TempFighter.Behaviour = string.Empty;
+            TempFighter.Team = 99;
             ThisFight.Add(TempFighter);
-
 
             for (index = 0; index < CurrentRoom.Enemy.Count; index++)
             {
@@ -2336,6 +2618,8 @@ namespace Legend_Of_Drongo
                 TempFighter.isAlive = true;
                 TempFighter.initiative = RNG.Next(0, 100); //Roll 1d100 to decide initiative
                 TempFighter.ID = index;
+                TempFighter.Behaviour = CurrentRoom.Enemy[index].Behaviour;
+                TempFighter.Team = CurrentRoom.Enemy[index].Team;
                 ThisFight.Add(TempFighter);
             }
 
@@ -2355,7 +2639,7 @@ namespace Legend_Of_Drongo
 
             double BaseAttack = 0;
             index = 0;
-            while (index < ThisFight.Count && Player.HPBonus > 0 && CurrentRoom.Enemy.Count != 0)
+            while (index < ThisFight.Count && Player.HPBonus > 0 && CurrentRoom.Enemy != null && CurrentRoom.Enemy.Count != 0)
             {
                 if (ThisFight[index].name == Player.name)   //players turn
                 {
@@ -2420,12 +2704,12 @@ namespace Legend_Of_Drongo
                                 if (ThisEnemy.Money != 0) Console.WriteLine("\nYou take {0} gold coins from {1}'s corpse", ThisEnemy.Money, enemy);
 
                                 Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
-                                Player.XP = Player.XP + ThisEnemy.XP;  //Take XP 
+                                GainXPfromEnemy(ThisEnemy);  //Take XP 
                                 NumOfFighters = NumOfFighters - 1;
 
                                 SaveWorld();
 
-                                EventTrigger("killenemy");
+                                EventTrigger("killenemy", ThisEnemy.name);
                                 CurrentRoom.Enemy.RemoveAt(ThisFight[Counter].ID);
 
                                 if (CurrentRoom.Enemy.Count != 0)
@@ -2436,7 +2720,7 @@ namespace Legend_Of_Drongo
                                 else
                                 {
                                     EventTrigger("killallenemies");
-                                    CurrentRoom.Enemy.Clear();
+                                    //if (CurrentRoom.Enemy != null) CurrentRoom.Enemy.Clear();
                                 }
                             }
                             else CurrentRoom.Enemy[ThisFight[Counter].ID] = ThisEnemy;
@@ -2448,19 +2732,22 @@ namespace Legend_Of_Drongo
                 }
                 else  //enemies turn
                 {
+                    int EnemyTarget = FindEnemyTarget(ThisFight, index);    //Find enemy based on this enemies behaviour
                     BaseAttack = RNG.Next(1, 3);
 
-                    Console.WriteLine(WordWrap(string.Concat("Enemy ", ThisFight[index].name, " attacks you with their ", ThisFight[index].Weapon.Name,"\n")));
+                    string target = ThisFight[EnemyTarget].name;
+                    if (ThisFight[EnemyTarget].ID == 99) target = "you";
+
+                    Console.WriteLine(WordWrap(string.Concat(ThisFight[index].name, " attacks ", target ," with their ", ThisFight[index].Weapon.Name)));
                     if (BaseAttack == 1)
                     {
                         //bad attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
                         Console.WriteLine(WordWrap(string.Concat(ThisFight[index].Weapon.BadHit)));
-
                     }
                     else if (BaseAttack == 2)
                     {
-                        //Medium Strong Attack
+                        //Medium Attack
                         BaseAttack = BaseAttack * ThisFight[index].AttackMod;
                         Console.WriteLine(WordWrap(string.Concat(ThisFight[index].Weapon.MedHit)));
                     }
@@ -2471,28 +2758,81 @@ namespace Legend_Of_Drongo
                         Console.WriteLine(WordWrap(string.Concat(ThisFight[index].Weapon.GoodHit)));
                     }
 
-                    Fortitude = RNG.Next(1, 100);
-                    if (Fortitude > Player.ArmorBonus) Player.HPBonus = Player.HPBonus- BaseAttack;
-                    else Player.HPBonus = Player.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * Player.ArmorBonus);
-                    Player.HPBonus = Math.Round((double)Player.HPBonus, 2);
-                    if (Player.HPBonus < 0)
+                    if (ThisFight[EnemyTarget].ID == 99)
                     {
-                        for (int Counter = 0; Counter < CurrentRoom.Enemy.Count; Counter++)
+                        Fortitude = RNG.Next(1, 100);
+                        if (Fortitude > ThisFight[EnemyTarget].DefenseMod) Player.HPBonus = Player.HPBonus - BaseAttack;
+                        else Player.HPBonus = Player.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * Player.ArmorBonus);
+                        Player.HPBonus = Math.Round((double)Player.HPBonus, 2);
+                        if (Player.HPBonus < 0)
                         {
-                            if (ThisFight[index].name == CurrentRoom.Enemy[Counter].name)
+                            if (CurrentRoom.Enemy[ThisFight[index].ID].KillMessage != null)
                             {
-                                if (CurrentRoom.Enemy[Counter].KillMessage != null)
-                                { 
-                                    Console.WriteLine(WordWrap(string.Concat("\n", CurrentRoom.Enemy[Counter].KillMessage))); 
-                                }
-                                else
-                                {
-                                    Console.WriteLine(WordWrap(string.Concat("\n\n", CurrentRoom.Enemy[Counter].name, " has killed you with their ", CurrentRoom.Enemy[Counter].Weapon.Name)));
-                                }
+                                Console.WriteLine(WordWrap(string.Concat("\n", CurrentRoom.Enemy[ThisFight[index].ID].KillMessage)));
+                            }
+                            else
+                            {
+                                Console.WriteLine(WordWrap(string.Concat("\n\n", CurrentRoom.Enemy[ThisFight[index].ID].name, " has killed you with their ", CurrentRoom.Enemy[ThisFight[index].ID].Weapon.Name)));
                             }
                             NumOfFighters = NumOfFighters - 1;
                         }
+                    }
+                    else
+                    {
+                        EnemyProfile ThisEnemy = CurrentRoom.Enemy[ThisFight[EnemyTarget].ID];
+                        ThisEnemy.PayOff = 0;   //Do not allow the player to bribe the enemy after attacking them
+                        Fortitude = RNG.Next(1, 100);
+                        if (Fortitude > ThisEnemy.armor) ThisEnemy.HPBonus = ThisEnemy.HPBonus - BaseAttack;
+                        else ThisEnemy.HPBonus = ThisEnemy.HPBonus - Math.Ceiling((double)(BaseAttack / 110) * ThisEnemy.armor);
 
+                        if (ThisEnemy.HPBonus < 0) //if the enemy has been killed
+                        {
+                            Console.WriteLine();
+                            if (CurrentRoom.Enemy[ThisFight[EnemyTarget].ID].DeathMessage == null)
+                            { Console.WriteLine(WordWrap(string.Concat("With this hit ", ThisFight[index].name , " kills the enemy ", CurrentRoom.Enemy[ThisFight[EnemyTarget].ID].name))); }
+                            else { Console.WriteLine(WordWrap(CurrentRoom.Enemy[ThisFight[EnemyTarget].ID].DeathMessage)); }
+
+                            if (CurrentRoom.items == null) CurrentRoom.items = new List<itemInfo>();
+
+                            CurrentRoom.items.Add(ThisEnemy.Weapon);
+
+                            itemInfo newItem = new itemInfo();
+
+                            newItem.Name = string.Concat(ThisEnemy.name, "'s body");
+                            newItem.Class = "Object";
+                            newItem.Examine = string.Concat("The slashed and torn body of enemy ", ThisEnemy.name);
+                            newItem.CanPickUp = false;
+                            newItem.InteractionName = new List<string>();
+                            newItem.InteractionName.Add("body");
+                            newItem.InteractionName.Add("corpse");
+                            newItem.InteractionName.Add("enemy");
+                            newItem.InteractionName.Add(string.Concat(ThisEnemy.name, "'s body"));
+                            newItem.InteractionName.Add(ThisEnemy.name);
+                            CurrentRoom.items.Add(newItem);
+
+                            
+                             //Player should not get money/xp if an enemy kills another enemy?
+                            //Player.Money = Player.Money + ThisEnemy.Money; //take money from enemy
+                            //Player.XP = Player.XP + ThisEnemy.XP;  //Take XP 
+                            NumOfFighters = NumOfFighters - 1;
+
+                            SaveWorld();
+
+                            EventTrigger("killenemy",ThisEnemy.name);
+                            CurrentRoom.Enemy.RemoveAt(ThisFight[EnemyTarget].ID);
+
+                            if (CurrentRoom.Enemy.Count != 0)
+                            {
+                                //Remove the fighter
+                                ThisFight.RemoveAt(EnemyTarget);
+                            }
+                            else
+                            {
+                                EventTrigger("killallenemies");
+                                //if (CurrentRoom.Enemy != null) CurrentRoom.Enemy.Clear();
+                            }
+                        }
+                        else CurrentRoom.Enemy[ThisFight[EnemyTarget].ID] = ThisEnemy;
                     }
                 }
                 Thread.Sleep(1500);
@@ -2500,7 +2840,50 @@ namespace Legend_Of_Drongo
                 index++;
             }
         }
-        
+
+        public static int FindEnemyTarget(List<Fighter> ThisFight, int CurrentPos)
+        {
+                    /*  AttackPlayer            
+                     *  AttackBestDamage
+                     *  AttackWorstDamage
+                     *  AttackStrongDefense
+                     *  AttackWeakDefense
+                     *  AttackMostHP
+                     *  AttackLeastHP
+                     *  AttackRandom   
+                     */
+
+            Fighter CurrentEnemy = ThisFight[CurrentPos];
+            int EnemyFoundAt = 0;
+
+            if (CurrentEnemy.Behaviour == "AttackPlayer") for (int i = 0; i < ThisFight.Count; i++) { if (ThisFight[i].ID == 99) EnemyFoundAt = i; }
+            else if (CurrentEnemy.Behaviour == "AttackBestDamage") for (int i = 0; i < ThisFight.Count; i++) { if (ThisFight[i].AttackMod > ThisFight[EnemyFoundAt].AttackMod && ThisFight[i].ID != CurrentEnemy.ID && ThisFight[i].Team != CurrentEnemy.Team) EnemyFoundAt = i; }
+            else if (CurrentEnemy.Behaviour == "AttackWorstDamage") for (int i = 0; i < ThisFight.Count; i++) { if (ThisFight[i].AttackMod < ThisFight[EnemyFoundAt].AttackMod && ThisFight[i].ID != CurrentEnemy.ID && ThisFight[i].Team != CurrentEnemy.Team) EnemyFoundAt = i; }
+            else if (CurrentEnemy.Behaviour == "AttackStrongDefense") for (int i = 0; i < ThisFight.Count; i++) { if (ThisFight[i].DefenseMod > ThisFight[EnemyFoundAt].DefenseMod && ThisFight[i].ID != CurrentEnemy.ID && ThisFight[i].Team != CurrentEnemy.Team) EnemyFoundAt = i; }
+            else if (CurrentEnemy.Behaviour == "AttackWeakDefense") for (int i = 0; i < ThisFight.Count; i++) { if (ThisFight[i].DefenseMod < ThisFight[EnemyFoundAt].DefenseMod && ThisFight[i].ID != CurrentEnemy.ID && ThisFight[i].Team != CurrentEnemy.Team) EnemyFoundAt = i; }
+            else if (CurrentEnemy.Behaviour == "AttackMostHP") for (int i = 0; i < ThisFight.Count; i++) { if (ThisFight[i].HP > ThisFight[EnemyFoundAt].HP && ThisFight[i].ID != CurrentEnemy.ID && ThisFight[i].Team != CurrentEnemy.Team) EnemyFoundAt = i; }
+            else if (CurrentEnemy.Behaviour == "AttackLeastHP") for (int i = 0; i < ThisFight.Count; i++) { if (ThisFight[i].HP > ThisFight[EnemyFoundAt].HP && ThisFight[i].ID != CurrentEnemy.ID && ThisFight[i].Team != CurrentEnemy.Team) EnemyFoundAt = i; }
+            else if (CurrentEnemy.Behaviour == "AttackRandom" || string.IsNullOrEmpty(CurrentEnemy.Behaviour))
+            {
+                Random rng = new Random();
+                EnemyFoundAt = -1;
+                while (EnemyFoundAt < 0)
+                {
+                    EnemyFoundAt = rng.Next(0, ThisFight.Count);
+                    {
+                        if (ThisFight[EnemyFoundAt].ID == CurrentEnemy.ID && ThisFight[EnemyFoundAt].Team == CurrentEnemy.Team) EnemyFoundAt = -1;
+                    }
+                }
+            }
+            else EnemyFoundAt = -1;
+
+            return EnemyFoundAt;
+        }
+
+        #endregion
+
+        #region Player Functions
+
         public static void Rest(string BedItem)
         {
             int index = 0;
@@ -2523,6 +2906,7 @@ namespace Legend_Of_Drongo
                                 Player.HPBonus = Player.MaxHp;
                                 WorldState.WorldTime = 480;
                                 Player.DaysSinceSleep = 0;
+                                if (CurrentRoom.Events != null) EventTrigger("sleeps");
                             }
                             else
                             {
@@ -2542,6 +2926,178 @@ namespace Legend_Of_Drongo
             else Console.WriteLine("There are no places to sleep in this area");
 
         }
+
+        public static void PlayerStatus()
+        {
+            Console.WriteLine(WordWrap(string.Concat("Your HP is at ", Player.HPBonus, "/", Player.MaxHp, "")));
+            if (Player.HPBonus < 20) Console.WriteLine(WordWrap("Your health is low, you should find some food or a place to rest!"));
+            Console.WriteLine("\nCurrent Level: {3}  Current XP: {4}\nStrength: {0}  Speed: {1}  Resistence: {2}", Player.Strength, Player.Speed, Player.Resitence, Player.Level, Player.XP);
+
+            Console.WriteLine(WordWrap(string.Concat("\nYour current weapon is: ", Player.WeaponHeld.Name)));
+
+            Console.WriteLine(WordWrap(string.Concat("\nYou current armor is at ", Player.ArmorBonus, "%\n")));
+
+            if (Player.ArmorWorn[0].Name == null) Console.WriteLine("  0");   //head
+            else Console.WriteLine(string.Concat(" {0}      - Head armor: ", Player.ArmorWorn[0].Name, " - ", Player.ArmorWorn[0].DefenseMod, "%"));
+
+            if (Player.ArmorWorn[1].Name == null) Console.WriteLine(" /|\\"); //chest
+            else Console.WriteLine("╔=╬=╗     - Chest Armor: {0} - {1}%", Player.ArmorWorn[1].Name, Player.ArmorWorn[1].DefenseMod);
+
+            if (Player.ArmorWorn[2].Name == null)   //gloves
+            {
+                Console.WriteLine("/ | \\");
+                Console.WriteLine("  |");
+            }
+            else
+            {
+                Console.WriteLine("║ ║ ║    - Glove Armor: {0} - {1}%", Player.ArmorWorn[2].Name, Player.ArmorWorn[2].DefenseMod);
+                Console.WriteLine("Û ║ Û ");
+            }
+
+            if (Player.ArmorWorn[3].Name == null) Console.WriteLine(" / \\"); //Legs
+            else Console.WriteLine(" / \\     - Leg Armor: {0} - {1}%", Player.ArmorWorn[3].Name, Player.ArmorWorn[3].DefenseMod);
+
+            if (Player.ArmorWorn[4].Name == null) Console.WriteLine("/   \\"); //boots
+            else Console.WriteLine(" ╝ ╚     - Boots Armor: {0} - {1}%", Player.ArmorWorn[4].Name, Player.ArmorWorn[4].DefenseMod);
+
+            Console.WriteLine(WordWrap("\nYour current objective is: {0}"), Player.Objective);
+        }
+
+        public static void DrawMap()
+        {
+            int row;
+            int col;
+            Console.Clear();
+            //Console.CursorSize
+            Console.WriteLine("Map of " + ThisFloor.FloorName);
+            Console.WriteLine("──────────────────────");
+            Console.WriteLine("* Dead End");
+            Console.WriteLine("X Blocked");
+            Console.WriteLine("┼ Path\n\n");
+
+            Console.Write("\t┌────────────┐\n");
+            for (row = 0; row < 10; row++)
+            {
+                Console.Write("\t│ ");
+                for (col = 0; col < 10; col++)
+                {
+                    //Draw the map
+                    roomInfo TempRoom = new roomInfo();
+                    TempRoom = ThisFloor.CurrentFloor[row, col];
+                    if (TempRoom.Explored == true)
+                    {
+                        if (TempRoom.CanMove == true)
+                        {
+                            if (row > 0 && row < 10 && col > 0 && col < 10)
+                            {
+                                bool north = false;
+                                bool east = false;
+                                bool south = false;
+                                bool west = false;
+
+                                if (ThisFloor.CurrentFloor[row - 1, col].CanMove == true) north = true;
+                                if (ThisFloor.CurrentFloor[row + 1, col].CanMove == true) south = true;
+                                if (ThisFloor.CurrentFloor[row, col - 1].CanMove == true) west = true;
+                                if (ThisFloor.CurrentFloor[row, col + 1].CanMove == true) east = true;
+
+                                /*
+                                 *      http://www.theasciicode.com.ar/ 
+                                 */
+
+                                //North Combinations
+                                if (north == true && south == true && east == true && west == true) Console.Write("┼");
+                                else if (north == true && south == true && east == true && west == false) Console.Write("├");
+                                else if (north == true && south == true && east == false && west == true) Console.Write("┤");
+                                else if (north == true && south == true && east == false && west == false) Console.Write("│");
+                                else if (north == true && south == false && east == true && west == true) Console.Write("┴");
+                                else if (north == true && south == false && east == true && west == false) Console.Write("└");
+                                else if (north == true && south == false && east == false && west == true) Console.Write("┘");
+
+                                //South Combinations
+                                else if (north == false && south == true && east == true && west == true) Console.Write("┬");
+                                else if (north == false && south == true && east == true && west == false) Console.Write("┌");
+                                else if (north == false && south == true && east == false && west == true) Console.Write("┐");
+
+                                //East West Combinations
+                                else if (north == false && south == false && east == true && west == true) Console.Write("─");
+                                else Console.Write("X");
+                            }
+                        }
+                        else Console.Write("*");
+                    }
+                    else Console.Write(" ");
+
+                }
+                Console.Write(" │\n");
+            }
+            Console.WriteLine("\t└────────────┘");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine(WordWrap(CurrentRoom.Description));
+        }
+
+        public static string SaveGame()
+        {
+            DirectoryInfo dir = new DirectoryInfo(".\\Saves\\");
+            if (!dir.Exists) Directory.CreateDirectory(".\\Saves\\");
+            string playername = Player.name;
+            dir = new DirectoryInfo(".\\Saves\\" + WorldState.WorldName);
+            bool namefound = false;
+            if (!dir.Exists) Directory.CreateDirectory(".\\Saves\\" + WorldState.WorldName);
+            foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
+            {
+                if (file.Name.ToLower() == (playername + ".dsg").ToLower()) namefound = true;
+            }
+            while (namefound == true)   //warn players who have save files
+            {
+                Console.WriteLine(WordWrap("There is already a save game for {0}"), playername);
+                Console.WriteLine(WordWrap("You can save a new game with this name, but if you save you will overwrite progress for that character"));
+                Console.Write(WordWrap("Do you want to continue saving and overwrite?\n1: Yes\n2: No\n3: Choose a new name\n>"));
+                string YesNo = Console.ReadLine();
+
+                if (YesNo.ToLower() == "yes" || YesNo.ToLower() == "y" || YesNo.ToLower() == "1") namefound = false;
+                else if (YesNo.ToLower() == "no" || YesNo.ToLower() == "n" || YesNo.ToLower() == "2") return ("Failure");
+                else
+                {
+                    Console.Clear();
+                    Console.Write("Choose a new name?: ");
+
+                    playername = Console.ReadLine();
+                    if (playername == "")
+                    {
+                        playername = "Drongo";
+                    }
+                    namefound = false;
+                    foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
+                    {
+                        if (file.Name.ToLower() == (playername + ".dsg").ToLower()) namefound = true;
+                    }
+                }
+            }
+            Player.name = playername;
+
+            string SavePath = string.Concat(".\\Saves\\", WorldState.WorldName, "\\", Player.name, ".dsg");
+            GameState gamestate = new GameState();
+
+            //ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+            //world[Player.CurrentPos[2]] = ThisFloor;
+
+            SaveWorld();
+
+            gamestate.PlayerState = Player;
+            gamestate.WorldState.WorldState = world;
+
+            using (Stream stream = File.Open(SavePath, FileMode.Create))
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                bin.Serialize(stream, gamestate);
+            }
+            return ("Success");
+        }
+
+        #endregion
+
+        #region NPC Functions
 
         public static void AskQuestion(string Target, string Topic)
         {
@@ -2635,7 +3191,7 @@ namespace Legend_Of_Drongo
                             NewEnemy.Weapon.AttackMod = 1;
                             NewEnemy.Weapon.CanPickUp = false;
                             NewEnemy.Weapon.Name = "fists";
-
+                            NewEnemy.Behaviour = "AttackPlayer";
 
                             if (CurrentRoom.items == null) CurrentRoom.items = new List<itemInfo>();
 
@@ -2668,142 +3224,9 @@ namespace Legend_Of_Drongo
             else Console.WriteLine("There is nobody around here to fight");
         }
 
-        public static void DrawMap()
-        {
-            int row;
-            int col;
-            Console.Clear();
-            //Console.CursorSize
-            Console.WriteLine("Map of " + ThisFloor.FloorName);
-            Console.WriteLine("──────────────────────");
-            Console.WriteLine("* Dead End");
-            Console.WriteLine("X Blocked");
-            Console.WriteLine("┼ Path\n\n");
-
-            Console.Write("\t┌────────────┐\n");
-            for (row = 0; row<10;row++)
-            {
-                Console.Write("\t│ ");
-                for (col = 0; col<10;col++)
-                {
-                    //Draw the map
-                    roomInfo TempRoom = new roomInfo();
-                    TempRoom = ThisFloor.CurrentFloor[row, col];
-                    if (TempRoom.Explored == true)
-                    {
-                        if (TempRoom.CanMove == true)
-                        {
-                            if (row > 0 && row < 10 && col > 0 && col < 10)
-                            {
-                                bool north = false;
-                                bool east = false;
-                                bool south = false;
-                                bool west = false;
-
-                                if (ThisFloor.CurrentFloor[row - 1, col].CanMove == true) north = true;
-                                if (ThisFloor.CurrentFloor[row + 1, col].CanMove == true) south = true;
-                                if (ThisFloor.CurrentFloor[row, col - 1].CanMove == true) west = true;
-                                if (ThisFloor.CurrentFloor[row, col + 1].CanMove == true) east = true;
-
-                                /*
-                                 *      http://www.theasciicode.com.ar/ 
-                                 */
-
-                                //North Combinations
-                                if (north == true && south == true && east == true && west == true) Console.Write("┼");
-                                else if (north == true && south == true && east == true && west == false) Console.Write("├");
-                                else if (north == true && south == true && east == false && west == true) Console.Write("┤");
-                                else if (north == true && south == true && east == false && west == false) Console.Write("│");
-                                else if (north == true && south == false && east == true && west == true) Console.Write("┴");
-                                else if (north == true && south == false && east == true && west == false) Console.Write("└");
-                                else if (north == true && south == false && east == false && west == true) Console.Write("┘");
-                                    
-                                //South Combinations
-                                else if (north == false && south == true && east == true && west == true) Console.Write("┬");
-                                else if (north == false && south == true && east == true && west == false) Console.Write("┌");
-                                else if (north == false && south == true && east == false && west == true) Console.Write("┐");
-
-                                //East West Combinations
-                                else if (north == false && south == false && east == true && west == true) Console.Write("─");
-                                else Console.Write("X");
-                            }
-                        }
-                        else Console.Write("*");
-                    }
-                    else Console.Write(" ");
-                    
-                }
-                Console.Write(" │\n");
-            }
-            Console.WriteLine("\t└────────────┘");
-            Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine(WordWrap(CurrentRoom.Description));
-        }
-
-        public static string SaveGame()
-        {
-            DirectoryInfo dir = new DirectoryInfo(".\\Saves\\");
-            if (!dir.Exists) Directory.CreateDirectory(".\\Saves\\");
-            string playername = Player.name;
-            dir = new DirectoryInfo(".\\Saves\\" + WorldState.WorldName);
-            bool namefound = false;
-            if (!dir.Exists) Directory.CreateDirectory(".\\Saves\\" + WorldState.WorldName);
-            foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
-            {
-                if (file.Name.ToLower() == (playername + ".dsg").ToLower()) namefound = true;
-            }
-            while (namefound == true)   //warn players who have save files
-            {                
-                Console.WriteLine(WordWrap("There is already a save game for {0}"), playername);
-                Console.WriteLine(WordWrap("You can save a new game with this name, but if you save you will overwrite progress for that character"));
-                Console.Write(WordWrap("Do you want to continue saving and overwrite?\n1: Yes\n2: No\n3: Choose a new name\n>"));
-                string YesNo = Console.ReadLine();
-
-                if (YesNo.ToLower() == "yes" || YesNo.ToLower() == "y" || YesNo.ToLower() == "1") namefound = false;
-                else if (YesNo.ToLower() == "no" || YesNo.ToLower() == "n" || YesNo.ToLower() == "2") return ("Failure");
-                else
-                {
-                    Console.Clear();
-                    Console.Write("Choose a new name?: ");
-
-                    playername = Console.ReadLine();
-                    if (playername == "")
-                    {
-                        playername = "Drongo";
-                    }
-                    namefound = false;
-                    foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
-                    {
-                        if (file.Name.ToLower() == (playername + ".dsg").ToLower()) namefound = true;
-                    }
-                }
-            }
-            Player.name = playername;
-
-                string SavePath = string.Concat(".\\Saves\\", WorldState.WorldName, "\\" , Player.name, ".dsg");
-                GameState gamestate = new GameState();
-
-                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-                world[Player.CurrentPos[2]] = ThisFloor;
-
-                gamestate.PlayerState = Player;
-                gamestate.WorldState.WorldState = world;
-
-                using (Stream stream = File.Open(SavePath, FileMode.Create))
-                {
-                    BinaryFormatter bin = new BinaryFormatter();
-                    bin.Serialize(stream, gamestate);
-                }
-                return ("Success");
-        }
-
-        public static void SaveWorld()
-        {
-            ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
-            world[Player.CurrentPos[2]] = ThisFloor;
-            WorldState.WorldState = world;
-        }
+        #endregion
+                
+        #region Event Functions
 
         public static bool EventTrigger(string Trigger)
         {
@@ -2820,6 +3243,22 @@ namespace Legend_Of_Drongo
             }
             return Fired;
         }
+
+        public static bool EventTrigger(string Trigger, string criteria)
+        {
+            int i = 0;
+            bool Fired = false;
+            while (CurrentRoom.Events != null && i < CurrentRoom.Events.Count)
+            {
+                if (CurrentRoom.Events[i].Trigger.ToLower() == Trigger.ToLower() && (string.IsNullOrEmpty(CurrentRoom.Events[i].triggerCriteria) || CurrentRoom.Events[i].triggerCriteria.ToLower() == criteria.ToLower()))
+                {
+                    CurrentRoom.Events[i] = EventAction(CurrentRoom.Events[i]);
+                    Fired = true;
+                }
+                i++;
+            }
+            return Fired;
+        }
         
         public static Event EventAction(Event thisEvent)
         {
@@ -2827,18 +3266,33 @@ namespace Legend_Of_Drongo
             {
                 thisEvent.Triggered = true;
 
-                if (thisEvent.Action.ToLower() == "unlock")   //unlock
+                if (thisEvent.Action.ToLower() == "unlockroom")   //unlock
                 {
                     if (thisEvent.Coodinates != null)
                     {
                         ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].CanMove = true;
                     }
                 }
-                else if (thisEvent.Action.ToLower() == "lock")   //lock
+                else if (thisEvent.Action.ToLower() == "lockroom")   //lock
                 {
                     if (thisEvent.Coodinates != null)
                     {
                         ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].CanMove = false;
+                    }
+
+                }
+                else if (thisEvent.Action.ToLower() == "unlockbuilding")   //unlock
+                {
+                    if (thisEvent.Coodinates != null)
+                    {
+                        ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building.CanMove = true;
+                    }
+                }
+                else if (thisEvent.Action.ToLower() == "lockbuilding")   //lock
+                {
+                    if (thisEvent.Coodinates != null)
+                    {
+                        ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building.CanMove = false;
                     }
 
                 }
@@ -2873,31 +3327,85 @@ namespace Legend_Of_Drongo
                             newItem.InteractionName.Add(ThisEnemy.name);
                             CurrentRoom.items.Add(newItem);
 
-                            Player.XP = Player.XP + ThisEnemy.XP;
+                            GainXPfromEnemy(ThisEnemy);
                         }
                         EventTrigger("killallenemies");
                         CurrentRoom.Enemy.Clear();   //Overwrite all enemies
                     }
                 }
-                else if (thisEvent.Action.ToLower() == "change description") //change description
+                else if (thisEvent.Action.ToLower() == "remove all npcs") //remove all npcs
+                {
+                    CurrentRoom.Civilians.Clear();
+                    SaveWorld();
+                }
+                else if (thisEvent.Action.ToLower() == "remove all items") //remove all npcs
+                {
+                    CurrentRoom.items.Clear();
+                    SaveWorld();
+                }
+                else if (thisEvent.Action.ToLower() == "change description" || thisEvent.Action.ToLower() == "custom description") //change description
                 {
                     if (thisEvent.Coodinates[2] != Player.CurrentPos[2]) //If change is not on this floor
                     {
                         Floor TempFloor;
                         TempFloor = world[thisEvent.Coodinates[2]];
-                        TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
-                        CurrentRoom.Description = CurrentRoom.AltDescription;
+
+                        if (!thisEvent.ApplyToBuilding)
+                        {
+                            if (thisEvent.Action.ToLower() == "change description") TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
+                            else TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = thisEvent.EventValue;
+                        }
+                        else if (thisEvent.ApplyToBuilding == true && TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building.BuildingName != null)
+                        {
+                            roomInfo TempRoom = new roomInfo();
+                            DataTypes dt = new DataTypes();
+                            TempRoom = dt.BuildingIntoRoom(TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building);
+                            if (thisEvent.Action.ToLower() == "change description") TempRoom.Description = TempRoom.AltDescription;
+                            else TempRoom.Description = thisEvent.EventValue;
+                            TempFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building = dt.RoomIntoBuilding(TempRoom);
+                        }
                         world[thisEvent.Coodinates[2]] = TempFloor;
                     }
-                    else if (thisEvent.Coodinates == Player.CurrentPos)
+                    else if (Player.CurrentPos[0] != thisEvent.Coodinates[0] || Player.CurrentPos[1] != thisEvent.Coodinates[1])    //Change is not in this cell
                     {
-                        CurrentRoom.Description = CurrentRoom.AltDescription;
-                        ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;   //Save the status of the current room
+                        if (!thisEvent.ApplyToBuilding)
+                        {
+                            if (thisEvent.Action.ToLower() == "change description") ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
+                            else ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = thisEvent.EventValue;
+                        }
+                        else if (thisEvent.ApplyToBuilding == true && ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building.BuildingName != null)
+                        {
+                            roomInfo TempRoom = new roomInfo();
+                            DataTypes dt = new DataTypes();
+                            TempRoom = dt.BuildingIntoRoom(ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building);
+                            if (thisEvent.Action.ToLower() == "change description") TempRoom.Description = TempRoom.AltDescription;
+                            else TempRoom.Description = thisEvent.EventValue;
+                            ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building = dt.RoomIntoBuilding(TempRoom);
+                        }
                     }
                     else
                     {
-                        ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
+                        if ((!thisEvent.ApplyToBuilding && !Player.InBuilding) || (thisEvent.ApplyToBuilding && Player.InBuilding))   //Applying to the non-building area the player is in
+                        {
+                            if (thisEvent.Action.ToLower() == "change description") CurrentRoom.Description = CurrentRoom.AltDescription;
+                            else CurrentRoom.Description = thisEvent.EventValue;
+                        }
+                        else if (!thisEvent.ApplyToBuilding && Player.InBuilding == true)   //Applies to current cell but player is in building
+                        {
+                            if (thisEvent.Action.ToLower() == "change description") ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].AltDescription;
+                            else ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Description = thisEvent.EventValue;
+                        }
+                        else if (thisEvent.ApplyToBuilding == true && Player.InBuilding == false)   //Applies to building in current Cell
+                        {
+                            roomInfo TempRoom = new roomInfo();
+                            DataTypes dt = new DataTypes();
+                            TempRoom = dt.BuildingIntoRoom(ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building);
+                            if (thisEvent.Action.ToLower() == "change description") TempRoom.Description = TempRoom.AltDescription;
+                            else TempRoom.Description = thisEvent.EventValue;
+                            ThisFloor.CurrentFloor[thisEvent.Coodinates[0], thisEvent.Coodinates[1]].Building = dt.RoomIntoBuilding(TempRoom);
+                        }
                     }
+                    SaveWorld();
                     CurrentRoom = GetRoomInfo(Player.CurrentPos);   //retreive new room info
                 }
                 else if (thisEvent.Action.ToLower() == "change location") //change floor
@@ -2912,7 +3420,14 @@ namespace Legend_Of_Drongo
                     Player.CurrentPos[1] = thisEvent.Coodinates[1];   //set players position to start of new room
                     Player.CurrentPos[2] = thisEvent.Coodinates[2];
                     ThisFloor = world[Player.CurrentPos[2]];    //retreive new floor
+                    if (!thisEvent.ApplyToBuilding) Player.InBuilding = true; 
                     CurrentRoom = GetRoomInfo(Player.CurrentPos);   //retreive new room info
+                    
+                    //else if (!string.IsNullOrEmpty(ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]].Building.BuildingName))   //move player into building. 
+                    //{
+                    //    DataTypes dt = new DataTypes();
+                    //    CurrentRoom = dt.BuildingIntoRoom(ThisFloor.CurrentFloor[Player.CurrentPos[0],Player.CurrentPos[1]].Building);
+                    //}
                     Console.Clear();    //clear the screen
                     Console.WriteLine(WordWrap(CurrentRoom.Description));
 
@@ -2925,12 +3440,15 @@ namespace Legend_Of_Drongo
                 else if (thisEvent.Action.ToLower() == "change objective")
                 {
                     Player.Objective = thisEvent.EventValue;
-                    Console.WriteLine("Your current objective has changed.");
+                    Console.WriteLine("\nYour current objective has changed.");
                 }
+                /* 
                 else if (thisEvent.Action.ToLower() == "custom description")
                 {
                     CurrentRoom.Description = thisEvent.EventValue;
-                }
+                    SaveWorld();
+                } 
+                */
                 else if (thisEvent.Action.ToLower() == "output text")
                 {
                     Console.WriteLine("");
@@ -2943,6 +3461,7 @@ namespace Legend_Of_Drongo
                     {
                         CurrentRoom.items.Add(Item);
                     }
+                    SaveWorld();
                 }
                 else if (thisEvent.Action == "spawnNPC")
                 {
@@ -2951,6 +3470,7 @@ namespace Legend_Of_Drongo
                     {
                         CurrentRoom.Civilians.Add(NPC);
                     }
+                    SaveWorld();
                 }
                 else if (thisEvent.Action == "spawnEnemy")
                 {
@@ -2959,6 +3479,7 @@ namespace Legend_Of_Drongo
                     {
                         CurrentRoom.Enemy.Add(Enemy);
                     }
+                    SaveWorld();
                 }
                 else if (thisEvent.Action == "giveXP")
                 {
@@ -2973,10 +3494,16 @@ namespace Legend_Of_Drongo
                 else thisEvent.Triggered = false;
 
                 //If an event is re-usable allow it to be triggered again
-                if (thisEvent.Triggered == true && thisEvent.ReUsable == true) thisEvent.Triggered = false; 
+                if (thisEvent.Triggered == true && thisEvent.ReUsable == true) thisEvent.Triggered = false;
+                if (thisEvent.Coodinates != null && thisEvent.Coodinates[0] == Player.CurrentPos[0] && thisEvent.Coodinates[1] == Player.CurrentPos[1] && thisEvent.Coodinates[2] == Player.CurrentPos[2]) 
+                    CurrentRoom = GetRoomInfo(Player.CurrentPos);
             }
             return thisEvent;
         }
+
+        #endregion
+
+        #region LevelUp Functions
 
         public static void LevelUp(int Level)
         {
@@ -2989,7 +3516,7 @@ namespace Legend_Of_Drongo
             Player.invspace = Player.invspace + 1;
             Player.Level = Level;
 
-            Console.WriteLine("You have Levelled up!\nYou are now faster, stronger and can carry more items!");
+            Console.WriteLine("\n!! You have levelled up !!\nYou are now faster, stronger and can carry more items!");
         }
 
         public static EnemyProfile GainXPfromEnemy(EnemyProfile Enemy)
@@ -3016,21 +3543,37 @@ namespace Legend_Of_Drongo
             return NPC;
         }
 
+        #endregion
+
+        #region Game Functions
+
+        public static void SaveWorld()
+        {
+            if (Player.InBuilding == true)
+            {
+                DataTypes dt = new DataTypes();
+                ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]].Building = dt.RoomIntoBuilding(CurrentRoom);
+            }
+            else ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]] = CurrentRoom;
+            world[Player.CurrentPos[2]] = ThisFloor;
+            WorldState.WorldState = world;
+        }
+                
         public static void TimeTicker()
         {
-            int index = 1;
-            while (stopTime == false)
+            int index = 0;
+            while (stopTime > -1)
             {
                 lock (myLock)
                 {
-                    if (stopTime == true) break;
-                }
-                index++;
+                    if (stopTime == -1) break;
+                    else if (stopTime == 1) index++;
+                }                
                 if (index == 15)
                 {
                     WorldState.WorldTime = WorldState.WorldTime + 1;
                     if (WorldState.WorldTime == 1440) WorldState.WorldTime = 0;
-                    else if (WorldState.WorldTime == 360) Console.WriteLine("\n\nThe sun rises in the distance, morning has come\n>");
+                    else if (WorldState.WorldTime == 360) Console.WriteLine("\n\nThe sun rises in the distance, dawn has come\n>");
                     else if (WorldState.WorldTime == 480)
                     {
                         Player.DaysSinceSleep = Player.DaysSinceSleep + 1;
@@ -3039,12 +3582,13 @@ namespace Legend_Of_Drongo
                         else if (Player.DaysSinceSleep == 3) Console.WriteLine("\n\nYou have been awake for 72 hours, you need to find a place to sleep!\n>");
                         else if (Player.DaysSinceSleep == 4)
                         {
-                            Console.WriteLine("\n\nHaving been awake for 96 hours your body shuts down. Your fall into a deep sleep. Never to wake up...\n>");
+                            Console.WriteLine("\n\nHaving been awake for 96 hours your body shuts down. Your fall into a deep sleep. Never to wake up...");
                             Player.HPBonus = 0;
+                            Player.DaysSinceSleep = 0;
                         }
                     }
                     else if (WorldState.WorldTime == 1200) Console.WriteLine("\n\nThe sun sets over the horizon, night has come\n>");
-                    index = 1;
+                    index = 0;
                 }
                 Thread.Sleep(1000);
             }
@@ -3192,6 +3736,40 @@ namespace Legend_Of_Drongo
         
         public static void ForceError() { Console.WriteLine(WordWrap(world[-1].CurrentFloor[-1, -1].Description)); } //Debugging Only
 
+        public static string CleanPlayerInput(string PlayerInput)
+        {
+            PlayerInput = PlayerInput.Replace('?', ' ');
+            PlayerInput = PlayerInput.Replace('!', ' ');
+            PlayerInput = PlayerInput.Replace('.', ' ');
+            PlayerInput = PlayerInput.Replace(',', ' ');
+            PlayerInput = PlayerInput.Replace(':', ' ');
+            PlayerInput = PlayerInput.Replace(';', ' ');
+            PlayerInput = PlayerInput.Replace('/', ' ');
+            PlayerInput = PlayerInput.Replace('\\', ' ');
+            PlayerInput = PlayerInput.Trim();
+
+            return PlayerInput;
+        }
+
+        public static bool CommandContains(string PlayerCommand, string CommandsRequired)
+        {
+            bool Contained = false;
+            string[] PlayerCommands = PlayerCommand.Split(' ');
+            string[] RequiredCommands = CommandsRequired.Split(' ');
+            foreach (string Command in RequiredCommands) 
+            {
+                Contained = false;
+                foreach (string Word in PlayerCommands)
+                {
+                    if (Command.ToLower() == Word.ToLower()) Contained = true;
+                }
+                if (!Contained) return false;
+            }
+            return true;
+        }
+
+        #endregion
     }
 }
+
 //end of line...

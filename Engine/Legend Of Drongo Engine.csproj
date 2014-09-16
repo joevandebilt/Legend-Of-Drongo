@@ -69,12 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmLegendOfDrongo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLegendOfDrongo.Designer.cs">
-      <DependentUpon>frmLegendOfDrongo.cs</DependentUpon>
-    </Compile>
     <Compile Include="LegendOfDrongo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,11 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Drongo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="frmLegendOfDrongo.resx">
-      <DependentUpon>frmLegendOfDrongo.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data Types\Legend Of Drongo Data Types.csproj">

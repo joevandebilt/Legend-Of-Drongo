@@ -3,6 +3,8 @@ North - Move North
 East - Move East
 South - Move South
 West - Move West
+Go into/Enter - Enter A building
+Leave - Leave a building
 
 Interaction and Items
 Attack - Attacks an enemy with equipped weapon
@@ -12,6 +14,7 @@ Ask - Ask a person about a thing
 View Wares - See the wares of a merchant
 Buy - Buy items from merchants
 Sell - Sell an item to a willing merchant
+Give - Give an item to an NPC
 Take - picks up an item
 Drop - Drops an item
 Sleep in - go to sleep in a bed or bed like item

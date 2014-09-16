@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRoomEditor));
             this.cmdSaveRoom = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,8 +61,12 @@
             this.cmdCloneItem = new System.Windows.Forms.Button();
             this.cmdCloneNPC = new System.Windows.Forms.Button();
             this.cmdCloneEnemy = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblRoomColour = new System.Windows.Forms.Label();
             this.lstColourPicker = new System.Windows.Forms.ComboBox();
+            this.lblBuildingName = new System.Windows.Forms.Label();
+            this.txtBuildingName = new System.Windows.Forms.TextBox();
+            this.txtBuilding = new System.Windows.Forms.TextBox();
+            this.lblBuilding = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdSaveRoom
@@ -367,14 +372,14 @@
             this.cmdCloneEnemy.UseVisualStyleBackColor = true;
             this.cmdCloneEnemy.Click += new System.EventHandler(this.cmdCloneEnemy_Click);
             // 
-            // label8
+            // lblRoomColour
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(199, 45);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 13);
-            this.label8.TabIndex = 32;
-            this.label8.Text = "Room Colour";
+            this.lblRoomColour.AutoSize = true;
+            this.lblRoomColour.Location = new System.Drawing.Point(199, 45);
+            this.lblRoomColour.Name = "lblRoomColour";
+            this.lblRoomColour.Size = new System.Drawing.Size(68, 13);
+            this.lblRoomColour.TabIndex = 32;
+            this.lblRoomColour.Text = "Room Colour";
             // 
             // lstColourPicker
             // 
@@ -398,13 +403,53 @@
             this.lstColourPicker.Size = new System.Drawing.Size(128, 21);
             this.lstColourPicker.TabIndex = 33;
             // 
+            // lblBuildingName
+            // 
+            this.lblBuildingName.AutoSize = true;
+            this.lblBuildingName.Location = new System.Drawing.Point(192, 44);
+            this.lblBuildingName.Name = "lblBuildingName";
+            this.lblBuildingName.Size = new System.Drawing.Size(75, 13);
+            this.lblBuildingName.TabIndex = 34;
+            this.lblBuildingName.Text = "Building Name";
+            this.lblBuildingName.Visible = false;
+            // 
+            // txtBuildingName
+            // 
+            this.txtBuildingName.Location = new System.Drawing.Point(273, 41);
+            this.txtBuildingName.Name = "txtBuildingName";
+            this.txtBuildingName.Size = new System.Drawing.Size(128, 20);
+            this.txtBuildingName.TabIndex = 35;
+            this.txtBuildingName.Visible = false;
+            // 
+            // txtBuilding
+            // 
+            this.txtBuilding.Location = new System.Drawing.Point(273, 15);
+            this.txtBuilding.Name = "txtBuilding";
+            this.txtBuilding.ReadOnly = true;
+            this.txtBuilding.Size = new System.Drawing.Size(128, 20);
+            this.txtBuilding.TabIndex = 37;
+            this.txtBuilding.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtBuilding_MouseDoubleClick);
+            // 
+            // lblBuilding
+            // 
+            this.lblBuilding.AutoSize = true;
+            this.lblBuilding.Location = new System.Drawing.Point(223, 18);
+            this.lblBuilding.Name = "lblBuilding";
+            this.lblBuilding.Size = new System.Drawing.Size(44, 13);
+            this.lblBuilding.TabIndex = 36;
+            this.lblBuilding.Text = "Building";
+            // 
             // frmRoomEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1065, 368);
+            this.Controls.Add(this.txtBuilding);
+            this.Controls.Add(this.lblBuilding);
+            this.Controls.Add(this.txtBuildingName);
+            this.Controls.Add(this.lblBuildingName);
             this.Controls.Add(this.lstColourPicker);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblRoomColour);
             this.Controls.Add(this.cmdCloneEnemy);
             this.Controls.Add(this.cmdCloneNPC);
             this.Controls.Add(this.cmdCloneItem);
@@ -437,6 +482,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdSaveRoom);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmRoomEditor";
             this.Text = "Room Editor";
             this.ResumeLayout(false);
@@ -478,7 +524,11 @@
         private System.Windows.Forms.Button cmdCloneItem;
         private System.Windows.Forms.Button cmdCloneNPC;
         private System.Windows.Forms.Button cmdCloneEnemy;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblRoomColour;
         private System.Windows.Forms.ComboBox lstColourPicker;
+        private System.Windows.Forms.Label lblBuildingName;
+        private System.Windows.Forms.TextBox txtBuildingName;
+        private System.Windows.Forms.TextBox txtBuilding;
+        private System.Windows.Forms.Label lblBuilding;
     }
 }

@@ -167,7 +167,7 @@ namespace Legend_Of_Drongo
                 txtItemNeeded.Enabled = true;
                 txtInteractionMessage.Enabled = true;
             }
-            else if (cmbItemClass.Text == "Food")
+            else if (cmbItemClass.Text == "Food" || cmbItemClass.Text == "Drink")
             {
                 txtHP.Enabled = true;
                 txtXP.Enabled = true;

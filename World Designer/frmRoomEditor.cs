@@ -14,12 +14,13 @@ namespace Legend_Of_Drongo
         public DataTypes.roomInfo Room;
         int FloorCount;
         public bool ChangeMade;
+        bool isBuilding;
 
-        public frmRoomEditor(DataTypes.roomInfo thisRoom, int floors)
+        public frmRoomEditor(DataTypes.roomInfo thisRoom, int floors, bool Building)
         {
             InitializeComponent();
             ChangeMade = false;
-
+            isBuilding = Building;
             Room = thisRoom;
             FloorCount = floors;
             PopulateFields();
@@ -27,18 +28,46 @@ namespace Legend_Of_Drongo
 
         public void PopulateFields()
         {
-            if (Room.CanMove == false)
+            if (!isBuilding)
             {
-                chkCanMove.Checked = false;
-                lstColourPicker.SelectedIndex  = lstColourPicker.FindString("Red");
+                if (Room.CanMove == false)
+                {
+                    chkCanMove.Checked = false;
+                    lstColourPicker.SelectedIndex = lstColourPicker.FindString("Red");
+                }
+                else
+                {
+                    chkCanMove.Checked = true;
+                    lstColourPicker.SelectedIndex = lstColourPicker.FindString("Green");
+                }
+                if (Room.RoomColour != null) lstColourPicker.SelectedIndex = lstColourPicker.FindString(Room.RoomColour);
+
+                lblRoomColour.Visible = true;
+                lstColourPicker.Visible = true;
+                lblBuilding.Visible = true;
+                txtBuilding.Visible = true;
+
+
+                txtBuildingName.Visible = false;
+                lblBuildingName.Visible = false;
+
+                if (Room.Building.BuildingName != null) txtBuilding.Text = Room.Building.BuildingName;
+
             }
             else
             {
-                chkCanMove.Checked = true;
-                lstColourPicker.SelectedIndex = lstColourPicker.FindString("Green");
-            }
+                if (Room.CanMove == false) chkCanMove.Checked = false;
+                else chkCanMove.Checked = true;
 
-            if (Room.RoomColour != null) lstColourPicker.SelectedIndex = lstColourPicker.FindString(Room.RoomColour);
+                lblRoomColour.Visible = false;
+                lstColourPicker.Visible = false;
+                lblBuilding.Visible = false;
+                txtBuilding.Visible = false;
+
+                txtBuildingName.Visible = true;
+                txtBuildingName.Text = Room.RoomName;
+                lblBuildingName.Visible = true;
+            }
 
             if (Room.Description != null) txtDescription.Text = Room.Description;
             if (Room.AltDescription != null) txtAltDescription.Text = Room.AltDescription;
@@ -60,7 +89,16 @@ namespace Legend_Of_Drongo
             Room.Description = txtDescription.Text;
             Room.AltDescription = txtAltDescription.Text;
             Room.SuicideAction = txtSuicide.Text;
-            Room.RoomColour = lstColourPicker.Text;
+
+            if (!isBuilding)
+            {
+                Room.RoomColour = lstColourPicker.Text;
+            }
+            else
+            {
+                if (txtBuildingName.Text != string.Empty) Room.RoomName = txtBuildingName.Text;
+                else return false;
+            }
 
             return true;
         }
@@ -346,6 +384,23 @@ namespace Legend_Of_Drongo
         {
             frmHelp NewForm = new frmHelp();
             NewForm.Show();
+        }
+
+        private void txtBuilding_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            DataTypes dt = new DataTypes();
+            DataTypes.Building Building = new DataTypes.Building();
+
+            if (Room.Building.BuildingName != null) Building = Room.Building;
+            frmRoomEditor NewForm = new frmRoomEditor(dt.BuildingIntoRoom(Building),FloorCount,true);
+            NewForm.ShowDialog();
+
+            if (NewForm.ChangeMade == true)
+            {
+                Building = dt.RoomIntoBuilding(NewForm.Room);
+                Room.Building = Building;
+                txtBuilding.Text = Building.BuildingName;
+            }
         }
 
     }

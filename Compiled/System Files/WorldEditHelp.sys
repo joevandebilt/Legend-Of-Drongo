@@ -62,6 +62,7 @@ Room Editor
 > If there is any information in the room it will be populated automatically.
 > Mark whether or not the player can move into a square
 > Set the colour of a room, this is to keep track of rooms within the game
+> Double clicking the building text box will set up a building within this room. 
 > Description sets what is output when the player moves into the room or attempts to move into the room (I.E even if a room is locked description should be: "There is something blocking your path" if description is set to nothing the game will still output text when it is used.
 > Alt Description is an alternative description should you want to change the description of a room at some point
 > Suicide Message, this is custom text that will output if the player decides to kill themselves in a particular room.
@@ -86,6 +87,33 @@ Room Editor
 	-  Will remove a selected NPC
 	Double click an NPC to open it in the editor
 	
+Building Editor
+------------------------
+Almost identical to the room editor, a building is designed to be an area within an area. A player can move into a room with the usual north,east,south and west commands, but can also enter and leave buildings within that area. For instance the area may have a shop in it. You can create the building to describe the interior of the shop, along with the proprietor and the items he can sell. While the parent room describes the exterior and general area. 
+> Building name is the name of the building. I.E "go into shop" "go into blacksmiths"
+> Description sets what is output when the player moves into the building, if the player cannot move into room a generic message will be shown, you would not need to set up a custom output. 
+> Alt Description is an alternative description should you want to change the description of a building at some point
+> Suicide Message, this is custom text that will output if the player decides to kill themselves in a particular building.
+> Events List displays events within the current building
+	+  Will create a new event
+	|| Will Clone a selected event
+	-  Will remove a selected event
+	Double click an event to open it in the editor
+> Enemy List displays enemies within the current building
+	+  Will create a new enemy
+	|| Will Clone a selected enemy
+	-  Will remove a selected enemy
+	Double click an enemy to open it in the editor
+> Item List displays item within the current building
+	+  Will create a new item
+	|| Will Clone a selected item
+	-  Will remove a selected item
+	Double click an item to open it in the editor
+> NPC List displays NPCs within the current building
+	+  Will create a new NPC
+	|| Will Clone a selected NPC
+	-  Will remove a selected NPC
+	Double click an NPC to open it in the editor
 
 Events Editor 
 ------------------------
@@ -106,6 +134,8 @@ An enemy will be placed into a room, however nothing will indicate they exist, t
 > Set the armor proficiency of the enemy
 > Set how much money the enemy has, which player will gain when enemy is killed
 > XP is how much XP the player will gain when they kill or payoff the enemy
+> Team is the logical team of an enemy, this means that enemies can be grouped, i.e Spiders and Bandits will likely be opposed to eachother. The players default team is 99. 
+> Behaviour is the AI profile of the enemy. Enemies may not always want to attack the player, so you can set their behaviour here. They will not attack members of their own team. 
 > Kill message is a custom output if the enemy kills the player
 > Death Message is a custom output when the enemy is killed
 > Pay off value is the value it which the enemy can be bribed. 0 means cannot bribe
@@ -142,6 +172,7 @@ An NPC is a non-hostile person within the world. The player can talk to NPCs and
 > HP is how much health the NPC has, irrelevant if the NPC is plot character
 > Armor is the armor rating the NPC has, irrelevant if the NPC is plot character
 > Money is how much money the NPC has
+> Donation is a specific item or value of money that when donated by the player can trigger an event. This can be left blank.
 > Merchant Type is the type of merchant (if any) the NPC is. This will affect what kind of items the NPC will buy from the player
 > Set whether or not the NPC will buy or sell items to the player
 > The inventory of the NPC is what they will buy/sell. If the NPC has a weapon in their inventory when they are attacked they will equip it.
