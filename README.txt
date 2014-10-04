@@ -272,4 +272,10 @@ v3.0.0
 - Altered Saveworld, GetRoomInfo and MainMenu options to compensate for building types
 - Made Floor size changeable to suit different areas.
 
+v3.0.1 (The 'Hodgi' release)
+- Fixed change location event action moving people into buildings
+- Fixed save games
+- Improved Draw map function
+- Added bribe command to check if bribe target is NPC
+
 If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub

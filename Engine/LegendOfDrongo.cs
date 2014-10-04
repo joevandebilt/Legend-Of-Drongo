@@ -189,7 +189,7 @@ namespace Legend_Of_Drongo
 
                         foreach (DirectoryInfo folder in parDir.GetDirectories())
                         {
-                            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(".\\Saves\\"+ folder.Name);
+                            DirectoryInfo dir = new DirectoryInfo(".\\Saves\\"+ folder.Name);
                             if (dir.GetFiles().Length != 0)
                             {
                                 Console.WriteLine(WordWrap("\n\n"+folder.Name));
@@ -215,7 +215,12 @@ namespace Legend_Of_Drongo
 
                         }
                         Player = gamestate.PlayerState;
-                        world = gamestate.WorldState.WorldState;
+                        WorldState = gamestate.WorldState;
+                        WorldState.WorldName = gamestate.WorldState.WorldName;
+                        WorldState.WorldAuthor = gamestate.WorldState.WorldAuthor;
+                        WorldState.WorldTime = gamestate.WorldState.WorldTime;
+                        world = WorldState.WorldState;
+                        
 
                         Console.WriteLine(WordWrap("\n            Loading"));
                         Thread.Sleep(1500);
@@ -1017,14 +1022,25 @@ namespace Legend_Of_Drongo
                         int BribeAmount = 0;
                         bool dontrun = false;
 
-                        if (CurrentRoom.Enemy != null)
+                        if (CurrentRoom.Enemy != null || CurrentRoom.Civilians != null)
                         {
                             if (PlayerCommand.ToLower() == "bribe")
                             {
                                 Console.WriteLine("People in the room who may accept a bribe:\n");
-                                for (index = 0; index < CurrentRoom.Enemy.Count; index++)
+                                if (CurrentRoom.Enemy != null)
                                 {
-                                    Console.WriteLine(CurrentRoom.Enemy[index].name);
+                                    for (index = 0; index < CurrentRoom.Enemy.Count; index++)
+                                    {
+                                        Console.WriteLine(CurrentRoom.Enemy[index].name);
+                                    }
+                                }
+
+                                if (CurrentRoom.Civilians != null)
+                                {
+                                    for (index = 0; index < CurrentRoom.Civilians.Count; index++)
+                                    {
+                                        Console.WriteLine(CurrentRoom.Civilians[index].name);
+                                    }
                                 }
                                 Console.Write("\nWho do you want to bribe? ");
                                 WhoToBribe = Console.ReadLine();
@@ -1068,9 +1084,13 @@ namespace Legend_Of_Drongo
                                 dontrun = true;
                                 Console.WriteLine(WordWrap("I can't quite work out how many things you just said, try again"));
                             }
+                            if (dontrun == false)
+                            {
+                                if (isEnemy(WhoToBribe)) PayOff(WhoToBribe, BribeAmount);
+                                else if (isNPC(WhoToBribe)) GiveItem(BribeAmount + " gold", WhoToBribe);
+                                else Console.WriteLine("That person does not appear to be here...");
 
-                            if (dontrun == false) PayOff(WhoToBribe, BribeAmount);
-
+                            }
                         }
                         else Console.WriteLine(WordWrap("There are no people in the room to bribe"));
                     }
@@ -2376,9 +2396,7 @@ namespace Legend_Of_Drongo
         {
             int index = 0;
             bool enemyfound = false;
-
-            //Console.WriteLine("!! Trying to pay off {0} with amount {1} !!\n", EnemyName, amount);
-
+            
             while (CurrentRoom.Enemy != null && index < CurrentRoom.Enemy.Count)
             {
                 if (EnemyName.ToLower() == CurrentRoom.Enemy[index].name.ToLower())
@@ -2880,6 +2898,18 @@ namespace Legend_Of_Drongo
             return EnemyFoundAt;
         }
 
+        public static bool isEnemy(string Enemyname)
+        {
+            if (CurrentRoom.Enemy!= null)
+            {
+                foreach (EnemyProfile Enemy in CurrentRoom.Enemy)
+                {
+                    if (Enemy.name.ToLower() == Enemyname.ToLower()) return true;
+                }
+            }
+            return false;
+        }
+
         #endregion
 
         #region Player Functions
@@ -2976,10 +3006,10 @@ namespace Legend_Of_Drongo
             Console.WriteLine("┼ Path\n\n");
 
             Console.Write("\t┌────────────┐\n");
-            for (row = 0; row < 10; row++)
+            for (row = 0; row < ThisFloor.CurrentFloor.GetLength(0); row++)
             {
                 Console.Write("\t│ ");
-                for (col = 0; col < 10; col++)
+                for (col = 0; col < ThisFloor.CurrentFloor.GetLength(1); col++)
                 {
                     //Draw the map
                     roomInfo TempRoom = new roomInfo();
@@ -2988,13 +3018,15 @@ namespace Legend_Of_Drongo
                     {
                         if (TempRoom.CanMove == true)
                         {
-                            if (row > 0 && row < 10 && col > 0 && col < 10)
+                            if (row > 0 && row < (ThisFloor.CurrentFloor.GetLength(0)-1) && col > 0 && col < (ThisFloor.CurrentFloor.GetLength(1)-1))
                             {
                                 bool north = false;
                                 bool east = false;
                                 bool south = false;
                                 bool west = false;
+                                bool isPlayer = false;
 
+                                if (row == Player.CurrentPos[0] && col == Player.CurrentPos[1]) isPlayer = true;
                                 if (ThisFloor.CurrentFloor[row - 1, col].CanMove == true) north = true;
                                 if (ThisFloor.CurrentFloor[row + 1, col].CanMove == true) south = true;
                                 if (ThisFloor.CurrentFloor[row, col - 1].CanMove == true) west = true;
@@ -3004,8 +3036,9 @@ namespace Legend_Of_Drongo
                                  *      http://www.theasciicode.com.ar/ 
                                  */
 
+                                if (isPlayer == true) Console.Write("O");
                                 //North Combinations
-                                if (north == true && south == true && east == true && west == true) Console.Write("┼");
+                                else if (north == true && south == true && east == true && west == true) Console.Write("┼");
                                 else if (north == true && south == true && east == true && west == false) Console.Write("├");
                                 else if (north == true && south == true && east == false && west == true) Console.Write("┤");
                                 else if (north == true && south == true && east == false && west == false) Console.Write("│");
@@ -3085,7 +3118,8 @@ namespace Legend_Of_Drongo
             SaveWorld();
 
             gamestate.PlayerState = Player;
-            gamestate.WorldState.WorldState = world;
+            WorldState.WorldState = world;
+            gamestate.WorldState = WorldState;
 
             using (Stream stream = File.Open(SavePath, FileMode.Create))
             {
@@ -3222,6 +3256,18 @@ namespace Legend_Of_Drongo
 
             }
             else Console.WriteLine("There is nobody around here to fight");
+        }
+
+        public static bool isNPC(string NPCname)
+        {
+            if (CurrentRoom.Civilians != null)
+            {
+                foreach (CivilianProfile NPC in CurrentRoom.Civilians)
+                {
+                    if (NPC.name.ToLower() == NPCname.ToLower()) return true;
+                }
+            }
+            return false;
         }
 
         #endregion
@@ -3420,7 +3466,8 @@ namespace Legend_Of_Drongo
                     Player.CurrentPos[1] = thisEvent.Coodinates[1];   //set players position to start of new room
                     Player.CurrentPos[2] = thisEvent.Coodinates[2];
                     ThisFloor = world[Player.CurrentPos[2]];    //retreive new floor
-                    if (!thisEvent.ApplyToBuilding) Player.InBuilding = true; 
+                    if (!thisEvent.ApplyToBuilding) Player.InBuilding = false;
+                    else Player.InBuilding = true;
                     CurrentRoom = GetRoomInfo(Player.CurrentPos);   //retreive new room info
                     
                     //else if (!string.IsNullOrEmpty(ThisFloor.CurrentFloor[Player.CurrentPos[0], Player.CurrentPos[1]].Building.BuildingName))   //move player into building. 
