@@ -274,7 +274,7 @@ v3.0.0
 
 v3.0.1 (The 'Hodgi' release)
 - Fixed change location event action moving people into buildings
-- Fixed save games
+- Fixed save games/load games ruining file & world information
 - Improved Draw map function
 - Added bribe command to check if bribe target is NPC
 

@@ -1,0 +1,20 @@
+---Legend-Of-Drongo---
+
+Error logged at 01-10-2014 13:13:16
+
+Player Location: Row I, Col 9, Level 2
+
+
+Command Entered: view map
+
+
+
+
+The stacktrace output can be scary, some say it can read your very soul!
+Error Message: Index was outside the bounds of the array.
+Stacktrace:
+   at Legend_Of_Drongo.LegendOfDrongoEngine.DrawMap() in C:\Dropbox\Programming\Legend-Of-Drongo\Engine\LegendOfDrongo.cs:line 3001
+   at Legend_Of_Drongo.LegendOfDrongoEngine.Main(String[] args) in C:\Dropbox\Programming\Leged-Of-Drongo\Engine\LegendOfDrongo.cs:line 1479
+
+
+End of line...

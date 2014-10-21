@@ -43,26 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Legend Of Drongo Data Types.dll" size="11264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Legend Of Drongo Data Types.dll" size="11776">
       <assemblyIdentity name="Legend Of Drongo Data Types" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>kf7gXoaNDKTsMmCiQ7CVR/b5dmY=</dsig:DigestValue>
+        <dsig:DigestValue>d4tisw4nMwaFOgMGnTKwzzGXgEo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Legend Of Drongo World Designer.exe" size="2044416">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Legend Of Drongo World Designer.exe" size="2000896">
       <assemblyIdentity name="Legend Of Drongo World Designer" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>G2hWLHrzrN9Y3ibIiLbu/K3Bbbg=</dsig:DigestValue>
+        <dsig:DigestValue>onKbk8vQIZYCB2dbP7Z4V3vn8K8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

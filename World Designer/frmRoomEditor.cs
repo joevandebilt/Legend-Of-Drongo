@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Legend_Of_Drongo
 {
@@ -72,6 +73,7 @@ namespace Legend_Of_Drongo
             if (Room.Description != null) txtDescription.Text = Room.Description;
             if (Room.AltDescription != null) txtAltDescription.Text = Room.AltDescription;
             if (Room.SuicideAction != null) txtSuicide.Text = Room.SuicideAction;
+            if (Room.ImagePath != null) txtBackgroundImage.Text = Room.ImagePath;
 
             GetAllNPCs();
             GetAllItems();
@@ -100,6 +102,11 @@ namespace Legend_Of_Drongo
                 else return false;
             }
 
+            if (File.Exists(Directory.GetCurrentDirectory() + txtBackgroundImage.Text))
+            {
+                Room.ImagePath = txtBackgroundImage.Text;
+            }
+
             return true;
         }
 
@@ -107,11 +114,6 @@ namespace Legend_Of_Drongo
         {
             ChangeMade = false;
             this.Hide();
-        }
-
-        private void cmdSaveRoom_Click(object sender, EventArgs e)
-        {
-            ChangeMade = false;
         }
 
         private void cmdSaveClose_Click(object sender, EventArgs e)
@@ -403,5 +405,19 @@ namespace Legend_Of_Drongo
             }
         }
 
+        private void cmdFindImage_Click(object sender, EventArgs e)
+        {
+            OpenFile.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(),"\\Resources\\Backgrounds");
+            OpenFile.FileName = string.Empty;
+
+            DialogResult result = OpenFile.ShowDialog();    
+
+            if (result == DialogResult.OK)
+            {
+                string Test = OpenFile.FileName.Replace(Directory.GetCurrentDirectory(),string.Empty);
+                txtBackgroundImage.Text = Test;
+            }
+        }
+        
     }
 }

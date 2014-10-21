@@ -241,7 +241,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data Types\Legend Of Drongo Data Types.csproj">
-      <Project>{16A4E1A2-EC9C-470F-BED2-05DA707CABAC}</Project>
+      <Project>{16a4e1a2-ec9c-470f-bed2-05da707cabac}</Project>
       <Name>Legend Of Drongo Data Types</Name>
     </ProjectReference>
   </ItemGroup>

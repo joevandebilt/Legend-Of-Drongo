@@ -50,19 +50,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>xnqX8v4NoPgOwFyuSyVJu603Ehg=</dsig:DigestValue>
+        <dsig:DigestValue>e5U07A7QdEd0kNiBXHgUYmL6eUI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Legend Of Drongo World Designer.exe" size="2044416">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Legend Of Drongo World Designer.exe" size="2000896">
       <assemblyIdentity name="Legend Of Drongo World Designer" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>9IwTOaEXt2PaXe7PT/EdAYuHYkc=</dsig:DigestValue>
+        <dsig:DigestValue>t8Cq4Ju9bVUI27xNt6s4ncn3AQ4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

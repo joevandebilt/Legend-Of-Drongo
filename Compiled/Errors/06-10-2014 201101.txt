@@ -1,0 +1,23 @@
+---Legend-Of-Drongo---
+
+Error logged at 06-10-2014 20:11:01
+
+Player Location: Row C, Col 3, Level 7
+
+
+Command Entered: movepos c 3 7
+
+
+
+
+The stacktrace output can be scary, some say it can read your very soul!
+Error Message: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+Stacktrace:
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Legend_Of_Drongo.LegendOfDrongoEngine.GetRoomInfo(Int32[] UserPos) in c:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Legend Of Drongo UI\Game Engine.cs:line 1589
+   at Legend_Of_Drongo.LegendOfDrongoEngine.EnterCommand(String PlayerCommand) in c:\Users\Joe\Dropbox\Programming\Legend-Of-Drongo\Legend Of Drongo UI\Game Engine.cs:line 1455
+
+
+End of line...
