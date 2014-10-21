@@ -9,10 +9,12 @@ if not exist .\Legend-Of-Drongo\Music MKDIR .\Legend-Of-Drongo\Music
 if not exist .\Legend-Of-Drongo\Saves MKDIR .\Legend-Of-Drongo\Saves
 if not exist .\Legend-Of-Drongo\Worlds MKDIR .\Legend-Of-Drongo\Worlds
 if not exist .\Legend-Of-Drongo\"System Files" MKDIR .\Legend-Of-Drongo\"System Files"
+if not exist .\Legend-Of-Drongo\Resources MKDIR .\Legend-Of-Drongo\Resources
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\README.txt" .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\LICENSE.md" .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe" .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe" .\Legend-Of-Drongo
+COPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo UI.exe" .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Help.txt" .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.dll" .\Legend-Of-Drongo
 COPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Options.txt" .\Legend-Of-Drongo
@@ -20,7 +22,8 @@ XCOPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Music" .\Legend-Of-Drong
 XCOPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Saves" .\Legend-Of-Drongo\Saves /E
 XCOPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Worlds" .\Legend-Of-Drongo\Worlds /E
 XCOPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\System Files" .\Legend-Of-Drongo\"System Files" /E
+XCOPY "D:\Dropbox\Programming\Legend-Of-Drongo\Compiled\Resources" .\Legend-Of-Drongo\Resources /E
 winrar a -afzip "Legend-Of-Drongo v%delBuild%.zip" .\Legend-Of-Drongo
-move ".\Legend-Of-Drongo v%delBuild%.zip" C:\cygwin\home\Joe
+move ".\Legend-Of-Drongo v%delBuild%.zip" C:\Users\Joe\Desktop
 rmdir /s /q .\Legend-Of-Drongo
 pause
