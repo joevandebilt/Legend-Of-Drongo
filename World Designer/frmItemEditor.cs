@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Legend_Of_Drongo
 {
@@ -61,6 +62,8 @@ namespace Legend_Of_Drongo
 
             if (Item.ItemNeeded != null) txtItemNeeded.Text = Item.ItemNeeded;
             if (Item.interactionResponse != null) txtInteractionMessage.Text = Item.interactionResponse;
+
+            if (!string.IsNullOrEmpty(Item.ImagePath)) txtImagePath.Text = Item.ImagePath;
         }
 
         private bool SaveItem()
@@ -117,6 +120,8 @@ namespace Legend_Of_Drongo
 
             if (txtInteractionMessage.Text != string.Empty) Item.interactionResponse = txtInteractionMessage.Text;
             else if (txtInteractionMessage.Enabled == true) return false;
+
+            if (!string.IsNullOrEmpty(txtImagePath.Text)) Item.ImagePath = txtImagePath.Text;
 
             return true;
         }
@@ -182,6 +187,21 @@ namespace Legend_Of_Drongo
         {
             frmHelp NewForm = new frmHelp();
             NewForm.Show();
+        }
+
+        private void cmdImagePath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFile = new OpenFileDialog();
+            OpenFile.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(), "\\Resources\\Items");
+            OpenFile.FileName = string.Empty;
+
+            DialogResult result = OpenFile.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string Test = OpenFile.FileName.Replace(Directory.GetCurrentDirectory(), string.Empty);
+                txtImagePath.Text = Test;
+            }
         }
     }
 }

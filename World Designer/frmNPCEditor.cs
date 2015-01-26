@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Legend_Of_Drongo
 {
@@ -47,6 +48,7 @@ namespace Legend_Of_Drongo
             if (NPC.Knowledge != null) GetAllKnowledge();
 
             if (!string.IsNullOrEmpty(NPC.Donation)) txtDonate.Text = NPC.Donation;
+            if (!string.IsNullOrEmpty(NPC.ImagePath)) txtImagePath.Text = NPC.ImagePath;
 
         }
 
@@ -79,6 +81,8 @@ namespace Legend_Of_Drongo
             else NPC.willSell = false;
 
             if (!string.IsNullOrEmpty(txtDonate.Text)) NPC.Donation = txtDonate.Text;
+
+            if (!string.IsNullOrEmpty(txtImagePath.Text)) NPC.ImagePath = txtImagePath.Text;
 
             return true;
 
@@ -255,6 +259,19 @@ namespace Legend_Of_Drongo
             NewForm.Show();
         }
 
-        
+        private void cmdImagePath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFile = new OpenFileDialog();
+            OpenFile.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(), "\\Resources\\NPCs");
+            OpenFile.FileName = string.Empty;
+
+            DialogResult result = OpenFile.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string Test = OpenFile.FileName.Replace(Directory.GetCurrentDirectory(), string.Empty);
+                txtImagePath.Text = Test;
+            }
+        }
     }
 }

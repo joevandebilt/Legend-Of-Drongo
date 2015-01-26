@@ -178,64 +178,75 @@ namespace Legend_Of_Drongo
                 else if (Menu.Key == ConsoleKey.L)
                 {
                     validChoice = true;
-                    System.IO.DirectoryInfo parDir = new System.IO.DirectoryInfo(".\\Saves");
+                    DirectoryInfo parDir = new DirectoryInfo(".\\Saves");
                     int SaveIndex = 0;
                     List<string> SavesList = new List<string>();
 
-                    if (parDir.GetDirectories().Length != 0)
+                    if (Directory.Exists(".\\Saves"))
                     {
-                        Console.Clear();
-                        Console.WriteLine(WordWrap("Select a save from the list below:"));
 
-                        foreach (DirectoryInfo folder in parDir.GetDirectories())
+                        if (parDir.GetDirectories().Length != 0)
                         {
-                            DirectoryInfo dir = new DirectoryInfo(".\\Saves\\"+ folder.Name);
-                            if (dir.GetFiles().Length != 0)
+                            Console.Clear();
+                            Console.WriteLine(WordWrap("Select a save from the list below:"));
+
+                            foreach (DirectoryInfo folder in parDir.GetDirectories())
                             {
-                                Console.WriteLine(WordWrap("\n\n"+folder.Name));
-                                foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
+                                DirectoryInfo dir = new DirectoryInfo(".\\Saves\\" + folder.Name);
+                                if (dir.GetFiles().Length != 0)
                                 {
-                                    string FileName = file.Name;
-                                    Console.WriteLine(WordWrap(string.Concat((SaveIndex + 1), ": ", FileName.Split('.')[0])));
-                                    SavesList.Add(folder.Name + "\\" + FileName);
-                                    SaveIndex++;
+                                    Console.WriteLine(WordWrap("\n\n" + folder.Name));
+                                    foreach (FileInfo file in dir.GetFiles())    //Find games in saves directory
+                                    {
+                                        string FileName = file.Name;
+                                        Console.WriteLine(WordWrap(string.Concat((SaveIndex + 1), ": ", FileName.Split('.')[0])));
+                                        SavesList.Add(folder.Name + "\\" + FileName);
+                                        SaveIndex++;
+                                    }
                                 }
                             }
+
+                            Console.Write("\nWhich save would you like to continue: ");
+                            int UserChoice = Convert.ToInt32(Console.ReadLine());
+                            string SavePath = string.Concat(".\\Saves\\", SavesList[UserChoice - 1]);
+
+                            GameState gamestate = new GameState();
+                            using (Stream stream = File.Open(SavePath, FileMode.Open))
+                            {
+                                BinaryFormatter bin = new BinaryFormatter();
+                                gamestate = (GameState)bin.Deserialize(stream);
+
+                            }
+                            Player = gamestate.PlayerState;
+                            WorldState = gamestate.WorldState;
+                            WorldState.WorldName = gamestate.WorldState.WorldName;
+                            WorldState.WorldAuthor = gamestate.WorldState.WorldAuthor;
+                            WorldState.WorldTime = gamestate.WorldState.WorldTime;
+                            world = WorldState.WorldState;
+
+
+                            Console.WriteLine(WordWrap("\n            Loading"));
+                            Thread.Sleep(1500);
+                            Console.Clear();
+
+                            PlayerStatus();
+                            Console.WriteLine(WordWrap("Press any key to continue your adventure..."));
+                            Console.ReadKey();
+                            Console.Clear();
                         }
-
-                        Console.Write("\nWhich save would you like to continue: ");
-                        int UserChoice = Convert.ToInt32(Console.ReadLine());
-                        string SavePath = string.Concat(".\\Saves\\", SavesList[UserChoice - 1]);
-
-                        GameState gamestate = new GameState();
-                        using (Stream stream = File.Open(SavePath, FileMode.Open))
+                        else
                         {
-                            BinaryFormatter bin = new BinaryFormatter();
-                            gamestate = (GameState)bin.Deserialize(stream);
-
+                            Console.Clear();
+                            Console.WriteLine(WordWrap("No saves have been detected. Please check the Saves folder or start a new game\nPress [Enter] To continue"));
+                            Console.ReadKey();
+                            MainMenu();
                         }
-                        Player = gamestate.PlayerState;
-                        WorldState = gamestate.WorldState;
-                        WorldState.WorldName = gamestate.WorldState.WorldName;
-                        WorldState.WorldAuthor = gamestate.WorldState.WorldAuthor;
-                        WorldState.WorldTime = gamestate.WorldState.WorldTime;
-                        world = WorldState.WorldState;
-                        
-
-                        Console.WriteLine(WordWrap("\n            Loading"));
-                        Thread.Sleep(1500);
-                        Console.Clear();
-
-                        PlayerStatus();
-                        Console.WriteLine(WordWrap("Press any key to continue your adventure..."));
-                        Console.ReadKey();
-                        Console.Clear();
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine(WordWrap("No saves have been detected. Please check the Saves folder or start a new game\nPress [Enter] To continue"));
-                        Console.ReadKey();
+                        Console.ReadLine();
                         MainMenu();
                     }
                 }

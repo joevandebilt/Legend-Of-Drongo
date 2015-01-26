@@ -61,6 +61,9 @@
             this.txtXP = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.cmdHelp = new System.Windows.Forms.Button();
+            this.cmdImagePath = new System.Windows.Forms.Button();
+            this.txtImagePath = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdAddItems
@@ -154,7 +157,7 @@
             this.txtInteraction.Location = new System.Drawing.Point(370, 21);
             this.txtInteraction.Multiline = true;
             this.txtInteraction.Name = "txtInteraction";
-            this.txtInteraction.Size = new System.Drawing.Size(160, 130);
+            this.txtInteraction.Size = new System.Drawing.Size(160, 77);
             this.txtInteraction.TabIndex = 5;
             // 
             // label1
@@ -358,11 +361,41 @@
             this.cmdHelp.UseVisualStyleBackColor = true;
             this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
             // 
+            // cmdImagePath
+            // 
+            this.cmdImagePath.Location = new System.Drawing.Point(505, 129);
+            this.cmdImagePath.Name = "cmdImagePath";
+            this.cmdImagePath.Size = new System.Drawing.Size(25, 22);
+            this.cmdImagePath.TabIndex = 51;
+            this.cmdImagePath.Text = "...";
+            this.cmdImagePath.UseVisualStyleBackColor = true;
+            this.cmdImagePath.Click += new System.EventHandler(this.cmdImagePath_Click);
+            // 
+            // txtImagePath
+            // 
+            this.txtImagePath.Location = new System.Drawing.Point(373, 131);
+            this.txtImagePath.Name = "txtImagePath";
+            this.txtImagePath.ReadOnly = true;
+            this.txtImagePath.Size = new System.Drawing.Size(126, 20);
+            this.txtImagePath.TabIndex = 50;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(370, 115);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(36, 13);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "Image";
+            // 
             // frmItemEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 397);
+            this.ClientSize = new System.Drawing.Size(542, 397);
+            this.Controls.Add(this.cmdImagePath);
+            this.Controls.Add(this.txtImagePath);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.txtXP);
             this.Controls.Add(this.label14);
@@ -437,5 +470,8 @@
         private System.Windows.Forms.TextBox txtXP;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button cmdHelp;
+        private System.Windows.Forms.Button cmdImagePath;
+        private System.Windows.Forms.TextBox txtImagePath;
+        private System.Windows.Forms.Label label15;
     }
 }

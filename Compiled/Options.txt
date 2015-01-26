@@ -5,3 +5,8 @@ DebugOptions: true
 
 #Clear Console after each command
 ClearConsole: true
+
+#Select Border style
+#1 - Flowery
+#2 - Black Fleur De Lis
+BorderStyle: 2

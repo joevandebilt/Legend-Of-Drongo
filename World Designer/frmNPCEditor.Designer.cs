@@ -62,11 +62,14 @@
             this.cmdHelp = new System.Windows.Forms.Button();
             this.txtDonate = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.cmdImagePath = new System.Windows.Forms.Button();
+            this.txtImagePath = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(169, 312);
+            this.cmdCancel.Location = new System.Drawing.Point(165, 326);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(121, 27);
             this.cmdCancel.TabIndex = 19;
@@ -76,7 +79,7 @@
             // 
             // cmdSaveNPC
             // 
-            this.cmdSaveNPC.Location = new System.Drawing.Point(34, 312);
+            this.cmdSaveNPC.Location = new System.Drawing.Point(30, 326);
             this.cmdSaveNPC.Name = "cmdSaveNPC";
             this.cmdSaveNPC.Size = new System.Drawing.Size(121, 27);
             this.cmdSaveNPC.TabIndex = 18;
@@ -94,21 +97,21 @@
             // 
             // txtArmor
             // 
-            this.txtArmor.Location = new System.Drawing.Point(493, 22);
+            this.txtArmor.Location = new System.Drawing.Point(549, 55);
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
             this.txtArmor.TabIndex = 3;
             // 
             // txtMoney
             // 
-            this.txtMoney.Location = new System.Drawing.Point(583, 22);
+            this.txtMoney.Location = new System.Drawing.Point(639, 55);
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(39, 20);
             this.txtMoney.TabIndex = 4;
             // 
             // txtHP
             // 
-            this.txtHP.Location = new System.Drawing.Point(398, 22);
+            this.txtHP.Location = new System.Drawing.Point(454, 55);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(38, 20);
             this.txtHP.TabIndex = 2;
@@ -132,7 +135,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(442, 25);
+            this.label4.Location = new System.Drawing.Point(498, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 24;
@@ -141,7 +144,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(537, 25);
+            this.label9.Location = new System.Drawing.Point(593, 58);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
             this.label9.TabIndex = 22;
@@ -150,7 +153,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(361, 25);
+            this.label3.Location = new System.Drawing.Point(417, 58);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 13);
             this.label3.TabIndex = 23;
@@ -168,7 +171,7 @@
             // chkWillBuy
             // 
             this.chkWillBuy.AutoSize = true;
-            this.chkWillBuy.Location = new System.Drawing.Point(16, 166);
+            this.chkWillBuy.Location = new System.Drawing.Point(12, 180);
             this.chkWillBuy.Name = "chkWillBuy";
             this.chkWillBuy.Size = new System.Drawing.Size(150, 17);
             this.chkWillBuy.TabIndex = 7;
@@ -178,7 +181,7 @@
             // chkWillSell
             // 
             this.chkWillSell.AutoSize = true;
-            this.chkWillSell.Location = new System.Drawing.Point(16, 189);
+            this.chkWillSell.Location = new System.Drawing.Point(12, 203);
             this.chkWillSell.Name = "chkWillSell";
             this.chkWillSell.Size = new System.Drawing.Size(139, 17);
             this.chkWillSell.TabIndex = 8;
@@ -207,7 +210,7 @@
             "Readable",
             "Weapons",
             "Weapons & Armor"});
-            this.cmbMerchType.Location = new System.Drawing.Point(98, 136);
+            this.cmbMerchType.Location = new System.Drawing.Point(94, 150);
             this.cmbMerchType.Name = "cmbMerchType";
             this.cmbMerchType.Size = new System.Drawing.Size(138, 21);
             this.cmbMerchType.TabIndex = 6;
@@ -215,7 +218,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 139);
+            this.label5.Location = new System.Drawing.Point(9, 153);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 13);
             this.label5.TabIndex = 46;
@@ -224,7 +227,7 @@
             // lstInventory
             // 
             this.lstInventory.FormattingEnabled = true;
-            this.lstInventory.Location = new System.Drawing.Point(16, 211);
+            this.lstInventory.Location = new System.Drawing.Point(12, 225);
             this.lstInventory.Name = "lstInventory";
             this.lstInventory.Size = new System.Drawing.Size(287, 82);
             this.lstInventory.TabIndex = 9;
@@ -232,7 +235,7 @@
             // 
             // cmdAddItem
             // 
-            this.cmdAddItem.Location = new System.Drawing.Point(309, 211);
+            this.cmdAddItem.Location = new System.Drawing.Point(302, 225);
             this.cmdAddItem.Name = "cmdAddItem";
             this.cmdAddItem.Size = new System.Drawing.Size(36, 24);
             this.cmdAddItem.TabIndex = 10;
@@ -242,7 +245,7 @@
             // 
             // cmdRemoveItem
             // 
-            this.cmdRemoveItem.Location = new System.Drawing.Point(309, 269);
+            this.cmdRemoveItem.Location = new System.Drawing.Point(302, 283);
             this.cmdRemoveItem.Name = "cmdRemoveItem";
             this.cmdRemoveItem.Size = new System.Drawing.Size(36, 24);
             this.cmdRemoveItem.TabIndex = 11;
@@ -252,7 +255,7 @@
             // 
             // cmdRemoveKnowledge
             // 
-            this.cmdRemoveKnowledge.Location = new System.Drawing.Point(641, 269);
+            this.cmdRemoveKnowledge.Location = new System.Drawing.Point(634, 283);
             this.cmdRemoveKnowledge.Name = "cmdRemoveKnowledge";
             this.cmdRemoveKnowledge.Size = new System.Drawing.Size(41, 24);
             this.cmdRemoveKnowledge.TabIndex = 13;
@@ -262,7 +265,7 @@
             // 
             // cmdAddKnowledge
             // 
-            this.cmdAddKnowledge.Location = new System.Drawing.Point(641, 211);
+            this.cmdAddKnowledge.Location = new System.Drawing.Point(634, 225);
             this.cmdAddKnowledge.Name = "cmdAddKnowledge";
             this.cmdAddKnowledge.Size = new System.Drawing.Size(41, 24);
             this.cmdAddKnowledge.TabIndex = 12;
@@ -273,7 +276,7 @@
             // lstKnowledge
             // 
             this.lstKnowledge.FormattingEnabled = true;
-            this.lstKnowledge.Location = new System.Drawing.Point(351, 211);
+            this.lstKnowledge.Location = new System.Drawing.Point(344, 225);
             this.lstKnowledge.Name = "lstKnowledge";
             this.lstKnowledge.Size = new System.Drawing.Size(287, 82);
             this.lstKnowledge.TabIndex = 14;
@@ -282,7 +285,7 @@
             // txtKnowledge
             // 
             this.txtKnowledge.Enabled = false;
-            this.txtKnowledge.Location = new System.Drawing.Point(352, 169);
+            this.txtKnowledge.Location = new System.Drawing.Point(345, 183);
             this.txtKnowledge.Multiline = true;
             this.txtKnowledge.Name = "txtKnowledge";
             this.txtKnowledge.Size = new System.Drawing.Size(286, 36);
@@ -291,7 +294,7 @@
             // txtTopic
             // 
             this.txtTopic.Enabled = false;
-            this.txtTopic.Location = new System.Drawing.Point(352, 126);
+            this.txtTopic.Location = new System.Drawing.Point(345, 140);
             this.txtTopic.Name = "txtTopic";
             this.txtTopic.Size = new System.Drawing.Size(286, 20);
             this.txtTopic.TabIndex = 15;
@@ -299,7 +302,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(349, 106);
+            this.label2.Location = new System.Drawing.Point(346, 124);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 55;
@@ -308,7 +311,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(348, 149);
+            this.label7.Location = new System.Drawing.Point(341, 163);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 56;
@@ -316,7 +319,7 @@
             // 
             // cmdSaveKnowledge
             // 
-            this.cmdSaveKnowledge.Location = new System.Drawing.Point(641, 166);
+            this.cmdSaveKnowledge.Location = new System.Drawing.Point(634, 180);
             this.cmdSaveKnowledge.Name = "cmdSaveKnowledge";
             this.cmdSaveKnowledge.Size = new System.Drawing.Size(41, 39);
             this.cmdSaveKnowledge.TabIndex = 17;
@@ -326,7 +329,7 @@
             // 
             // cmdCloneItem
             // 
-            this.cmdCloneItem.Location = new System.Drawing.Point(309, 240);
+            this.cmdCloneItem.Location = new System.Drawing.Point(302, 254);
             this.cmdCloneItem.Name = "cmdCloneItem";
             this.cmdCloneItem.Size = new System.Drawing.Size(36, 24);
             this.cmdCloneItem.TabIndex = 57;
@@ -336,7 +339,7 @@
             // 
             // cmdCloneKnowledge
             // 
-            this.cmdCloneKnowledge.Location = new System.Drawing.Point(641, 241);
+            this.cmdCloneKnowledge.Location = new System.Drawing.Point(634, 255);
             this.cmdCloneKnowledge.Name = "cmdCloneKnowledge";
             this.cmdCloneKnowledge.Size = new System.Drawing.Size(41, 24);
             this.cmdCloneKnowledge.TabIndex = 58;
@@ -346,7 +349,7 @@
             // 
             // cmdHelp
             // 
-            this.cmdHelp.Location = new System.Drawing.Point(515, 312);
+            this.cmdHelp.Location = new System.Drawing.Point(508, 326);
             this.cmdHelp.Name = "cmdHelp";
             this.cmdHelp.Size = new System.Drawing.Size(123, 28);
             this.cmdHelp.TabIndex = 59;
@@ -356,25 +359,55 @@
             // 
             // txtDonate
             // 
-            this.txtDonate.Location = new System.Drawing.Point(417, 55);
+            this.txtDonate.Location = new System.Drawing.Point(478, 88);
             this.txtDonate.Name = "txtDonate";
-            this.txtDonate.Size = new System.Drawing.Size(171, 20);
+            this.txtDonate.Size = new System.Drawing.Size(197, 20);
             this.txtDonate.TabIndex = 60;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(361, 58);
+            this.label8.Location = new System.Drawing.Point(358, 91);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 13);
+            this.label8.Size = new System.Drawing.Size(114, 13);
             this.label8.TabIndex = 61;
-            this.label8.Text = "Donation";
+            this.label8.Text = "Donation Item/Amount";
+            // 
+            // cmdImagePath
+            // 
+            this.cmdImagePath.Location = new System.Drawing.Point(650, 22);
+            this.cmdImagePath.Name = "cmdImagePath";
+            this.cmdImagePath.Size = new System.Drawing.Size(25, 22);
+            this.cmdImagePath.TabIndex = 63;
+            this.cmdImagePath.Text = "...";
+            this.cmdImagePath.UseVisualStyleBackColor = true;
+            this.cmdImagePath.Click += new System.EventHandler(this.cmdImagePath_Click);
+            // 
+            // txtImagePath
+            // 
+            this.txtImagePath.Location = new System.Drawing.Point(455, 22);
+            this.txtImagePath.Name = "txtImagePath";
+            this.txtImagePath.ReadOnly = true;
+            this.txtImagePath.Size = new System.Drawing.Size(189, 20);
+            this.txtImagePath.TabIndex = 62;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(413, 25);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(36, 13);
+            this.label13.TabIndex = 64;
+            this.label13.Text = "Image";
             // 
             // frmNPCEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 363);
+            this.ClientSize = new System.Drawing.Size(693, 381);
+            this.Controls.Add(this.cmdImagePath);
+            this.Controls.Add(this.txtImagePath);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.txtDonate);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmdHelp);
@@ -451,5 +484,8 @@
         private System.Windows.Forms.Button cmdHelp;
         private System.Windows.Forms.TextBox txtDonate;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button cmdImagePath;
+        private System.Windows.Forms.TextBox txtImagePath;
+        private System.Windows.Forms.Label label13;
     }
 }

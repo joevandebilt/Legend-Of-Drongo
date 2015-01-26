@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Legend_Of_Drongo
 {
@@ -83,6 +84,8 @@ namespace Legend_Of_Drongo
 
             txtPayOff.Text = Enemy.PayOff.ToString();
             if (Enemy.PayOffResponse != null) txtPayOffResponse.Text = Enemy.PayOffResponse;
+
+            if (!string.IsNullOrEmpty(Enemy.ImagePath)) txtImagePath.Text = Enemy.ImagePath;
         }
 
         public bool SaveEnemy()
@@ -110,6 +113,8 @@ namespace Legend_Of_Drongo
             if (int.TryParse(txtPayOff.Text, out n)) Enemy.PayOff = n;
             else return false;
             if (int.TryParse(txtTeam.Text, out n)) Enemy.Team = n;
+
+            if (!string.IsNullOrEmpty(txtImagePath.Text)) Enemy.ImagePath = txtImagePath.Text;
 
             return true;
         }
@@ -151,6 +156,21 @@ namespace Legend_Of_Drongo
         {
             frmHelp NewForm = new frmHelp();
             NewForm.Show();
+        }
+
+        private void cmdImagePath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFile = new OpenFileDialog();
+            OpenFile.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(), "\\Resources\\Enemies");
+            OpenFile.FileName = string.Empty;
+
+            DialogResult result = OpenFile.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string Test = OpenFile.FileName.Replace(Directory.GetCurrentDirectory(), string.Empty);
+                txtImagePath.Text = Test;
+            }
         }
     }
 }
