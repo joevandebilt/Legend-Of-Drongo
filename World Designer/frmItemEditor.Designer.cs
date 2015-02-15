@@ -64,6 +64,9 @@
             this.cmdImagePath = new System.Windows.Forms.Button();
             this.txtImagePath = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtImageLocation = new System.Windows.Forms.TextBox();
+            this.cmdManualLocation = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdAddItems
@@ -172,7 +175,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(196, 115);
+            this.label2.Location = new System.Drawing.Point(442, 164);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 19;
@@ -180,15 +183,15 @@
             // 
             // txtValue
             // 
-            this.txtValue.Location = new System.Drawing.Point(199, 131);
+            this.txtValue.Location = new System.Drawing.Point(482, 161);
             this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(160, 20);
+            this.txtValue.Size = new System.Drawing.Size(31, 20);
             this.txtValue.TabIndex = 4;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(51, 164);
+            this.label6.Location = new System.Drawing.Point(20, 164);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 21;
@@ -197,7 +200,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(163, 164);
+            this.label7.Location = new System.Drawing.Point(117, 164);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(55, 13);
             this.label7.TabIndex = 22;
@@ -206,7 +209,7 @@
             // txtDamage
             // 
             this.txtDamage.Enabled = false;
-            this.txtDamage.Location = new System.Drawing.Point(106, 161);
+            this.txtDamage.Location = new System.Drawing.Point(75, 161);
             this.txtDamage.Name = "txtDamage";
             this.txtDamage.Size = new System.Drawing.Size(28, 20);
             this.txtDamage.TabIndex = 6;
@@ -214,7 +217,7 @@
             // txtProtection
             // 
             this.txtProtection.Enabled = false;
-            this.txtProtection.Location = new System.Drawing.Point(224, 161);
+            this.txtProtection.Location = new System.Drawing.Point(178, 161);
             this.txtProtection.Name = "txtProtection";
             this.txtProtection.Size = new System.Drawing.Size(28, 20);
             this.txtProtection.TabIndex = 7;
@@ -222,7 +225,7 @@
             // txtHP
             // 
             this.txtHP.Enabled = false;
-            this.txtHP.Location = new System.Drawing.Point(365, 161);
+            this.txtHP.Location = new System.Drawing.Point(298, 161);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(28, 20);
             this.txtHP.TabIndex = 8;
@@ -230,7 +233,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(288, 164);
+            this.label8.Location = new System.Drawing.Point(221, 164);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 13);
             this.label8.TabIndex = 23;
@@ -337,7 +340,7 @@
             // txtXP
             // 
             this.txtXP.Enabled = false;
-            this.txtXP.Location = new System.Drawing.Point(473, 161);
+            this.txtXP.Location = new System.Drawing.Point(384, 161);
             this.txtXP.Name = "txtXP";
             this.txtXP.Size = new System.Drawing.Size(28, 20);
             this.txtXP.TabIndex = 29;
@@ -345,7 +348,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(439, 164);
+            this.label14.Location = new System.Drawing.Point(350, 164);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(21, 13);
             this.label14.TabIndex = 30;
@@ -363,7 +366,7 @@
             // 
             // cmdImagePath
             // 
-            this.cmdImagePath.Location = new System.Drawing.Point(505, 129);
+            this.cmdImagePath.Location = new System.Drawing.Point(502, 117);
             this.cmdImagePath.Name = "cmdImagePath";
             this.cmdImagePath.Size = new System.Drawing.Size(25, 22);
             this.cmdImagePath.TabIndex = 51;
@@ -373,7 +376,7 @@
             // 
             // txtImagePath
             // 
-            this.txtImagePath.Location = new System.Drawing.Point(373, 131);
+            this.txtImagePath.Location = new System.Drawing.Point(370, 119);
             this.txtImagePath.Name = "txtImagePath";
             this.txtImagePath.ReadOnly = true;
             this.txtImagePath.Size = new System.Drawing.Size(126, 20);
@@ -382,18 +385,48 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(370, 115);
+            this.label15.Location = new System.Drawing.Point(367, 103);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(36, 13);
             this.label15.TabIndex = 52;
             this.label15.Text = "Image";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(198, 103);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(48, 13);
+            this.label16.TabIndex = 52;
+            this.label16.Text = "Location";
+            // 
+            // txtImageLocation
+            // 
+            this.txtImageLocation.Location = new System.Drawing.Point(201, 119);
+            this.txtImageLocation.Name = "txtImageLocation";
+            this.txtImageLocation.ReadOnly = true;
+            this.txtImageLocation.Size = new System.Drawing.Size(126, 20);
+            this.txtImageLocation.TabIndex = 50;
+            // 
+            // cmdManualLocation
+            // 
+            this.cmdManualLocation.Location = new System.Drawing.Point(333, 117);
+            this.cmdManualLocation.Name = "cmdManualLocation";
+            this.cmdManualLocation.Size = new System.Drawing.Size(25, 22);
+            this.cmdManualLocation.TabIndex = 53;
+            this.cmdManualLocation.Text = "...";
+            this.cmdManualLocation.UseVisualStyleBackColor = true;
+            this.cmdManualLocation.Click += new System.EventHandler(this.cmdManualLocation_Click);
             // 
             // frmItemEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 397);
+            this.Controls.Add(this.cmdManualLocation);
             this.Controls.Add(this.cmdImagePath);
+            this.Controls.Add(this.txtImageLocation);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.txtImagePath);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.cmdHelp);
@@ -473,5 +506,8 @@
         private System.Windows.Forms.Button cmdImagePath;
         private System.Windows.Forms.TextBox txtImagePath;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtImageLocation;
+        private System.Windows.Forms.Button cmdManualLocation;
     }
 }

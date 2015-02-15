@@ -7,6 +7,7 @@ DebugOptions: true
 ClearConsole: true
 
 #Select Border style
-#1 - Flowery
-#2 - Black Fleur De Lis
-BorderStyle: 2
+#0 No Border			#1 Flowery
+#2 Black Fleur De Lis	#3 Dashed
+#4 Solid				#5 Thick
+BorderStyle: 5

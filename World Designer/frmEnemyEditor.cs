@@ -86,6 +86,7 @@ namespace Legend_Of_Drongo
             if (Enemy.PayOffResponse != null) txtPayOffResponse.Text = Enemy.PayOffResponse;
 
             if (!string.IsNullOrEmpty(Enemy.ImagePath)) txtImagePath.Text = Enemy.ImagePath;
+            txtImageLocation.Text = Enemy.ImageLocation.ToString();
         }
 
         public bool SaveEnemy()

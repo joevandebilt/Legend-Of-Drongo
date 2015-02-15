@@ -25,6 +25,7 @@ namespace Legend_Of_Drongo
             Room = thisRoom;
             FloorCount = floors;
             PopulateFields();
+            DrawEnvironment();
         }
 
         public void PopulateFields()
@@ -107,6 +108,12 @@ namespace Legend_Of_Drongo
                 Room.ImagePath = txtBackgroundImage.Text;
             }
 
+            try
+            {
+                SaveImageLocations();
+            }
+            catch { return false; }
+
             return true;
         }
 
@@ -136,6 +143,7 @@ namespace Legend_Of_Drongo
                     lstItems.Items.Add(Item.Name + " - " + Item.Class);
                 }
             }
+            DrawEnvironment();
         }
 
         private void cmdAddItem_Click(object sender, EventArgs e)
@@ -199,6 +207,7 @@ namespace Legend_Of_Drongo
                     lstEnemies.Items.Add(Enemy.name + " - " + Enemy.Weapon.Name);
                 }
             }
+            DrawEnvironment();
         }
 
         private void cmdAddEnemy_Click(object sender, EventArgs e)
@@ -263,6 +272,7 @@ namespace Legend_Of_Drongo
                     lstNPCs.Items.Add(NPC.name);
                 }
             }
+            DrawEnvironment();
         }
 
         private void cmdAddNPC_Click(object sender, EventArgs e)
@@ -331,7 +341,7 @@ namespace Legend_Of_Drongo
         private void cmdAddEvent_Click(object sender, EventArgs e)
         {
             DataTypes.Event NewEvent = new DataTypes.Event();
-            frmEventEditor NewForm = new frmEventEditor(NewEvent, FloorCount);
+            frmEventEditor NewForm = new frmEventEditor(NewEvent, FloorCount, Room.ImagePath);
 
             NewForm.ShowDialog();
 
@@ -370,7 +380,7 @@ namespace Legend_Of_Drongo
             {
                 DataTypes.Event EditEvent = new DataTypes.Event();
                 EditEvent = Room.Events[lstEvents.SelectedIndex];
-                frmEventEditor NewForm = new frmEventEditor(EditEvent, FloorCount);
+                frmEventEditor NewForm = new frmEventEditor(EditEvent, FloorCount, Room.ImagePath);
 
                 NewForm.ShowDialog();
 
@@ -407,17 +417,197 @@ namespace Legend_Of_Drongo
 
         private void cmdFindImage_Click(object sender, EventArgs e)
         {
-            OpenFile.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(),"\\Resources\\Backgrounds");
+            OpenFile.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(), "\\Resources\\Backgrounds");
             OpenFile.FileName = string.Empty;
 
-            DialogResult result = OpenFile.ShowDialog();    
+            DialogResult result = OpenFile.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                string Test = OpenFile.FileName.Replace(Directory.GetCurrentDirectory(),string.Empty);
+                string Test = OpenFile.FileName.Replace(Directory.GetCurrentDirectory(), string.Empty);
                 txtBackgroundImage.Text = Test;
+            }
+            DrawEnvironment();
+        }
+
+        #region Room Drawing
+
+        public void DragNDrop_MouseEnter(object sender, EventArgs e)
+        {
+            PictureBox picBox = (PictureBox)sender;
+            picBox.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        public void DragNDrop_MouseUp(object sender, MouseEventArgs e)
+        {
+            PictureBox picBox = (PictureBox)sender;
+            if (e.Button == MouseButtons.Left)
+            {
+                int X = picBox.Location.X + e.Location.X;
+                int Y = picBox.Location.Y + e.Location.Y;
+
+                picBox.Location = new Point(X, Y);
+            }
+        }
+
+        public void DragNDrop_MouseLeave(object sender, EventArgs e)
+        {
+            PictureBox picBox = (PictureBox)sender;
+            picBox.BorderStyle = BorderStyle.None;
+        }
+
+        public void DebugOutput(string input)
+        {
+            using (StreamWriter sr = new StreamWriter("C:\\Users\\Joe\\Desktop\\Output.txt",true))
+            {
+                sr.WriteLine(input);
+            }
+        }
+
+        public void DrawEnvironment()
+        {
+            
+            //Clear existing controls that have been added. Continue to use previous background image if no new one is available
+            pnlGraphicWindow.Controls.Clear();
+
+            #region Background
+            //Draw the Background Image
+            if (!string.IsNullOrEmpty(Room.ImagePath)) Room.ImagePath = Path.Combine(Directory.GetCurrentDirectory() + Room.ImagePath);
+            else if (!string.IsNullOrEmpty(txtBackgroundImage.Text)) Room.ImagePath = Path.Combine(Directory.GetCurrentDirectory() + txtBackgroundImage.Text);
+            if (!string.IsNullOrEmpty(Room.ImagePath) && File.Exists(Room.ImagePath))
+            {
+                pnlGraphicWindow.BackgroundImage = Image.FromFile(Room.ImagePath);
+                pnlGraphicWindow.Refresh();
+            }
+            #endregion
+
+            //Draw Enemies
+            #region Enemy Drawing
+            if (Room.Enemy != null)
+            {
+                for(int i=0; i<Room.Enemy.Count;i++)
+                {
+                    DataTypes.EnemyProfile Enemy = Room.Enemy[i];
+                    string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + Enemy.ImagePath);
+                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
+                    {
+                        PictureBox NewPicBox = new PictureBox
+                        {
+                            Name = "Enemy."+i,
+                            BackColor = Color.Transparent,
+                            BorderStyle = System.Windows.Forms.BorderStyle.None,
+                            Size = new Size(200, 200),
+                            Location = Enemy.ImageLocation,
+                            Visible = true,
+                            ImageLocation = ImagePath,
+                            Image = Image.FromFile(ImagePath),
+                            SizeMode = PictureBoxSizeMode.StretchImage,   
+                        };
+                        NewPicBox.MouseEnter += new EventHandler(DragNDrop_MouseEnter);
+                        NewPicBox.MouseLeave += new EventHandler(DragNDrop_MouseLeave);
+                        NewPicBox.MouseMove += new MouseEventHandler(DragNDrop_MouseUp);
+                        pnlGraphicWindow.Controls.Add(NewPicBox);
+                    }
+                }
+            }
+
+            #endregion
+
+            //Draw items;
+            #region Item Drawing
+            if (Room.items != null)
+            {
+                for (int i = 0; i < Room.items.Count; i++)
+                {
+                    DataTypes.itemInfo Item = Room.items[i];
+                    string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + Item.ImagePath);
+                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
+                    {
+                        PictureBox NewPicBox = new PictureBox
+                        {
+                            Name = "Item."+i,
+                            BackColor = Color.Transparent,
+                            BorderStyle = System.Windows.Forms.BorderStyle.None,
+                            Size = new Size(50, 50),
+                            Location = Item.ImageLocation,
+                            Visible = true,
+                            ImageLocation = ImagePath,
+                            Image = Image.FromFile(ImagePath),
+                            SizeMode = PictureBoxSizeMode.StretchImage
+                        };
+                        NewPicBox.MouseEnter += new EventHandler(DragNDrop_MouseEnter);
+                        NewPicBox.MouseLeave += new EventHandler(DragNDrop_MouseLeave);
+                        NewPicBox.MouseMove += new MouseEventHandler(DragNDrop_MouseUp);
+                        pnlGraphicWindow.Controls.Add(NewPicBox);
+                    }
+                }
+            }
+            #endregion
+
+            //Draw NPCs
+            #region NPC Drawing
+            if (Room.Civilians != null)
+            {
+                for (int i = 0; i < Room.Civilians.Count;i++ )
+                {
+                    DataTypes.CivilianProfile NPC = Room.Civilians[i];
+                    string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + NPC.ImagePath);
+                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
+                    {
+                        PictureBox NewPicBox = new PictureBox
+                        {
+                            Name = "NPC."+i,
+                            BackColor = Color.Transparent,
+                            BorderStyle = System.Windows.Forms.BorderStyle.None,
+                            Size = new Size(150, 150),
+                            Location = NPC.ImageLocation,
+                            Visible = true,
+                            ImageLocation = ImagePath,
+                            Image = Image.FromFile(ImagePath),
+                            SizeMode = PictureBoxSizeMode.StretchImage
+                        };
+                        NewPicBox.MouseEnter += new EventHandler(DragNDrop_MouseEnter);
+                        NewPicBox.MouseLeave += new EventHandler(DragNDrop_MouseLeave);
+                        NewPicBox.MouseMove += new MouseEventHandler(DragNDrop_MouseUp);
+                        pnlGraphicWindow.Controls.Add(NewPicBox);
+                    }
+
+                }
+            }
+            #endregion
+        }
+
+        public void SaveImageLocations()
+        {
+            if (pnlGraphicWindow.Controls != null)
+            {
+                foreach (PictureBox PicBox in pnlGraphicWindow.Controls)
+                {
+                    string DataType = PicBox.Name.Split('.')[0];
+                    int Index = Int32.Parse(PicBox.Name.Split('.')[1]);
+
+                    if (DataType == "Enemy")
+                    {
+                        DataTypes.EnemyProfile Enemy = Room.Enemy[Index];
+                        Enemy.ImageLocation = PicBox.Location;
+                        Room.Enemy[Index] = Enemy;
+                    }
+                    else if (DataType == "Item")
+                    {
+                        DataTypes.itemInfo Item = Room.items[Index];
+                        Item.ImageLocation = PicBox.Location;
+                        Room.items[Index] = Item;
+                    }
+                    else if (DataType == "NPC")
+                    {
+                        DataTypes.CivilianProfile NPC = Room.Civilians[Index];
+                        NPC.ImageLocation = PicBox.Location;
+                        Room.Civilians[Index] = NPC;
+                    }
+                }
             }
         }
         
+        #endregion
     }
 }

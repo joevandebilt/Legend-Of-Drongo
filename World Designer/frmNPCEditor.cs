@@ -49,6 +49,7 @@ namespace Legend_Of_Drongo
 
             if (!string.IsNullOrEmpty(NPC.Donation)) txtDonate.Text = NPC.Donation;
             if (!string.IsNullOrEmpty(NPC.ImagePath)) txtImagePath.Text = NPC.ImagePath;
+            if (NPC.ImageLocation != null) txtLocation.Text = NPC.ImageLocation.ToString();
 
         }
 

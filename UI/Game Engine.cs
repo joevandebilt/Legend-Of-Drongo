@@ -135,8 +135,7 @@ namespace Legend_Of_Drongo
                 //LoDConsole.WriteLine("        [N] New Game    [T] Tutorial    [C] Custom Game\n\n                [L] Load Game        [Q] Quit");
                 */
 
-                LoDConsole.ToggleMenuButtoms(true);
-
+                LoDConsole.ToggleMenuButtons(true);
         }
 
         public static PlayerProfile MainMenu(int MenuChoice)
@@ -221,7 +220,13 @@ namespace Legend_Of_Drongo
                 }
                 else
                 {
-                    
+                    using (Stream stream = File.Open(SavePath, FileMode.Open))
+                    {
+                        BinaryFormatter bin = new BinaryFormatter();
+                        WorldState = (WorldFile)bin.Deserialize(stream);
+                    }
+                    world = WorldState.WorldState;
+                    Player = WorldState.DefaultPlayer;
                     Player.name = LoDConsole.ReadLine("What is your name?", "Name", Player.name);
                     LoDConsole.Clear();
                     LoDConsole.WriteLine(WordWrap("\n            Loading"));
@@ -289,10 +294,12 @@ namespace Legend_Of_Drongo
                 }
                 LoDConsole.Clear();
                 LoDConsole.WriteLine(string.Concat("\n\n", intro[index]));
-                Thread.Sleep(sleep[index]);
+                //Thread.Sleep(sleep[index]);
+                Thread.Sleep(100);
                 index++;
             }
             lock (myLock) { stopProcessing = true; }
+            LoDConsole.LoadCampaign();
         }
 
         public static void SkipIntro()
@@ -341,7 +348,7 @@ namespace Legend_Of_Drongo
 
         public static void StartGame (PlayerProfile Player)
         {
-            LoDConsole.ToggleMenuButtoms(false);
+            LoDConsole.ToggleMenuButtons(false);
             
             ParseOptions();
 
@@ -1527,35 +1534,10 @@ namespace Legend_Of_Drongo
 
             int XP = Player.XP;
             int Level = Player.Level;
-            if (XP > 1000 && Level < 2) LevelUp(2);
-            else if (XP > 2250 && Level < 3) LevelUp(3);
-            else if (XP > 3750 && Level < 4) LevelUp(4);
-            else if (XP > 5500 && Level < 5) LevelUp(5);
-            else if (XP > 7500 && Level < 6) LevelUp(6);
-            else if (XP > 10000 && Level < 7) LevelUp(7);
-            else if (XP > 13000 && Level < 8) LevelUp(8);
-            else if (XP > 16500 && Level < 9) LevelUp(9);
-            else if (XP > 20500 && Level < 10) LevelUp(10);
-            else if (XP > 26000 && Level < 11) LevelUp(11);
-            else if (XP > 32000 && Level < 12) LevelUp(12);
-            else if (XP > 39000 && Level < 13) LevelUp(13);
-            else if (XP > 47000 && Level < 14) LevelUp(14);
-            else if (XP > 57000 && Level < 15) LevelUp(15);
-            else if (XP > 69000 && Level < 16) LevelUp(16);
-            else if (XP > 83000 && Level < 17) LevelUp(17);
-            else if (XP > 99000 && Level < 18) LevelUp(18);
-            else if (XP > 119000 && Level < 19) LevelUp(19);
-            else if (XP > 143000 && Level < 20) LevelUp(20);
-            else if (XP > 175000 && Level < 21) LevelUp(21);
-            else if (XP > 210000 && Level < 22) LevelUp(22);
-            else if (XP > 255000 && Level < 23) LevelUp(23);
-            else if (XP > 310000 && Level < 24) LevelUp(24);
-            else if (XP > 375000 && Level < 25) LevelUp(25);
-            else if (XP > 450000 && Level < 26) LevelUp(26);
-            else if (XP > 550000 && Level < 27) LevelUp(27);
-            else if (XP > 675000 && Level < 28) LevelUp(28);
-            else if (XP > 825000 && Level < 29) LevelUp(29);
-            else if (XP > 1000000 && Level < 30) LevelUp(30);
+
+            if (XP >= XPNeeded(Level)) LevelUp(Level + 1);
+
+            
 
 
             #endregion
@@ -2850,35 +2832,18 @@ namespace Legend_Of_Drongo
         public static void PlayerStatus()
         {
             LoDConsole.WriteLine(WordWrap(string.Concat("Your HP is at ", Player.HPBonus, "/", Player.MaxHp, "")));
-            if (Player.HPBonus < 20) LoDConsole.WriteLine(WordWrap("Your health is low, you should find some food or a place to rest!"));
-            LoDConsole.WriteLine("\nCurrent Level: {3}  Current XP: {4}\nStrength: {0}  Speed: {1}  Resistence: {2}", Player.Strength.ToString(), Player.Speed.ToString(), Player.Resitence.ToString(), Player.Level.ToString(), Player.XP.ToString());
+            if (Player.HPBonus < 20) LoDConsole.WriteLine("Your health is low, you should find some food or a place to rest!");
+            LoDConsole.WriteLine("\nCurrent Level: {0}  ({1}xp/" + XPNeeded(Player.Level) + "xp)", Player.Level.ToString(), Player.XP.ToString());
+            LoDConsole.WriteLine("Strength: {0}  Speed: {1}  Resistence: {2}", Player.Strength.ToString(), Player.Speed.ToString(), Player.Resitence.ToString());
 
             LoDConsole.WriteLine(WordWrap(string.Concat("\nYour current weapon is: ", Player.WeaponHeld.Name)));
 
-            LoDConsole.WriteLine(WordWrap(string.Concat("\nYou current armor is at ", Player.ArmorBonus, "%\n")));
-
-            if (Player.ArmorWorn[0].Name == null) LoDConsole.WriteLine("  0");   //head
-            else LoDConsole.WriteLine(string.Concat(" {0}      - Head armor: ", Player.ArmorWorn[0].Name, " - ", Player.ArmorWorn[0].DefenseMod, "%"));
-
-            if (Player.ArmorWorn[1].Name == null) LoDConsole.WriteLine(" /|\\"); //chest
-            else LoDConsole.WriteLine("╔=╬=╗     - Chest Armor: {0} - {1}%", Player.ArmorWorn[1].Name, Player.ArmorWorn[1].DefenseMod.ToString());
-
-            if (Player.ArmorWorn[2].Name == null)   //gloves
-            {
-                LoDConsole.WriteLine("/ | \\");
-                LoDConsole.WriteLine("  |");
-            }
-            else
-            {
-                LoDConsole.WriteLine("║ ║ ║    - Glove Armor: {0} - {1}%", Player.ArmorWorn[2].Name, Player.ArmorWorn[2].DefenseMod.ToString());
-                LoDConsole.WriteLine("Û ║ Û ");
-            }
-
-            if (Player.ArmorWorn[3].Name == null) LoDConsole.WriteLine(" / \\"); //Legs
-            else LoDConsole.WriteLine(" / \\     - Leg Armor: {0} - {1}%", Player.ArmorWorn[3].Name, Player.ArmorWorn[3].DefenseMod.ToString());
-
-            if (Player.ArmorWorn[4].Name == null) LoDConsole.WriteLine("/   \\"); //boots
-            else LoDConsole.WriteLine(" ╝ ╚     - Boots Armor: {0} - {1}%", Player.ArmorWorn[4].Name, Player.ArmorWorn[4].DefenseMod.ToString());
+            LoDConsole.WriteLine(WordWrap(string.Concat("You current armor is at ", Player.ArmorBonus, "%\n")));
+            if (!string.IsNullOrEmpty(Player.ArmorWorn[0].Name)) LoDConsole.WriteLine("Head:  {0} {1}%", Player.ArmorWorn[0].Name, Player.ArmorWorn[0].DefenseMod.ToString());
+            if (!string.IsNullOrEmpty(Player.ArmorWorn[1].Name)) LoDConsole.WriteLine("Chest: {0} {1}%", Player.ArmorWorn[1].Name, Player.ArmorWorn[1].DefenseMod.ToString());
+            if (!string.IsNullOrEmpty(Player.ArmorWorn[2].Name)) LoDConsole.WriteLine("Hands: {0} {1}%", Player.ArmorWorn[2].Name, Player.ArmorWorn[2].DefenseMod.ToString());
+            if (!string.IsNullOrEmpty(Player.ArmorWorn[3].Name)) LoDConsole.WriteLine("Legs:  {0} {1}%", Player.ArmorWorn[3].Name, Player.ArmorWorn[3].DefenseMod.ToString());
+            if (!string.IsNullOrEmpty(Player.ArmorWorn[4].Name)) LoDConsole.WriteLine("Feet:  {0} {1}%", Player.ArmorWorn[4].Name, Player.ArmorWorn[4].DefenseMod.ToString());
 
             LoDConsole.WriteLine(WordWrap("\nYour current objective is: {0}"), Player.Objective);
         }
@@ -3392,6 +3357,42 @@ namespace Legend_Of_Drongo
             Player.Level = Level;
 
             LoDConsole.WriteLine("\n!! You have levelled up !!\nYou are now faster, stronger and can carry more items!");
+        }
+
+        public static int XPNeeded(int Level)
+        {
+            int[] Levels = new int[30];
+            Levels[0] = 0;
+            Levels[1] = 1000;
+            Levels[2] = 2250;
+            Levels[3] = 3750;
+            Levels[4] = 5500;
+            Levels[5] = 7500;
+            Levels[6] = 10000;
+            Levels[7] = 13000;
+            Levels[8] = 16500;
+            Levels[9] = 20500;
+            Levels[10] = 26000;
+            Levels[11] = 32000;
+            Levels[12] = 39000;
+            Levels[13] = 47000;
+            Levels[14] = 57000;
+            Levels[15] = 69000;
+            Levels[16] = 83000;
+            Levels[17] = 99000;
+            Levels[18] = 119000;
+            Levels[19] = 143000;
+            Levels[20] = 175000;
+            Levels[21] = 210000;
+            Levels[22] = 255000;
+            Levels[23] = 310000;
+            Levels[24] = 375000;
+            Levels[25] = 450000;
+            Levels[26] = 550000;
+            Levels[27] = 675000;
+            Levels[28] = 825000;
+            Levels[29] = 1000000;
+            return Levels[Level];
         }
 
         public static EnemyProfile GainXPfromEnemy(EnemyProfile Enemy)

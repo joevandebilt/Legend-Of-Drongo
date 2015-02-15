@@ -14,12 +14,12 @@ namespace Legend_Of_Drongo
     {
         public DataTypes.itemInfo Item;
         public bool ChangeMade;
+        public string BackGroundImage;
 
         public frmItemEditor(DataTypes.itemInfo ThisItem, string ItemClass)
         {
             InitializeComponent();
             ChangeMade = false;
-            Item = ThisItem;
             PopulateItem(ItemClass);
         }
 
@@ -64,6 +64,7 @@ namespace Legend_Of_Drongo
             if (Item.interactionResponse != null) txtInteractionMessage.Text = Item.interactionResponse;
 
             if (!string.IsNullOrEmpty(Item.ImagePath)) txtImagePath.Text = Item.ImagePath;
+            txtImageLocation.Text = Item.ImageLocation.ToString();
         }
 
         private bool SaveItem()
@@ -203,5 +204,33 @@ namespace Legend_Of_Drongo
                 txtImagePath.Text = Test;
             }
         }
+
+        private void cmdManualLocation_Click(object sender, EventArgs e)
+        {
+            int X=10; 
+            int Y=10;
+
+            if (Item.ImageLocation != null)
+            {
+                X = Item.ImageLocation.X;
+                Y = Item.ImageLocation.Y;
+            }
+           
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Please Enter Some Coodinates", "Item Location", X+","+Y,-1,-1);
+            try
+            {
+                string[] Positions = input.Replace(" ","").Split(',');
+                X = Int32.Parse(Positions[0]);
+                Y = Int32.Parse(Positions[1]);
+
+                Item.ImageLocation = new Point(X, Y);
+            }
+            catch 
+            {
+                txtImageLocation.Text = "Failure!";
+            }
+            txtImageLocation.Text = Item.ImageLocation.ToString();
+        }
+
     }
 }

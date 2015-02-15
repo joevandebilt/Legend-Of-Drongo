@@ -60,6 +60,8 @@
             this.cmdImagePath = new System.Windows.Forms.Button();
             this.txtImagePath = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.txtImageLocation = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -300,7 +302,7 @@
             // 
             // cmdImagePath
             // 
-            this.cmdImagePath.Location = new System.Drawing.Point(261, 59);
+            this.cmdImagePath.Location = new System.Drawing.Point(262, 58);
             this.cmdImagePath.Name = "cmdImagePath";
             this.cmdImagePath.Size = new System.Drawing.Size(25, 22);
             this.cmdImagePath.TabIndex = 48;
@@ -310,26 +312,45 @@
             // 
             // txtImagePath
             // 
-            this.txtImagePath.Location = new System.Drawing.Point(66, 61);
+            this.txtImagePath.Location = new System.Drawing.Point(209, 60);
             this.txtImagePath.Name = "txtImagePath";
             this.txtImagePath.ReadOnly = true;
-            this.txtImagePath.Size = new System.Drawing.Size(189, 20);
+            this.txtImagePath.Size = new System.Drawing.Size(47, 20);
             this.txtImagePath.TabIndex = 47;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 64);
+            this.label13.Location = new System.Drawing.Point(155, 63);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(36, 13);
             this.label13.TabIndex = 49;
             this.label13.Text = "Image";
+            // 
+            // txtImageLocation
+            // 
+            this.txtImageLocation.Location = new System.Drawing.Point(67, 60);
+            this.txtImageLocation.Name = "txtImageLocation";
+            this.txtImageLocation.ReadOnly = true;
+            this.txtImageLocation.Size = new System.Drawing.Size(82, 20);
+            this.txtImageLocation.TabIndex = 50;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(12, 63);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(48, 13);
+            this.label14.TabIndex = 52;
+            this.label14.Text = "Location";
             // 
             // frmEnemyEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 501);
+            this.Controls.Add(this.txtImageLocation);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.cmdImagePath);
             this.Controls.Add(this.txtImagePath);
             this.Controls.Add(this.label13);
@@ -402,5 +423,7 @@
         private System.Windows.Forms.Button cmdImagePath;
         private System.Windows.Forms.TextBox txtImagePath;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtImageLocation;
+        private System.Windows.Forms.Label label14;
     }
 }

@@ -17,6 +17,12 @@ namespace Legend_Of_Drongo
 {
     public partial class frmMainConsole : Form
     {
+        #region Public Data Objects
+        List<string> CommandHistory = new List<string>();
+        int cmdHistory = -1;
+        Thread thr = new Thread(LegendOfDrongoEngine.Introduction);
+        #endregion
+
         #region Console Behaviour
 
         #region Writeline
@@ -28,6 +34,7 @@ namespace Legend_Of_Drongo
 
         delegate void WriteLineDelegate(string text);
         delegate void ClearDelegate();
+        
         public void WriteLine(string Input, params string[] args)
         {
             for (int i = 0; i < args.Length; i++)
@@ -98,10 +105,8 @@ namespace Legend_Of_Drongo
         #endregion
 
         #endregion
-
-        List<string> CommandHistory = new List<string>();
-        int cmdHistory = -1;
-        Thread thr = new Thread(LegendOfDrongoEngine.Introduction);
+        
+        #region Init and Closing
 
         public frmMainConsole()
         {
@@ -117,6 +122,23 @@ namespace Legend_Of_Drongo
             }
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+
+            // Confirm user wants to close
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to quit?\n\nAll Unsaved progress will be lost?", "Quit World Designer", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.No || dialogResult == DialogResult.None)
+            {
+                e.Cancel = true;
+            }
+            else Environment.Exit(0); //Close form gracfully
+        }
+
+        #endregion
+
+        #region Game Setup
+
         public void SetupGame()
         {
             LegendOfDrongoEngine GameEngine = new LegendOfDrongoEngine(this);
@@ -124,6 +146,143 @@ namespace Legend_Of_Drongo
             LegendOfDrongoEngine.Warning();
             pnlWarning.Visible = true;
             
+        }
+        
+        private void MainMenuChoice(int Choice)
+        {
+            if (Choice == 0)
+            {
+                txtConsoleOutput.TextAlign = HorizontalAlignment.Left;
+                lblOptions.Visible = false;
+                tkbVolume.Visible = false;
+                lblVolume.Visible = false;
+
+                pnlWarning.Visible = true;
+                lblOkay.Visible = false;
+                lblSkipIntro.Visible = true;
+
+                pnlMainMenu.Visible = false;
+                
+                thr.Start();
+            }
+            else
+            {
+                DataTypes.PlayerProfile newPlayer = LegendOfDrongoEngine.MainMenu(Choice);
+
+                if (!string.IsNullOrEmpty(newPlayer.name))
+                {
+                    LegendOfDrongoEngine.StartGame(newPlayer);
+                    txtInput.Visible = true;
+                    txtInput.Focus();
+                    txtConsoleOutput.TextAlign = HorizontalAlignment.Left;
+                }
+            }
+        }
+        
+        delegate void BeginCampaign();
+        public void LoadCampaign()
+        {
+            if (!this.InvokeRequired)
+            {
+                DataTypes.PlayerProfile newPlayer = LegendOfDrongoEngine.MainMenu(0);
+                if (!string.IsNullOrEmpty(newPlayer.name))
+                {
+                    pnlWarning.Visible = false;
+                    txtConsoleOutput.TextAlign = HorizontalAlignment.Left;
+                    lblSkipIntro.Visible = false;
+                    lblOptions.Visible = true;
+                    tkbVolume.Visible = true;
+                    lblVolume.Visible = true;
+                    LegendOfDrongoEngine.StartGame(newPlayer);
+                    txtInput.Visible = true;
+                    txtInput.Focus();
+                    txtConsoleOutput.TextAlign = HorizontalAlignment.Left;
+                }
+            }
+            else
+            {
+                BeginCampaign d = new BeginCampaign(LoadCampaign);
+                this.Invoke(d);
+            }
+        }
+
+        #endregion
+      
+        #region Form Events
+
+        public void ToggleMenuButtons(bool Enabled)
+        {
+            if (Enabled == false)
+            {
+                lblCustom.Visible = false;
+                lblLoadGame.Visible = false;
+                lblNewGame.Visible = false;
+                lblQuit.Visible = false;
+                lblTutorial.Visible = false;
+                pnlMainMenu.Visible = false;
+            }
+            else
+            {
+                pnlMainMenu.Visible = true;
+                lblCustom.Visible = true;
+                lblLoadGame.Visible = true;
+                lblNewGame.Visible = true;
+                lblQuit.Visible = true;
+                lblTutorial.Visible = true;
+            }
+        }
+
+
+        private void lblNewGame_Click(object sender, EventArgs e)
+        {
+            MainMenuChoice(0);
+        }
+
+        private void lblTutorial_Click(object sender, EventArgs e)
+        {
+            MainMenuChoice(1);
+        }
+
+        private void lblLoadGame_Click(object sender, EventArgs e)
+        {
+            MainMenuChoice(2);
+        }
+
+        private void lblCustom_Click(object sender, EventArgs e)
+        {
+            MainMenuChoice(3);
+        }
+
+        private void lblQuit_Click(object sender, EventArgs e)
+        {
+            MainMenuChoice(4);
+        }
+
+        private void lblOkay_Click(object sender, EventArgs e)
+        {
+            pnlWarning.Visible = false;
+            //pnlOutputWindow.Visible = false;
+            pnlMainMenu.Visible = true;
+            txtConsoleOutput.TextAlign = HorizontalAlignment.Center;
+            LegendOfDrongoEngine.DrawMainMenu();
+        }
+
+        private void lblOptions_Click(object sender, EventArgs e)
+        {
+            Process proc = new Process();
+            proc = Process.Start(Directory.GetCurrentDirectory() + "\\Options.txt");
+            while (proc.HasExited == false) { }
+            LegendOfDrongoEngine.ParseOptions();
+
+        }
+
+        private void lblSkipIntro_Click(object sender, EventArgs e)
+        {
+            LegendOfDrongoEngine.SkipIntro();
+            WriteLine("Skipping Intro");
+            thr.Join();
+            pnlWarning.Visible = false;
+            LoadCampaign();
         }
 
         private void txtInput_KeyDown(object sender, KeyEventArgs e)
@@ -151,7 +310,7 @@ namespace Legend_Of_Drongo
             {
                 if (CommandHistory.Count > 0)
                 {
-                    if (cmdHistory < (CommandHistory.Count -1))
+                    if (cmdHistory < (CommandHistory.Count - 1))
                     {
                         cmdHistory++;
                         txtInput.Text = CommandHistory[cmdHistory];
@@ -167,101 +326,15 @@ namespace Legend_Of_Drongo
             tmrStartGame.Enabled = false;
         }
 
-        private void MainMenuChoice(int Choice)
+        private void txtConsoleOutput_TextChanged(object sender, EventArgs e)
         {
-            if (Choice == 0)
-            {
-                txtConsoleOutput.TextAlign = ContentAlignment.MiddleCenter;
-                lblOptions.Visible = false;
-                tkbVolume.Visible = false;
-                lblVolume.Visible = false;
+            if (txtConsoleOutput.Text.Length > 300) txtConsoleOutput.ScrollBars = ScrollBars.Vertical;
+            else txtConsoleOutput.ScrollBars = ScrollBars.None;
+        }    
 
-                pnlWarning.Visible = true;
-                lblOkay.Visible = false;
-                lblSkipIntro.Visible = true;
+        #endregion
 
-                pnlMainMenu.Visible = false;
-                
-                thr.Start();
-            }
-            else
-            {
-                DataTypes.PlayerProfile newPlayer = LegendOfDrongoEngine.MainMenu(Choice);
-
-                if (!string.IsNullOrEmpty(newPlayer.name))
-                {
-                    LegendOfDrongoEngine.StartGame(newPlayer);
-                    txtInput.Visible = true;
-                    txtInput.Focus();
-                    txtConsoleOutput.TextAlign = ContentAlignment.TopLeft;
-                }
-            }
-        }
-
-        public void LoadCampaign()
-        {
-            DataTypes.PlayerProfile newPlayer = LegendOfDrongoEngine.MainMenu(0);
-            if (!string.IsNullOrEmpty(newPlayer.name))
-            {
-                txtConsoleOutput.TextAlign = ContentAlignment.TopLeft;
-                lblSkipIntro.Visible = false;
-                lblOptions.Visible = true;
-                tkbVolume.Visible = true;
-                lblVolume.Visible = true;
-                LegendOfDrongoEngine.StartGame(newPlayer);
-                txtInput.Visible = true;
-                txtInput.Focus();
-                txtConsoleOutput.TextAlign = ContentAlignment.TopLeft;
-            }
-        }
-
-        public void ToggleMenuButtoms(bool Enabled)
-        {
-            if (Enabled == false)
-            {
-                lblCustom.Visible = false;
-                lblLoadGame.Visible = false;
-                lblNewGame.Visible = false;
-                lblQuit.Visible = false;
-                lblTutorial.Visible = false;
-                pnlMainMenu.Visible = false;
-            }
-            else
-            {
-                pnlMainMenu.Visible = true;
-                lblCustom.Visible = true;
-                lblLoadGame.Visible = true;
-                lblNewGame.Visible = true;
-                lblQuit.Visible = true;
-                lblTutorial.Visible = true;
-            }
-        }
-
-        private void lblNewGame_Click(object sender, EventArgs e)
-        {
-            MainMenuChoice(0);
-        }
-
-        private void lblTutorial_Click(object sender, EventArgs e)
-        {
-            MainMenuChoice(1);
-        }
-
-        private void lblLoadGame_Click(object sender, EventArgs e)
-        {
-            MainMenuChoice(2);
-        }
-
-        private void lblCustom_Click(object sender, EventArgs e)
-        {
-            MainMenuChoice(3);
-        }
-
-        private void lblQuit_Click(object sender, EventArgs e)
-        {
-            MainMenuChoice(4);
-        }
-
+        #region File Control
         public string FindFile(string StartDirectory)
         {
             string FilePath = string.Empty;
@@ -277,7 +350,6 @@ namespace Legend_Of_Drongo
             }
             else return ("!FAIL!");
         }
-
         public string SaveFile(string StartDirectory)
         {
             string FilePath = string.Empty;
@@ -293,16 +365,9 @@ namespace Legend_Of_Drongo
             }
             else return ("!FAIL!");
         }
+        #endregion
 
-        private void lblOkay_Click(object sender, EventArgs e)
-        {
-            pnlWarning.Visible = false;
-            //pnlOutputWindow.Visible = false;
-            pnlMainMenu.Visible = true;
-            txtConsoleOutput.TextAlign = ContentAlignment.MiddleCenter;
-            LegendOfDrongoEngine.DrawMainMenu();
-        }
-
+        #region Music Control
         private void tkbVolume_ValueChanged(object sender, EventArgs e)
         {
             int trackBarValue = tkbVolume.Value;
@@ -312,7 +377,9 @@ namespace Legend_Of_Drongo
 
             lblVolume.Text = "Game Volume " + percentage.ToString() + "%";
         }
-                
+        #endregion
+        
+        #region Drawing
         public void DrawEnvironment(DataTypes.roomInfo ThisRoom)
         {
             //Clear existing controls that have been added. Continue to use previous background image if no new one is available
@@ -330,149 +397,115 @@ namespace Legend_Of_Drongo
 
             //Draw Enemies
             #region Enemy Drawing
-
-            //Create locations where images can be placed and indexes to point to next available image location
-            List<Point> EnemyLocations = new List<Point>();
-            EnemyLocations.Add(new Point(381, 352));
-            EnemyLocations.Add(new Point(633, 352));
-            EnemyLocations.Add(new Point(87, 352));
-                        
-            int EnemyLocationIndex = 0;
             if (ThisRoom.Enemy != null)
             {
                 foreach (DataTypes.EnemyProfile Enemy in ThisRoom.Enemy)
                 {
                     string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + Enemy.ImagePath);
-                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath) && EnemyLocationIndex < EnemyLocations.Count)
+                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
                     {
                         PictureBox NewPicBox = new PictureBox
                         {
                             Name = "img" + Enemy.name,
                             BackColor = Color.Transparent,
                             Size = new Size(200, 200),
-                            Location = EnemyLocations[EnemyLocationIndex],
+                            Location = Enemy.ImageLocation,
                             Visible = true,
                             ImageLocation = ImagePath,
                             Image = Image.FromFile(ImagePath),
                             SizeMode = PictureBoxSizeMode.StretchImage
                         };
                         MainBackgroundImage.Controls.Add(NewPicBox);
-                        EnemyLocationIndex++;
                     }
-
                 }
-
             }
 
             #endregion
 
             //Draw items;
             #region Item Drawing
-
-            //Create locations where images can be placed and indexes to point to next available image location
-            List<Point> ItemLocations = new List<Point>();
-            ItemLocations.Add(new Point(698, 294));
-            ItemLocations.Add(new Point(14, 17));
-            ItemLocations.Add(new Point(200, 90));
-            int ItemLocationIndex = 0;
             if (ThisRoom.items != null)
             {
                 foreach (DataTypes.itemInfo Item in ThisRoom.items)
                 {
                     string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + Item.ImagePath);
-                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath) && ItemLocationIndex < ItemLocations.Count)
+                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
                     {
                         PictureBox NewPicBox = new PictureBox
                         {
                             Name = "img" + Item.Name,
                             BackColor = Color.Transparent,
-                            Size = new Size(150, 150),
-                            Location = ItemLocations[ItemLocationIndex],
+                            Size = new Size(50, 50),
+                            Location = Item.ImageLocation,
                             Visible = true,
                             ImageLocation = ImagePath,
                             Image = Image.FromFile(ImagePath),
                             SizeMode = PictureBoxSizeMode.StretchImage
                         };
                         MainBackgroundImage.Controls.Add(NewPicBox);
-                        ItemLocationIndex++;
                     }
-
                 }
-
             }
-
             #endregion
 
             //Draw NPCs
             #region NPC Drawing
-            List<Point> NPCLocations = new List<Point>();
-            NPCLocations.Add(new Point(300, 150));
-            int NPCLocationIndex = 0;
             if (ThisRoom.Civilians != null)
             {
                 foreach (DataTypes.CivilianProfile NPC in ThisRoom.Civilians)
                 {
                     string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + NPC.ImagePath);
-                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath) && NPCLocationIndex < NPCLocations.Count)
+                    if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
                     {
                         PictureBox NewPicBox = new PictureBox
                         {
                             Name = "img" + NPC.name,
                             BackColor = Color.Transparent,
                             Size = new Size(150, 150),
-                            Location = NPCLocations[NPCLocationIndex],
+                            Location = NPC.ImageLocation,
                             Visible = true,
                             ImageLocation = ImagePath,
                             Image = Image.FromFile(ImagePath),
                             SizeMode = PictureBoxSizeMode.StretchImage
                         };
                         MainBackgroundImage.Controls.Add(NewPicBox);
-                        NPCLocationIndex++;
                     }
 
                 }
             }
-
             #endregion
         }
-
-        private void lblOptions_Click(object sender, EventArgs e)
-        {
-            Process proc = new Process();
-            proc = Process.Start(Directory.GetCurrentDirectory() + "\\Options.txt");
-            while (proc.HasExited == false) { }
-            LegendOfDrongoEngine.ParseOptions();
-            
-        }
-
-        private void lblSkipIntro_Click(object sender, EventArgs e)
-        {
-            LegendOfDrongoEngine.SkipIntro();
-            WriteLine("Skipping Intro");
-            thr.Join();
-            pnlWarning.Visible = false;
-            LoadCampaign();
-        }
-
+                
         public void DrawBorders(int BorderStyle)
         {
             bool Found = false;
             string[] FileNames = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\Resources\\Borders");
             int index = 0;
 
-            while (index < FileNames.Length && !Found)
+            if (BorderStyle > 0)
             {
-                string ThisFile = FileNames[index].Split('\\')[FileNames[index].Split('\\').Length -1];
-                if (ThisFile.Split('.')[0] == BorderStyle.ToString())
+                while (index < FileNames.Length && !Found)
                 {
-                    pnlGraphicWindow.BackgroundImage = Image.FromFile(FileNames[index]);
-                    pnlGraphicWindow.BackgroundImageLayout = ImageLayout.Stretch;
-                    pnlOutputWindow.BackgroundImage = Image.FromFile(FileNames[index]);
-                    pnlOutputWindow.BackgroundImageLayout = ImageLayout.Stretch;
-                    Found = true;
+                    string ThisFile = FileNames[index].Split('\\')[FileNames[index].Split('\\').Length - 1];
+                    if (ThisFile.Split('.')[0] == BorderStyle.ToString())
+                    {
+                        pnlGraphicWindow.BackgroundImage = Image.FromFile(FileNames[index]);
+                        pnlGraphicWindow.BackgroundImageLayout = ImageLayout.Stretch;
+                        pnlOutputWindow.BackgroundImage = Image.FromFile(FileNames[index]);
+                        pnlOutputWindow.BackgroundImageLayout = ImageLayout.Stretch;
+                        Found = true;
+                    }
+                    index++;
                 }
-                index++;
-            }            
+            }
+            else
+            {
+                pnlGraphicWindow.BackgroundImage = null;
+                pnlOutputWindow.BackgroundImage = null;
+                Found = true;
+            }
         }
-    }
+        #endregion
+
+        }
 }

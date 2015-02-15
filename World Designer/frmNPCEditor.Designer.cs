@@ -65,6 +65,8 @@
             this.cmdImagePath = new System.Windows.Forms.Button();
             this.txtImagePath = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.txtLocation = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdCancel
@@ -97,21 +99,21 @@
             // 
             // txtArmor
             // 
-            this.txtArmor.Location = new System.Drawing.Point(549, 55);
+            this.txtArmor.Location = new System.Drawing.Point(434, 58);
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
             this.txtArmor.TabIndex = 3;
             // 
             // txtMoney
             // 
-            this.txtMoney.Location = new System.Drawing.Point(639, 55);
+            this.txtMoney.Location = new System.Drawing.Point(524, 58);
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(39, 20);
             this.txtMoney.TabIndex = 4;
             // 
             // txtHP
             // 
-            this.txtHP.Location = new System.Drawing.Point(454, 55);
+            this.txtHP.Location = new System.Drawing.Point(339, 58);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(38, 20);
             this.txtHP.TabIndex = 2;
@@ -135,7 +137,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(498, 58);
+            this.label4.Location = new System.Drawing.Point(383, 61);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 24;
@@ -144,7 +146,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(593, 58);
+            this.label9.Location = new System.Drawing.Point(478, 61);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
             this.label9.TabIndex = 22;
@@ -153,7 +155,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(417, 58);
+            this.label3.Location = new System.Drawing.Point(302, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 13);
             this.label3.TabIndex = 23;
@@ -359,7 +361,7 @@
             // 
             // txtDonate
             // 
-            this.txtDonate.Location = new System.Drawing.Point(478, 88);
+            this.txtDonate.Location = new System.Drawing.Point(422, 88);
             this.txtDonate.Name = "txtDonate";
             this.txtDonate.Size = new System.Drawing.Size(197, 20);
             this.txtDonate.TabIndex = 60;
@@ -367,7 +369,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(358, 91);
+            this.label8.Location = new System.Drawing.Point(302, 91);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(114, 13);
             this.label8.TabIndex = 61;
@@ -400,11 +402,30 @@
             this.label13.TabIndex = 64;
             this.label13.Text = "Image";
             // 
+            // txtLocation
+            // 
+            this.txtLocation.Location = new System.Drawing.Point(623, 55);
+            this.txtLocation.Name = "txtLocation";
+            this.txtLocation.ReadOnly = true;
+            this.txtLocation.Size = new System.Drawing.Size(64, 20);
+            this.txtLocation.TabIndex = 65;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(569, 61);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(48, 13);
+            this.label10.TabIndex = 66;
+            this.label10.Text = "Location";
+            // 
             // frmNPCEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 381);
+            this.Controls.Add(this.txtLocation);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.cmdImagePath);
             this.Controls.Add(this.txtImagePath);
             this.Controls.Add(this.label13);
@@ -487,5 +508,7 @@
         private System.Windows.Forms.Button cmdImagePath;
         private System.Windows.Forms.TextBox txtImagePath;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtLocation;
+        private System.Windows.Forms.Label label10;
     }
 }

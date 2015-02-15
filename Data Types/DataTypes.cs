@@ -6,6 +6,7 @@ using System.Text;
 using System.Media;
 using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Drawing;
 
 
 namespace Legend_Of_Drongo
@@ -132,6 +133,7 @@ namespace Legend_Of_Drongo
             public string interactionResponse;
             public int XP;
             public string ImagePath;
+            public Point ImageLocation;
         }
 
         [Serializable()]
@@ -150,6 +152,7 @@ namespace Legend_Of_Drongo
             public int Team;
             public string Behaviour;
             public string ImagePath;
+            public Point ImageLocation;
         }
 
         [Serializable()]
@@ -169,6 +172,7 @@ namespace Legend_Of_Drongo
             public int XP;
             public string Donation;
             public string ImagePath;
+            public Point ImageLocation;
         }
 
         [Serializable()]
@@ -271,6 +275,7 @@ namespace Legend_Of_Drongo
             NewItem.interactionResponse = Item.interactionResponse;
             NewItem.XP = Item.XP;
             NewItem.ImagePath = Item.ImagePath;
+            NewItem.ImageLocation = Item.ImageLocation;
 
             return NewItem;
         }
@@ -321,6 +326,7 @@ namespace Legend_Of_Drongo
             NewEnemy.XP = Enemy.XP;
             NewEnemy.Behaviour = Enemy.Behaviour;
             NewEnemy.ImagePath = Enemy.ImagePath;
+            NewEnemy.ImageLocation = Enemy.ImageLocation;
 
             return NewEnemy;
         }
@@ -348,6 +354,7 @@ namespace Legend_Of_Drongo
             NewNPC.XP = NPC.XP;
             NewNPC.Donation = NPC.Donation;
             NewNPC.ImagePath = NPC.ImagePath;
+            NewNPC.ImageLocation = NPC.ImageLocation;
 
             return NewNPC;
         }

@@ -45,7 +45,7 @@
             this.lblOptions = new System.Windows.Forms.Label();
             this.MainBackgroundImage = new System.Windows.Forms.PictureBox();
             this.pnlOutputWindow = new System.Windows.Forms.Panel();
-            this.txtConsoleOutput = new System.Windows.Forms.Label();
+            this.txtConsoleOutput = new System.Windows.Forms.TextBox();
             this.pnlWarning = new System.Windows.Forms.Panel();
             this.lblOkay = new System.Windows.Forms.Label();
             this.lblSkipIntro = new System.Windows.Forms.Label();
@@ -111,7 +111,7 @@
             this.lblTutorial.AutoSize = true;
             this.lblTutorial.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTutorial.ForeColor = System.Drawing.Color.White;
-            this.lblTutorial.Location = new System.Drawing.Point(179, 98);
+            this.lblTutorial.Location = new System.Drawing.Point(154, 86);
             this.lblTutorial.Name = "lblTutorial";
             this.lblTutorial.Size = new System.Drawing.Size(65, 22);
             this.lblTutorial.TabIndex = 13;
@@ -124,7 +124,7 @@
             this.lblCustom.AutoSize = true;
             this.lblCustom.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCustom.ForeColor = System.Drawing.Color.White;
-            this.lblCustom.Location = new System.Drawing.Point(158, 129);
+            this.lblCustom.Location = new System.Drawing.Point(133, 117);
             this.lblCustom.Name = "lblCustom";
             this.lblCustom.Size = new System.Drawing.Size(108, 22);
             this.lblCustom.TabIndex = 12;
@@ -136,7 +136,7 @@
             this.lblQuit.AutoSize = true;
             this.lblQuit.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblQuit.ForeColor = System.Drawing.Color.White;
-            this.lblQuit.Location = new System.Drawing.Point(195, 156);
+            this.lblQuit.Location = new System.Drawing.Point(170, 144);
             this.lblQuit.Name = "lblQuit";
             this.lblQuit.Size = new System.Drawing.Size(40, 22);
             this.lblQuit.TabIndex = 11;
@@ -148,7 +148,7 @@
             this.lblLoadGame.AutoSize = true;
             this.lblLoadGame.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoadGame.ForeColor = System.Drawing.Color.White;
-            this.lblLoadGame.Location = new System.Drawing.Point(167, 66);
+            this.lblLoadGame.Location = new System.Drawing.Point(142, 54);
             this.lblLoadGame.Name = "lblLoadGame";
             this.lblLoadGame.Size = new System.Drawing.Size(90, 22);
             this.lblLoadGame.TabIndex = 10;
@@ -160,7 +160,7 @@
             this.lblNewGame.AutoSize = true;
             this.lblNewGame.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNewGame.ForeColor = System.Drawing.Color.White;
-            this.lblNewGame.Location = new System.Drawing.Point(169, 35);
+            this.lblNewGame.Location = new System.Drawing.Point(144, 23);
             this.lblNewGame.Name = "lblNewGame";
             this.lblNewGame.Size = new System.Drawing.Size(88, 22);
             this.lblNewGame.TabIndex = 9;
@@ -222,15 +222,17 @@
             // 
             // txtConsoleOutput
             // 
-            this.txtConsoleOutput.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.txtConsoleOutput.BackColor = System.Drawing.Color.Transparent;
-            this.txtConsoleOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConsoleOutput.BackColor = System.Drawing.Color.Black;
+            this.txtConsoleOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtConsoleOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.txtConsoleOutput.ForeColor = System.Drawing.Color.White;
-            this.txtConsoleOutput.Location = new System.Drawing.Point(30, 35);
+            this.txtConsoleOutput.Location = new System.Drawing.Point(38, 21);
+            this.txtConsoleOutput.Multiline = true;
             this.txtConsoleOutput.Name = "txtConsoleOutput";
-            this.txtConsoleOutput.Size = new System.Drawing.Size(352, 322);
-            this.txtConsoleOutput.TabIndex = 12;
-            this.txtConsoleOutput.Text = "Output Window";
+            this.txtConsoleOutput.ReadOnly = true;
+            this.txtConsoleOutput.Size = new System.Drawing.Size(348, 343);
+            this.txtConsoleOutput.TabIndex = 14;
+            this.txtConsoleOutput.Text = "vvvvvvvvvvvvvvvvvv";
             // 
             // pnlWarning
             // 
@@ -296,6 +298,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tkbVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MainBackgroundImage)).EndInit();
             this.pnlOutputWindow.ResumeLayout(false);
+            this.pnlOutputWindow.PerformLayout();
             this.pnlWarning.ResumeLayout(false);
             this.pnlWarning.PerformLayout();
             this.pnlGraphicWindow.ResumeLayout(false);
@@ -322,11 +325,11 @@
         private System.Windows.Forms.Label lblOptions;
         private System.Windows.Forms.PictureBox MainBackgroundImage;
         private System.Windows.Forms.Panel pnlOutputWindow;
-        private System.Windows.Forms.Label txtConsoleOutput;
         private System.Windows.Forms.Panel pnlWarning;
         private System.Windows.Forms.Label lblOkay;
         private System.Windows.Forms.Label lblSkipIntro;
         private System.Windows.Forms.Panel pnlGraphicWindow;
+        private System.Windows.Forms.TextBox txtConsoleOutput;
     }
 }
 

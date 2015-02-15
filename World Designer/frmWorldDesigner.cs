@@ -110,7 +110,7 @@ namespace Legend_Of_Drongo
                 e.Cancel = true;
             }
             else Environment.Exit(0); //Close form gracfully
-        }
+    }
 
         private void cmdMainMenu_Click(object sender, EventArgs e)
         {

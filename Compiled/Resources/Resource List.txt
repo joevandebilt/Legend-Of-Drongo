@@ -1,0 +1,34 @@
+Generic Items:
+	Meat
+	Water Bottle
+	Medecine (bottle with different colour water)
+	Book
+
+Level 2 - Forest
+---------------------
+Backgrounds:
+	Woods
+	Bridge
+	Woods/River
+	Campsite
+	Dark woods/Spider nest
+
+Items (50x50):
+	Peach
+	Apple
+	Leather Shirt
+	Leather Boots
+	Rusty Sword
+	Axe
+	Pitchfork
+	Woodcutters axe (bandit axe different colour?)
+	
+Enemies (200x200)
+	Giant Spider
+	Bandit
+	Old man
+
+NPCs (200x200)
+	Hunter
+	Old man
+	
