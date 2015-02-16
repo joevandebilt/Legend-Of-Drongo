@@ -75,7 +75,7 @@
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(15, 486);
+            this.cmdCancel.Location = new System.Drawing.Point(790, 687);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(161, 38);
             this.cmdCancel.TabIndex = 6;
@@ -130,7 +130,7 @@
             // 
             // cmdSaveClose
             // 
-            this.cmdSaveClose.Location = new System.Drawing.Point(182, 486);
+            this.cmdSaveClose.Location = new System.Drawing.Point(790, 599);
             this.cmdSaveClose.Name = "cmdSaveClose";
             this.cmdSaveClose.Size = new System.Drawing.Size(161, 38);
             this.cmdSaveClose.TabIndex = 5;
@@ -177,7 +177,7 @@
             // 
             // cmdFormHelp
             // 
-            this.cmdFormHelp.Location = new System.Drawing.Point(349, 486);
+            this.cmdFormHelp.Location = new System.Drawing.Point(790, 643);
             this.cmdFormHelp.Name = "cmdFormHelp";
             this.cmdFormHelp.Size = new System.Drawing.Size(161, 38);
             this.cmdFormHelp.TabIndex = 7;
@@ -187,7 +187,7 @@
             // 
             // txtSuicide
             // 
-            this.txtSuicide.Location = new System.Drawing.Point(15, 440);
+            this.txtSuicide.Location = new System.Drawing.Point(15, 419);
             this.txtSuicide.Name = "txtSuicide";
             this.txtSuicide.Size = new System.Drawing.Size(744, 20);
             this.txtSuicide.TabIndex = 3;
@@ -195,7 +195,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 422);
+            this.label6.Location = new System.Drawing.Point(12, 401);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(126, 13);
             this.label6.TabIndex = 13;
@@ -467,16 +467,18 @@
             // pnlGraphicWindow
             // 
             this.pnlGraphicWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlGraphicWindow.Location = new System.Drawing.Point(1065, 101);
+            this.pnlGraphicWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlGraphicWindow.Location = new System.Drawing.Point(29, 445);
             this.pnlGraphicWindow.Name = "pnlGraphicWindow";
-            this.pnlGraphicWindow.Size = new System.Drawing.Size(651, 322);
+            this.pnlGraphicWindow.Size = new System.Drawing.Size(730, 384);
             this.pnlGraphicWindow.TabIndex = 41;
             // 
             // frmRoomEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1733, 560);
+            this.ClientSize = new System.Drawing.Size(1057, 837);
+            this.Controls.Add(this.cmdFormHelp);
             this.Controls.Add(this.pnlGraphicWindow);
             this.Controls.Add(this.cmdFindImage);
             this.Controls.Add(this.txtBackgroundImage);
@@ -506,7 +508,6 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtSuicide);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.cmdFormHelp);
             this.Controls.Add(this.chkCanMove);
             this.Controls.Add(this.txtAltDescription);
             this.Controls.Add(this.label5);
