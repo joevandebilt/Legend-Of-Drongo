@@ -287,5 +287,8 @@ v3.2.0 (GUI Release)
 - Dubs checkum
 - Improved threading on game clock and introduction 
 - Nice roll faget
+
+v3.2.1
 - Added txtOutputConsole function to add scrollbar on text overflow
 - Added txtOutputConsole function to prevent typing in textbox
+- Added SetFonts method to globally set a font rather than change elements individually

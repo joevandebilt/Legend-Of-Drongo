@@ -341,7 +341,7 @@ namespace Legend_Of_Drongo
         private void cmdAddEvent_Click(object sender, EventArgs e)
         {
             DataTypes.Event NewEvent = new DataTypes.Event();
-            frmEventEditor NewForm = new frmEventEditor(NewEvent, FloorCount, Room.ImagePath);
+            frmEventEditor NewForm = new frmEventEditor(NewEvent, FloorCount);
 
             NewForm.ShowDialog();
 
@@ -380,7 +380,7 @@ namespace Legend_Of_Drongo
             {
                 DataTypes.Event EditEvent = new DataTypes.Event();
                 EditEvent = Room.Events[lstEvents.SelectedIndex];
-                frmEventEditor NewForm = new frmEventEditor(EditEvent, FloorCount, Room.ImagePath);
+                frmEventEditor NewForm = new frmEventEditor(EditEvent, FloorCount);
 
                 NewForm.ShowDialog();
 
@@ -466,6 +466,8 @@ namespace Legend_Of_Drongo
 
         public void DrawEnvironment()
         {
+            //Just save everything first in case something has changed that I forgot about
+            SaveImageLocations();
             
             //Clear existing controls that have been added. Continue to use previous background image if no new one is available
             pnlGraphicWindow.Controls.Clear();
@@ -496,7 +498,7 @@ namespace Legend_Of_Drongo
                             Name = "Enemy."+i,
                             BackColor = Color.Transparent,
                             BorderStyle = System.Windows.Forms.BorderStyle.None,
-                            Size = new Size(200, 200),
+                            Size = new Size(150, 150),
                             Location = Enemy.ImageLocation,
                             Visible = true,
                             ImageLocation = ImagePath,
@@ -575,6 +577,108 @@ namespace Legend_Of_Drongo
                 }
             }
             #endregion
+
+            #region Event Drawing 
+
+            if (Room.Events != null)
+            { 
+                for (int index=0;index<Room.Events.Count;index++)
+                {
+                    //Draw Event Enemies
+                    #region Event Enemy Drawing
+                    if (Room.Events[index].Enemies != null)
+                    {
+                        for (int i = 0; i < Room.Events[index].Enemies.Count; i++)
+                        {
+                            DataTypes.EnemyProfile Enemy = Room.Events[index].Enemies[i];
+                            string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + Enemy.ImagePath);
+                            if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
+                            {
+                                PictureBox NewPicBox = new PictureBox
+                                {
+                                    Name = "Event."+index+".Enemy." + i,
+                                    BackColor = Color.Transparent,
+                                    BorderStyle = System.Windows.Forms.BorderStyle.None,
+                                    Size = new Size(150,150),
+                                    Location = Enemy.ImageLocation,
+                                    Visible = true,
+                                    ImageLocation = ImagePath,
+                                    Image = Image.FromFile(ImagePath),
+                                    SizeMode = PictureBoxSizeMode.StretchImage,
+                                };
+                                NewPicBox.MouseEnter += new EventHandler(DragNDrop_MouseEnter);
+                                NewPicBox.MouseLeave += new EventHandler(DragNDrop_MouseLeave);
+                                NewPicBox.MouseMove += new MouseEventHandler(DragNDrop_MouseUp);
+                                pnlGraphicWindow.Controls.Add(NewPicBox);
+                            }
+                        }
+                    }
+                    #endregion
+
+                    //Draw Event Items
+                    #region Event Item Drawing
+                    if (Room.Events[index].Items != null)
+                    {
+                        for (int i = 0; i < Room.Events[index].Items.Count; i++)
+                        {
+                            DataTypes.itemInfo Item = Room.Events[index].Items[i];
+                            string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + Item.ImagePath);
+                            if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
+                            {
+                                PictureBox NewPicBox = new PictureBox
+                                {
+                                    Name = "Event." + index + ".Item." + i,
+                                    BackColor = Color.Transparent,
+                                    BorderStyle = System.Windows.Forms.BorderStyle.None,
+                                    Size = new Size(50, 50),
+                                    Location = Item.ImageLocation,
+                                    Visible = true,
+                                    ImageLocation = ImagePath,
+                                    Image = Image.FromFile(ImagePath),
+                                    SizeMode = PictureBoxSizeMode.StretchImage,
+                                };
+                                NewPicBox.MouseEnter += new EventHandler(DragNDrop_MouseEnter);
+                                NewPicBox.MouseLeave += new EventHandler(DragNDrop_MouseLeave);
+                                NewPicBox.MouseMove += new MouseEventHandler(DragNDrop_MouseUp);
+                                pnlGraphicWindow.Controls.Add(NewPicBox);
+                            }
+                        }
+                    }
+                    #endregion
+
+                    //Draw Event NPCs
+                    #region Event NPC Drawing
+                    if (Room.Events[index].NPCs != null)
+                    {
+                        for (int i = 0; i < Room.Events[index].NPCs.Count; i++)
+                        {
+                            DataTypes.CivilianProfile NPC = Room.Events[index].NPCs[i];
+                            string ImagePath = Path.Combine(Directory.GetCurrentDirectory() + NPC.ImagePath);
+                            if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
+                            {
+                                PictureBox NewPicBox = new PictureBox
+                                {
+                                    Name = "Event." + index + ".NPC." + i,
+                                    BackColor = Color.Transparent,
+                                    BorderStyle = System.Windows.Forms.BorderStyle.None,
+                                    Size = new Size(150, 150),
+                                    Location = NPC.ImageLocation,
+                                    Visible = true,
+                                    ImageLocation = ImagePath,
+                                    Image = Image.FromFile(ImagePath),
+                                    SizeMode = PictureBoxSizeMode.StretchImage,
+                                };
+                                NewPicBox.MouseEnter += new EventHandler(DragNDrop_MouseEnter);
+                                NewPicBox.MouseLeave += new EventHandler(DragNDrop_MouseLeave);
+                                NewPicBox.MouseMove += new MouseEventHandler(DragNDrop_MouseUp);
+                                pnlGraphicWindow.Controls.Add(NewPicBox);
+                            }
+                        }
+                    }
+                    #endregion
+                }
+            }
+            #endregion
         }
 
         public void SaveImageLocations()
@@ -603,6 +707,29 @@ namespace Legend_Of_Drongo
                         DataTypes.CivilianProfile NPC = Room.Civilians[Index];
                         NPC.ImageLocation = PicBox.Location;
                         Room.Civilians[Index] = NPC;
+                    }
+                    else if (DataType == "Event")
+                    {
+                        string SubDataType = PicBox.Name.Split('.')[2];
+                        int i = Int32.Parse(PicBox.Name.Split('.')[3]);
+                        if (SubDataType == "Enemy")
+                        {
+                            DataTypes.EnemyProfile Enemy = Room.Events[Index].Enemies[i];
+                            Enemy.ImageLocation = PicBox.Location;
+                            Room.Events[Index].Enemies[i] = Enemy;
+                        }
+                        else if (SubDataType == "Item")
+                        {
+                            DataTypes.itemInfo Item = Room.Events[Index].Items[i];
+                            Item.ImageLocation = PicBox.Location;
+                            Room.Events[Index].Items[i] = Item;
+                        }
+                        else if (SubDataType == "NPC")
+                        {
+                            DataTypes.CivilianProfile NPC = Room.Events[Index].NPCs[i];
+                            NPC.ImageLocation = PicBox.Location;
+                            Room.Events[Index].NPCs[i] = NPC;
+                        }                        
                     }
                 }
             }

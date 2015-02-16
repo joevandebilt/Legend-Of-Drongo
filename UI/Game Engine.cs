@@ -283,23 +283,27 @@ namespace Legend_Of_Drongo
             sleep[14] = 6000;
 
             index = 0;
+            bool Skipped = false;
             while (index < sleep.Length && !stopProcessing)
             {
                 lock (myLock)
                 {
                     if (stopProcessing == true)
                     {
+                        Skipped = true;
                         break;
                     }
-                }
-                LoDConsole.Clear();
-                LoDConsole.WriteLine(string.Concat("\n\n", intro[index]));
-                //Thread.Sleep(sleep[index]);
-                Thread.Sleep(100);
-                index++;
+                    else
+                    {
+                        LoDConsole.Clear();
+                        LoDConsole.WriteLine(string.Concat("\n\n", intro[index]));
+                        Thread.Sleep(sleep[index]);
+                        index++;
+                    }
+                }                
             }
             lock (myLock) { stopProcessing = true; }
-            LoDConsole.LoadCampaign();
+            if (!Skipped) LoDConsole.LoadCampaign();
         }
 
         public static void SkipIntro()
@@ -336,9 +340,8 @@ namespace Legend_Of_Drongo
                             }
                             else if (LineWords[0] == "BorderStyle")
                             {
-                                int TryParse = -1;
-                                if (int.TryParse(LineWords[1], out TryParse)) LoDConsole.DrawBorders(TryParse);
-
+                                //int TryParse = -1;
+                                //if (int.TryParse(LineWords[1], out TryParse)) LoDConsole.DrawBorders(TryParse);
                             }
                         }
                     }
@@ -3438,7 +3441,7 @@ namespace Legend_Of_Drongo
         public static string SaveGame()
         {
             string SavePath = LoDConsole.SaveFile("\\Saves\\");
-            if (SavePath == "!FAIL!" || !File.Exists(SavePath))
+            if (SavePath == "!FAIL!" || !Directory.Exists(SavePath))
             {
                 return "Save Failure";
             }
@@ -3493,7 +3496,8 @@ namespace Legend_Of_Drongo
                     else if (WorldState.WorldTime == 1200) LoDConsole.WriteLine("\n\nThe sun sets over the horizon, night has come\n>");
                     index = 0;
                 }
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
+                Thread.Sleep(10);
             }
             lock (myLock) { stopProcessing = true; }
         }
@@ -3651,7 +3655,6 @@ namespace Legend_Of_Drongo
             LoDConsole.Write("as this.");
         }
 
-        
 
         #endregion
     }

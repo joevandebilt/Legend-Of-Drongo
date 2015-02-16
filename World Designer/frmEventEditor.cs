@@ -346,7 +346,7 @@ namespace Legend_Of_Drongo
         private void cmdAddItem_Click(object sender, EventArgs e)
         {
             DataTypes.itemInfo NewItem = new DataTypes.itemInfo();
-            frmItemEditor NewForm = new frmItemEditor(NewItem,string.Empty);
+            frmItemEditor NewForm = new frmItemEditor(NewItem, string.Empty);
             NewForm.ShowDialog();
 
             NewItem = NewForm.Item;

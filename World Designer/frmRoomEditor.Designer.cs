@@ -469,14 +469,14 @@
             this.pnlGraphicWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlGraphicWindow.Location = new System.Drawing.Point(1065, 101);
             this.pnlGraphicWindow.Name = "pnlGraphicWindow";
-            this.pnlGraphicWindow.Size = new System.Drawing.Size(730, 384);
+            this.pnlGraphicWindow.Size = new System.Drawing.Size(651, 322);
             this.pnlGraphicWindow.TabIndex = 41;
             // 
             // frmRoomEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1827, 534);
+            this.ClientSize = new System.Drawing.Size(1733, 560);
             this.Controls.Add(this.pnlGraphicWindow);
             this.Controls.Add(this.cmdFindImage);
             this.Controls.Add(this.txtBackgroundImage);

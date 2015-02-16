@@ -117,9 +117,26 @@ namespace Legend_Of_Drongo
             string MainMenuImage = ".\\Resources\\Backgrounds\\MainMenu\\MainMenu.png";
             if (File.Exists(MainMenuImage))
             {
-                MainBackgroundImage.Image = Image.FromFile(MainMenuImage);
-                MainBackgroundImage.Refresh();
+                pnlOutputWindow.BackgroundImage = Image.FromFile(MainMenuImage);
+                pnlOutputWindow.Refresh();
             }
+            SetFonts();
+        }
+        
+        public void SetFonts ()
+        {
+            Font DefaultFont = new Font("Bookman Old Style",12F,FontStyle.Regular);
+            txtConsoleOutput.Font = DefaultFont;
+            lblSkipIntro.Font = DefaultFont;
+            txtInput.Font = DefaultFont;
+            lblNewGame.Font = DefaultFont;
+            lblLoadGame.Font = DefaultFont;
+            lblTutorial.Font = DefaultFont;
+            lblCustom.Font = DefaultFont;
+            lblQuit.Font = DefaultFont;
+            lblOptions.Font = DefaultFont;
+            lblOkay.Font = DefaultFont;
+            lblVolume.Font = DefaultFont;
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -231,8 +248,7 @@ namespace Legend_Of_Drongo
                 lblTutorial.Visible = true;
             }
         }
-
-
+        
         private void lblNewGame_Click(object sender, EventArgs e)
         {
             MainMenuChoice(0);
@@ -383,15 +399,15 @@ namespace Legend_Of_Drongo
         public void DrawEnvironment(DataTypes.roomInfo ThisRoom)
         {
             //Clear existing controls that have been added. Continue to use previous background image if no new one is available
-            MainBackgroundImage.Controls.Clear();
+            pnlOutputWindow.Controls.Clear();
 
             #region Background
             //Draw the Background Image
             ThisRoom.ImagePath = Path.Combine(Directory.GetCurrentDirectory() + ThisRoom.ImagePath);
             if (!string.IsNullOrEmpty(ThisRoom.ImagePath) && File.Exists(ThisRoom.ImagePath))
             {
-                MainBackgroundImage.Image = Image.FromFile(ThisRoom.ImagePath);
-                MainBackgroundImage.Refresh();
+                pnlOutputWindow.BackgroundImage = Image.FromFile(ThisRoom.ImagePath);
+                pnlOutputWindow.Refresh();
             }
             #endregion
 
@@ -415,7 +431,7 @@ namespace Legend_Of_Drongo
                             Image = Image.FromFile(ImagePath),
                             SizeMode = PictureBoxSizeMode.StretchImage
                         };
-                        MainBackgroundImage.Controls.Add(NewPicBox);
+                        pnlOutputWindow.Controls.Add(NewPicBox);
                     }
                 }
             }
@@ -442,7 +458,7 @@ namespace Legend_Of_Drongo
                             Image = Image.FromFile(ImagePath),
                             SizeMode = PictureBoxSizeMode.StretchImage
                         };
-                        MainBackgroundImage.Controls.Add(NewPicBox);
+                        pnlOutputWindow.Controls.Add(NewPicBox);
                     }
                 }
             }
@@ -468,7 +484,7 @@ namespace Legend_Of_Drongo
                             Image = Image.FromFile(ImagePath),
                             SizeMode = PictureBoxSizeMode.StretchImage
                         };
-                        MainBackgroundImage.Controls.Add(NewPicBox);
+                        pnlOutputWindow.Controls.Add(NewPicBox);
                     }
 
                 }
@@ -489,8 +505,8 @@ namespace Legend_Of_Drongo
                     string ThisFile = FileNames[index].Split('\\')[FileNames[index].Split('\\').Length - 1];
                     if (ThisFile.Split('.')[0] == BorderStyle.ToString())
                     {
-                        pnlGraphicWindow.BackgroundImage = Image.FromFile(FileNames[index]);
-                        pnlGraphicWindow.BackgroundImageLayout = ImageLayout.Stretch;
+                        pnlOutputWindow.BackgroundImage = Image.FromFile(FileNames[index]);
+                        pnlOutputWindow.BackgroundImageLayout = ImageLayout.Stretch;
                         pnlOutputWindow.BackgroundImage = Image.FromFile(FileNames[index]);
                         pnlOutputWindow.BackgroundImageLayout = ImageLayout.Stretch;
                         Found = true;
@@ -500,7 +516,7 @@ namespace Legend_Of_Drongo
             }
             else
             {
-                pnlGraphicWindow.BackgroundImage = null;
+                pnlOutputWindow.BackgroundImage = null;
                 pnlOutputWindow.BackgroundImage = null;
                 Found = true;
             }

@@ -20,6 +20,7 @@ namespace Legend_Of_Drongo
         {
             InitializeComponent();
             ChangeMade = false;
+            Item = ThisItem;
             PopulateItem(ItemClass);
         }
 
