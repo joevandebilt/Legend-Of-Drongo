@@ -173,7 +173,7 @@
             this.pnlMainMenu.Controls.Add(this.lblQuit);
             this.pnlMainMenu.Controls.Add(this.lblLoadGame);
             this.pnlMainMenu.Controls.Add(this.lblNewGame);
-            this.pnlMainMenu.Location = new System.Drawing.Point(27, 82);
+            this.pnlMainMenu.Location = new System.Drawing.Point(27, 27);
             this.pnlMainMenu.Name = "pnlMainMenu";
             this.pnlMainMenu.Size = new System.Drawing.Size(392, 189);
             this.pnlMainMenu.TabIndex = 19;

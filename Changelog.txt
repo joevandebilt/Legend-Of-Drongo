@@ -292,7 +292,3 @@ v3.2.1
 - Added txtOutputConsole function to add scrollbar on text overflow
 - Added txtOutputConsole function to prevent typing in textbox
 - Added SetFonts method to globally set a font rather than change elements individually
-
-v3.2.2
-- Matched Size of Drawing pane in world editor to Main Display in Game UI
-- Redesigned frmRoomEditor for Smaller Monitors (still a bit big)
