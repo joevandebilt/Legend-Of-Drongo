@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legend Of Drongo World Desi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legend Of Drongo Data Types", "Data Types\Legend Of Drongo Data Types.csproj", "{16A4E1A2-EC9C-470F-BED2-05DA707CABAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legend Of Drongo UI", "UI\Legend Of Drongo UI.csproj", "{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legend Of Drongo Engine", "Engine\Legend Of Drongo Engine.csproj", "{F8CCA1E1-BB50-4D84-8FF1-E07D9A01B5B1}"
 EndProject
 Global
@@ -41,16 +39,6 @@ Global
 		{16A4E1A2-EC9C-470F-BED2-05DA707CABAC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{16A4E1A2-EC9C-470F-BED2-05DA707CABAC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{16A4E1A2-EC9C-470F-BED2-05DA707CABAC}.Release|x86.ActiveCfg = Release|Any CPU
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Debug|x86.ActiveCfg = Debug|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Debug|x86.Build.0 = Debug|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Release|Any CPU.ActiveCfg = Release|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Release|Mixed Platforms.Build.0 = Release|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Release|x86.ActiveCfg = Release|x86
-		{6A5AE69A-CA87-4B03-A8EA-CD37840ED817}.Release|x86.Build.0 = Release|x86
 		{F8CCA1E1-BB50-4D84-8FF1-E07D9A01B5B1}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{F8CCA1E1-BB50-4D84-8FF1-E07D9A01B5B1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{F8CCA1E1-BB50-4D84-8FF1-E07D9A01B5B1}.Debug|Mixed Platforms.Build.0 = Debug|x86

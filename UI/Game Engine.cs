@@ -375,8 +375,8 @@ namespace Legend_Of_Drongo
                 Music("Start");
             }
 
-            LoDConsole.WriteLine(WordWrap(CurrentRoom.Description));
-            LoDConsole.DrawEnvironment(CurrentRoom);
+            //LoDConsole.WriteLine(WordWrap(CurrentRoom.Description));
+            //LoDConsole.DrawEnvironment(CurrentRoom);
         }
 
         public static void EnterCommand(string PlayerCommand)
@@ -1580,7 +1580,7 @@ namespace Legend_Of_Drongo
             }
             #endregion
 
-            LoDConsole.DrawEnvironment(CurrentRoom);
+            //LoDConsole.DrawEnvironment(CurrentRoom);
         }
 
         #region Movement Functions

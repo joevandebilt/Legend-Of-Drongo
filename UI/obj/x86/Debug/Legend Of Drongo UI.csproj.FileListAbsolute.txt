@@ -33,3 +33,12 @@ D:\Dropbox\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend_Of_Drongo.Proper
 D:\Dropbox\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend Of Drongo UI.csproj.GenerateResource.Cache
 D:\Dropbox\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend Of Drongo UI.exe
 D:\Dropbox\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend Of Drongo UI.pdb
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend Of Drongo UI.csprojResolveAssemblyReference.cache
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend_Of_Drongo.frmMainConsole.resources
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend Of Drongo UI.csproj.GenerateResource.Cache
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend Of Drongo UI.exe
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo UI.exe.config
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo UI.exe
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo UI.pdb
+C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\UI\obj\x86\Debug\Legend Of Drongo UI.pdb

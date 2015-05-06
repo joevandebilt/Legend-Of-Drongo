@@ -62,11 +62,6 @@
             this.cmdHelp = new System.Windows.Forms.Button();
             this.txtDonate = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.cmdImagePath = new System.Windows.Forms.Button();
-            this.txtImagePath = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtLocation = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmdCancel
@@ -99,21 +94,21 @@
             // 
             // txtArmor
             // 
-            this.txtArmor.Location = new System.Drawing.Point(434, 58);
+            this.txtArmor.Location = new System.Drawing.Point(507, 22);
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
             this.txtArmor.TabIndex = 3;
             // 
             // txtMoney
             // 
-            this.txtMoney.Location = new System.Drawing.Point(524, 58);
+            this.txtMoney.Location = new System.Drawing.Point(597, 22);
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(39, 20);
             this.txtMoney.TabIndex = 4;
             // 
             // txtHP
             // 
-            this.txtHP.Location = new System.Drawing.Point(339, 58);
+            this.txtHP.Location = new System.Drawing.Point(412, 22);
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(38, 20);
             this.txtHP.TabIndex = 2;
@@ -137,7 +132,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(383, 61);
+            this.label4.Location = new System.Drawing.Point(456, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 24;
@@ -146,7 +141,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(478, 61);
+            this.label9.Location = new System.Drawing.Point(551, 25);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
             this.label9.TabIndex = 22;
@@ -155,7 +150,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(302, 61);
+            this.label3.Location = new System.Drawing.Point(375, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 13);
             this.label3.TabIndex = 23;
@@ -287,16 +282,16 @@
             // txtKnowledge
             // 
             this.txtKnowledge.Enabled = false;
-            this.txtKnowledge.Location = new System.Drawing.Point(345, 183);
+            this.txtKnowledge.Location = new System.Drawing.Point(345, 132);
             this.txtKnowledge.Multiline = true;
             this.txtKnowledge.Name = "txtKnowledge";
-            this.txtKnowledge.Size = new System.Drawing.Size(286, 36);
+            this.txtKnowledge.Size = new System.Drawing.Size(286, 87);
             this.txtKnowledge.TabIndex = 16;
             // 
             // txtTopic
             // 
             this.txtTopic.Enabled = false;
-            this.txtTopic.Location = new System.Drawing.Point(345, 140);
+            this.txtTopic.Location = new System.Drawing.Point(341, 93);
             this.txtTopic.Name = "txtTopic";
             this.txtTopic.Size = new System.Drawing.Size(286, 20);
             this.txtTopic.TabIndex = 15;
@@ -304,7 +299,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(346, 124);
+            this.label2.Location = new System.Drawing.Point(342, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 55;
@@ -313,7 +308,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(341, 163);
+            this.label7.Location = new System.Drawing.Point(341, 116);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 56;
@@ -361,7 +356,7 @@
             // 
             // txtDonate
             // 
-            this.txtDonate.Location = new System.Drawing.Point(422, 88);
+            this.txtDonate.Location = new System.Drawing.Point(439, 55);
             this.txtDonate.Name = "txtDonate";
             this.txtDonate.Size = new System.Drawing.Size(197, 20);
             this.txtDonate.TabIndex = 60;
@@ -369,66 +364,17 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(302, 91);
+            this.label8.Location = new System.Drawing.Point(319, 58);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(114, 13);
             this.label8.TabIndex = 61;
             this.label8.Text = "Donation Item/Amount";
-            // 
-            // cmdImagePath
-            // 
-            this.cmdImagePath.Location = new System.Drawing.Point(650, 22);
-            this.cmdImagePath.Name = "cmdImagePath";
-            this.cmdImagePath.Size = new System.Drawing.Size(25, 22);
-            this.cmdImagePath.TabIndex = 63;
-            this.cmdImagePath.Text = "...";
-            this.cmdImagePath.UseVisualStyleBackColor = true;
-            this.cmdImagePath.Click += new System.EventHandler(this.cmdImagePath_Click);
-            // 
-            // txtImagePath
-            // 
-            this.txtImagePath.Location = new System.Drawing.Point(455, 22);
-            this.txtImagePath.Name = "txtImagePath";
-            this.txtImagePath.ReadOnly = true;
-            this.txtImagePath.Size = new System.Drawing.Size(189, 20);
-            this.txtImagePath.TabIndex = 62;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(413, 25);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(36, 13);
-            this.label13.TabIndex = 64;
-            this.label13.Text = "Image";
-            // 
-            // txtLocation
-            // 
-            this.txtLocation.Location = new System.Drawing.Point(623, 55);
-            this.txtLocation.Name = "txtLocation";
-            this.txtLocation.ReadOnly = true;
-            this.txtLocation.Size = new System.Drawing.Size(64, 20);
-            this.txtLocation.TabIndex = 65;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(569, 61);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(48, 13);
-            this.label10.TabIndex = 66;
-            this.label10.Text = "Location";
             // 
             // frmNPCEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 381);
-            this.Controls.Add(this.txtLocation);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.cmdImagePath);
-            this.Controls.Add(this.txtImagePath);
-            this.Controls.Add(this.label13);
             this.Controls.Add(this.txtDonate);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmdHelp);
@@ -505,10 +451,5 @@
         private System.Windows.Forms.Button cmdHelp;
         private System.Windows.Forms.TextBox txtDonate;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button cmdImagePath;
-        private System.Windows.Forms.TextBox txtImagePath;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtLocation;
-        private System.Windows.Forms.Label label10;
     }
 }

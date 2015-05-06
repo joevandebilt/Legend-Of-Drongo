@@ -71,7 +71,6 @@ namespace Legend_Of_Drongo
             public List<itemInfo> items;        //a list of items (list due to players being able to drop items on the floor)
             public List<EnemyProfile> Enemy;    //an array of enemies in the room
             public Building Building;
-            public string ImagePath;
         }
 
         [Serializable()]
@@ -87,7 +86,7 @@ namespace Legend_Of_Drongo
             public List<CivilianProfile> Civilians;
             public List<itemInfo> items;        //a list of items (list due to players being able to drop items on the floor)
             public List<EnemyProfile> Enemy;    //an array of enemies in the room
-            public string ImagePath;
+            //public string ImagePath;
             //Thanks for the coffee scott
         }
 
@@ -132,8 +131,8 @@ namespace Legend_Of_Drongo
             public string ItemNeeded;
             public string interactionResponse;
             public int XP;
-            public string ImagePath;
-            public Point ImageLocation;
+            //public string ImagePath;
+            //public Point ImageLocation;
         }
 
         [Serializable()]
@@ -151,8 +150,8 @@ namespace Legend_Of_Drongo
             public int XP;
             public int Team;
             public string Behaviour;
-            public string ImagePath;
-            public Point ImageLocation;
+            //public string ImagePath;
+            //public Point ImageLocation;
         }
 
         [Serializable()]
@@ -171,8 +170,8 @@ namespace Legend_Of_Drongo
             public bool QuestCharacter;
             public int XP;
             public string Donation;
-            public string ImagePath;
-            public Point ImageLocation;
+            //public string ImagePath;
+            //public Point ImageLocation;
         }
 
         [Serializable()]
@@ -210,7 +209,7 @@ namespace Legend_Of_Drongo
             NewRoom.LockedIn = Room.LockedIn;
             NewRoom.SuicideAction = Room.SuicideAction;
             NewRoom.RoomColour = Room.RoomColour;
-            NewRoom.ImagePath = Room.ImagePath;
+            //NewRoom.ImagePath = Room.ImagePath;
 
             NewRoom.Building = CloneBuilding(Room.Building);
 
@@ -237,7 +236,7 @@ namespace Legend_Of_Drongo
             NewBuilding.CanMove = Building.CanMove;            //denotes whether player can move into this building
             NewBuilding.LockedIn = Building.LockedIn;           //If a player is allowed to leave the building
             NewBuilding.SuicideAction = Building.SuicideAction;    //Special string for if the user wishes to commit suicide.
-            NewBuilding.ImagePath = Building.ImagePath;
+            //NewBuilding.ImagePath = Building.ImagePath;
 
             NewBuilding.Events = new List<Event>();
             NewBuilding.Civilians = new List<CivilianProfile>();
@@ -274,8 +273,8 @@ namespace Legend_Of_Drongo
             NewItem.ItemNeeded = Item.ItemNeeded;
             NewItem.interactionResponse = Item.interactionResponse;
             NewItem.XP = Item.XP;
-            NewItem.ImagePath = Item.ImagePath;
-            NewItem.ImageLocation = Item.ImageLocation;
+            //NewItem.ImagePath = Item.ImagePath;
+            //NewItem.ImageLocation = Item.ImageLocation;
 
             return NewItem;
         }
@@ -325,8 +324,8 @@ namespace Legend_Of_Drongo
             NewEnemy.PayOffResponse = Enemy.PayOffResponse;
             NewEnemy.XP = Enemy.XP;
             NewEnemy.Behaviour = Enemy.Behaviour;
-            NewEnemy.ImagePath = Enemy.ImagePath;
-            NewEnemy.ImageLocation = Enemy.ImageLocation;
+            //NewEnemy.ImagePath = Enemy.ImagePath;
+            //NewEnemy.ImageLocation = Enemy.ImageLocation;
 
             return NewEnemy;
         }
@@ -353,8 +352,8 @@ namespace Legend_Of_Drongo
             NewNPC.QuestCharacter = NPC.QuestCharacter;
             NewNPC.XP = NPC.XP;
             NewNPC.Donation = NPC.Donation;
-            NewNPC.ImagePath = NPC.ImagePath;
-            NewNPC.ImageLocation = NPC.ImageLocation;
+            //NewNPC.ImagePath = NPC.ImagePath;
+            //NewNPC.ImageLocation = NPC.ImageLocation;
 
             return NewNPC;
         }
@@ -383,7 +382,7 @@ namespace Legend_Of_Drongo
             ThisRoom.CanMove = thisBuilding.CanMove;
             ThisRoom.LockedIn = thisBuilding.LockedIn;
             ThisRoom.SuicideAction = thisBuilding.SuicideAction;
-            ThisRoom.ImagePath = thisBuilding.ImagePath;
+            //ThisRoom.ImagePath = thisBuilding.ImagePath;
 
             ThisRoom.Events = new List<Event>();
             ThisRoom.Civilians = new List<CivilianProfile>();
@@ -410,7 +409,7 @@ namespace Legend_Of_Drongo
             thisBuilding.CanMove = thisRoom.CanMove;
             thisBuilding.LockedIn = thisRoom.LockedIn;
             thisBuilding.SuicideAction = thisRoom.SuicideAction;
-            thisBuilding.ImagePath = thisRoom.ImagePath;
+            //thisBuilding.ImagePath = thisRoom.ImagePath;
 
             thisBuilding.Events = new List<Event>();
             thisBuilding.Civilians = new List<CivilianProfile>();

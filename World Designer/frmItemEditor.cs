@@ -64,8 +64,8 @@ namespace Legend_Of_Drongo
             if (Item.ItemNeeded != null) txtItemNeeded.Text = Item.ItemNeeded;
             if (Item.interactionResponse != null) txtInteractionMessage.Text = Item.interactionResponse;
 
-            if (!string.IsNullOrEmpty(Item.ImagePath)) txtImagePath.Text = Item.ImagePath;
-            txtImageLocation.Text = Item.ImageLocation.ToString();
+            //if (!string.IsNullOrEmpty(Item.ImagePath)) txtImagePath.Text = Item.ImagePath;
+            //txtImageLocation.Text = Item.ImageLocation.ToString();
         }
 
         private bool SaveItem()
@@ -123,7 +123,7 @@ namespace Legend_Of_Drongo
             if (txtInteractionMessage.Text != string.Empty) Item.interactionResponse = txtInteractionMessage.Text;
             else if (txtInteractionMessage.Enabled == true) return false;
 
-            if (!string.IsNullOrEmpty(txtImagePath.Text)) Item.ImagePath = txtImagePath.Text;
+            //if (!string.IsNullOrEmpty(txtImagePath.Text)) Item.ImagePath = txtImagePath.Text;
 
             return true;
         }
@@ -190,7 +190,7 @@ namespace Legend_Of_Drongo
             frmHelp NewForm = new frmHelp();
             NewForm.Show();
         }
-
+        /*
         private void cmdImagePath_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFile = new OpenFileDialog();
@@ -232,6 +232,7 @@ namespace Legend_Of_Drongo
             }
             txtImageLocation.Text = Item.ImageLocation.ToString();
         }
+        */
 
     }
 }

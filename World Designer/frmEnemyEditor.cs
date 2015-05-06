@@ -85,8 +85,8 @@ namespace Legend_Of_Drongo
             txtPayOff.Text = Enemy.PayOff.ToString();
             if (Enemy.PayOffResponse != null) txtPayOffResponse.Text = Enemy.PayOffResponse;
 
-            if (!string.IsNullOrEmpty(Enemy.ImagePath)) txtImagePath.Text = Enemy.ImagePath;
-            txtImageLocation.Text = Enemy.ImageLocation.ToString();
+            //if (!string.IsNullOrEmpty(Enemy.ImagePath)) txtImagePath.Text = Enemy.ImagePath;
+            //txtImageLocation.Text = Enemy.ImageLocation.ToString();
         }
 
         public bool SaveEnemy()
@@ -115,7 +115,7 @@ namespace Legend_Of_Drongo
             else return false;
             if (int.TryParse(txtTeam.Text, out n)) Enemy.Team = n;
 
-            if (!string.IsNullOrEmpty(txtImagePath.Text)) Enemy.ImagePath = txtImagePath.Text;
+            //if (!string.IsNullOrEmpty(txtImagePath.Text)) Enemy.ImagePath = txtImagePath.Text;
 
             return true;
         }
@@ -159,6 +159,7 @@ namespace Legend_Of_Drongo
             NewForm.Show();
         }
 
+        /*
         private void cmdImagePath_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFile = new OpenFileDialog();
@@ -173,5 +174,6 @@ namespace Legend_Of_Drongo
                 txtImagePath.Text = Test;
             }
         }
+        */
     }
 }

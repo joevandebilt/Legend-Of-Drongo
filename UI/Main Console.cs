@@ -396,6 +396,7 @@ namespace Legend_Of_Drongo
         #endregion
         
         #region Drawing
+        /*
         public void DrawEnvironment(DataTypes.roomInfo ThisRoom)
         {
             //Clear existing controls that have been added. Continue to use previous background image if no new one is available
@@ -521,7 +522,8 @@ namespace Legend_Of_Drongo
                 Found = true;
             }
         }
+        */
         #endregion
 
-        }
+    }
 }

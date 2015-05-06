@@ -61,12 +61,6 @@
             this.txtXP = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.cmdHelp = new System.Windows.Forms.Button();
-            this.cmdImagePath = new System.Windows.Forms.Button();
-            this.txtImagePath = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtImageLocation = new System.Windows.Forms.TextBox();
-            this.cmdManualLocation = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdAddItems
@@ -364,71 +358,11 @@
             this.cmdHelp.UseVisualStyleBackColor = true;
             this.cmdHelp.Click += new System.EventHandler(this.cmdHelp_Click);
             // 
-            // cmdImagePath
-            // 
-            this.cmdImagePath.Location = new System.Drawing.Point(502, 117);
-            this.cmdImagePath.Name = "cmdImagePath";
-            this.cmdImagePath.Size = new System.Drawing.Size(25, 22);
-            this.cmdImagePath.TabIndex = 51;
-            this.cmdImagePath.Text = "...";
-            this.cmdImagePath.UseVisualStyleBackColor = true;
-            this.cmdImagePath.Click += new System.EventHandler(this.cmdImagePath_Click);
-            // 
-            // txtImagePath
-            // 
-            this.txtImagePath.Location = new System.Drawing.Point(370, 119);
-            this.txtImagePath.Name = "txtImagePath";
-            this.txtImagePath.ReadOnly = true;
-            this.txtImagePath.Size = new System.Drawing.Size(126, 20);
-            this.txtImagePath.TabIndex = 50;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(367, 103);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(36, 13);
-            this.label15.TabIndex = 52;
-            this.label15.Text = "Image";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(198, 103);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(48, 13);
-            this.label16.TabIndex = 52;
-            this.label16.Text = "Location";
-            // 
-            // txtImageLocation
-            // 
-            this.txtImageLocation.Location = new System.Drawing.Point(201, 119);
-            this.txtImageLocation.Name = "txtImageLocation";
-            this.txtImageLocation.ReadOnly = true;
-            this.txtImageLocation.Size = new System.Drawing.Size(126, 20);
-            this.txtImageLocation.TabIndex = 50;
-            // 
-            // cmdManualLocation
-            // 
-            this.cmdManualLocation.Location = new System.Drawing.Point(333, 117);
-            this.cmdManualLocation.Name = "cmdManualLocation";
-            this.cmdManualLocation.Size = new System.Drawing.Size(25, 22);
-            this.cmdManualLocation.TabIndex = 53;
-            this.cmdManualLocation.Text = "...";
-            this.cmdManualLocation.UseVisualStyleBackColor = true;
-            this.cmdManualLocation.Click += new System.EventHandler(this.cmdManualLocation_Click);
-            // 
             // frmItemEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 397);
-            this.Controls.Add(this.cmdManualLocation);
-            this.Controls.Add(this.cmdImagePath);
-            this.Controls.Add(this.txtImageLocation);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.txtImagePath);
-            this.Controls.Add(this.label15);
             this.Controls.Add(this.cmdHelp);
             this.Controls.Add(this.txtXP);
             this.Controls.Add(this.label14);
@@ -503,11 +437,5 @@
         private System.Windows.Forms.TextBox txtXP;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button cmdHelp;
-        private System.Windows.Forms.Button cmdImagePath;
-        private System.Windows.Forms.TextBox txtImagePath;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtImageLocation;
-        private System.Windows.Forms.Button cmdManualLocation;
     }
 }

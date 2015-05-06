@@ -25,7 +25,7 @@ namespace Legend_Of_Drongo
             Room = thisRoom;
             FloorCount = floors;
             PopulateFields();
-            DrawEnvironment();
+            //DrawEnvironment();
         }
 
         public void PopulateFields()
@@ -74,7 +74,7 @@ namespace Legend_Of_Drongo
             if (Room.Description != null) txtDescription.Text = Room.Description;
             if (Room.AltDescription != null) txtAltDescription.Text = Room.AltDescription;
             if (Room.SuicideAction != null) txtSuicide.Text = Room.SuicideAction;
-            if (Room.ImagePath != null) txtBackgroundImage.Text = Room.ImagePath;
+            //if (Room.ImagePath != null) txtBackgroundImage.Text = Room.ImagePath;
 
             GetAllNPCs();
             GetAllItems();
@@ -103,6 +103,7 @@ namespace Legend_Of_Drongo
                 else return false;
             }
 
+            /*
             if (File.Exists(Directory.GetCurrentDirectory() + txtBackgroundImage.Text))
             {
                 Room.ImagePath = txtBackgroundImage.Text;
@@ -113,6 +114,7 @@ namespace Legend_Of_Drongo
                 SaveImageLocations();
             }
             catch { return false; }
+            */
 
             return true;
         }
@@ -143,7 +145,7 @@ namespace Legend_Of_Drongo
                     lstItems.Items.Add(Item.Name + " - " + Item.Class);
                 }
             }
-            DrawEnvironment();
+            //DrawEnvironment();
         }
 
         private void cmdAddItem_Click(object sender, EventArgs e)
@@ -207,7 +209,7 @@ namespace Legend_Of_Drongo
                     lstEnemies.Items.Add(Enemy.name + " - " + Enemy.Weapon.Name);
                 }
             }
-            DrawEnvironment();
+            //DrawEnvironment();
         }
 
         private void cmdAddEnemy_Click(object sender, EventArgs e)
@@ -272,7 +274,7 @@ namespace Legend_Of_Drongo
                     lstNPCs.Items.Add(NPC.name);
                 }
             }
-            DrawEnvironment();
+            //DrawEnvironment();
         }
 
         private void cmdAddNPC_Click(object sender, EventArgs e)
@@ -425,12 +427,13 @@ namespace Legend_Of_Drongo
             if (result == DialogResult.OK)
             {
                 string Test = OpenFile.FileName.Replace(Directory.GetCurrentDirectory(), string.Empty);
-                txtBackgroundImage.Text = Test;
+                //txtBackgroundImage.Text = Test;
             }
-            DrawEnvironment();
+            //DrawEnvironment();
         }
-
+                
         #region Room Drawing
+        /*
 
         public void DragNDrop_MouseEnter(object sender, EventArgs e)
         {
@@ -734,7 +737,7 @@ namespace Legend_Of_Drongo
                 }
             }
         }
-        
+        */
         #endregion
     }
 }

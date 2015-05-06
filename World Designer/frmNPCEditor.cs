@@ -48,8 +48,8 @@ namespace Legend_Of_Drongo
             if (NPC.Knowledge != null) GetAllKnowledge();
 
             if (!string.IsNullOrEmpty(NPC.Donation)) txtDonate.Text = NPC.Donation;
-            if (!string.IsNullOrEmpty(NPC.ImagePath)) txtImagePath.Text = NPC.ImagePath;
-            if (NPC.ImageLocation != null) txtLocation.Text = NPC.ImageLocation.ToString();
+            //if (!string.IsNullOrEmpty(NPC.ImagePath)) txtImagePath.Text = NPC.ImagePath;
+            //if (NPC.ImageLocation != null) txtLocation.Text = NPC.ImageLocation.ToString();
 
         }
 
@@ -83,7 +83,7 @@ namespace Legend_Of_Drongo
 
             if (!string.IsNullOrEmpty(txtDonate.Text)) NPC.Donation = txtDonate.Text;
 
-            if (!string.IsNullOrEmpty(txtImagePath.Text)) NPC.ImagePath = txtImagePath.Text;
+            //if (!string.IsNullOrEmpty(txtImagePath.Text)) NPC.ImagePath = txtImagePath.Text;
 
             return true;
 
@@ -260,6 +260,7 @@ namespace Legend_Of_Drongo
             NewForm.Show();
         }
 
+        /*
         private void cmdImagePath_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFile = new OpenFileDialog();
@@ -274,5 +275,6 @@ namespace Legend_Of_Drongo
                 txtImagePath.Text = Test;
             }
         }
+        */
     }
 }

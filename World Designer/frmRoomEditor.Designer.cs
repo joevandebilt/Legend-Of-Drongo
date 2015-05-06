@@ -66,11 +66,7 @@
             this.txtBuildingName = new System.Windows.Forms.TextBox();
             this.txtBuilding = new System.Windows.Forms.TextBox();
             this.lblBuilding = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtBackgroundImage = new System.Windows.Forms.TextBox();
-            this.cmdFindImage = new System.Windows.Forms.Button();
             this.OpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.pnlGraphicWindow = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // cmdCancel
@@ -433,54 +429,15 @@
             this.lblBuilding.TabIndex = 36;
             this.lblBuilding.Text = "Building";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(610, 45);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
-            this.label8.TabIndex = 38;
-            this.label8.Text = "Background Image";
-            // 
-            // txtBackgroundImage
-            // 
-            this.txtBackgroundImage.Location = new System.Drawing.Point(713, 43);
-            this.txtBackgroundImage.Name = "txtBackgroundImage";
-            this.txtBackgroundImage.ReadOnly = true;
-            this.txtBackgroundImage.Size = new System.Drawing.Size(278, 20);
-            this.txtBackgroundImage.TabIndex = 39;
-            // 
-            // cmdFindImage
-            // 
-            this.cmdFindImage.Location = new System.Drawing.Point(997, 41);
-            this.cmdFindImage.Name = "cmdFindImage";
-            this.cmdFindImage.Size = new System.Drawing.Size(31, 22);
-            this.cmdFindImage.TabIndex = 40;
-            this.cmdFindImage.Text = "...";
-            this.cmdFindImage.UseVisualStyleBackColor = true;
-            this.cmdFindImage.Click += new System.EventHandler(this.cmdFindImage_Click);
-            // 
             // OpenFile
             // 
             this.OpenFile.FileName = "openFileDialog1";
-            // 
-            // pnlGraphicWindow
-            // 
-            this.pnlGraphicWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlGraphicWindow.Location = new System.Drawing.Point(1065, 101);
-            this.pnlGraphicWindow.Name = "pnlGraphicWindow";
-            this.pnlGraphicWindow.Size = new System.Drawing.Size(651, 322);
-            this.pnlGraphicWindow.TabIndex = 41;
             // 
             // frmRoomEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1733, 560);
-            this.Controls.Add(this.pnlGraphicWindow);
-            this.Controls.Add(this.cmdFindImage);
-            this.Controls.Add(this.txtBackgroundImage);
-            this.Controls.Add(this.label8);
+            this.ClientSize = new System.Drawing.Size(1046, 560);
             this.Controls.Add(this.txtBuilding);
             this.Controls.Add(this.lblBuilding);
             this.Controls.Add(this.txtBuildingName);
@@ -565,10 +522,6 @@
         private System.Windows.Forms.TextBox txtBuildingName;
         private System.Windows.Forms.TextBox txtBuilding;
         private System.Windows.Forms.Label lblBuilding;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtBackgroundImage;
-        private System.Windows.Forms.Button cmdFindImage;
         private System.Windows.Forms.OpenFileDialog OpenFile;
-        private System.Windows.Forms.Panel pnlGraphicWindow;
     }
 }
