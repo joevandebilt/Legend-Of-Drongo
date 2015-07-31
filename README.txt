@@ -24,6 +24,6 @@ Known Bugs:
 To Do:
 - Finish world.
 - File directories are fixed paths, add in choice of directory. - Omitted
-- Speed up generating world graphics 
+- Speed up generating world graphics - Omitted
 
 If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub

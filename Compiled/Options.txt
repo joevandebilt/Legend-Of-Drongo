@@ -1,13 +1,7 @@
 #Options for Legend Of Drongo
 
 #Enable debugging options
-DebugOptions: true
+DebugOptions: false
 
 #Clear Console after each command
 ClearConsole: true
-
-#Select Border style
-#0 No Border			#1 Flowery
-#2 Black Fleur De Lis	#3 Dashed
-#4 Solid				#5 Thick
-BorderStyle: 5

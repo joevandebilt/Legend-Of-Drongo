@@ -76,3 +76,8 @@ C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo
 C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache
 C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
 C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
+C:\Google Drive\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.exe
+C:\Google Drive\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo.pdb
+C:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.exe
+C:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo.pdb
+C:\Google Drive\Programming\Legend-Of-Drongo\Engine\obj\x86\Debug\Legend Of Drongo Engine.csprojResolveAssemblyReference.cache

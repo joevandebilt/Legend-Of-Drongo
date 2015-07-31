@@ -3006,78 +3006,86 @@ namespace Legend_Of_Drongo
 
         public static void DrawMap()
         {
-            int row;
-            int col;
-            Console.Clear();
-            //Console.CursorSize
-            Console.WriteLine("Map of " + ThisFloor.FloorName);
-            Console.WriteLine("──────────────────────");
-            Console.WriteLine("* Dead End");
-            Console.WriteLine("X Blocked");
-            Console.WriteLine("┼ Path\n\n");
-
-            Console.Write("\t┌────────────┐\n");
-            for (row = 0; row < ThisFloor.CurrentFloor.GetLength(0); row++)
+            if (!Player.InBuilding)
             {
-                Console.Write("\t│ ");
-                for (col = 0; col < ThisFloor.CurrentFloor.GetLength(1); col++)
+                int row;
+                int col;
+                Console.Clear();
+                //Console.CursorSize
+                Console.WriteLine("Map of " + ThisFloor.FloorName);
+                Console.Write(string.Empty.PadLeft((ThisFloor.CurrentFloor.GetLength(1) + 2), '─'));
+                Console.WriteLine("* Dead End");
+                Console.WriteLine("X Blocked");
+                Console.WriteLine("O Player");
+                Console.WriteLine("┼ Path\n\n");
+
+                Console.Write("\t┌────────────┐\n");
+                for (row = 0; row < ThisFloor.CurrentFloor.GetLength(0); row++)
                 {
-                    //Draw the map
-                    roomInfo TempRoom = new roomInfo();
-                    TempRoom = ThisFloor.CurrentFloor[row, col];
-                    if (TempRoom.Explored == true)
+                    Console.Write("\t│ ");
+                    for (col = 0; col < ThisFloor.CurrentFloor.GetLength(1); col++)
                     {
-                        if (TempRoom.CanMove == true)
+                        //Draw the map
+                        roomInfo TempRoom = new roomInfo();
+                        TempRoom = ThisFloor.CurrentFloor[row, col];
+                        if (TempRoom.Explored == true || DebugEnabled == true)
                         {
-                            if (row > 0 && row < (ThisFloor.CurrentFloor.GetLength(0)-1) && col > 0 && col < (ThisFloor.CurrentFloor.GetLength(1)-1))
+                            if (TempRoom.CanMove == true)
                             {
-                                bool north = false;
-                                bool east = false;
-                                bool south = false;
-                                bool west = false;
-                                bool isPlayer = false;
+                                if (row > 0 && row < (ThisFloor.CurrentFloor.GetLength(0) - 1) && col > 0 && col < (ThisFloor.CurrentFloor.GetLength(1) - 1))
+                                {
+                                    bool north = false;
+                                    bool east = false;
+                                    bool south = false;
+                                    bool west = false;
+                                    bool isPlayer = false;
 
-                                if (row == Player.CurrentPos[0] && col == Player.CurrentPos[1]) isPlayer = true;
-                                if (ThisFloor.CurrentFloor[row - 1, col].CanMove == true) north = true;
-                                if (ThisFloor.CurrentFloor[row + 1, col].CanMove == true) south = true;
-                                if (ThisFloor.CurrentFloor[row, col - 1].CanMove == true) west = true;
-                                if (ThisFloor.CurrentFloor[row, col + 1].CanMove == true) east = true;
+                                    if (row == Player.CurrentPos[0] && col == Player.CurrentPos[1]) isPlayer = true;
+                                    if (ThisFloor.CurrentFloor[row - 1, col].CanMove == true) north = true;
+                                    if (ThisFloor.CurrentFloor[row + 1, col].CanMove == true) south = true;
+                                    if (ThisFloor.CurrentFloor[row, col - 1].CanMove == true) west = true;
+                                    if (ThisFloor.CurrentFloor[row, col + 1].CanMove == true) east = true;
 
-                                /*
-                                 *      http://www.theasciicode.com.ar/ 
-                                 */
+                                    /*
+                                     *      http://www.theasciicode.com.ar/ 
+                                     */
 
-                                if (isPlayer == true) Console.Write("O");
-                                //North Combinations
-                                else if (north == true && south == true && east == true && west == true) Console.Write("┼");
-                                else if (north == true && south == true && east == true && west == false) Console.Write("├");
-                                else if (north == true && south == true && east == false && west == true) Console.Write("┤");
-                                else if (north == true && south == true && east == false && west == false) Console.Write("│");
-                                else if (north == true && south == false && east == true && west == true) Console.Write("┴");
-                                else if (north == true && south == false && east == true && west == false) Console.Write("└");
-                                else if (north == true && south == false && east == false && west == true) Console.Write("┘");
+                                    if (isPlayer == true) Console.Write("O");
+                                    //North Combinations
+                                    else if (north == true && south == true && east == true && west == true) Console.Write("┼");
+                                    else if (north == true && south == true && east == true && west == false) Console.Write("├");
+                                    else if (north == true && south == true && east == false && west == true) Console.Write("┤");
+                                    else if (north == true && south == true && east == false && west == false) Console.Write("│");
+                                    else if (north == true && south == false && east == true && west == true) Console.Write("┴");
+                                    else if (north == true && south == false && east == true && west == false) Console.Write("└");
+                                    else if (north == true && south == false && east == false && west == true) Console.Write("┘");
 
-                                //South Combinations
-                                else if (north == false && south == true && east == true && west == true) Console.Write("┬");
-                                else if (north == false && south == true && east == true && west == false) Console.Write("┌");
-                                else if (north == false && south == true && east == false && west == true) Console.Write("┐");
+                                    //South Combinations
+                                    else if (north == false && south == true && east == true && west == true) Console.Write("┬");
+                                    else if (north == false && south == true && east == true && west == false) Console.Write("┌");
+                                    else if (north == false && south == true && east == false && west == true) Console.Write("┐");
 
-                                //East West Combinations
-                                else if (north == false && south == false && east == true && west == true) Console.Write("─");
-                                else Console.Write("X");
+                                    //East West Combinations
+                                    else if (north == false && south == false && east == true && west == true) Console.Write("─");
+                                    else Console.Write("X");
+                                }
                             }
+                            else Console.Write("■");
                         }
-                        else Console.Write("*");
-                    }
-                    else Console.Write(" ");
+                        else Console.Write(" ");
 
+                    }
+                    Console.Write(" │\n");
                 }
-                Console.Write(" │\n");
+                Console.Write("\t└");
+                Console.Write(string.Empty.PadLeft((ThisFloor.CurrentFloor.GetLength(1) + 2), '─'));
+                Console.Write("┘");
+                Console.WriteLine("\n\nPress [Enter] to close map");
+                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine(WordWrap(CurrentRoom.Description));
             }
-            Console.WriteLine("\t└────────────┘");
-            Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine(WordWrap(CurrentRoom.Description));
+            Console.WriteLine("You don't need to see a map for a building");
         }
 
         public static string SaveGame()

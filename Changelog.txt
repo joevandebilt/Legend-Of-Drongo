@@ -292,3 +292,17 @@ v3.2.1
 - Added txtOutputConsole function to add scrollbar on text overflow
 - Added txtOutputConsole function to prevent typing in textbox
 - Added SetFonts method to globally set a font rather than change elements individually
+
+v3.3.0
+- Removed UI project from solution
+- Commented out any references to graphics generation
+- Added engine fixes to old Console App engine
+- Re-instated console app engine
+- Moved UI designs over to new LOD-II engine
+- Removed UI design features from World Designer.
+
+v3.3.1
+- Improved World Design
+- Added Spell Check to Windows Design Forms (good god we needed that);
+- Changed Map drawing so space and blocked areas both denoted by filled blocks
+- Made map fully revealed in debug options
