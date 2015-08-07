@@ -36,12 +36,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblEditing = new System.Windows.Forms.Label();
             this.cmdSaveClose = new System.Windows.Forms.Button();
-            this.txtDescription = new System.Windows.Forms.TextBox();
-            this.txtAltDescription = new System.Windows.Forms.TextBox();
+            this.txtAltDescription = new SpellBox();
             this.label5 = new System.Windows.Forms.Label();
             this.chkCanMove = new System.Windows.Forms.CheckBox();
             this.cmdFormHelp = new System.Windows.Forms.Button();
-            this.txtSuicide = new System.Windows.Forms.TextBox();
+            this.txtSuicide = new SpellBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lstEnemies = new System.Windows.Forms.ListBox();
@@ -63,10 +62,11 @@
             this.lblRoomColour = new System.Windows.Forms.Label();
             this.lstColourPicker = new System.Windows.Forms.ComboBox();
             this.lblBuildingName = new System.Windows.Forms.Label();
-            this.txtBuildingName = new System.Windows.Forms.TextBox();
-            this.txtBuilding = new System.Windows.Forms.TextBox();
+            this.txtBuildingName = new SpellBox();
+            this.txtBuilding = new SpellBox();
             this.lblBuilding = new System.Windows.Forms.Label();
             this.OpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.txtDescription = new SpellBox();
             this.SuspendLayout();
             // 
             // cmdCancel
@@ -134,21 +134,11 @@
             this.cmdSaveClose.UseVisualStyleBackColor = true;
             this.cmdSaveClose.Click += new System.EventHandler(this.cmdSaveClose_Click);
             // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(15, 101);
-            this.txtDescription.Multiline = true;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescription.Size = new System.Drawing.Size(744, 121);
-            this.txtDescription.TabIndex = 1;
-            // 
             // txtAltDescription
             // 
             this.txtAltDescription.Location = new System.Drawing.Point(15, 268);
             this.txtAltDescription.Multiline = true;
             this.txtAltDescription.Name = "txtAltDescription";
-            this.txtAltDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtAltDescription.Size = new System.Drawing.Size(744, 121);
             this.txtAltDescription.TabIndex = 2;
             // 
@@ -415,7 +405,7 @@
             // 
             this.txtBuilding.Location = new System.Drawing.Point(443, 42);
             this.txtBuilding.Name = "txtBuilding";
-            this.txtBuilding.ReadOnly = true;
+            this.txtBuilding.Enabled = false;
             this.txtBuilding.Size = new System.Drawing.Size(128, 20);
             this.txtBuilding.TabIndex = 37;
             this.txtBuilding.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtBuilding_MouseDoubleClick);
@@ -433,11 +423,22 @@
             // 
             this.OpenFile.FileName = "openFileDialog1";
             // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(15, 101);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(744, 121);
+            this.txtDescription.TabIndex = 38;
+            this.txtDescription.Text = "spellBox1";
+            this.txtDescription.WordWrap = true;
+            this.txtDescription.Child = new System.Windows.Controls.TextBox();
+            // 
             // frmRoomEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1046, 560);
+            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtBuilding);
             this.Controls.Add(this.lblBuilding);
             this.Controls.Add(this.txtBuildingName);
@@ -467,7 +468,6 @@
             this.Controls.Add(this.chkCanMove);
             this.Controls.Add(this.txtAltDescription);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.cmdSaveClose);
             this.Controls.Add(this.lblEditing);
             this.Controls.Add(this.label4);
@@ -492,12 +492,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblEditing;
         private System.Windows.Forms.Button cmdSaveClose;
-        private System.Windows.Forms.TextBox txtDescription;
-        private System.Windows.Forms.TextBox txtAltDescription;
+        private SpellBox txtAltDescription;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox chkCanMove;
         private System.Windows.Forms.Button cmdFormHelp;
-        private System.Windows.Forms.TextBox txtSuicide;
+        private SpellBox txtSuicide;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListBox lstEnemies;
@@ -519,9 +518,10 @@
         private System.Windows.Forms.Label lblRoomColour;
         private System.Windows.Forms.ComboBox lstColourPicker;
         private System.Windows.Forms.Label lblBuildingName;
-        private System.Windows.Forms.TextBox txtBuildingName;
-        private System.Windows.Forms.TextBox txtBuilding;
+        private SpellBox txtBuildingName;
+        private SpellBox txtBuilding;
         private System.Windows.Forms.Label lblBuilding;
         private System.Windows.Forms.OpenFileDialog OpenFile;
+        private SpellBox txtDescription;
     }
 }

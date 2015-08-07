@@ -34,7 +34,7 @@ namespace Legend_Of_Drongo
 
             if (Item.InteractionName != null)
             {
-                txtInteraction.Clear();
+                txtInteraction.Text = string.Empty;
                 txtInteraction.Text = Item.InteractionName[0];
                 for (int i = 1; i < Item.InteractionName.Count; i++)
                 {

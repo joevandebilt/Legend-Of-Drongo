@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNPCEditor));
             this.cmdCancel = new System.Windows.Forms.Button();
             this.cmdSaveNPC = new System.Windows.Forms.Button();
-            this.txtTalkTo = new System.Windows.Forms.TextBox();
-            this.txtArmor = new System.Windows.Forms.TextBox();
-            this.txtMoney = new System.Windows.Forms.TextBox();
-            this.txtHP = new System.Windows.Forms.TextBox();
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtTalkTo = new SpellBox();
+            this.txtArmor = new SpellBox();
+            this.txtMoney = new SpellBox();
+            this.txtHP = new SpellBox();
+            this.txtName = new SpellBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -52,15 +52,15 @@
             this.cmdRemoveKnowledge = new System.Windows.Forms.Button();
             this.cmdAddKnowledge = new System.Windows.Forms.Button();
             this.lstKnowledge = new System.Windows.Forms.ListBox();
-            this.txtKnowledge = new System.Windows.Forms.TextBox();
-            this.txtTopic = new System.Windows.Forms.TextBox();
+            this.txtKnowledge = new SpellBox();
+            this.txtTopic = new SpellBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cmdSaveKnowledge = new System.Windows.Forms.Button();
             this.cmdCloneItem = new System.Windows.Forms.Button();
             this.cmdCloneKnowledge = new System.Windows.Forms.Button();
             this.cmdHelp = new System.Windows.Forms.Button();
-            this.txtDonate = new System.Windows.Forms.TextBox();
+            this.txtDonate = new SpellBox();
             this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -420,11 +420,11 @@
 
         private System.Windows.Forms.Button cmdCancel;
         private System.Windows.Forms.Button cmdSaveNPC;
-        private System.Windows.Forms.TextBox txtTalkTo;
-        private System.Windows.Forms.TextBox txtArmor;
-        private System.Windows.Forms.TextBox txtMoney;
-        private System.Windows.Forms.TextBox txtHP;
-        private System.Windows.Forms.TextBox txtName;
+        private SpellBox txtTalkTo;
+        private SpellBox txtArmor;
+        private SpellBox txtMoney;
+        private SpellBox txtHP;
+        private SpellBox txtName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label9;
@@ -441,15 +441,15 @@
         private System.Windows.Forms.Button cmdRemoveKnowledge;
         private System.Windows.Forms.Button cmdAddKnowledge;
         private System.Windows.Forms.ListBox lstKnowledge;
-        private System.Windows.Forms.TextBox txtKnowledge;
-        private System.Windows.Forms.TextBox txtTopic;
+        private SpellBox txtKnowledge;
+        private SpellBox txtTopic;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button cmdSaveKnowledge;
         private System.Windows.Forms.Button cmdCloneItem;
         private System.Windows.Forms.Button cmdCloneKnowledge;
         private System.Windows.Forms.Button cmdHelp;
-        private System.Windows.Forms.TextBox txtDonate;
+        private SpellBox txtDonate;
         private System.Windows.Forms.Label label8;
     }
 }

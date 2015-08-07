@@ -37,16 +37,16 @@ namespace Legend_Of_Drongo
             this.tblWorldLevel = new System.Windows.Forms.TableLayoutPanel();
             this.lblEditor = new System.Windows.Forms.Label();
             this.cmdDeleteLevel = new System.Windows.Forms.Button();
-            this.txtWorldName = new System.Windows.Forms.TextBox();
+            this.txtWorldName = new SpellBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtFloorName = new System.Windows.Forms.TextBox();
+            this.txtFloorName = new SpellBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.txtMusicPath = new System.Windows.Forms.TextBox();
+            this.txtMusicPath = new SpellBox();
             this.cmdPickMusic = new System.Windows.Forms.Button();
             this.cmdHelp = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
-            this.txtAuthor = new System.Windows.Forms.TextBox();
+            this.txtAuthor = new SpellBox();
             this.cmdEndCredits = new System.Windows.Forms.Button();
             this.cmdDefaultPlayer = new System.Windows.Forms.Button();
             this.cmdAddCol = new System.Windows.Forms.Button();
@@ -202,7 +202,7 @@ namespace Legend_Of_Drongo
             // 
             this.txtMusicPath.Location = new System.Drawing.Point(515, 44);
             this.txtMusicPath.Name = "txtMusicPath";
-            this.txtMusicPath.ReadOnly = true;
+            this.txtMusicPath.Enabled = false;
             this.txtMusicPath.Size = new System.Drawing.Size(131, 20);
             this.txtMusicPath.TabIndex = 37;
             // 
@@ -367,16 +367,16 @@ namespace Legend_Of_Drongo
         private System.Windows.Forms.TableLayoutPanel tblWorldLevel;
         private System.Windows.Forms.Label lblEditor;
         private System.Windows.Forms.Button cmdDeleteLevel;
-        private System.Windows.Forms.TextBox txtWorldName;
+        private SpellBox txtWorldName;
         private System.Windows.Forms.Label label1;
-        private TextBox txtFloorName;
+        private SpellBox txtFloorName;
         private Label label22;
         private Label label23;
-        private TextBox txtMusicPath;
+        private SpellBox txtMusicPath;
         private Button cmdPickMusic;
         private Button cmdHelp;
         private Label label24;
-        private TextBox txtAuthor;
+        private SpellBox txtAuthor;
         private Button cmdEndCredits;
         private Button cmdDefaultPlayer;
         private Button cmdAddCol;

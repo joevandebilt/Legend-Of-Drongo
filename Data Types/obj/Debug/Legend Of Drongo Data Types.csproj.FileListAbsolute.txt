@@ -67,3 +67,8 @@ C:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Type
 C:\Google Drive\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.csprojResolveAssemblyReference.cache
 C:\Google Drive\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
 C:\Google Drive\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb
+D:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.dll
+D:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo Data Types.pdb
+D:\Google Drive\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.csprojResolveAssemblyReference.cache
+D:\Google Drive\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.dll
+D:\Google Drive\Programming\Legend-Of-Drongo\Data Types\obj\Debug\Legend Of Drongo Data Types.pdb

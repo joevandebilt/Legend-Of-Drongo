@@ -228,8 +228,8 @@ namespace Legend_Of_Drongo
                 thisFact.Topic = txtTopic.Text;
                 thisFact.Knowledge = txtKnowledge.Text;
 
-                txtTopic.Clear();
-                txtKnowledge.Clear();
+                txtTopic.Text = string.Empty;
+                txtKnowledge.Text = string.Empty;
 
                 txtTopic.Enabled = false;
                 txtKnowledge.Enabled = false;
@@ -243,8 +243,8 @@ namespace Legend_Of_Drongo
         {
             if (lstKnowledge.SelectedIndex > -1)
             {
-                txtTopic.Clear();
-                txtKnowledge.Clear();
+                txtTopic.Text = string.Empty;
+                txtKnowledge.Text = string.Empty;
 
                 txtTopic.Enabled = true;
                 txtKnowledge.Enabled = true;

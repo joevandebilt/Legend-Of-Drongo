@@ -18,13 +18,12 @@ namespace Legend_Of_Drongo
             InitializeComponent();
             label2.Text = "World Designed by " + Author;
 
-            rtbCredits.Clear();
+            rtbCredits.Text = string.Empty;
             if (ExistingCredits != null && ExistingCredits.Count != 0)
             {
                 foreach (string Credit in ExistingCredits)
                 {
-                    rtbCredits.AppendText(Credit);
-                    rtbCredits.AppendText("\n");
+                    rtbCredits.Text = rtbCredits.Text + Credit + Environment.NewLine;
                 }
             }
         }
@@ -33,10 +32,8 @@ namespace Legend_Of_Drongo
         {
             if (rtbCredits.Text != string.Empty)
             {
-                foreach (string Credit in rtbCredits.Lines)
-                {
-                    EndCredits.Add(Credit);
-                }
+                string[] Credits = rtbCredits.Text.Split('\n');
+                EndCredits = Credits.ToList<string>();
             }
             this.Hide();
         }

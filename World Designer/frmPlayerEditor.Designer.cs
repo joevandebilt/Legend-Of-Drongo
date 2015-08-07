@@ -43,23 +43,23 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.txtDefaultName = new System.Windows.Forms.TextBox();
+            this.txtDefaultName = new SpellBox();
             this.lstInventory = new System.Windows.Forms.ListBox();
-            this.txtObjective = new System.Windows.Forms.TextBox();
-            this.txtMoney = new System.Windows.Forms.TextBox();
+            this.txtObjective = new SpellBox();
+            this.txtMoney = new SpellBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.txtSpeed = new System.Windows.Forms.TextBox();
-            this.txtStrength = new System.Windows.Forms.TextBox();
-            this.txtResist = new System.Windows.Forms.TextBox();
-            this.txtHP = new System.Windows.Forms.TextBox();
-            this.txtMaxHP = new System.Windows.Forms.TextBox();
+            this.txtSpeed = new SpellBox();
+            this.txtStrength = new SpellBox();
+            this.txtResist = new SpellBox();
+            this.txtHP = new SpellBox();
+            this.txtMaxHP = new SpellBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtWeapon = new System.Windows.Forms.TextBox();
-            this.txtHelm = new System.Windows.Forms.TextBox();
-            this.txtChest = new System.Windows.Forms.TextBox();
-            this.txtFeet = new System.Windows.Forms.TextBox();
-            this.txtHands = new System.Windows.Forms.TextBox();
-            this.txtLegs = new System.Windows.Forms.TextBox();
+            this.txtWeapon = new SpellBox();
+            this.txtHelm = new SpellBox();
+            this.txtChest = new SpellBox();
+            this.txtFeet = new SpellBox();
+            this.txtHands = new SpellBox();
+            this.txtLegs = new SpellBox();
             this.cmdSaveChanges = new System.Windows.Forms.Button();
             this.cmdReset = new System.Windows.Forms.Button();
             this.cmdCloneItem = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             this.cmbCol = new System.Windows.Forms.ComboBox();
             this.cmbRow = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtMaxItems = new System.Windows.Forms.TextBox();
+            this.txtMaxItems = new SpellBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -289,7 +289,7 @@
             this.txtWeapon.BackColor = System.Drawing.Color.White;
             this.txtWeapon.Location = new System.Drawing.Point(314, 364);
             this.txtWeapon.Name = "txtWeapon";
-            this.txtWeapon.ReadOnly = true;
+            this.txtWeapon.Enabled = false;
             this.txtWeapon.Size = new System.Drawing.Size(111, 20);
             this.txtWeapon.TabIndex = 25;
             this.txtWeapon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtWeapon_MouseDoubleClick);
@@ -299,7 +299,7 @@
             this.txtHelm.BackColor = System.Drawing.Color.White;
             this.txtHelm.Location = new System.Drawing.Point(5, 313);
             this.txtHelm.Name = "txtHelm";
-            this.txtHelm.ReadOnly = true;
+            this.txtHelm.Enabled = false;
             this.txtHelm.Size = new System.Drawing.Size(111, 20);
             this.txtHelm.TabIndex = 27;
             this.txtHelm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtHelm_MouseDoubleClick);
@@ -309,7 +309,7 @@
             this.txtChest.BackColor = System.Drawing.Color.White;
             this.txtChest.Location = new System.Drawing.Point(5, 376);
             this.txtChest.Name = "txtChest";
-            this.txtChest.ReadOnly = true;
+            this.txtChest.Enabled = false;
             this.txtChest.Size = new System.Drawing.Size(111, 20);
             this.txtChest.TabIndex = 28;
             this.txtChest.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtChest_MouseDoubleClick);
@@ -319,7 +319,7 @@
             this.txtFeet.BackColor = System.Drawing.Color.White;
             this.txtFeet.Location = new System.Drawing.Point(5, 444);
             this.txtFeet.Name = "txtFeet";
-            this.txtFeet.ReadOnly = true;
+            this.txtFeet.Enabled = false;
             this.txtFeet.Size = new System.Drawing.Size(111, 20);
             this.txtFeet.TabIndex = 29;
             this.txtFeet.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtFeet_MouseDoubleClick);
@@ -329,7 +329,7 @@
             this.txtHands.BackColor = System.Drawing.Color.White;
             this.txtHands.Location = new System.Drawing.Point(311, 297);
             this.txtHands.Name = "txtHands";
-            this.txtHands.ReadOnly = true;
+            this.txtHands.Enabled = false;
             this.txtHands.Size = new System.Drawing.Size(111, 20);
             this.txtHands.TabIndex = 30;
             this.txtHands.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtHands_MouseDoubleClick);
@@ -339,7 +339,7 @@
             this.txtLegs.BackColor = System.Drawing.Color.White;
             this.txtLegs.Location = new System.Drawing.Point(314, 431);
             this.txtLegs.Name = "txtLegs";
-            this.txtLegs.ReadOnly = true;
+            this.txtLegs.Enabled = false;
             this.txtLegs.Size = new System.Drawing.Size(111, 20);
             this.txtLegs.TabIndex = 31;
             this.txtLegs.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtLegs_MouseDoubleClick);
@@ -464,7 +464,6 @@
             // 
             // txtMaxItems
             // 
-            this.txtMaxItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtMaxItems.Location = new System.Drawing.Point(76, 32);
             this.txtMaxItems.Multiline = true;
             this.txtMaxItems.Name = "txtMaxItems";
@@ -544,23 +543,23 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtDefaultName;
+        private SpellBox txtDefaultName;
         private System.Windows.Forms.ListBox lstInventory;
-        private System.Windows.Forms.TextBox txtObjective;
-        private System.Windows.Forms.TextBox txtMoney;
+        private SpellBox txtObjective;
+        private SpellBox txtMoney;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox txtSpeed;
-        private System.Windows.Forms.TextBox txtStrength;
-        private System.Windows.Forms.TextBox txtResist;
-        private System.Windows.Forms.TextBox txtHP;
-        private System.Windows.Forms.TextBox txtMaxHP;
+        private SpellBox txtSpeed;
+        private SpellBox txtStrength;
+        private SpellBox txtResist;
+        private SpellBox txtHP;
+        private SpellBox txtMaxHP;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox txtWeapon;
-        private System.Windows.Forms.TextBox txtHelm;
-        private System.Windows.Forms.TextBox txtChest;
-        private System.Windows.Forms.TextBox txtFeet;
-        private System.Windows.Forms.TextBox txtHands;
-        private System.Windows.Forms.TextBox txtLegs;
+        private SpellBox txtWeapon;
+        private SpellBox txtHelm;
+        private SpellBox txtChest;
+        private SpellBox txtFeet;
+        private SpellBox txtHands;
+        private SpellBox txtLegs;
         private System.Windows.Forms.Button cmdSaveChanges;
         private System.Windows.Forms.Button cmdReset;
         private System.Windows.Forms.Button cmdCloneItem;
@@ -571,6 +570,6 @@
         private System.Windows.Forms.ComboBox cmbCol;
         private System.Windows.Forms.ComboBox cmbRow;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtMaxItems;
+        private SpellBox txtMaxItems;
     }
 }

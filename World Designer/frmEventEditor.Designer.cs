@@ -51,14 +51,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtOutcomeValue = new System.Windows.Forms.TextBox();
+            this.txtOutcomeValue = new SpellBox();
             this.cmdCloneEnemy = new System.Windows.Forms.Button();
             this.cmdCloneNPC = new System.Windows.Forms.Button();
             this.cmdCloneItem = new System.Windows.Forms.Button();
             this.cmdHelp = new System.Windows.Forms.Button();
             this.chkReUse = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtTriggerValue = new System.Windows.Forms.TextBox();
+            this.txtTriggerValue = new SpellBox();
             this.chkBuilding = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -455,14 +455,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtOutcomeValue;
+        private SpellBox txtOutcomeValue;
         private System.Windows.Forms.Button cmdCloneEnemy;
         private System.Windows.Forms.Button cmdCloneNPC;
         private System.Windows.Forms.Button cmdCloneItem;
         private System.Windows.Forms.Button cmdHelp;
         private System.Windows.Forms.CheckBox chkReUse;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtTriggerValue;
+        private SpellBox txtTriggerValue;
         private System.Windows.Forms.CheckBox chkBuilding;
     }
 }
