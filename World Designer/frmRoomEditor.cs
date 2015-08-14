@@ -20,6 +20,7 @@ namespace Legend_Of_Drongo
         public frmRoomEditor(DataTypes.roomInfo thisRoom, int floors, bool Building)
         {
             InitializeComponent();
+
             ChangeMade = false;
             isBuilding = Building;
             Room = thisRoom;

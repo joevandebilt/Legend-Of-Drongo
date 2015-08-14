@@ -137,14 +137,16 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(220, 20);
             this.txtName.TabIndex = 0;
+            this.txtName.Child = new System.Windows.Controls.TextBox();
             // 
             // txtWeapon
             // 
+            this.txtWeapon.Enabled = false;
             this.txtWeapon.Location = new System.Drawing.Point(67, 34);
             this.txtWeapon.Name = "txtWeapon";
-            this.txtWeapon.Enabled = false;
             this.txtWeapon.Size = new System.Drawing.Size(189, 20);
             this.txtWeapon.TabIndex = 1;
+            this.txtWeapon.Child = new System.Windows.Controls.TextBox();
             // 
             // txtHP
             // 
@@ -152,6 +154,7 @@
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(38, 20);
             this.txtHP.TabIndex = 3;
+            this.txtHP.Child = new System.Windows.Controls.TextBox();
             // 
             // txtArmor
             // 
@@ -159,6 +162,7 @@
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
             this.txtArmor.TabIndex = 4;
+            this.txtArmor.Child = new System.Windows.Controls.TextBox();
             // 
             // txtKill
             // 
@@ -167,6 +171,8 @@
             this.txtKill.Name = "txtKill";
             this.txtKill.Size = new System.Drawing.Size(271, 50);
             this.txtKill.TabIndex = 7;
+            this.txtKill.WordWrap = true;
+            this.txtKill.Child = new System.Windows.Controls.TextBox();
             // 
             // txtDeath
             // 
@@ -175,6 +181,8 @@
             this.txtDeath.Name = "txtDeath";
             this.txtDeath.Size = new System.Drawing.Size(271, 50);
             this.txtDeath.TabIndex = 8;
+            this.txtDeath.WordWrap = true;
+            this.txtDeath.Child = new System.Windows.Controls.TextBox();
             // 
             // txtPayOff
             // 
@@ -182,6 +190,7 @@
             this.txtPayOff.Name = "txtPayOff";
             this.txtPayOff.Size = new System.Drawing.Size(38, 20);
             this.txtPayOff.TabIndex = 9;
+            this.txtPayOff.Child = new System.Windows.Controls.TextBox();
             // 
             // txtPayOffResponse
             // 
@@ -189,6 +198,7 @@
             this.txtPayOffResponse.Name = "txtPayOffResponse";
             this.txtPayOffResponse.Size = new System.Drawing.Size(175, 20);
             this.txtPayOffResponse.TabIndex = 10;
+            this.txtPayOffResponse.Child = new System.Windows.Controls.TextBox();
             // 
             // cmdItemInspect
             // 
@@ -235,6 +245,7 @@
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(38, 20);
             this.txtMoney.TabIndex = 5;
+            this.txtMoney.Child = new System.Windows.Controls.TextBox();
             // 
             // txtXP
             // 
@@ -242,6 +253,7 @@
             this.txtXP.Name = "txtXP";
             this.txtXP.Size = new System.Drawing.Size(38, 20);
             this.txtXP.TabIndex = 6;
+            this.txtXP.Child = new System.Windows.Controls.TextBox();
             // 
             // label10
             // 
@@ -268,6 +280,7 @@
             this.txtTeam.Name = "txtTeam";
             this.txtTeam.Size = new System.Drawing.Size(38, 20);
             this.txtTeam.TabIndex = 43;
+            this.txtTeam.Child = new System.Windows.Controls.TextBox();
             // 
             // label11
             // 

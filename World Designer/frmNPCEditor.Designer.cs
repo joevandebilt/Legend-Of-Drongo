@@ -91,6 +91,8 @@
             this.txtTalkTo.Name = "txtTalkTo";
             this.txtTalkTo.Size = new System.Drawing.Size(271, 50);
             this.txtTalkTo.TabIndex = 5;
+            this.txtTalkTo.WordWrap = true;
+            this.txtTalkTo.Child = new System.Windows.Controls.TextBox();
             // 
             // txtArmor
             // 
@@ -98,6 +100,7 @@
             this.txtArmor.Name = "txtArmor";
             this.txtArmor.Size = new System.Drawing.Size(38, 20);
             this.txtArmor.TabIndex = 3;
+            this.txtArmor.Child = new System.Windows.Controls.TextBox();
             // 
             // txtMoney
             // 
@@ -105,6 +108,7 @@
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(39, 20);
             this.txtMoney.TabIndex = 4;
+            this.txtMoney.Child = new System.Windows.Controls.TextBox();
             // 
             // txtHP
             // 
@@ -112,6 +116,7 @@
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(38, 20);
             this.txtHP.TabIndex = 2;
+            this.txtHP.Child = new System.Windows.Controls.TextBox();
             // 
             // txtName
             // 
@@ -119,6 +124,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(220, 20);
             this.txtName.TabIndex = 0;
+            this.txtName.Child = new System.Windows.Controls.TextBox();
             // 
             // label6
             // 
@@ -287,14 +293,17 @@
             this.txtKnowledge.Name = "txtKnowledge";
             this.txtKnowledge.Size = new System.Drawing.Size(286, 87);
             this.txtKnowledge.TabIndex = 16;
+            this.txtKnowledge.WordWrap = true;
+            this.txtKnowledge.Child = new System.Windows.Controls.TextBox();
             // 
             // txtTopic
             // 
             this.txtTopic.Enabled = false;
-            this.txtTopic.Location = new System.Drawing.Point(341, 93);
+            this.txtTopic.Location = new System.Drawing.Point(345, 93);
             this.txtTopic.Name = "txtTopic";
             this.txtTopic.Size = new System.Drawing.Size(286, 20);
             this.txtTopic.TabIndex = 15;
+            this.txtTopic.Child = new System.Windows.Controls.TextBox();
             // 
             // label2
             // 
@@ -360,6 +369,7 @@
             this.txtDonate.Name = "txtDonate";
             this.txtDonate.Size = new System.Drawing.Size(197, 20);
             this.txtDonate.TabIndex = 60;
+            this.txtDonate.Child = new System.Windows.Controls.TextBox();
             // 
             // label8
             // 

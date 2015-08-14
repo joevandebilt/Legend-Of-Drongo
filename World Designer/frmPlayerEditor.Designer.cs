@@ -1,4 +1,6 @@
-﻿namespace Legend_Of_Drongo
+﻿using System;
+using System.Windows.Forms;
+namespace Legend_Of_Drongo
 {
     partial class frmPlayerEditor
     {
@@ -289,60 +291,66 @@
             this.txtWeapon.BackColor = System.Drawing.Color.White;
             this.txtWeapon.Location = new System.Drawing.Point(314, 364);
             this.txtWeapon.Name = "txtWeapon";
-            this.txtWeapon.Enabled = false;
+            this.txtWeapon.Enabled = true;
+            this.txtWeapon.ReadOnly = true;
             this.txtWeapon.Size = new System.Drawing.Size(111, 20);
             this.txtWeapon.TabIndex = 25;
-            this.txtWeapon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtWeapon_MouseDoubleClick);
+            this.txtWeapon.MouseDoubleClickHandler += new MouseEventHandler(this.txtWeapon_MouseDoubleClick);
             // 
             // txtHelm
             // 
             this.txtHelm.BackColor = System.Drawing.Color.White;
             this.txtHelm.Location = new System.Drawing.Point(5, 313);
             this.txtHelm.Name = "txtHelm";
-            this.txtHelm.Enabled = false;
+            this.txtHelm.Enabled = true;
+            this.txtHelm.ReadOnly = true;
             this.txtHelm.Size = new System.Drawing.Size(111, 20);
             this.txtHelm.TabIndex = 27;
-            this.txtHelm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtHelm_MouseDoubleClick);
+            this.txtHelm.MouseDoubleClickHandler += new MouseEventHandler(this.txtHelm_MouseDoubleClick);
             // 
             // txtChest
             // 
             this.txtChest.BackColor = System.Drawing.Color.White;
             this.txtChest.Location = new System.Drawing.Point(5, 376);
             this.txtChest.Name = "txtChest";
-            this.txtChest.Enabled = false;
+            this.txtChest.Enabled = true;
+            this.txtChest.ReadOnly = true;
             this.txtChest.Size = new System.Drawing.Size(111, 20);
             this.txtChest.TabIndex = 28;
-            this.txtChest.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtChest_MouseDoubleClick);
+            this.txtChest.MouseDoubleClickHandler += new MouseEventHandler(this.txtChest_MouseDoubleClick);
             // 
             // txtFeet
             // 
             this.txtFeet.BackColor = System.Drawing.Color.White;
             this.txtFeet.Location = new System.Drawing.Point(5, 444);
             this.txtFeet.Name = "txtFeet";
-            this.txtFeet.Enabled = false;
+            this.txtFeet.Enabled = true;
+            this.txtFeet.ReadOnly = true;
             this.txtFeet.Size = new System.Drawing.Size(111, 20);
             this.txtFeet.TabIndex = 29;
-            this.txtFeet.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtFeet_MouseDoubleClick);
+            this.txtFeet.MouseDoubleClickHandler += new MouseEventHandler(this.txtFeet_MouseDoubleClick);
             // 
             // txtHands
             // 
             this.txtHands.BackColor = System.Drawing.Color.White;
             this.txtHands.Location = new System.Drawing.Point(311, 297);
             this.txtHands.Name = "txtHands";
-            this.txtHands.Enabled = false;
+            this.txtHands.Enabled = true;
+            this.txtHands.ReadOnly = true;
             this.txtHands.Size = new System.Drawing.Size(111, 20);
             this.txtHands.TabIndex = 30;
-            this.txtHands.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtHands_MouseDoubleClick);
+            this.txtHands.MouseDoubleClickHandler += new MouseEventHandler(this.txtHands_MouseDoubleClick);
             // 
             // txtLegs
             // 
             this.txtLegs.BackColor = System.Drawing.Color.White;
             this.txtLegs.Location = new System.Drawing.Point(314, 431);
             this.txtLegs.Name = "txtLegs";
-            this.txtLegs.Enabled = false;
+            this.txtLegs.Enabled = true;
+            this.txtLegs.ReadOnly = true;
             this.txtLegs.Size = new System.Drawing.Size(111, 20);
             this.txtLegs.TabIndex = 31;
-            this.txtLegs.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtLegs_MouseDoubleClick);
+            this.txtLegs.MouseDoubleClickHandler += new MouseEventHandler(this.txtLegs_MouseDoubleClick);
             // 
             // cmdSaveChanges
             // 

@@ -67,10 +67,12 @@
             // rtbCredits
             // 
             this.rtbCredits.Location = new System.Drawing.Point(12, 59);
+            this.rtbCredits.Multiline = true;
             this.rtbCredits.Name = "rtbCredits";
             this.rtbCredits.Size = new System.Drawing.Size(437, 165);
             this.rtbCredits.TabIndex = 4;
             this.rtbCredits.Text = "Credit Line 1\nCredit Line 2\netc...";
+            this.rtbCredits.WordWrap = true;
             this.rtbCredits.Child = new System.Windows.Controls.TextBox();
             // 
             // frmEndCredits

@@ -322,9 +322,6 @@ C:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend
 C:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
 C:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
 C:\Users\Joe\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe.config
-D:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe.config
-D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
-D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb
 D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csprojResolveAssemblyReference.cache
 D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEndCredits.resources
 D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmEnemyEditor.resources
@@ -340,9 +337,12 @@ D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend
 D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.Properties.Resources.resources
 D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend_Of_Drongo.frmRoomEditor.resources
 D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.csproj.GenerateResource.Cache
+D:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe.config
 D:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe.manifest
 D:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.application
 D:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.exe
 D:\Google Drive\Programming\Legend-Of-Drongo\Compiled\Legend Of Drongo World Designer.pdb
 D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe.manifest
 D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.application
+D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.exe
+D:\Google Drive\Programming\Legend-Of-Drongo\World Designer\obj\x86\Debug\Legend Of Drongo World Designer.pdb

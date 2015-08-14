@@ -1,4 +1,6 @@
-﻿namespace Legend_Of_Drongo
+﻿using System;
+using System.Windows.Forms;
+namespace Legend_Of_Drongo
 {
     partial class frmRoomEditor
     {
@@ -136,16 +138,18 @@
             // 
             // txtAltDescription
             // 
-            this.txtAltDescription.Location = new System.Drawing.Point(15, 268);
+            this.txtAltDescription.Location = new System.Drawing.Point(15, 235);
             this.txtAltDescription.Multiline = true;
             this.txtAltDescription.Name = "txtAltDescription";
-            this.txtAltDescription.Size = new System.Drawing.Size(744, 121);
+            this.txtAltDescription.Size = new System.Drawing.Size(744, 92);
             this.txtAltDescription.TabIndex = 2;
+            this.txtAltDescription.WordWrap = true;
+            this.txtAltDescription.Child = new System.Windows.Controls.TextBox();
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 245);
+            this.label5.Location = new System.Drawing.Point(12, 212);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 13);
             this.label5.TabIndex = 9;
@@ -173,15 +177,16 @@
             // 
             // txtSuicide
             // 
-            this.txtSuicide.Location = new System.Drawing.Point(15, 440);
+            this.txtSuicide.Location = new System.Drawing.Point(15, 368);
             this.txtSuicide.Name = "txtSuicide";
-            this.txtSuicide.Size = new System.Drawing.Size(744, 20);
+            this.txtSuicide.Size = new System.Drawing.Size(744, 92);
             this.txtSuicide.TabIndex = 3;
+            this.txtSuicide.Child = new System.Windows.Controls.TextBox();
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 422);
+            this.label6.Location = new System.Drawing.Point(12, 352);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(126, 13);
             this.label6.TabIndex = 13;
@@ -400,15 +405,18 @@
             this.txtBuildingName.Size = new System.Drawing.Size(128, 20);
             this.txtBuildingName.TabIndex = 35;
             this.txtBuildingName.Visible = false;
+            this.txtBuildingName.Child = new System.Windows.Controls.TextBox();
             // 
             // txtBuilding
             // 
+            this.txtBuilding.Enabled = true;
+            this.txtBuilding.ReadOnly = true;
             this.txtBuilding.Location = new System.Drawing.Point(443, 42);
             this.txtBuilding.Name = "txtBuilding";
-            this.txtBuilding.Enabled = false;
-            this.txtBuilding.Size = new System.Drawing.Size(128, 20);
+            this.txtBuilding.Size = new System.Drawing.Size(206, 20);
             this.txtBuilding.TabIndex = 37;
-            this.txtBuilding.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtBuilding_MouseDoubleClick);
+            this.txtBuilding.MouseDoubleClickHandler += new MouseEventHandler(this.txtBuilding_MouseDoubleClick);
+            this.txtBuilding.Child = new System.Windows.Controls.TextBox();
             // 
             // lblBuilding
             // 
@@ -427,9 +435,8 @@
             // 
             this.txtDescription.Location = new System.Drawing.Point(15, 101);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(744, 121);
+            this.txtDescription.Size = new System.Drawing.Size(744, 92);
             this.txtDescription.TabIndex = 38;
-            this.txtDescription.Text = "spellBox1";
             this.txtDescription.WordWrap = true;
             this.txtDescription.Child = new System.Windows.Controls.TextBox();
             // 

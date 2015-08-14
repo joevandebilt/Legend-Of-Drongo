@@ -195,9 +195,11 @@ namespace Legend_Of_Drongo
                 txtFloorName.Text = ThisFloor.FloorName;
                 txtMusicPath.Text = ThisFloor.FloorSong;
             }
+            tblWorldLevel.Visible = false;
             SetWorldSize();
             AddTableLabels();
             tblWorldLevel.Refresh(); //Draw the grid
+            tblWorldLevel.Visible = true;
 
         }
 
@@ -510,11 +512,33 @@ namespace Legend_Of_Drongo
             }
 
             tblWorldLevel.Refresh();
+
+            TableLayoutRowStyleCollection RowStyles = this.tblWorldLevel.RowStyles;
+            foreach (RowStyle style in RowStyles)
+            {
+                style.SizeType = SizeType.Percent;
+
+                // Set the row height to be a percentage  
+                // of the TableLayoutPanel control's height.  
+                style.Height = (float)(100.00 / tblWorldLevel.RowCount);
+
+            }
+
+            TableLayoutColumnStyleCollection ColStyles = this.tblWorldLevel.ColumnStyles;
+            foreach (ColumnStyle style in ColStyles)
+            {
+                style.SizeType = SizeType.Percent;
+
+                // Set the row height to be a percentage  
+                // of the TableLayoutPanel control's height.  
+                style.Width = (float)(100.00 / tblWorldLevel.ColumnCount);
+
+            }            
         }
 
         private void AddTableLabels()
         {
-            tblWorldLevel.Visible = false;
+            tblWorldLevel.Controls.Clear();
             for (int row = 0; row < tblWorldLevel.RowCount; row++)
             {
                 for (int col = 0; col < tblWorldLevel.ColumnCount; col++)
@@ -529,8 +553,6 @@ namespace Legend_Of_Drongo
                     }, col, row); 
                 }
             }
-            tblWorldLevel.Visible = true;
-
         }
 
 
@@ -602,47 +624,20 @@ namespace Legend_Of_Drongo
 
         public void AddRow()
         {
-            tblWorldLevel.Visible = false;
             tblWorldLevel.Controls.Clear();
 
             tblWorldLevel.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
             tblWorldLevel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             tblWorldLevel.RowCount = tblWorldLevel.RowStyles.Count;
-
-            TableLayoutRowStyleCollection styles = this.tblWorldLevel.RowStyles;
-            foreach (RowStyle style in styles)
-            {
-                style.SizeType = SizeType.Percent;
-
-                // Set the row height to be a percentage  
-                // of the TableLayoutPanel control's height.  
-                style.Height = (100 / tblWorldLevel.RowCount);
-
-            }
-            tblWorldLevel.Visible = true;
-        
         }
 
         public void AddCol()
         {
-            tblWorldLevel.Visible = false;
             tblWorldLevel.Controls.Clear();
 
             tblWorldLevel.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
             tblWorldLevel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
             tblWorldLevel.ColumnCount = tblWorldLevel.ColumnStyles.Count;
-
-            TableLayoutColumnStyleCollection styles = this.tblWorldLevel.ColumnStyles;
-            foreach (ColumnStyle style in styles)
-            {
-                style.SizeType = SizeType.Percent;
-
-                // Set the row height to be a percentage  
-                // of the TableLayoutPanel control's height.  
-                style.Width = (100 / tblWorldLevel.ColumnCount);
-
-            }
-            tblWorldLevel.Visible = true;
         }
 
         #endregion
@@ -651,45 +646,18 @@ namespace Legend_Of_Drongo
 
         public void RemoveRow()
         {
-            tblWorldLevel.Visible = false;
             tblWorldLevel.Controls.Clear();
             tblWorldLevel.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
             tblWorldLevel.RowStyles.RemoveAt(tblWorldLevel.RowCount - 1);
-            tblWorldLevel.RowCount = tblWorldLevel.RowStyles.Count;
-
-            TableLayoutRowStyleCollection styles = this.tblWorldLevel.RowStyles;
-            foreach (RowStyle style in styles)
-            {
-                style.SizeType = SizeType.Percent;
-
-                // Set the row height to be a percentage  
-                // of the TableLayoutPanel control's height.  
-                style.Height = (100 / tblWorldLevel.RowCount);
-
-            }
-            tblWorldLevel.Visible = true;
-            
+            tblWorldLevel.RowCount = tblWorldLevel.RowStyles.Count;   
         }
 
         public void RemoveCol()
         {
-            tblWorldLevel.Visible = false;
             tblWorldLevel.Controls.Clear();
             tblWorldLevel.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
             tblWorldLevel.ColumnStyles.RemoveAt(tblWorldLevel.ColumnCount - 1);
             tblWorldLevel.ColumnCount = tblWorldLevel.ColumnStyles.Count;
-
-            TableLayoutColumnStyleCollection styles = this.tblWorldLevel.ColumnStyles;
-            foreach (ColumnStyle style in styles)
-            {
-                style.SizeType = SizeType.Percent;
-
-                // Set the row height to be a percentage  
-                // of the TableLayoutPanel control's height.  
-                style.Width = (100 / tblWorldLevel.ColumnCount);
-
-            }
-            tblWorldLevel.Visible = true;
         }
         
         public DataTypes.Floor RemoveWorldRow()
@@ -757,8 +725,5 @@ namespace Legend_Of_Drongo
 
         #endregion
 
-        
-
-        
     }
 }

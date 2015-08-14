@@ -71,12 +71,12 @@ namespace Legend_Of_Drongo
             this.Hide();
         }
 
-        private void txtHelm_MouseDoubleClick(object sender, MouseEventArgs e) { if(Equiptment(0)) txtHelm.Text = Player.ArmorWorn[0].Name; }
-        private void txtChest_MouseDoubleClick(object sender, MouseEventArgs e) { if(Equiptment(1)) txtChest.Text = Player.ArmorWorn[1].Name; }
-        private void txtHands_MouseDoubleClick(object sender, MouseEventArgs e) { if(Equiptment(2)) txtHands.Text = Player.ArmorWorn[2].Name; }
-        private void txtLegs_MouseDoubleClick(object sender, MouseEventArgs e) { if(Equiptment(3)) txtLegs.Text = Player.ArmorWorn[3].Name; }
-        private void txtFeet_MouseDoubleClick(object sender, MouseEventArgs e) { if(Equiptment(4)) txtFeet.Text = Player.ArmorWorn[4].Name; }
-        private void txtWeapon_MouseDoubleClick(object sender, MouseEventArgs e) { if(Equiptment(5)) txtWeapon.Text = Player.WeaponHeld.Name; }
+        private void txtHelm_MouseDoubleClick(object sender, MouseEventArgs e) { if (Equiptment(0)) txtHelm.Text = Player.ArmorWorn[0].Name; }
+        private void txtChest_MouseDoubleClick(object sender, MouseEventArgs e) { if (Equiptment(1)) txtChest.Text = Player.ArmorWorn[1].Name; }
+        private void txtHands_MouseDoubleClick(object sender, MouseEventArgs e) { if (Equiptment(2)) txtHands.Text = Player.ArmorWorn[2].Name; }
+        private void txtLegs_MouseDoubleClick(object sender, MouseEventArgs e) { if (Equiptment(3)) txtLegs.Text = Player.ArmorWorn[3].Name; }
+        private void txtFeet_MouseDoubleClick(object sender, MouseEventArgs e) { if (Equiptment(4)) txtFeet.Text = Player.ArmorWorn[4].Name; }
+        private void txtWeapon_MouseDoubleClick(object sender, MouseEventArgs e) { if (Equiptment(5)) txtWeapon.Text = Player.WeaponHeld.Name; }
 
         private bool Equiptment(int Position)
         {

@@ -97,6 +97,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(160, 20);
             this.txtName.TabIndex = 0;
+            this.txtName.Child = new System.Windows.Controls.TextBox();
             // 
             // txtDescription
             // 
@@ -105,6 +106,8 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(160, 74);
             this.txtDescription.TabIndex = 2;
+            this.txtDescription.WordWrap = true;
+            this.txtDescription.Child = new System.Windows.Controls.TextBox();
             // 
             // chkPickup
             // 
@@ -156,6 +159,8 @@
             this.txtInteraction.Name = "txtInteraction";
             this.txtInteraction.Size = new System.Drawing.Size(160, 77);
             this.txtInteraction.TabIndex = 5;
+            this.txtInteraction.WordWrap = true;
+            this.txtInteraction.Child = new System.Windows.Controls.TextBox();
             // 
             // label1
             // 
@@ -181,6 +186,7 @@
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(31, 20);
             this.txtValue.TabIndex = 4;
+            this.txtValue.Child = new System.Windows.Controls.TextBox();
             // 
             // label6
             // 
@@ -207,6 +213,7 @@
             this.txtDamage.Name = "txtDamage";
             this.txtDamage.Size = new System.Drawing.Size(28, 20);
             this.txtDamage.TabIndex = 6;
+            this.txtDamage.Child = new System.Windows.Controls.TextBox();
             // 
             // txtProtection
             // 
@@ -215,6 +222,7 @@
             this.txtProtection.Name = "txtProtection";
             this.txtProtection.Size = new System.Drawing.Size(28, 20);
             this.txtProtection.TabIndex = 7;
+            this.txtProtection.Child = new System.Windows.Controls.TextBox();
             // 
             // txtHP
             // 
@@ -223,6 +231,7 @@
             this.txtHP.Name = "txtHP";
             this.txtHP.Size = new System.Drawing.Size(28, 20);
             this.txtHP.TabIndex = 8;
+            this.txtHP.Child = new System.Windows.Controls.TextBox();
             // 
             // label8
             // 
@@ -250,6 +259,7 @@
             this.txtGoodHit.Size = new System.Drawing.Size(463, 20);
             this.txtGoodHit.TabIndex = 9;
             this.txtGoodHit.Text = "The weapon deals a high amount of damage";
+            this.txtGoodHit.Child = new System.Windows.Controls.TextBox();
             // 
             // txtMedHit
             // 
@@ -259,6 +269,7 @@
             this.txtMedHit.Size = new System.Drawing.Size(463, 20);
             this.txtMedHit.TabIndex = 10;
             this.txtMedHit.Text = "The weapon deals a medium amount of damage";
+            this.txtMedHit.Child = new System.Windows.Controls.TextBox();
             // 
             // label10
             // 
@@ -277,6 +288,7 @@
             this.txtBadHit.Size = new System.Drawing.Size(463, 20);
             this.txtBadHit.TabIndex = 11;
             this.txtBadHit.Text = "The weapon deals a low amount of damage";
+            this.txtBadHit.Child = new System.Windows.Controls.TextBox();
             // 
             // label11
             // 
@@ -294,6 +306,7 @@
             this.txtItemNeeded.Name = "txtItemNeeded";
             this.txtItemNeeded.Size = new System.Drawing.Size(175, 20);
             this.txtItemNeeded.TabIndex = 12;
+            this.txtItemNeeded.Child = new System.Windows.Controls.TextBox();
             // 
             // label12
             // 
@@ -320,6 +333,7 @@
             this.txtInteractionMessage.Name = "txtInteractionMessage";
             this.txtInteractionMessage.Size = new System.Drawing.Size(360, 20);
             this.txtInteractionMessage.TabIndex = 13;
+            this.txtInteractionMessage.Child = new System.Windows.Controls.TextBox();
             // 
             // cmdCancelEdit
             // 
@@ -338,6 +352,7 @@
             this.txtXP.Name = "txtXP";
             this.txtXP.Size = new System.Drawing.Size(28, 20);
             this.txtXP.TabIndex = 29;
+            this.txtXP.Child = new System.Windows.Controls.TextBox();
             // 
             // label14
             // 

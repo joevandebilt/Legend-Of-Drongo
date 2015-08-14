@@ -306,3 +306,9 @@ v3.3.1
 - Added Spell Check to Windows Design Forms (good god we needed that);
 - Changed Map drawing so space and blocked areas both denoted by filled blocks
 - Made map fully revealed in debug options
+
+v3.3.2
+- Fixed new spellboxes being disabled by default
+- Fixed new spellboxes not wordwrapping
+- Fixed new spellboxes to have read only elements
+- Added double click windows form events to spellboxes
