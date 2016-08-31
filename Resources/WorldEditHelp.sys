@@ -1,0 +1,190 @@
+Main Menu
+------------------------
+> New World will load a new world
+> Load World will open the menu to open an existing world
+> Quit will close the program
+
+
+World Picker
+------------------------
+>This menu will populate with world files contained in the Worlds folder
+>To load a world: select one from the menu and press select world.
+>To return to the main menu press "Go Back"
+
+
+World Editor
+------------------------
+>The world editor shows the world floor by floor. Each floor is a 10x10 grid of rooms. 
+> By default the spawning position is B2. 
+> Name the world using the text box at the top of the screen, this will be the name that the world is saved as in the Worlds folder.
+> Select which level to edit from the level drop down box, select add new floor to add a new floor.
+> Name each floor to keep track of them.
+> Select Music using the music Picker (see Music picker)
+> To edit a room, select the cell and the room editor will open for that cell (See room editor)
+> Enter your own personal name as the world creator, this will be shown in the end credits
+> Press the end credits button to write custom end credits (See End Credits)
+> Press the default player button to set up the default player (See default player)
+
+End Credits
+------------------------
+The end credits is triggered as an event, it will show each line of the end credits starting with the first two static lines which cannot be changed. After the credits roll the player will return to the main menu. 
+> Each line is a new item. 
+
+Music Picker
+------------------------
+> The music picker will populate all .wav files contained within the Music Folder, you can add your own custom music here with this method. 
+> The music file selected will begin playing when the player moves to that floor, allowing you to set a custom soundtrack for each floor.
+> If the music remains blank the game will continue to play the music from the previous floor. 
+
+Default Player
+------------------------
+The default player is how the player starts the game. 
+> Default name is the name the player will take if they do not enter a valid name
+> Inventory sets up their starting inventory, max 20 items. 
+	+  Will create a new item
+	|| Will Clone a selected item
+	-  Will remove a selected item
+> Starting objective will be the first objective the player has
+> Starting money is how much money the player begins with. 
+> Starting position is the grid reference where the player starts the game. I.E B2 top left, I9 Bottom right.
+> Speed is the player initial speed at level 0
+> Strength is the player initial strength at level 0
+> Resitence is the player initial resistence at level 0
+> Starting HP is how much HP the player has at the start of the game
+> Max HP is how much HP the player can have at level 0 (increases by 5 per level)
+> Armor and weapons are set up by double clicking on the fields, see Item Editor for how to create an item.
+> Save default player
+> Reset to default creates blank template
+
+
+Room Editor
+------------------------
+> If there is any information in the room it will be populated automatically.
+> Mark whether or not the player can move into a square
+> Set the colour of a room, this is to keep track of rooms within the game
+> Double clicking the building text box will set up a building within this room. 
+> Description sets what is output when the player moves into the room or attempts to move into the room (I.E even if a room is locked description should be: "There is something blocking your path" if description is set to nothing the game will still output text when it is used.
+> Alt Description is an alternative description should you want to change the description of a room at some point
+> Suicide Message, this is custom text that will output if the player decides to kill themselves in a particular room.
+> Events List displays events within the current room
+	+  Will create a new event
+	|| Will Clone a selected event
+	-  Will remove a selected event
+	Double click an event to open it in the editor
+> Enemy List displays enemies within the current room
+	+  Will create a new enemy
+	|| Will Clone a selected enemy
+	-  Will remove a selected enemy
+	Double click an enemy to open it in the editor
+> Item List displays item within the current room
+	+  Will create a new item
+	|| Will Clone a selected item
+	-  Will remove a selected item
+	Double click an item to open it in the editor
+> NPC List displays NPCs within the current room
+	+  Will create a new NPC
+	|| Will Clone a selected NPC
+	-  Will remove a selected NPC
+	Double click an NPC to open it in the editor
+	
+Building Editor
+------------------------
+Almost identical to the room editor, a building is designed to be an area within an area. A player can move into a room with the usual north,east,south and west commands, but can also enter and leave buildings within that area. For instance the area may have a shop in it. You can create the building to describe the interior of the shop, along with the proprietor and the items he can sell. While the parent room describes the exterior and general area. 
+> Building name is the name of the building. I.E "go into shop" "go into blacksmiths"
+> Description sets what is output when the player moves into the building, if the player cannot move into room a generic message will be shown, you would not need to set up a custom output. 
+> Alt Description is an alternative description should you want to change the description of a building at some point
+> Suicide Message, this is custom text that will output if the player decides to kill themselves in a particular building.
+> Events List displays events within the current building
+	+  Will create a new event
+	|| Will Clone a selected event
+	-  Will remove a selected event
+	Double click an event to open it in the editor
+> Enemy List displays enemies within the current building
+	+  Will create a new enemy
+	|| Will Clone a selected enemy
+	-  Will remove a selected enemy
+	Double click an enemy to open it in the editor
+> Item List displays item within the current building
+	+  Will create a new item
+	|| Will Clone a selected item
+	-  Will remove a selected item
+	Double click an item to open it in the editor
+> NPC List displays NPCs within the current building
+	+  Will create a new NPC
+	|| Will Clone a selected NPC
+	-  Will remove a selected NPC
+	Double click an NPC to open it in the editor
+
+Events Editor 
+------------------------
+An event within the game is comprised of a trigger and an outcome, select the desired output from the dropdown boxes.
+> If the outcome relates to a position the Row:Col:Floor picker will become available
+> If the outcome relates to a custom value the value box will become available
+> If the outcome relates to an NPC,Item or Enemy the controls will become available. 
+One action per trigger however multiple actions can be used for the same trigger
+Save the event when you are done. 
+
+Enemy Editor
+------------------------
+An enemy will be placed into a room, however nothing will indicate they exist, this is down to either an event or the description of the room.
+>If the LockedIn criteria of a room is set to true, an enemy will attack the player if they try to escape.
+> Name the enemy
+> Use the button to set up the enemy weapon in the event editor. 
+> Set the HP of the enemy
+> Set the armor proficiency of the enemy
+> Set how much money the enemy has, which player will gain when enemy is killed
+> XP is how much XP the player will gain when they kill or payoff the enemy
+> Team is the logical team of an enemy, this means that enemies can be grouped, i.e Spiders and Bandits will likely be opposed to eachother. The players default team is 99. 
+> Behaviour is the AI profile of the enemy. Enemies may not always want to attack the player, so you can set their behaviour here. They will not attack members of their own team. 
+> Kill message is a custom output if the enemy kills the player
+> Death Message is a custom output when the enemy is killed
+> Pay off value is the value it which the enemy can be bribed. 0 means cannot bribe
+> Pay off response is what the enemy says when they are successfully bribed. This will also become their talk to response when they are and NPC
+Save the enemy when you are done. 
+
+Item Editor
+------------------------
+An item is an object within the world, it can range a number of uses, from world items or interaction objects, to food, weapons and armor.
+> This is the proper name of the Item
+> Item Description is what it outputted when the item is 'looked at'
+> Set whether or not the item can be picked up
+> Interaction names are pseudo names by which the item can go by. I.E an apple can have an interaction name "fruit" and when the player uses command "pick up fruit" the apple will be picked up
+> Item Class is the classification of the item.
+> Value is the money value of the item
+> Damage is base damage of a weapon item
+> Protection is the protection value of a weapon item or armor item
+> HP Recovery is the amount of HP recovered when consuming an item. Can be a negative value for items such as poison
+> XP is how much XP is gained.
+	XP is gained with: food, Interaction Objects, Readable
+> Good hit is the output for a very good hit with a weapon
+> Medium Hit is the output for a medium hit with a weapon
+> Bad Hit is the output for a bad hit with a weapon
+> Item needed is the item needed for a proper interaction. I.E and interaction object could be a door, the item needed would be "Key" and there would be another item of class "Interactive item" called "Key"
+>Interacted message is the output when this interaction object is interacted with. I.E The key turns in the lock and the door opens.
+Save the item when you are done.
+
+NPC Editor
+------------------------
+An NPC is a non-hostile person within the world. The player can talk to NPCs and ask them for infoamtion, some NPCs can also buy and sell items. 
+> The name of the NPC
+> Plot character prevetns whether or not the player can attack the NPC (and potentially kill them)
+> Talk to response is the output when the player "talks to" the NPC
+> HP is how much health the NPC has, irrelevant if the NPC is plot character
+> Armor is the armor rating the NPC has, irrelevant if the NPC is plot character
+> Money is how much money the NPC has
+> Donation is a specific item or value of money that when donated by the player can trigger an event. This can be left blank.
+> Merchant Type is the type of merchant (if any) the NPC is. This will affect what kind of items the NPC will buy from the player
+> Set whether or not the NPC will buy or sell items to the player
+> The inventory of the NPC is what they will buy/sell. If the NPC has a weapon in their inventory when they are attacked they will equip it.
+	+  Will create a new item
+	|| will Clone a selected item
+	-  Will remove a selected item
+	Double click an item to open it in the editor
+> Knowledge is a list of things the player can ask the NPC about.
+	+  Will create a new item of knowledge
+	|| Will Clone a selected item of knowledge
+	-  Will remove a selected item of knowledge
+	Mouse click item to edit it. 
+> Topic is what the player asks about. I.E ask NPC about Topic
+> Knowledge is the output of the questions, telling the player what they know.
+Save the NPC when done. 

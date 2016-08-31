@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -35,4 +36,27 @@ Icon
 .Spotlight-V100
 .Trashes
 
+#Specific Files
 map.pub
+Engine/Mailer.cs
+
+#Directories
+Compiled/*
+Compiled\*
+BuildProcessTemplates/*
+BuildProcessTemplates\*
+*/obj/*
+*\obj\*
+*/bin/*
+*\bin\*
+
+#File Types
+*.suo
+*.rw
+*.cache
+*.tf1
+*.tfb
+*.pdb
+*.manifest
+*.xaml
+*.suo

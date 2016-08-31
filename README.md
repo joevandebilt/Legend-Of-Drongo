@@ -1,7 +1,7 @@
-+---------------------------------------+
-|			Legend Of Drongo			|
-|				Readme					|
-+---------------------------------------+
+
+## Legend Of Drongo
+# Readme
+
 
 Description:
 The Legend of Drongo was a project I started as a means to familiarise myself with C# programming concepts for my studies. Following my studies the project was mothballed and is worked on in sprints as and when I have the time. It is a hobby and is the accumulated skilled I have gained over the past 3 years of dev experience, so naturally some areas of the program are poorly designed and executed. However I am constantly making changes to the engine, and one day hope to release as an indie game. 
@@ -24,6 +24,6 @@ Known Bugs:
 To Do:
 - Finish world.
 - File directories are fixed paths, add in choice of directory. - Omitted
-- Speed up generating world graphics - Omitted
+- Speed up generating world graphics - Omitted graphics engine
 
-If you encounter an error, please email the error file to joevandebilt@live.co.uk, or report it on gitHub
+If you encounter an error, please email the error file to Joe@vandebilt.co, or report it on gitHub

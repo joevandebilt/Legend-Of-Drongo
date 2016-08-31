@@ -21,6 +21,8 @@ using System.Text;
 using System.Media;
 using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Net.Mail;
+using System.Net;
 
 namespace Legend_Of_Drongo
 {
@@ -33,7 +35,6 @@ namespace Legend_Of_Drongo
         public static Floor ThisFloor = new Floor();
 
         public static roomInfo CurrentRoom = new roomInfo();
-
         public static roomInfo PotentialRoom = new roomInfo();
 
         public static PlayerProfile Player = new PlayerProfile();
@@ -48,6 +49,7 @@ namespace Legend_Of_Drongo
         //Game Options
         public static bool DebugEnabled = false;
         public static bool ClearConsole = false;
+        public static bool EmailErrors = false;
 
         public static PlayerProfile MainMenu()
         {
@@ -215,7 +217,6 @@ namespace Legend_Of_Drongo
                             {
                                 BinaryFormatter bin = new BinaryFormatter();
                                 gamestate = (GameState)bin.Deserialize(stream);
-
                             }
                             Player = gamestate.PlayerState;
                             WorldState = gamestate.WorldState;
@@ -428,9 +429,9 @@ namespace Legend_Of_Drongo
             else Player = MainMenu();
             
             //Check for optional Options File
-            if (File.Exists(".\\Options.txt"))
+            if (File.Exists(".\\Options.sys"))
             {
-                using (StreamReader sr = new StreamReader(".\\Options.txt",true))
+                using (StreamReader sr = new StreamReader(".\\Options.sys",true))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -446,6 +447,11 @@ namespace Legend_Of_Drongo
                             {
                                 if (LineWords[1].Trim().ToLower() == "true") ClearConsole = true;
                                 else if (LineWords[1].Trim().ToLower() == "false") ClearConsole = false;
+                            }
+                            else if (LineWords[0] == "EmailErrors")
+                            {
+                                if (LineWords[1].Trim().ToLower() == "true") EmailErrors = true;
+                                else if (LineWords[1].Trim().ToLower() == "false") EmailErrors = false;
                             }
                         }
                     }
@@ -1617,19 +1623,24 @@ namespace Legend_Of_Drongo
                             else Console.WriteLine("Command Failed");
 
                         }
+                        else if (CommandContains(PlayerCommand, "throw error"))
+                        {
+                            throw new Exception("This is the test error");
+                        }
                         else Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
                     }
                     else Console.WriteLine(WordWrap("Command not found, type help for a list of valid commands"));
                 }
                 catch (Exception ex)
                 {
-                    string FileName = DateTime.Now.ToString(@"dd-MM-yyyy HHmmss");
+                    string FileName = string.Format(@".\Errors\{0}.txt",DateTime.Now.ToString(@"dd-MM-yyyy HHmmss"));
 
+                    //Let the user know there's been an error
                     Console.WriteLine(WordWrap("\nYou have encountered an error.\nThe game engine was not able to handle the command you entered."));
-                    Console.WriteLine(WordWrap("\nAn error report has been created in .\\Errors\\" + FileName + ".txt\nPlease submit this to the developer"));
-
+                    
+                    //Write the bug report to disk
                     if (!Directory.Exists(".\\Errors")) Directory.CreateDirectory(".\\Errors");
-                    using (StreamWriter file = new System.IO.StreamWriter(@".\Errors\"+FileName+".txt", true))
+                    using (StreamWriter file = new System.IO.StreamWriter(FileName, true))
                     {
                         file.WriteLine("---Legend-Of-Drongo---");
                         file.WriteLine("");
@@ -1655,9 +1666,24 @@ namespace Legend_Of_Drongo
                         file.WriteLine("");
                         file.WriteLine("");
                         file.WriteLine("End of line...");
-
                     }
-                    
+
+                    if (EmailErrors)
+                    {
+                        //Send the bug report straight to the developer
+                        //Er... that's me?
+                        Console.WriteLine("\nYou have auto-email developer enabled. Sending your error report directly to the developer");
+                        Console.WriteLine("\n\t Cheers, that's a massive help :)");
+                        Mailer.SendMail(new string[] { FileName });
+
+                        //Clean up the error report if it's been automatically sent, user doesn't need it
+                        File.Delete(FileName);
+                    }
+                    else
+                    {
+                        //User doesn't want to let me know, tell them where the error report is
+                        Console.WriteLine(WordWrap("\nAn error report has been created in {0}\nPlease submit this to the developer"), FileName);
+                    }                    
                 }
                 #endregion
 
@@ -3819,20 +3845,24 @@ namespace Legend_Of_Drongo
 
         public static bool CommandContains(string PlayerCommand, string CommandsRequired)
         {
-            bool Contained = false;
+            int i = 0;
             string[] PlayerCommands = PlayerCommand.Split(' ');
-            string[] RequiredCommands = CommandsRequired.Split(' ');
-            foreach (string Command in RequiredCommands) 
+            List<string> RequiredCommands = CommandsRequired.Split(' ').ToList<string>();
+            while (i < RequiredCommands.Count)
             {
-                Contained = false;
+                string Command = RequiredCommands[i];
                 foreach (string Word in PlayerCommands)
                 {
-                    if (Command.ToLower() == Word.ToLower()) Contained = true;
+                    if (Command.ToLower() == Word.ToLower())
+                    {
+                        RequiredCommands.Remove(Command);
+                        i = 0;
+                    }
                 }
-                if (!Contained) return false;
-            }
-            return true;
-        }
+                i++;
+            }            
+            return RequiredCommands.Count == 0;
+        }       
 
         #endregion
     }

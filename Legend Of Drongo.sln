@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legend Of Drongo Data Types
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legend Of Drongo Engine", "Engine\Legend Of Drongo Engine.csproj", "{F8CCA1E1-BB50-4D84-8FF1-E07D9A01B5B1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{21F15F89-97D6-4489-A193-A1F8E68C0D41}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Changelog.txt = Resources\Changelog.txt
+		Resources\GameEngineHelp.sys = Resources\GameEngineHelp.sys
+		Resources\Options.txt = Resources\Options.txt
+		Resources\WorldEditHelp.sys = Resources\WorldEditHelp.sys
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
